@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Posológica | Mpindi</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+    <button class="theme-toggle" id="themeBtn">
+        <i class="ri-moon-line" id="themeIcon"></i>
+    </button>
+
+    <section class="section-ferramentas">
+        <div class="hero" data-aos=fade-up>
+            <h1>Calculadora Posológica</h1>
+            <p>Mpindi TecMed</p> 
+        </div>
+
+        <div class="label-ferramentas">Ferramentas</div>
+        <div class="linha-decorativa"></div>
+
+        <div class="grid-ferramentas">
+            <a href="dosagem/index.html" class="card-tool" data-aos="fade-up" data-aos-delay="100">
+                <i class="ri-medicine-bottle-line"></i>
+                <span>Dosagem</span>
+            </a>
+            <a href="formula_internacional/index.html" class="card-tool" data-aos="fade-up" data-aos-delay="400">
+                <i class="ri-global-line"></i>
+                <span>Fórmula Internacional</span>
+            </a>
+            <a href="gotejamento/index.html" class="card-tool" data-aos="fade-up" data-aos-delay="200">
+                <i class="ri-drop-line"></i>
+                <span>Gotejamento</span>
+            </a>
+            <a href="conversor/index.html" class="card-tool" data-aos="fade-up" data-aos-delay="300">
+                <i class="ri-loop-right-line"></i>
+                <span>Conversão</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="section-info">
+        <div class="grid-info">
+            <div class="info-box" data-aos="fade-right" data-aos-delay="100">
+                <div class="floating-icon"><i class="ri-calculator-line"></i></div>
+                <h3>Sobre a Calculadora</h3>
+                <p>A calculadora funciona apenas para medicamentos injectáveis. <strong>Tem 10 cálculos grátis por dia em cada ferramenta, após isso será cobrado uma taxa.</strong></p>
+            </div>
+            
+            <div class="info-box" data-aos="fade-right" data-aos_delay="400">
+                <div class="floating-icon" style="background: #e67e22; box-shadow: 0 8px 20px rgba(230, 126, 34, 0.3);"><i class="ri-alert-line"></i></div>
+                <h3>Aviso Importante</h3>
+                <p>Esta ferramenta é um auxiliar de cálculo. A conferência com os protocolos institucionais e bula, bem como a opnião médica são indispensáveis.</p>
+            </div>
+            <div class="info-box" data-aos="fade-right" data-aos_delay="500">
+                <div class="floating-icon"><i class="ri-hospital-line"></i></div>
+                <h3>Segurança do Paciente</h3>
+                <p>Nossas fórmulas seguem padrões internacionais para minimizar riscos de subdosagem ou toxicidade medicamentosa.</p>
+            </div>
+            <div class="info-box" data-aos="fade-right">
+                <div class="floating-icon"><i class="ri-shake-hands-line"></i></div>
+                <h3>Suporte Gratuito</h3>
+                <p>Um projeto dedicado à comunidade médica, focado em democratizar ferramentas de precisão para salvar vidas.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p><strong>Mpindi TecMed</strong></p>
+        <div class="footer-links">
+            <span><i class="ri-mail-line"></i> sebastiaompindi@gmail.com</span>
+            <span><i class="ri-whatsapp-line"></i> +244 929 12 97 97 / Envie suas sugestões</span>
+        </div>
+        <p style="font-size: 0.8rem; margin-top: 15px; opacity: 0.6;">&copy; 2025 Todos os direitos reservados</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+  // Inicializa as animações
+  AOS.init({
+    duration: 800, // Duração da animação (800ms)
+    offset: 50     // Começa a animar 50px antes do elemento aparecer
+  });
+</script>
+</body>
+</html>
