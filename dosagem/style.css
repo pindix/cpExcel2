@@ -1,0 +1,469 @@
+:root {
+    --primary: #00843d;
+    --white: #ffffff;
+    --bg: #f0f2f0;
+    /* Cinza Pérola que usamos na S2 */
+    --text: #1a2a21;
+    --card-bg: #ffffff;
+    --sombra: #e0dada;
+    __card-bg2: #ffffff;
+} 
+
+[data-theme="dark"] {
+    --bg: #121212;
+    --card-bg: #1e1e1e;
+    --text: #f0f2f0;
+    --sombra: none;
+    --card-bg2: #121212;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: 0.3s;
+    outline: none;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- BARRA DE TOPO --- */
+nav {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.btn-back {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* --- SECTION ÚNICA --- */
+.main-tool {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    max-width: 450px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.tool-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.tool-header h2 {
+    font-size: 1.8rem;
+    color: var(--primary);
+}
+
+.tool-header span {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    letter-spacing: 1px;
+}
+
+/* Contentor dos Comandos (A sua DIV) */
+.calculator-box {
+    background: var(--card-bg);
+    width: 100%;
+    padding: 20px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+
+
+
+
+/* 1. O Contentor Pai (Ocupa a linha toda do Grid) */
+.nomeConcentracao {
+    grid-column: span 2; /* Garante que ocupa as duas colunas do seu grid principal */
+    display: flex;       /* Alinha os filhos horizontalmente */
+    gap: 10px;           /* Espaço entre o input e o select quando visível */
+    width: 100%;
+    align-items: flex-start; /* Mantém o alinhamento pelo topo (importante para as sugestões) */
+    row-gap: 8px;
+    margin-bottom: 1rem;
+}
+
+/* 2. O Campo de Nome (Configurado para crescer) */
+#campo_nome {
+    flex-grow: 1;        /* Faz este campo ocupar todo o espaço disponível */
+    display: flex;       /* Mantém o ícone e o input organizados internamente */
+    margin-bottom: 0;    /* Remove margens para não desalinharem */
+    position: relative;  /* Mantém a sugestões_box no lugar certo */
+}
+
+/* 3. O Select de Concentração */
+#selConcentracao {
+    display: none;       /* Começa escondido por padrão */
+    flex-basis: 35%;     /* Quando aparecer, tenta ocupar cerca de 35% do espaço */
+    min-width: 95px;     /* Largura mínima para ser utilizável no telemóvel */
+    height: 40px;        /* Mesma altura da sua classe .entradas_de_dados */
+    border-radius: 16px;
+    background-color: var(--card-bg2); 
+    border: none;
+    box-shadow: 0 4px 12px var(--sombra);
+    border-radius: 16px;
+    padding: 0.5rem;
+    color: green;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+/* Campos*/
+.entradas_de_dados {
+    width: 100%;
+    height: 40px;
+    position: relative;
+    display: none;
+    align-items: center;
+    padding: 4px;
+    background: var(--bg);
+    box-shadow: 0 4px 12px var(--sombra);
+    border-radius: 4px;
+    margin-bottom: 8px;
+    
+}
+
+
+.entradas_de_dados input {
+    padding: 0.5rem 0.5rem 0.5rem 1.8rem;
+    width: 100%;
+    background: none;
+    border: none;
+    border-bottom: solid 2px green;
+    color: green;
+}
+
+.entradas_de_dados i {
+    position: absolute;
+    left: 6px;
+    color: green;
+    background: var(--card-bg);
+    padding: 2px;
+    border-radius: 2px;
+    z-index: 1;
+}
+
+.entradas_de_dados select {
+    position: absolute;
+    right: 4px;
+    width: 4rem;
+    border: none;
+    color: green;
+    font-weight: bold;
+    background: var(--bg);
+    font-size: 11px;
+}
+
+.entradas_de_dados p {
+    background: var(--bg);
+    position: absolute;
+    right: 8px;
+    color: green;
+    font-size: 0.9rem;
+    width: 3rem;
+    height: 60%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 11px;
+}
+
+#intervalo,
+#via,
+#dose {
+    align-items: center;
+    flex-direction: column;
+    border-radius: 16px;
+    background-color: var(--card-bg2); 
+    border: none;
+    box-shadow: 0 4px 12px var(--sombra);
+    padding: 0.6rem;
+    display: none;
+    color: green;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+}
+#pais {
+    display: flex;
+    background-color: var(--card-bg); 
+    border: none;
+    box-shadow: 0 4px 12px var(--sombra);
+    border-radius: 16px;
+    padding: 0.7rem;
+    color: green;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.container-campos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    margin: 0 auto;
+    row-gap: 8px;
+    margin-bottom: 0.6rem;
+}
+
+
+
+/* Sugestões e animações) */
+#sugestoes_box {
+    position: absolute;
+    /* Alinha exatamente abaixo do pai (entradas_de_dados) */
+    top: calc(100% + 4px);
+    left: 0;
+    width: 100%;
+    background: var(--bg);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: none;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.sugestao_item {
+    padding: 10px;
+    cursor: pointer;
+    /* border-bottom: 1px solid #eee; */
+    background: var(--card-bg);
+    color: green;
+    margin: 4px;
+    border-radius: 15px;
+}
+
+.sugestao-item:hover {
+    background: #f0f0f0;
+    color: green;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#sugestoes_box,
+.entradas_de_dados,
+#intervalo,
+#dose 
+#via{
+    animation: fadeIn 0.5s ease-out;
+}
+
+.botao   {
+    flex: 6;
+    padding: 13px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.botao:hover {letter-spacing: 2px;}
+
+#limpador {
+    flex: 1;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+.caxa_de_botoes{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+
+/* O Resultado */
+.resultado-display {
+    margin-top: 25px;
+    padding: 15px;
+    background: var(--primary);
+    color: white;
+    border-radius: 24px;
+    font-weight: 600;
+    font-size: 1rem;
+    min-height: 0px;
+    box-shadow: 0 5px 15px rgba(0, 132, 61, 0.3);
+    width: 90%;
+    z-index: -1;
+}
+.dose-destaque {
+    font-size: 1.8rem; /* Tamanho bem visível */
+    font-weight: 800;
+    color: #ffffff;
+    padding: 0 4px;
+    display: inline-block; /* Garante que o tamanho maior não quebre a linha de forma feia */
+    vertical-align: middle;
+}
+
+footer {
+    padding: 30px;
+    text-align: center;
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+
+
+
+
+
+
+
+/* Definição da animação de vibrar */
+@keyframes vibration {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+/* Classe que será aplicada ao elemento */
+.vibrar {
+    animation: vibration 0.2s ease-in-out;
+}
+
+
+
+
+
+/* 1. O Fundo (Overlay) - Corrigido para centralização total */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.1); /* Escurecimento mínimo para destacar o blur */
+    backdrop-filter: blur(15px); /* Desfoque potente para o efeito vidro */
+    -webkit-backdrop-filter: blur(15px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* 2. A Caixa (Content) - Transparência e Brilho Corrigidos */
+.modal-content {
+    background: rgba(255, 255, 255, 0.4); /* Transparência equilibrada */
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Borda de "cristal" */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    
+    padding: 2rem;
+    border-radius: 24px;
+    width: 85%;
+    max-width: 350px;
+    text-align: left;
+    
+    animation: popIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Título e Texto */
+.modal-content h3 {
+    color: orange;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
+}
+
+.modal-content p {
+    color: black;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+/* O Botão Verde (Sucesso/Segurança) */
+.modal-content button {
+    background: #27ae60; /* Verde esmeralda */
+    color: white;
+    border: none;
+    padding: 14px 0;
+    width: 100%;
+    border-radius: 16px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 15px -3px rgba(39, 174, 96, 0.3);
+    transition: all 0.2s ease;
+}
+
+.modal-content button:hover {
+    background: #219150;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 20px -3px rgba(39, 174, 96, 0.4);
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.9) translateY(30px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
