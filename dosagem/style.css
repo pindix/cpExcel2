@@ -6,7 +6,7 @@
     --text: #1a2a21;
     --card-bg: #ffffff;
     --sombra: #e0dada;
-    __card-bg2: #ffffff;
+    --card-bg2: #ffffff;
 } 
 
 [data-theme="dark"] {
@@ -69,7 +69,7 @@ nav {
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    max-width: 450px;
+    max-width: 420px;
     margin: 0 auto;
     width: 100%;
 }
@@ -211,6 +211,7 @@ nav {
     font-size: 11px;
 }
 
+#selDoenca,
 #intervalo,
 #via,
 #dose {
@@ -348,10 +349,10 @@ nav {
     width: 90%;
     z-index: -1;
 }
-.dose-destaque {
+.ml {
     font-size: 1.8rem; /* Tamanho bem visível */
     font-weight: 800;
-    color: #ffffff;
+    color: #fff;
     padding: 0 4px;
     display: inline-block; /* Garante que o tamanho maior não quebre a linha de forma feia */
     vertical-align: middle;
@@ -360,7 +361,7 @@ nav {
 footer {
     padding: 30px;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     opacity: 0.6;
 }
 

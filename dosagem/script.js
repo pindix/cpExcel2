@@ -36,7 +36,9 @@ const camposDivs = {
     dose: document.getElementById("dose"),
     via: document.getElementById("via"),
     intervalo: document.getElementById("intervalo"),
-    selConcentracao: document.getElementById("selConcentracao")
+    selConcentracao: document.getElementById("selConcentracao"),
+    selDoenca: document.getElementById("selDoenca")  
+    
 };
 
 const inputs = {
@@ -105,7 +107,7 @@ function gerirSugestoes() {
         return;
     }
 
-    let baseTotal = [...(bancoDados[paisAtivo] || []), ...(bancoDados["universais"] || [])];
+    let baseTotal = [...(bancoDados[paisAtivo] || []), ...(bancoDados["oms"] || [])];
 
     // Filtro com Prioridade de Início (Relevância)
     const nomesFiltrados = [...new Set(
@@ -153,9 +155,6 @@ function gerirSugestoes() {
 }
 
 
-/* ==========================================================================
-   NOVA LÓGICA DE ESCOLHA DE LINHA INTELIGENTE
-   ========================================================================== */
 function escolherLinha(modo) {
     const nome = inputNome.value.trim().toLowerCase();
     const pais = selectPais.value.toLowerCase();
@@ -165,7 +164,7 @@ function escolherLinha(modo) {
     let basePais = bancoDados[pais] || [];
     let filtradas = basePais.filter(m => m.nome && String(m.nome).toLowerCase().trim() === nome);
     if (filtradas.length === 0) {
-        filtradas = (bancoDados["universais"] || []).filter(m => m.nome && String(m.nome).toLowerCase().trim() === nome);
+        filtradas = (bancoDados["oms"] || []).filter(m => m.nome && String(m.nome).toLowerCase().trim() === nome);
     }
     if (filtradas.length === 0) { medAtivo = null; return; }
 
@@ -176,20 +175,28 @@ function escolherLinha(modo) {
     const idadeVal = parseFloat(inputs.idade.value) || 0;
     const fatorIdade = parseFloat(inputs.unidadeIdade.value) || 1;
     const idadeDias = idadeVal * fatorIdade;
+    const doencaSel = (camposDivs.selDoenca.value || "").toLowerCase().trim();
+    
+    
+    // A) Filtrar por DOENÇA (Deve ser o primeiro filtro do funil)
+if (doencaSel) {
+    let temp = filtradas.filter(m => String(m.doenca || "").toLowerCase().trim() === doencaSel);
+    if (temp.length > 0) filtradas = temp;
+}
 
-    // A) Filtrar por DOSE (Se o usuário selecionou e a linha tem dose definida)
+    // B) Filtrar por DOSE (Se o usuário selecionou e a linha tem dose definida)
     if (doseSel) {
         let temp = filtradas.filter(m => String(m.dose || "").toLowerCase().trim() === doseSel);
         if (temp.length > 0) filtradas = temp;
     }
 
-    // B) Filtrar por VIA (Dentro das que sobraram da dose)
+    // C) Filtrar por VIA (Dentro das que sobraram da dose)
     if (viaSel) {
         let temp = filtradas.filter(m => String(m.via || "").toLowerCase().trim() === viaSel);
         if (temp.length > 0) filtradas = temp;
     }
 
-    // C) Filtrar por IDADE (O critério final de desempate)
+    // D) Filtrar por IDADE (O critério final de desempate)
     if (idadeDias > 0) {
         let temp = filtradas.filter(m => {
             const r = extrairRegra(m.campos, "idade");
@@ -198,7 +205,7 @@ function escolherLinha(modo) {
         if (temp.length > 0) filtradas = temp;
     }
 
-    // D) Filtrar por PESO
+    // E) Filtrar por PESO
     if (pesoVal > 0) {
         let temp = filtradas.filter(m => {
             const r = extrairRegra(m.campos, "peso");
@@ -214,6 +221,7 @@ function escolherLinha(modo) {
     if (medAtivo.dose) camposDivs.dose.value = medAtivo.dose.toLowerCase();
     if (medAtivo.via) camposDivs.via.value = medAtivo.via.toLowerCase();
 }
+
 
 function exibirCampos() {
     if (!medAtivo) {
@@ -244,8 +252,39 @@ function exibirCampos() {
         if(!inputs.dosagem.value) inputs.dosagem.value = d[2];
         txtUnidadeDosagem.innerText = d[3];
     }
-
     
+    
+// --- LÓGICA DE DOENÇA (INDICAÇÃO) ---
+    const selectD = camposDivs.selDoenca;
+    const nomeMedicamento = inputNome.value.trim().toLowerCase();
+    const paisAtivo = selectPais.value.toLowerCase();
+
+    let baseFiltrada = [...(bancoDados[paisAtivo] || []), ...(bancoDados["oms"] || [])]
+                        .filter(m => String(m.nome).toLowerCase().trim() === nomeMedicamento);
+
+    const doencasUnicas = [...new Set(baseFiltrada.map(m => m.doenca).filter(d => d && String(d).trim() !== ""))];
+
+    if (doencasUnicas.length > 0) {
+        const assinaturaDoenca = doencasUnicas.join("|");
+        const assinaturaAtualD = selectD.getAttribute("data-assinatura-doenca");
+
+        if (assinaturaDoenca !== assinaturaAtualD) {
+            selectD.innerHTML = "";
+            
+            doencasUnicas.forEach(d => {
+                const opt = document.createElement("option");
+                opt.value = String(d).trim();
+                opt.innerText = String(d).trim();
+                selectD.appendChild(opt);
+            });
+            selectD.setAttribute("data-assinatura-doenca", assinaturaDoenca);
+        }
+        selectD.style.display = "block";
+    } else {
+        selectD.style.display = "none";
+        selectD.removeAttribute("data-assinatura-doenca");
+        selectD.value = ""; 
+    }
     
     
 // 1. Preparamos os dados da nova concentração
@@ -351,7 +390,7 @@ function calcular() {
     if (medAtivo.p_min !== undefined && inputs.peso.value !== "") {
         if (peso < medAtivo.p_min || peso > medAtivo.p_max) {
             const novoPeso = (peso < medAtivo.p_min) ? medAtivo.p_min : medAtivo.p_max;
-            avisar(`Peso deve estar entre ${medAtivo.p_min}kg - ${medAtivo.p_max}kg. O calculo será feito com o peso ajustado para: ${novoPeso}kg`);
+            avisar(`Peso varia de ${medAtivo.p_min} - ${medAtivo.p_max} kg. O calculo feito com ajuste para: ${novoPeso} kg`);
             peso = novoPeso;
             inputs.peso.value = peso;
         }
@@ -369,7 +408,7 @@ function calcular() {
             // Ajustamos a 'idade' para o limite (ainda na unidade do ecrã)
             idade = idade < minNaUnidade ? minNaUnidade : maxNaUnidade;
             
-            avisar(`Idade deve estar entre ${minNaUnidade.toFixed(0)} - ${maxNaUnidade.toFixed(0)} ${idadeTexto}.\nO cálculo foi feito com a idade ajustada para: ${idade.toFixed(0)} ${idadeTexto}`);
+            avisar(`Idade varia de ${minNaUnidade.toFixed(0)} - ${maxNaUnidade.toFixed(0)} ${idadeTexto}.\nCalculo feito com ajuste para: ${idade.toFixed(0)} ${idadeTexto}`);
             
             // Atualiza o campo visual
             inputs.idade.value = idade;
@@ -378,7 +417,7 @@ function calcular() {
 
     if (medAtivo.d_min && inputs.dosagem.value && (dosagem < medAtivo.d_min || dosagem > medAtivo.d_max)) {
         dosagem = dosagem < medAtivo.d_min ? medAtivo.d_min : medAtivo.d_max;
-        avisar(`Dosagem deve estar entre ${medAtivo.d_min} - ${medAtivo.d_max} ${unidadeDosagem}.\nO calculo foi feito com a dosagem ajustada para: ${dosagem} ${unidadeDosagem}`);
+        avisar(`Dosagem varia de ${medAtivo.d_min} - ${medAtivo.d_max} ${unidadeDosagem}.\nCalculo feito com ajuste para: ${dosagem} ${unidadeDosagem}`);
         inputs.dosagem.value = dosagem;
     }
 try {
@@ -389,12 +428,14 @@ try {
             .replace(/#d/g, dosagem)
             .replace(/#c/g, concentracao)
             .replace(/#i/g, intervalo)
+            .replace(/@@([^@]+)@/g, '<span style="color: orange; font-weight: bold;">$1</span>')
+            .replace(/%([^%]+)%/g, '<span style="text-align: center; display: block;">$1</span>')
             .replace(/{([^}]+)}/g, (m, exp) => {
                 try {
                     return eval(exp).toFixed(1);
                 } catch (e) { return "Erro"; }
             })
-            .replace(/\[([^\]]+)\]/g, '<span class="dose-destaque">$1</span>')
+            .replace(/\[([^\]]+)\]/g, '<span class="ml">$1</span>')
             .replace(/#/g, "<br>");
         
         pResultado.innerHTML = res;
@@ -402,7 +443,7 @@ try {
         pResultado.style.textAlign = "left";
         pResultado.style.background = "var(--primary)";
     } catch (e) { 
-        pResultado.innerText = "Erro na fórmula da base de dados.";
+        pResultado.innerText = "Erro na fórmula da base de dados!";
         pResultado.style.textAlign = "center";
         pResultado.style.background = "red";
     }
@@ -491,6 +532,10 @@ inputNome.addEventListener("input", () => {
         } 
     });
 });
+camposDivs.selDoenca.addEventListener('change', () => {
+    escolherLinha('ajuste');
+    exibirCampos();
+});
 
 
 /* ==========================================================================
@@ -518,7 +563,7 @@ selectPais.addEventListener('change', () => {
     
     // 3. Simulação de atualização (Timeout)
     setTimeout(() => {
-        pResultado.innerHTML = `Padrões de <b>${nomePais}</b> carregados. <br> Tudo pronto.`;
+        pResultado.innerHTML = `Padrões da <b>${nomePais}</b> carregados. <br> Tudo pronto.`;
         pResultado.style.background = "var(--primary)"; // Usa a cor principal do teu CSS
     }, 1200);
 });
