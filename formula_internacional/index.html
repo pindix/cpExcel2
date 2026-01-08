@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gotejamento | Mpindi</title>
+    <title>Gotejamento</title>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
@@ -23,46 +23,42 @@
     <section class="main-tool">
         <div class="tool-header">
             <span>CALCULADORA POSOLÓGICA</span>
-            <h2>Calculo de Gotejamento</h2>
+            <h2>Fórmula Internacional</h2>
         </div>
 
         <div class="calculator-box" data-aos="fade-up">
-            <p class="nota"><i class="ri-information-line"></i>Coloque só os valores que tem</p>
+            
             <div class="container-campos">
                 <div class="entradas_de_dados">
-                <i class="ri-flask-line"></i>
-                <input type="number" placeholder="Volume..." id="volume">
-                <select id="unidade_de_volume">
-                    <option value="1">ml</option>
-                    <option value="1000">L</option>
+                <i class="ri-scales-2-fill"></i>
+                <input type="number" placeholder="Peso..." id="peso">
+                <p>kg</p>
+            </div>
+            <div class="entradas_de_dados">
+                <i class="ri-capsule-line"></i>
+                <input type="number" placeholder="Dosagem..." id="dosagem">
+                <select id="unidade_de_dosagem">
+                    <option value="1">mg/kg</option>
+                    <option value="1000">kg</option>
+                    <option value="1">mg</option>
+                </select>
+            </div>
+
+            <div class="entradas_de_dados">
+                <i class="ri-bubble-chart-line"></i>
+                <input type="number" placeholder="Concentração..." id="concentracao">
+                <select id="unidade_de_concentracao">
+                    <option value="1">mg/ml</option>
+                    <option value="1000">kg/ml</option>
                 </select>
             </div>
             <div class="entradas_de_dados">
                 <i class="ri-time-line"></i>
-                <input type="number" placeholder="Tempo..." id="tempo">
-                <select id="unidade_de_tempo">
-                    <option value="1">h</option>
-                    <option value="60">min</option>
-                </select>
+                <input type="number" placeholder="Intervalo..." id="intervalo">
+                <p>horas</p>
+            </div>
             </div>
             
-                
-            <div class="entradas_de_dados" id="campo_de_macrogotas">
-                <i class="ri-drop-line"></i>
-                <input type="number" placeholder="Macrogotas..." id="macrogotas">
-                <p>macro</p>
-            </div>
-            <div class="entradas_de_dados" id="campo_de_peso">
-                <i class="ri-drizzle-line"></i>
-                <input type="number" placeholder="Microgotas..." id="microgotas">
-                <p>micro</p>
-            </div>
-              
-            
-        </div>
-            
-            
- 
             <div class="caxa_de_botoes">
                 <button class="botao" onclick="calcular()">Calcular</button>
                 <i class="ri-delete-bin-line" id="limpador" onclick="limpar()"></i>
@@ -73,7 +69,7 @@
     </section>
 
     <footer>
-        <a style="text-decoration: none;" href="https://wa.me/244929129797?text=Olá!%20Encontrei%20uma%20possível%20inconsistência%20num%20cálculo%20e%20gostaria%20de%20reportar." target="_blank">Reportar erro</a>
+            <a style="color: inherit; text-decoration: none;" href="https://wa.me/244929129797?text=Olá!%20Encontrei%20uma%20possível%20inconsistência%20num%20cálculo%20e%20gostaria%20de%20reportar." target="_blank">Reportar erro</a>
     </footer>
 
     <script src="script.js"></script>
