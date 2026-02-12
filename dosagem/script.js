@@ -375,9 +375,9 @@ function calcular() {
     const idadeTexto = inputs.unidadeIdade.options[inputs.unidadeIdade.selectedIndex].text;
     const fatorConversao = parseFloat(inputs.unidadeIdade.value) || 1; 
     const unidadeDosagem = txtUnidadeDosagem.innerText;
-    let peso = parseFloat(inputs.peso.value) || 0;
-    let idade = parseFloat(inputs.idade.value) || 0;
-    let dosagem = parseFloat(inputs.dosagem.value) || 0;
+    let peso = parseFloat(inputs.peso.value) || 1
+    let idade = parseFloat(inputs.idade.value) || 1;
+    let dosagem = parseFloat(inputs.dosagem.value) || 1;
     let intervalo = parseFloat(camposDivs.intervalo.value) || 1;
     let concentracao = camposDivs.selConcentracao.style.display !== "none" ? parseFloat(camposDivs.selConcentracao.value) : parseFloat(medAtivo.concentracao) || 1;
     const textoExibido = camposDivs.selConcentracao.style.display !== "none" ? camposDivs.selConcentracao.options[camposDivs.selConcentracao.selectedIndex].text : String(medAtivo.concentracao || "");
@@ -390,7 +390,9 @@ function calcular() {
     if (medAtivo.p_min !== undefined && inputs.peso.value !== "") {
         if (peso < medAtivo.p_min || peso > medAtivo.p_max) {
             const novoPeso = (peso < medAtivo.p_min) ? medAtivo.p_min : medAtivo.p_max;
-            avisar(`Peso varia de ${medAtivo.p_min} - ${medAtivo.p_max} kg. O calculo feito com ajuste para: ${novoPeso} kg`);
+            avisar(`Peso inválido. <br>
+            Deve estar entre ${medAtivo.p_min} - ${medAtivo.p_max} kg. <br>
+            Corrigido para: ${novoPeso} kg`);
             peso = novoPeso;
             inputs.peso.value = peso;
         }
@@ -408,7 +410,9 @@ function calcular() {
             // Ajustamos a 'idade' para o limite (ainda na unidade do ecrã)
             idade = idade < minNaUnidade ? minNaUnidade : maxNaUnidade;
             
-            avisar(`Idade varia de ${minNaUnidade.toFixed(0)} - ${maxNaUnidade.toFixed(0)} ${idadeTexto}.\nCalculo feito com ajuste para: ${idade.toFixed(0)} ${idadeTexto}`);
+            avisar(`Idade inválida. <br>
+            Deve estar entre ${minNaUnidade.toFixed(0)} - ${maxNaUnidade.toFixed(0)} ${idadeTexto}. <br>
+            Corrigida para: ${idade.toFixed(0)} ${idadeTexto}`);
             
             // Atualiza o campo visual
             inputs.idade.value = idade;
@@ -417,27 +421,29 @@ function calcular() {
 
     if (medAtivo.d_min && inputs.dosagem.value && (dosagem < medAtivo.d_min || dosagem > medAtivo.d_max)) {
         dosagem = dosagem < medAtivo.d_min ? medAtivo.d_min : medAtivo.d_max;
-        avisar(`Dosagem varia de ${medAtivo.d_min} - ${medAtivo.d_max} ${unidadeDosagem}.\nCalculo feito com ajuste para: ${dosagem} ${unidadeDosagem}`);
+        avisar(`Dosagem inválida. <br>
+        Deve estar entre ${medAtivo.d_min} - ${medAtivo.d_max} ${unidadeDosagem}. <br>
+Corrigida para: ${dosagem} ${unidadeDosagem}`);
         inputs.dosagem.value = dosagem;
     }
 try {
-        let res = medAtivo.formula
+        let res = medAtivo.formula 
             .replace(/#p/g, peso)
-            .replace(/#co/g, textoExibido)
-            .replace(/#id/g, idade) // <--- ADICIONADO AQUI
+            .replace(/#co/g, textoExibido) // texto do select de concentração
+            .replace(/#id/g, idade) 
             .replace(/#d/g, dosagem)
-            .replace(/#c/g, concentracao)
+            .replace(/#c/g, concentracao) // valor ds concetração  usado na formula
             .replace(/#i/g, intervalo)
             .replace(/@@([^@]+)@/g, '<span style="color: orange; font-weight: bold;">$1</span>')
             .replace(/%([^%]+)%/g, '<span style="text-align: center; display: block;">$1</span>')
-            .replace(/{([^}]+)}/g, (m, exp) => {
+            .replace(/{([^}]+)}/g, (m, exp) => { //calculo
                 try {
                     return eval(exp).toFixed(1);
                 } catch (e) { return "Erro"; }
             })
             .replace(/\[([^\]]+)\]/g, '<span class="ml">$1</span>')
             .replace(/#/g, "<br>");
-        
+          
         pResultado.innerHTML = res;
         pResultado.style.color = "white";
         pResultado.style.textAlign = "left";
@@ -445,7 +451,7 @@ try {
     } catch (e) { 
         pResultado.innerText = "Erro na fórmula da base de dados!";
         pResultado.style.textAlign = "center";
-        pResultado.style.background = "red";
+        pResultado.style.background = "red"; 
     }
     
     

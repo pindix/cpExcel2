@@ -34,6 +34,12 @@ body {
     min-height: 100vh;
 }
 
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
 /* --- BARRA DE TOPO --- */
 nav {
     padding: 20px;
@@ -76,7 +82,7 @@ nav {
 
 .tool-header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .tool-header h2 {
@@ -222,6 +228,7 @@ nav {
     border: none;
     box-shadow: 0 4px 12px var(--sombra);
     padding: 0.6rem;
+    padding-right: 1rem;
     display: none;
     color: green;
     font-weight: bold;
@@ -237,7 +244,8 @@ nav {
     padding: 0.7rem;
     color: green;
     font-weight: bold;
-    margin-bottom: 1rem;
+    margin-bottom: 0.7rem;
+    text-align: center;
 }
 
 .container-campos {
