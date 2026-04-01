@@ -15,6 +15,31 @@ themeBtn.addEventListener('click', () => {
     }
 });
 
+
+// Botão Ver Mais - com animação e texto dinâmico
+const btnVerMais = document.getElementById('btnVerMais');
+const ferramentasOcultas = document.getElementById('ferramentasOcultas');
+const iconeSeta = document.getElementById('iconeSeta');
+const textoBotao = document.getElementById('textoBotao');
+
+// Estado inicial (não usei style.display para permitir animação)
+ferramentasOcultas.classList.remove('visivel');
+
+btnVerMais.addEventListener('click', () => {
+    // Alterna a classe 'visivel' para animar
+    ferramentasOcultas.classList.toggle('visivel');
+    
+    // Muda o texto do botão
+    if (ferramentasOcultas.classList.contains('visivel')) {
+        textoBotao.textContent = 'Ver menos ferramentas';
+    } else {
+        textoBotao.textContent = 'Ver outras ferramentas';
+    }
+    
+    // Muda a classe ativo para girar a seta
+    btnVerMais.classList.toggle('ativo');
+});
+
 // Quando a página carrega, recupera as escolhas anonimamente
 window.addEventListener('load', () => {
     // Restaurar Tema

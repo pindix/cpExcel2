@@ -15,10 +15,10 @@
         <i class="ri-moon-line" id="themeIcon"></i>
     </button>
 
-    <section class="section-ferramentas">
+    <section class="section-ferramentas" id="topo">
         <div class="hero" data-aos=fade-up>
             <h1>Calculadora Posológica</h1>
-            <p>+3.500 medicamentos. <br> Cálculo preciso em menos de 3 segundos.</p> 
+            <p>+3.500 medicamentos.  Cálculo preciso em menos de 3 segundos. <br>Ferramentas em construção.  Não usar resulatdo</p> 
         </div>
 
         <div class="label-ferramentas">Ferramentas</div>
@@ -42,6 +42,36 @@
                 <span>Conversão</span>
             </a>
         </div>
+        
+<!-- Div para ferramentas ocultas (inicialmente escondida) -->
+<div class="ferramentas-ocultas" id="ferramentasOcultas">  
+    <a href="diluicao/index.html" class="card-tool" data-aos="fade-up" data-aos-delay="300">
+        <i class="ri-flask-line"></i>
+        <span>Diluição</span>
+    </a>
+    <a href="sinais_vitais/index.html" class="card-tool" data-aos="fade-up" data-aos-delay="300">
+        <i class="ri-heart-pulse-line"></i>
+        <span>Sinais Vitais</span>
+    </a>
+    <a href="gestograma/index.html" class="card-tool" data-aos="fade-up" data-aos-delay="300">
+        <i class="ri-women-line"></i>
+        <span>Gestograma</span>
+    </a>
+    <a href="sangue/index.html" class="card-tool" data-aos="fade-up" data-aos-delay="300" >
+        <i class="ri-heart-pulse-line"></i>
+        <span>Grupos Sanguíneos</span>
+    </a>
+    <a href="peso_idade/index.html" class="card-tool" data-aos="fade-up" data-aos-delay="300">
+        <i class="ri-scales-2-line"></i>
+        <span>Peso e Idade</span>
+    </a>
+</div>
+
+<!-- Botão Ver Mais -->
+<div class="ver-mais" id="btnVerMais">
+    <span class="ver-mais-texto" id="textoBotao">Ver outras ferramentas</span>
+    <span class="ver-mais-icone" id="iconeSeta">▼</span>
+</div>
     </section>
 
     <section class="section-info">
@@ -49,7 +79,7 @@
             <div class="info-box" data-aos="fade-right" data-aos-delay="100">
                 <div class="floating-icon"><i class="ri-calculator-line"></i></div>
                 <h3>Sobre a Calculadora</h3>
-                <p>A calculadora funciona apenas para medicamentos injectáveis. <strong>Tem 10 cálculos grátis por dia em cada ferramenta, após isso será cobrado uma taxa.</strong></p>
+                <p>A calculadora funciona apenas para medicamentos injectáveis. <strong>Nossos calculos são adaptáveis a qualquer parte do mundo.</strong> <br>Há também outras ferramentas extras não relacionadas a medicamentos a sua disposição.</p>
             </div>
             
             <div class="info-box" data-aos="fade-right" data-aos_delay="400">
@@ -69,22 +99,45 @@
             </div>
         </div>
     </section>
+    
+    
+    
+<footer class="footer-static">
+    <div class="footer-container">
+        <div class="footer-column brand">
+            <h3>Mpindi TecMed</h3>
+            <p>Soluções digitais para suporte à decisão clínica. Precisão e rapidez no atendimento ao paciente.</p>
+        </div>
 
-    <footer>
-        <p><strong>Mpindi TecMed</strong></p>
-<div style="text-align: center; margin-top: 15px;">
-    <p style="color: white; font-size: 0.9em; margin-bottom: 5px;">
-        +3.500 medicamentos. <br> Cálculo preciso em menos de 3 segundos.
-    </p>
-    <a href="https://wa.me/244929129797?text=Olá!%20Estou%20a%20usar%20a%20Calculadora%20Posológica%20e%20gostaria%20de%20tirar%20uma%20dúvida." target="_blank" style="color: #25D366; text-decoration: none; font-size: 0.85em;">
-        WhatsApp Suporte <i class="ri-whatsapp-line"></i>
-    </a>
-    <span style="color: #444; margin: 0 10px;">|</span>
-    <a href="mailto:sebastiaompindi@gmail.com" style="color: #888; text-decoration: none; font-size: 0.85em;">
-        Email 
-    </a>
-</div>
-    </footer>
+        <div class="footer-column links">
+            <h4>Navegação</h4>
+            <ul>
+                <li><a href="#topo"><i class="ri-apps-2-line"></i> Todas as Ferramentas</a></li>
+                <li><a href="ajuda/index.html"><i class="ri-question-line"></i> Como cada ferramentas Funciona?</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column contact">
+            <h4>Suporte Profissional</h4>
+            <div class="social-row">
+                <a href="https://wa.me/244929129797" class="footer-icon wa" title="WhatsApp">
+                    <i class="ri-whatsapp-line"></i>
+                </a>
+                <a href="mailto:sebastiaompindi@gmail.com" class="footer-icon mail" title="Email">
+                    <i class="ri-mail-line"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-disclaimer">
+        <p><strong>Aviso:</strong> Estas ferramentas são auxiliares. O uso dos resultados é de inteira responsabilidade do profissional de saúde assistente. Não substitui a avaliação clínica direta.</p>
+    </div>
+
+    <div class="footer-copy">
+        <p>&copy; 2026 Mpindi TecMed</p>
+    </div>
+</footer>
 
     <script src="script.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
