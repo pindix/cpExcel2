@@ -1,0 +1,205 @@
+:root {
+    --primary: #00843d;
+    --white: #ffffff;
+    --bg: #f0f2f0;
+    --text: #1a2a21;
+    --card-bg: #ffffff;
+    --sombra: #e0dada;
+}
+
+[data-theme="dark"] {
+    --bg: #121212;
+    --card-bg: #1e1e1e;
+    --text: #f0f2f0;
+    --sombra: none;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.3s, color 0.3s;
+    outline: none;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- BARRA DE TOPO --- */
+nav {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.btn-back {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* --- ESTRUTURA PRINCIPAL --- */
+.main-tool {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.tool-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.tool-header h2 { font-size: 1.8rem; color: var(--primary); }
+.tool-header span { font-size: 0.8rem; opacity: 0.7; letter-spacing: 1px; }
+
+.calculator-box {
+    background: var(--card-bg);
+    width: 100%;
+    padding: 20px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* --- CAMPOS E LABELS --- */
+.nota-label {
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 8px;
+    display: block;
+    text-transform: uppercase;
+}
+
+.entradas_de_dados {
+    width: 100%;
+    height: 50px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    background: var(--bg);
+    box-shadow: 0 4px 12px var(--sombra);
+    border-radius: 8px;
+}
+
+.entradas_de_dados i {
+    position: absolute;
+    left: 10px;
+    color: var(--primary);
+    z-index: 1;
+}
+
+.entradas_de_dados input {
+    width: 100%;
+    height: 100%;
+    padding: 15px 10px 5px 35px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid var(--primary);
+    color: var(--primary);
+    font-weight: bold;
+    font-family: inherit;
+}
+
+/* Ajuste específico para input de data */
+input[type="date"] {
+    padding-left: 35px;
+}
+
+.label-flutuante {
+    position: absolute;
+    left: 35px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.75rem;
+    opacity: 0.6;
+    transition: 0.3s;
+    pointer-events: none;
+}
+
+input:focus ~ .label-flutuante,
+input:not(:placeholder-shown) ~ .label-flutuante {
+    top: 8px;
+    font-size: 0.6rem;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+/* --- BOTÕES --- */
+.caxa_de_botoes {
+    display: flex;
+    gap: 10px;
+    margin-top: 2rem;
+}
+
+.botao {
+    flex: 5;
+    padding: 15px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#limpador {
+    flex: 1;
+    background-color: #f44336;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- RESULTADO --- */
+.resultado-display {
+    margin-top: 25px;
+    padding: 20px;
+    background: var(--primary);
+    color: white;
+    border-radius: 24px;
+    width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 132, 61, 0.2);
+    line-height: 1.6;
+}
+
+.vibrar { animation: vibration 0.2s ease-in-out; }
+
+@keyframes vibration {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+}
+
+footer { padding: 40px; text-align: center; font-size: 0.8rem; opacity: 0.6; }

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obstetrícia | Mpindi TecMed</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <a href="../index.html" class="btn-back">
+            <i class="ri-arrow-left-line"></i> Início
+        </a>
+        <button class="theme-toggle" id="themeBtn"> 
+            <i class="ri-moon-line" id="themeIcon"></i>
+        </button>
+    </nav>
+
+    <section class="main-tool">
+        <div class="tool-header">
+            <span>SAÚDE MATERNO-INFANTIL</span>
+            <h2>Gestograma</h2>
+        </div>
+
+        <div class="calculator-box" data-aos="fade-up">
+            
+            <span class="nota-label">Data da Última Menstruação (DUM)</span>
+            <div class="entradas_de_dados floating-group">
+                <i class="ri-calendar-event-line"></i>
+                <input type="date" id="dum_data" placeholder=" ">
+            </div>
+
+            <div class="entradas_de_dados floating-group" style="margin-top: 15px;">
+                <i class="ri-loop-left-line"></i>
+                <input type="number" id="ciclo_dias" value="28" placeholder=" ">
+                <label class="label-flutuante">Duração do Ciclo (dias)</label>
+            </div>
+            
+            <div class="caxa_de_botoes">
+                <button class="botao" onclick="calcularObstetricia()">Calcular DPP e IG</button>
+                <div id="limpador" onclick="limparObstetricia()">
+                    <i class="ri-delete-bin-line"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="resultado-display" id="resultado" data-aos="fade-up" style="display: none;"></div>
+    </section>
+
+    <footer><p><strong>Mpindi TecMed</strong></p></footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init({duration: 800});</script>
+    <script src="script.js"></script>
+</body>
+</html>
