@@ -1,0 +1,62 @@
+.help-section {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .guia-item {
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        [data-theme="dark"] .guia-item { border-bottom-color: rgba(255,255,255,0.05); }
+
+        .guia-item h2 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .guia-item h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            color: var(--text);
+            opacity: 0.6;
+        }
+
+        .guia-item p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .formula-box {
+            background: rgba(0, 132, 61, 0.05);
+            border-left: 3px solid var(--primary);
+            padding: 15px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            color: var(--primary);
+        }
+
+        .ajuda-nav {
+            position: sticky;
+            top: 0;
+            background: var(--bg);
+            z-index: 100;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
