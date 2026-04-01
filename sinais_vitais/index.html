@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinais Vitais | Mpindi TecMed</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <a href="../index.html" class="btn-back">
+            <i class="ri-arrow-left-line"></i> Início
+        </a>
+        <button class="theme-toggle" id="themeBtn"> 
+            <i class="ri-moon-line" id="themeIcon"></i>
+        </button>
+    </nav>
+
+    <section class="main-tool">
+        <div class="tool-header">
+            <span>FISIOLOGIA DO CORPO</span>
+            <h2>Sinais Vitais</h2>
+        </div>
+        
+            <select id="pais_referencia" class="opcoes">
+               <option value="Angola">Angola</option>
+               <option value="Portugal">Portugal</option>
+            </select>
+
+        <div class="calculator-box" data-aos="fade-up">
+            
+            <div class="container-campos">
+
+                    <select id="faixa_etaria" class="opcoes" style="grid-column: span 2;">
+                        <option value="recem_nascido">Recém-nascido</option>
+                        <option value="lactante">Lactante</option>
+                        <option value="crianca">Criança</option>
+                        <option value="adulto" selected>Adulto</option>
+                    </select>
+
+                <div class="entradas_de_dados floating-group">
+                    <i class="ri-heart-pulse-fill"></i>
+                    <input type="number" id="fc" placeholder=" ">
+                    <label class="label-flutuante">F. Cardíaca</label>
+                    <p>bpm</p>
+                </div>
+
+                <div class="entradas_de_dados floating-group">
+                    <i class="ri-lungs-fill"></i>
+                    <input type="number" id="fr" placeholder=" ">
+                    <label class="label-flutuante">F. Respiratória</label>
+                    <p>ipm</p>
+                </div>
+
+                <div class="entradas_de_dados floating-group">
+                    <i class="ri-temp-hot-line"></i>
+                    <input type="number" step="0.1" id="temp" placeholder=" ">
+                    <label class="label-flutuante">Temperatura</label>
+                    <p>°C</p>
+                </div>
+
+                <div class="entradas_de_dados floating-group">
+                    <i class="ri-drop-line"></i>
+                    <input type="number" id="sato2" placeholder=" ">
+                    <label class="label-flutuante">Sat. O2</label>
+                    <p>%</p>
+                </div>
+            </div>
+
+            <div class="ta-master-wrapper">
+                <span class="nota-label"><i class="ri-h-1"></i> Tensão Arterial (mmHg)</span>
+                <div class="ta-unificada-box" id="caixa_ta">
+                    <div class="sub-field">
+                        <input type="number" id="sis" placeholder=" ">
+                        <label>Sistólica</label>
+                    </div>
+                    <span class="divisor-ta">/</span>
+                    <div class="sub-field">
+                        <input type="number" id="dia" placeholder=" ">
+                        <label>Diastólica</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="caxa_de_botoes">
+                <button class="botao" onclick="interpretar()">Interpretar</button>
+                <div id="limpador" onclick="limparSinais()">
+                    <i class="ri-delete-bin-line"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="resultado-display" id="resultado" data-aos="fade-up" style="display: none;"></div>
+    </section>
+
+    <footer>
+        <p><strong>Mpindi TecMed</strong></p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init({duration: 800});</script>
+    <script src="script.js"></script>
+</body>
+</html>
