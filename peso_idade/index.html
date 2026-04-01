@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antropometria | Mpindi TecMed</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <a href="../index.html" class="btn-back">
+            <i class="ri-arrow-left-line"></i> Início
+        </a>
+        <button class="theme-toggle" id="themeBtn"> 
+            <i class="ri-moon-line" id="themeIcon"></i>
+        </button>
+    </nav>
+
+<section class="main-tool">
+    <div class="tool-header">
+        <span>PEDIATRIA (0-14 ANOS)</span>
+        <h2>Peso ⇄ Idade</h2>
+    </div>
+
+    <div class="calculator-box" data-aos="fade-up">
+        <span class="nota-label">O que deseja calcular?</span>
+        <div class="entradas_de_dados full-width" style="margin-bottom: 20px;">
+            <i class="ri-arrow-left-right-line"></i>
+            <select id="modo_calculo" onchange="ajustarInterface()">
+                <option value="pesoParaIdade">Descobrir Idade pelo Peso</option>
+                <option value="idadeParaPeso">Descobrir Peso pela Idade</option>
+            </select>
+        </div>
+
+        <div class="entradas_de_dados">
+            <i id="icone_input" class="ri-scales-3-line"></i>
+            <input type="number" id="valor_entrada" placeholder=" ">
+            <label id="label_dinamica" class="label-flutuante">Peso (kg)</label>
+            <p id="unidade_dinamica">kg</p>
+        </div>
+        
+        <div class="caxa_de_botoes">
+            <button class="botao" onclick="calcularAntropometria()">Calcular</button>
+            <div id="limpador" onclick="limparAntropometria()">
+                <i class="ri-delete-bin-line"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="resultado-display" id="resultado" data-aos="fade-up" style="display: none;"></div>
+    
+    <p class="nota"><i class="ri-alert-line"></i> Atenção: Cálculo restrito a pacientes pediátricos (até 14 anos ou 50kg).</p>
+</section>
+
+    <footer><p><strong>Mpindi TecMed</strong></p></footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init({duration: 800});</script>
+    <script src="script.js"></script>
+</body>
+</html>
