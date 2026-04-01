@@ -1,0 +1,273 @@
+:root {
+    --primary: #00843d;
+    --white: #ffffff;
+    --bg: #f0f2f0;
+    --text: #1a2a21;
+    --card-bg: #ffffff;
+    --sombra: #e0dada;
+    --gray: #6d7c74;
+}
+
+[data-theme="dark"] {
+    --bg: #121212;
+    --card-bg: #1e1e1e;
+    --text: #f0f2f0;
+    --sombra: none;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: 0.3s;
+    outline: none;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- NAVEGAÇÃO --- */
+nav {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.btn-back {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* --- ESTRUTURA PRINCIPAL --- */
+.main-tool {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.tool-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.tool-header h2 { font-size: 1.8rem; color: var(--primary); }
+.tool-header span { font-size: 0.8rem; opacity: 0.7; letter-spacing: 1px; }
+
+.calculator-box {
+    background: var(--card-bg);
+    width: 100%;
+    padding: 20px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* --- CAMPOS FUNDIDOS (MODELO TA) --- */
+.nota-label {
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 8px;
+    display: block;
+    text-transform: uppercase;
+}
+
+.campos-fundidos {
+    display: flex;
+    align-items: center;
+    background: var(--bg);
+    border-radius: 12px;
+    padding: 8px 15px;
+    box-shadow: 0 4px 12px var(--sombra);
+}
+
+.sub-campo {
+    position: relative;
+    flex: 1;
+}
+
+.sub-campo input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    text-align: center;
+    padding: 18px 0 5px 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--primary);
+    border-bottom: solid 2px var(--primary);
+}
+
+.sub-campo label {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.7rem;
+    opacity: 0.5;
+    transition: 0.2s;
+    pointer-events: none;
+}
+
+.sub-campo input:focus ~ label,
+.sub-campo input:not(:placeholder-shown) ~ label {
+    top: 5px;
+    font-size: 0.55rem;
+    font-weight: bold;
+}
+
+.divisor {
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin: 0 5px;
+}
+
+.select-embutido {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    background: var(--bg);
+    border: none;
+    color: var(--primary);
+    font-weight: bold;
+    font-size: 0.6rem;
+    cursor: pointer;
+}
+
+/* --- INPUTS TRADICIONAIS E LABELS FLUTUANTES --- */
+.entradas_de_dados {
+    width: 100%;
+    height: 50px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    background: var(--bg);
+    box-shadow: 0 4px 12px var(--sombra);
+    border-radius: 8px;
+}
+
+.entradas_de_dados i {
+    position: absolute;
+    left: 10px;
+    color: var(--primary);
+}
+
+.entradas_de_dados input {
+    width: 100%;
+    padding: 15px 40px 5px 35px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid var(--primary);
+    color: var(--primary);
+    font-weight: bold;
+}
+
+.label-flutuante {
+    position: absolute;
+    left: 35px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.75rem;
+    opacity: 0.6;
+    transition: 0.3s;
+    pointer-events: none;
+}
+
+input:focus ~ .label-flutuante,
+input:not(:placeholder-shown) ~ .label-flutuante {
+    top: 8px;
+    font-size: 0.6rem;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.entradas_de_dados p {
+    position: absolute;
+    right: 10px;
+    font-size: 10px;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+/* --- BOTÕES --- */
+.caxa_de_botoes {
+    display: flex;
+    gap: 10px;
+    margin-top: 2rem;
+}
+
+.botao {
+    flex: 5;
+    padding: 15px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.botao:hover { letter-spacing: 2px; }
+
+#limpador {
+    flex: 1;
+    background-color: #f44336;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- RESULTADO --- */
+.resultado-display {
+    margin-top: 25px;
+    padding: 15px;
+    background: var(--primary);
+    color: white;
+    border-radius: 24px;
+    width: 80%;
+    box-shadow: 0 5px 15px rgba(0, 132, 61, 0.2);
+}
+
+/* --- ANIMAÇÕES --- */
+@keyframes vibration {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+}
+.vibrar { animation: vibration 0.2s ease-in-out; }
+
+footer { padding: 40px; text-align: center; font-size: 0.8rem; opacity: 0.6; }

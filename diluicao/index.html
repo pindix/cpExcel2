@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diluição | Mpindi TecMed</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <a href="../index.html" class="btn-back">
+            <i class="ri-arrow-left-line"></i> Início
+        </a>
+        <button class="theme-toggle" id="themeBtn"> 
+            <i class="ri-moon-line" id="themeIcon"></i>
+        </button>
+    </nav>
+
+    <section class="main-tool">
+        <div class="tool-header">
+            <span>Calculadora Posloógica</span>
+            <h2>Diluição</h2>
+        </div>
+
+        <div class="calculator-box" data-aos="fade-up">
+            
+            <span class="nota-label">Apresentação do Frasco</span>
+            <div class="campos-fundidos" id="caixa_mestre">
+                <div class="sub-campo">
+                    <input type="number" id="massa_valor" placeholder=" ">
+                    <label>Massa</label>
+                    <select id="massa_unidade" class="select-embutido">
+                        <option value="mg">mg</option>
+                        <option value="g">g</option>
+                    </select>
+                </div>
+                <span class="divisor">/</span>
+                <div class="sub-campo">
+                    <input type="number" id="vol_valor" placeholder=" ">
+                    <label>Capacidade</label>
+                    <select id="vol_unidade" class="select-embutido">
+                        <option value="ml">ml</option>
+                        <option value="l">L</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="entradas_de_dados floating-group" style="margin-top: 20px;">
+                <i class="ri-syringe-line"></i>
+                <input type="number" id="dose_indicada" placeholder=" ">
+                <label class="label-flutuante">Dose Indicada (Opcional)</label>
+                <p id="label_unidade_dinamica">mg</p>
+            </div>
+            
+            <div class="caxa_de_botoes">
+                <button class="botao" onclick="calcularDiluicao()">Calcular</button>
+                <div id="limpador" onclick="limparDiluicao()">
+                    <i class="ri-delete-bin-line"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="resultado-display" id="resultado" data-aos="fade-up" style="display: none;"></div>
+    </section>
+
+    <footer>
+        <p><strong>Mpindi TecMed</strong></p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init({duration: 800});</script>
+    <script src="script.js"></script>
+</body>
+</html>
