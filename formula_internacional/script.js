@@ -86,7 +86,7 @@ function calcular() {
     if(vintervalo_raw !== ""){
         // Exibe o resultado com o intervalo. 
         // Usei .toFixed(2) para o número ficar bonito (ex: 1.50 ml)
-        resultado.textContent = `${dose_calculada.toFixed(1)/vintervalo} ml de ${vintervalo_raw} em ${vintervalo_raw}h`;
+        resultado.innerHTML = `${dose_calculada.toFixed(1)/vintervalo} ml <br> <span style = "font-size: 12px;">de ${vintervalo_raw} em ${vintervalo_raw}h </span>`;
         resultado.style.background = "var(--primary)";
     } else {
         // Se estiver vazio, exibe apenas o volume
