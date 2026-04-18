@@ -270,6 +270,15 @@ nav {
 }
 
 
+.celula {
+  grid-column: 1 / 2; /* força estar na coluna 1 */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+}
+
+
+
 
 /* Sugestões e animações) */
 #sugestoes_box {
