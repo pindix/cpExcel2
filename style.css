@@ -8,6 +8,8 @@
     --milk-solid: #f0f2f0; 
     --section-2-bg: #f0f2f0; 
     --footer-bg: #1a2a21;
+    --sombra: #e0dada;
+    --subCard: #ffffff;
 }
 
 /* Cores do Tema Escuro */
@@ -19,7 +21,253 @@
     --gray: #a0a0a0;          /* Texto secundário */
     --primary-soft: #1a3326;  /* Hover dos cards no modo escuro */
     --border-color: #333333;
+    --sombra: none;
+    --subCard: #1e1e1e;
 }
+
+
+
+/* --- HERO TECH ADVANCED --- */
+.hero-tech-advanced {
+    position: relative;
+    min-height: 85vh;
+    /* Fundo suave com a sua cor de marca para branco */
+    background: linear-gradient(135deg, var(--primary-soft) 0%, var(--white) 100%);
+    display: flex;
+    align-items: center;
+    padding: 80px 5%;
+    overflow: hidden;
+}
+
+.hero-container {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 40px;
+    align-items: center;
+    width: 100%;
+}
+
+.logo-ultra {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 20px;
+}
+
+.logo-ultra span { color: var(--primary); }
+
+/* BADGES HORIZONTAIS (Pills) */
+.hero-badges-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.badge-item {
+    background: var(--white);
+    border: 1px solid rgba(0, 132, 61, 0.15);
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--gray);
+    max-width: 550px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* --- TUBO DE ENSAIO ANIMADO --- */
+.hero-visual-tech {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.test-tube-wrapper {
+    position: relative;
+}
+
+.tube-swing-arm {
+    transform-origin: top center;
+    animation: swingTube 5s ease-in-out infinite;
+}
+
+.tube {
+    width: 75px;
+    height: 190px;
+    border: 4px solid rgba(0, 132, 61, 0.15);
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.liquid {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60%;
+    background: linear-gradient(to top, var(--primary), #00ff73);
+}
+
+/* Bolhas de baixo para cima */
+.bubble {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    bottom: -15px;
+    animation: bubbleUp 3s infinite ease-in;
+}
+
+.bubble:nth-child(1) { left: 15%; width: 10px; height: 10px; animation-delay: 0s; }
+.bubble:nth-child(2) { left: 45%; width: 15px; height: 15px; animation-delay: 1s; }
+.bubble:nth-child(3) { left: 75%; width: 8px; height: 8px; animation-delay: 2s; }
+
+@keyframes swingTube {
+    0%, 100% { transform: rotate(-8deg); }
+    50% { transform: rotate(8deg); }
+}
+
+@keyframes bubbleUp {
+    0% { transform: translateY(0); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(-170px); opacity: 0; }
+}
+
+/* --- CORREÇÃO DE RESPONSIVIDADE MOBILE --- */
+@media (max-width: 992px) {
+    .hero-tech-advanced {
+        padding: 60px 20px;
+        text-align: center;
+        min-height: auto;
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr; /* Muda para uma coluna só */
+        gap: 50px;
+    }
+
+    .hero-content-tech {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-badges-container {
+        justify-content: center; /* Centraliza as cápsulas */
+    }
+
+    .hero-subtitle {
+        margin: 0 auto 30px;
+    }
+
+    .tube {
+        width: 65px;
+        height: 160px; /* Reduz um pouco no mobile */
+    }
+}
+    
+    
+    
+    
+    
+
+
+
+
+
+/* --- BENTO GRID SYSTEM --- */
+.section-bento {
+    padding: 80px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 160px;
+    gap: 15px;
+}
+
+.bento-item {
+    background: var(--white);
+    border: 1px solid var(--primary-soft);
+    border-radius: 28px;
+    padding: 24px;
+    text-decoration: none;
+    color: var(--text);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
+.bento-item i { font-size: 2.2rem; color: var(--primary); margin-bottom: 12px; }
+.bento-item h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+.bento-item p { font-size: 0.85rem; color: var(--gray); line-height: 1.4; }
+
+/* Variações de Tamanho */
+.card-grande { grid-column: span 2; grid-row: span 2; background: var(--primary-soft); }
+.card-medio, .card-largo { grid-column: span 2; grid-row: span 1; }
+.card-quadrado { grid-column: span 1; grid-row: span 1; align-items: center; justify-content: center; text-align: center; }
+
+.card-quadrado i { font-size: 2rem; margin-bottom: 5px; }
+.card-quadrado span { font-size: 0.85rem; font-weight: 600; }
+
+/* Efeitos Hover */
+.bento-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 132, 61, 0.12);
+    border-color: var(--primary);
+}
+
+.bento-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--primary);
+    color: white;
+    font-size: 0.7rem;
+    padding: 5px 12px;
+    border-radius: 50px;
+    font-weight: 700;
+}
+
+/* RESPONSIVIDADE (MILIMÉTRICA) */
+@media (max-width: 768px) {
+    .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 150px;
+    }
+    .card-grande, .card-medio, .card-largo { grid-column: span 2; }
+    .card-quadrado { grid-column: span 1; }
+    
+    .logo-responsive { font-size: 2.8rem; }
+}
+
+
+
+
+
+
 
 * { margin: 0; padding: 0; box-sizing: border-box; transition: background-color 0.3s, color 0.3s; }
 html {
@@ -78,7 +326,7 @@ body {
     margin-top: 30px;
 }
  
-.label-ferramentas { font-size: 1.8rem; font-weight: 600; margin-bottom: 10px; }
+.label-ferramentas { font-size: 1.8rem; font-weight: 600; margin-bottom: 10px; text-align: center; }
 
 .linha-decorativa {
     width: 60px;
@@ -345,6 +593,7 @@ body {
     }
     
     /* Esconde o botão no desktop */
+    
     .ver-mais {
         display: none;
     }
@@ -356,4 +605,162 @@ body {
         margin: 20px auto 0 !important;
         grid-template-columns: repeat(4, 1fr); 
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Container das Categorias */
+.menu-categorias-horizontal {
+    display: flex;
+    justify-content: space-around;
+    max-width: 600px;
+    margin: 40px auto 10px;
+    padding: 0 10px;
+}
+
+.item-categoria {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 80px;
+}
+
+.icone-circulo {
+    width: 60px;
+    height: 60px;
+    background: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--primary);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border: 2px solid transparent;
+}
+
+.item-categoria span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 8px;
+    
+}
+
+/* Estado Ativo */
+.item-categoria.ativo .icone-circulo {
+    border-color: var(--primary);
+    background: var(--primary-soft);
+    transform: translateY(-5px);
+}
+.item-categoria.ativo span { color: var(--primary); }
+
+
+
+
+
+
+
+
+/* Esconde todos os grupos por padrão */
+.grupo-ferramentas {
+    display: none; 
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Classe que ativa a exibição e animação */
+.grupo-ferramentas.ativo {
+    display: grid; /* Ativa o grid quando a categoria for clicada */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Painel de Ferramentas (Aberto) */
+.painel-ferramentas {
+    display: none; /* Inicia oculto */
+    margin: 20px auto;
+    max-width: 800px;
+    border-top: 2px solid var(--primary);
+    padding: 25px;
+    position: relative;
+    animation: 0.4s;
+    display: block; /* O painel pai fica sempre em bloco */
+    min-height: 150px; /* Evita que o layout "pule" muito ao trocar */
+}
+
+/* A Seta/Indicador que se move */
+.indicador-origem {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0; 
+    height: 0; 
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid var(--primary);
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Grelha de ferramentas dentro do painel */
+.grid-sub-ferramentas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+}
+
+.sub-card {
+    background: var(--subCard);
+    padding: 15px;
+    border-radius: 15px;
+    text-decoration: none;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    transition: 0.2s;
+    height: 5rem;
+    box-shadow: 0 4px 12px var(--sombra);
+}
+
+.sub-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.sub-card i { color: var(--primary); font-size: 1.2rem;}
+.sub-card b { font-size: 0.8rem;}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }

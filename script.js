@@ -16,39 +16,14 @@ themeBtn.addEventListener('click', () => {
 });
 
 
-// Botão Ver Mais - com animação e texto dinâmico
-const btnVerMais = document.getElementById('btnVerMais');
-const ferramentasOcultas = document.getElementById('ferramentasOcultas');
-const iconeSeta = document.getElementById('iconeSeta');
-const textoBotao = document.getElementById('textoBotao');
-
-// Estado inicial (não usei style.display para permitir animação)
-ferramentasOcultas.classList.remove('visivel');
-
-btnVerMais.addEventListener('click', () => {
-    // Alterna a classe 'visivel' para animar
-    ferramentasOcultas.classList.toggle('visivel');
-    
-    // Muda o texto do botão
-    if (ferramentasOcultas.classList.contains('visivel')) {
-        textoBotao.textContent = 'Ver menos ferramentas';
-    } else {
-        textoBotao.textContent = 'Ver outras ferramentas';
-    }
-    
-    // Muda a classe ativo para girar a seta
-    btnVerMais.classList.toggle('ativo');
-});
-
-// Quando a página carrega, recupera as escolhas anonimamente
+// LÓGICA DE INICIALIZAÇÃO (Ao carregar a página)
 window.addEventListener('load', () => {
-    // Restaurar Tema
+
+    // (Opcional) Restaurar Tema Escuro se já tiver essa lógica
     const temaSalvo = localStorage.getItem('tema');
     if (temaSalvo === 'dark') {
-        body.setAttribute('data-theme', 'dark');
-        themeIcon.className = 'ri-sun-line';
+        document.body.setAttribute('data-theme', 'dark');
+        const themeIcon = document.getElementById('themeIcon');
+        if(themeIcon) themeIcon.className = 'ri-sun-line';
     }
-    
-    // Inicia o carregamento do Excel
-    carregarDados();
 });
