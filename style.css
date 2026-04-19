@@ -10,6 +10,8 @@
     --footer-bg: #1a2a21;
     --sombra: #e0dada;
     --subCard: #ffffff;
+    --shadow-soft: none;
+    --borda-bento: 1px solid rgba(0,132,61,0.08);
 }
 
 /* Cores do Tema Escuro */
@@ -23,14 +25,21 @@
     --border-color: #333333;
     --sombra: none;
     --subCard: #1e1e1e;
+     --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.4); 
+    --borda-bento: none;
 }
+
+
+
+
+
 
 
 
 /* --- HERO TECH ADVANCED --- */
 .hero-tech-advanced {
     position: relative;
-    min-height: 85vh;
+    min-height: 100vh;
     /* Fundo suave com a sua cor de marca para branco */
     background: linear-gradient(135deg, var(--primary-soft) 0%, var(--white) 100%);
     display: flex;
@@ -47,6 +56,7 @@
     gap: 40px;
     align-items: center;
     width: 100%;
+    padding-top: 6rem;
 }
 
 .logo-ultra {
@@ -68,8 +78,7 @@
 
 .badge-item {
     background: var(--white);
-    border: 1px solid rgba(0, 132, 61, 0.15);
-    padding: 8px 16px;
+    padding: 18px;
     border-radius: 50px;
     font-size: 0.75rem;
     font-weight: 600;
@@ -77,7 +86,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    box-shadow: var(--shadow-soft);
 }
 
 .hero-subtitle {
@@ -206,8 +215,8 @@
 
 .bento-item {
     background: var(--white);
-    border: 1px solid var(--primary-soft);
     border-radius: 28px;
+    border: var(--borda-bento);
     padding: 24px;
     text-decoration: none;
     color: var(--text);
@@ -217,7 +226,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    box-shadow: var(--shadow-soft);
 }
 
 .bento-item i { font-size: 2.2rem; color: var(--primary); margin-bottom: 12px; }
@@ -367,49 +376,8 @@ body {
 .card-tool span { font-weight: 600; font-size: 0.95rem; }
 
 
-/* Botão Ver Mais */
-.ver-mais {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin: 30px auto 10px;
-    cursor: pointer;
-    color: var(--primary);
-    font-weight: 600;
-    font-size: 1rem;
-    width: fit-content;
-}
 
-.ver-mais-icone {
-    font-size: 0.8rem;
-    transition: transform 0.3s ease;
-}
 
-/* Quando ativo, a seta gira */
-.ver-mais.ativo .ver-mais-icone {
-    transform: rotate(180deg);
-}
-
-/* Div das ferramentas ocultas - com animação suave */
-.ferramentas-ocultas {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    max-width: 900px;
-    margin: 20px auto 0;
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: opacity 0.5s ease, max-height 0.5s ease, margin 0.3s ease;
-}
-
-/* Quando visível, aparece com fade + altura */
-.ferramentas-ocultas.visivel {
-    opacity: 1;
-    max-height: 500px; /* Ajusta se tiveres mais ferramentas */
-    margin: 20px auto 0;
-}
 /* --- SECTION 2: INFO --- */
 .section-info {
     background-color: var(--section-2-bg);
