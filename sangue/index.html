@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupos Sanguíneos | Mpindi TecMed</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <a href="../index.html" class="btn-back">
+            <i class="ri-arrow-left-line"></i> Início
+        </a>
+        <a href="../ajuda/index.html#sangue" class="help-icon" title="Como funciona?">
+            <i class="ri-question-line"></i> 
+        </a>
+        <button class="theme-toggle" id="themeBtn"> 
+            <i class="ri-moon-line" id="themeIcon"></i>
+        </button>
+    </nav>
+
+
+
+    <section class="main-tool">
+        <div class="tool-header">
+            <span>HEMOTERAPIA & GENÉTICA</span>
+            <h2>Grupo Sanguíneo</h2>
+        </div>
+
+        <div class="calculator-box" data-aos="fade-up">
+            
+            <span class="nota-label">1. Compatibilidade (Clínica)</span>
+            <div class="grid-sangue">
+                <div class="entradas_de_dados">
+                    <i class="ri-user-received-line"></i>
+                    <select id="tipo_paciente">
+                        <option value="" disabled selected>Paciente...</option>
+                        <option value="A+">A+</option><option value="A-">A-</option>
+                        <option value="B+">B+</option><option value="B-">B-</option>
+                        <option value="AB+">AB+</option><option value="AB-">AB-</option>
+                        <option value="O+">O+</option><option value="O-">O-</option>
+                    </select>
+                </div>
+                <div class="entradas_de_dados">
+                    <i class="ri-hand-heart-line"></i>
+                    <select id="tipo_doador">
+                        <option value="" disabled selected>Doador...</option>
+                        <option value="A+">A+</option><option value="A-">A-</option>
+                        <option value="B+">B+</option><option value="B-">B-</option>
+                        <option value="AB+">AB+</option><option value="AB-">AB-</option>
+                        <option value="O+">O+</option><option value="O-">O-</option>
+                    </select>
+                </div>
+            </div>
+
+            <span class="nota-label" style="margin-top: 20px;">2. Herança (Biológica)</span>
+            <div class="grid-sangue">
+                <div class="entradas_de_dados">
+                    <i class="ri-men-line"></i>
+                    <select id="sangue_pai">
+                        <option value="" disabled selected>Pai...</option>
+                        <option value="A">A</option><option value="B">B</option>
+                        <option value="AB">AB</option><option value="O">O</option>
+                    </select>
+                </div>
+                <div class="entradas_de_dados">
+                    <i class="ri-women-line"></i>
+                    <select id="sangue_mae">
+                        <option value="" disabled selected>Mãe...</option>
+                        <option value="A">A</option><option value="B">B</option>
+                        <option value="AB">AB</option><option value="O">O</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="caxa_de_botoes">
+                <button class="botao" onclick="analisarSangue()">Analisar</button>
+                <div id="limpador" onclick="limparSangue()">
+                    <i class="ri-delete-bin-line"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="resultado-display" id="resultado" data-aos="fade-up" style="display: none;"></div>
+    </section>
+
+    <footer><p><strong>Mpindi TecMed</strong></p></footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init({duration: 800});</script>
+    <script src="script.js"></script>
+</body>
+</html>

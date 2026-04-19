@@ -1,0 +1,263 @@
+:root {
+    --primary: #00843d;
+    --white: #ffffff;
+    --bg: #f0f2f0;
+    --text: #1a2a21;
+    --card-bg: #ffffff;
+    --sombra: #e0dada;
+}
+
+[data-theme="dark"] {
+    --bg: #121212;
+    --card-bg: #1e1e1e;
+    --text: #f0f2f0;
+    --sombra: none;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: 0.3s;
+    outline: none;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+
+/* --- BARRA DE TOPO --- */
+nav {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+}
+
+.btn-back {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap:5px;
+}
+
+.help-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--primary);
+    text-decoration: none;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* --- SECTION ÚNICA --- */
+.main-tool {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+    max-width: 420px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.tool-header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.tool-header h2 {
+    font-size: 1.6rem;
+    color: var(--primary);
+}
+
+.tool-header span {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    letter-spacing: 1px;
+}
+
+.calculator-box {
+    background: var(--card-bg);
+    width: 100%;
+    padding: 20px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.nota-label {
+    font-size: 0.65rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 10px;
+    display: block;
+    opacity: 0.8;
+}
+
+.grid-sangue {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.entradas_de_dados {
+    width: 100%;
+    height: 48px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: var(--bg);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px var(--sombra);
+}
+
+.entradas_de_dados i {
+    position: absolute;
+    left: 10px;
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.entradas_de_dados select {
+    width: 100%;
+    height: 100%;
+    padding-left: 35px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--primary);
+    color: var(--primary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    appearance: none;
+}
+
+.caxa_de_botoes {
+    display: flex;
+    gap: 10px;
+    margin-top: 1.5rem;
+}
+
+.botao {
+    flex: 5;
+    padding: 14px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#limpador {
+    flex: 1;
+    background: #f44336;
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* RESULTADO COM ESTRUTURA CENTRALIZADA */
+.resultado-display {
+    margin-top: 20px;
+    padding: 25px 20px;
+    color: white;
+    border-radius: 20px;
+    width: 80%;
+    box-shadow: 0 5px 15px rgba(0, 132, 61, 0.2);
+    line-height: 1.5;
+    text-align: center;
+}
+
+.res-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.res-titulo {
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.res-sub {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    display: block;
+}
+
+hr {
+    margin: 20px 0;
+    opacity: 0.3;
+    border: 0;
+    border-top: 1px solid white;
+}
+
+.heranca-box {
+    text-align: left;
+    padding: 0.3rem;
+    border-radius: 12px;
+    background: var(--primary);
+}
+
+.heranca-box b {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+}
+
+.vibrar {
+    animation: vibration 0.2s ease-in-out;
+}
+
+@keyframes vibration {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-4px);
+    }
+
+    50% {
+        transform: translateX(4px);
+    }
+}
+
+footer {
+    padding: 30px;
+    text-align: center;
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
