@@ -10,8 +10,8 @@
     --footer-bg: #1a2a21;
     --sombra: #e0dada;
     --subCard: #ffffff;
-    --shadow-soft: none;
     --borda-bento: 1px solid rgba(0,132,61,0.08);
+    --shadow-soft: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 /* Cores do Tema Escuro */
@@ -35,12 +35,10 @@
 
 
 
-
 /* --- HERO TECH ADVANCED --- */
 .hero-tech-advanced {
     position: relative;
     min-height: 100vh;
-    /* Fundo suave com a sua cor de marca para branco */
     background: linear-gradient(135deg, var(--primary-soft) 0%, var(--white) 100%);
     display: flex;
     align-items: center;
@@ -56,7 +54,7 @@
     gap: 40px;
     align-items: center;
     width: 100%;
-    padding-top: 6rem;
+    padding-top: 2rem;
 }
 
 .logo-ultra {
@@ -68,7 +66,6 @@
 
 .logo-ultra span { color: var(--primary); }
 
-/* BADGES HORIZONTAIS (Pills) */
 .hero-badges-container {
     display: flex;
     flex-wrap: wrap;
@@ -97,101 +94,139 @@
     margin-bottom: 30px;
 }
 
-/* --- TUBO DE ENSAIO ANIMADO --- */
-.hero-visual-tech {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.test-tube-wrapper {
-    position: relative;
-}
-
-.tube-swing-arm {
-    transform-origin: top center;
-    animation: swingTube 5s ease-in-out infinite;
-}
-
-.tube {
-    width: 75px;
-    height: 190px;
-    border: 4px solid rgba(0, 132, 61, 0.15);
-    border-bottom-left-radius: 40px;
-    border-bottom-right-radius: 40px;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
-    position: relative;
-    overflow: hidden;
-}
-
-.liquid {
-    position: absolute;
-    bottom: 0;
+/* CONTAINER DA SERINGA - SEM PADDINGS */
+.medical-svg-container {
     width: 100%;
-    height: 60%;
-    background: linear-gradient(to top, var(--primary), #00ff73);
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 0;
+    line-height: 0;
+    font-size: 0;
+    animation: floatingScene 4s ease-in-out infinite;
 }
 
-/* Bolhas de baixo para cima */
-.bubble {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.4);
-    border-radius: 50%;
-    bottom: -15px;
-    animation: bubbleUp 3s infinite ease-in;
+.medical-svg-container svg {
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
-.bubble:nth-child(1) { left: 15%; width: 10px; height: 10px; animation-delay: 0s; }
-.bubble:nth-child(2) { left: 45%; width: 15px; height: 15px; animation-delay: 1s; }
-.bubble:nth-child(3) { left: 75%; width: 8px; height: 8px; animation-delay: 2s; }
-
-@keyframes swingTube {
-    0%, 100% { transform: rotate(-8deg); }
-    50% { transform: rotate(8deg); }
+/* Animações do SVG */
+.syringe-fill {
+    animation: aspirarAction 6s ease-in-out infinite;
 }
 
-@keyframes bubbleUp {
-    0% { transform: translateY(0); opacity: 0; }
-    20% { opacity: 1; }
-    100% { transform: translateY(-170px); opacity: 0; }
+.plunger-assembly {
+    animation: plungerAction 6s ease-in-out infinite;
 }
 
-/* --- CORREÇÃO DE RESPONSIVIDADE MOBILE --- */
+@keyframes aspirarAction {
+    0%, 100% { height: 2px; y: 223; }
+    45%, 65% { height: 85px; y: 138; }
+}
+
+@keyframes plungerAction {
+    0%, 100% { transform: translateY(0); }
+    45%, 65% { transform: translateY(-85px); }
+}
+
+@keyframes floatingScene {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.vial-liquid {
+    opacity: 0.9;
+    filter: brightness(1.1);
+}
+    
+    
+
+/* --- RESPONSIVIDADE MOBILE COMPLETA --- */
 @media (max-width: 992px) {
     .hero-tech-advanced {
-        padding: 60px 20px;
+        padding: 30px 20px 20px;
         text-align: center;
-        min-height: auto;
+        min-height: 100vh;
+        display: flex;
+        align-items: flex-end;
+        padding: 0;
+        position: relative;
     }
 
     .hero-container {
-        grid-template-columns: 1fr; /* Muda para uma coluna só */
-        gap: 50px;
+        grid-template-columns: 1fr;
+        gap: 15px; /* Espaço reduzido drasticamente */
+        padding-top: 0;
+        position: relative;
+        bottom: 30px;
     }
 
     .hero-content-tech {
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-bottom: 0;
     }
 
     .hero-badges-container {
-        justify-content: center; /* Centraliza as cápsulas */
+        justify-content: center;
+        margin-top: 30px;
     }
 
     .hero-subtitle {
         margin: 0 auto 30px;
     }
 
-    .tube {
-        width: 65px;
-        height: 160px; /* Reduz um pouco no mobile */
+    /* Seringa sem espaços no mobile */
+    .medical-svg-container {
+        margin-top: -25px;
+        margin-bottom: -25px;
+        max-width: 320px;
     }
 }
-    
-    
-    
+
+@media (max-width: 768px) {
+    .hero-tech-advanced {
+        padding: 20px 15px 15px;
+    }
+
+    .hero-container {
+        gap: 10px;
+    }
+
+    .medical-svg-container {
+        margin-top: -30px;
+        margin-bottom: -30px;
+        max-width: 280px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-tech-advanced {
+        padding: 15px 12px 10px;
+    }
+
+    .hero-container {
+        gap: 5px;
+    }
+
+    .medical-svg-container {
+        margin-top: -40px;
+        margin-bottom: -35px;
+        max-width: 250px;
+    }
+
+
+    .hero-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+    }
+
+    .logo-ultra {
+        margin-bottom: 10px;
+    }
+}
     
     
 
@@ -215,8 +250,8 @@
 
 .bento-item {
     background: var(--white);
+    border: 1px solid rgba(0, 132, 61, 0.08);
     border-radius: 28px;
-    border: var(--borda-bento);
     padding: 24px;
     text-decoration: none;
     color: var(--text);
@@ -245,7 +280,7 @@
 .bento-item:hover {
     transform: translateY(-8px);
     box-shadow: 0 15px 35px rgba(0, 132, 61, 0.12);
-    border-color: var(--primary);
+    border: solid 0.5px var(--primary);
 }
 
 .bento-badge {
