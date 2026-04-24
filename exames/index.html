@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bioquímica | Mpindi TecMed</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <a href="../index.html" class="btn-back">
+            <i class="ri-arrow-left-line"></i> Início
+        </a>
+        <a href="../ajuda/index.html#exames" class="help-icon" title="Como funciona?">
+            <i class="ri-question-line"></i> 
+        </a>
+        <button class="theme-toggle" id="themeBtn"> 
+            <i class="ri-moon-line" id="themeIcon"></i>
+        </button>
+    </nav>
+
+
+
+
+    <section class="main-tool">
+        <div class="tool-header">
+            <span>BIOQUÍMICA & LABORATÓRIO</span>
+            <h2>Interpretador de Exames</h2>
+        </div>
+
+        <div class="calculator-box" data-aos="fade-up">
+            <div class="entradas_de_dados" style="position: relative;">
+                <i class="ri-search-eye-line"></i>
+                <input type="text" id="exame_nome" placeholder=" " oninput="filtrarExames()" autocomplete="off">
+                <label class="label-flutuante">Nome do exame</label>
+                <div id="sugestoes_box" class="sugestoes-box"></div>
+            </div>
+
+            <div class="entradas_de_dados" style="position: relative; margin-top: 25px;">
+                <i class="ri-ruler-2-line"></i>
+                <input type="number" step="0.01" id="exame_valor" placeholder=" ">
+                <label class="label-flutuante">Valor do resultado</label>
+                <p class="unidade-tag" id="unidade_display">--</p>
+            </div>
+
+            <div class="caxa_de_botoes">
+                <button class="botao" onclick="analisar()">Analisar</button>
+                <i class="ri-delete-bin-line" id="limpador" onclick="limpar()"></i>
+            </div>
+        </div>
+
+        <p class="resultado-display" id="resultado" data-aos="fade-up"></p>
+    </section>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init({duration: 800});</script>
+    <script src="script.js"></script>
+</body>
+</html>
