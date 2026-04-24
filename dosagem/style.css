@@ -146,7 +146,7 @@ nav {
 /* 3. O Select de Concentração */
 #selConcentracao {
     display: none;       /* Começa escondido por padrão */
-    flex-basis: 35%;     /* Quando aparecer, tenta ocupar cerca de 35% do espaço */
+    flex-basis: 45%;     /* Quando aparecer, tenta ocupar cerca de 35% do espaço */
     min-width: 95px;     /* Largura mínima para ser utilizável no telemóvel */
     height: 40px;        /* Mesma altura da sua classe .entradas_de_dados */
     border-radius: 16px;
@@ -357,20 +357,29 @@ nav {
 }
 
 
-/* O Resultado */
+/* ==========================================================================
+   AJUSTE DE ESPAÇAMENTO NO RESULTADO
+   ========================================================================== */
 .resultado-display {
     margin-top: 25px;
     padding: 15px;
     background: var(--primary);
     color: white;
     border-radius: 24px;
-    font-weight: 600;
     font-size: 1rem;
     min-height: 0px;
     box-shadow: 0 5px 15px rgba(0, 132, 61, 0.3);
     width: 90%;
     z-index: -1;
+    
+    /* ALTERAÇÃO AQUI: 
+       Mudamos de 'pre-line' para 'normal' para que o HTML (<br>) 
+       controle as quebras, evitando espaços vazios do Excel/Código. */
+    white-space: normal; 
+    line-height: 1.4; /* Reduzido ligeiramente para ficar mais compacto */
 }
+
+
 .ml {
     font-size: 1.8rem; /* Tamanho bem visível */
     font-weight: 800;
