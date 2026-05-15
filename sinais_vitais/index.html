@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,16 +10,68 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
+<div id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+        <h3>Gestão de Monitorização</h3>
+        <button onclick="toggleMenu()" class="close-btn"><i class="ri-close-line"></i></button>
+    </div>
+    <div class="sidebar-content">
+     
+        <p class="instrucao">Adicione um perfil e obtenha em PDF um registro com gráfico de sinais vitais de vários pacientes. Esse registos só estará disponível nesse navegador.</p>
+        
+        <div class="cadastro-box">
+            
+            <div class="row-selects">
+                <select id="p-pais" class="opcoes-menu">
+                    <option disabled="">Escolha um País</option>
+                    <option value="Angola">Angola</option>
+                    <option value="Portugal">Portugal</option>
+                </select>
+                <select id="p-faixa" class="opcoes-menu">
+                    <option value="Recem_nascido">Recém-nascido</option>
+                    <option value="Adulto" selected>Adulto</option>
+                </select>
+            </div>
+                <div class="p-nome floating-group">
+                    <i class="ri-user-3-fill"></i>
+                    <input maxlength="40" type="text" id="p-nome" placeholder=" ">
+                    <label class="label-flutuante">Nome do Paciente</label>
+                </div>
+            
+                    <button class="btn-add" onclick="cadastrarPaciente()">
+                        Adicionar paciente
+                 <i class="ri-user-add-fill"></i>
+                  </button>
+            
+        </div>
+
+        <hr class="divisor-menu">
+
+        <button class="btn-padrao" onclick="ativarModoPadrao()">
+            <i class="ri-refresh-line"></i> Ativar Modo Sem Paciente
+        </button>
+        
+        <div class="lista-titulo">PACIENTES MONITORIZADOS</div>
+        
+        
+        <div id="lista-pacientes" class="lista-vertical">
+            </div>
+    </div>
+</div>
+<div id="overlay" onclick="toggleMenu()" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:999;"></div>
+
 
     <nav>
         <a href="../index.html" class="btn-back">
             <i class="ri-arrow-left-line"></i> Início
         </a>
         <a href="../ajuda/index.html#sinais" class="help-icon" title="Como funciona?">
-            <i class="ri-question-line"></i> 
+            <i class="ri-question-line"></i>
         </a>
-        <button class="theme-toggle" id="themeBtn"> 
+        <button class="theme-toggle" id="themeBtn">
             <i class="ri-moon-line" id="themeIcon"></i>
         </button>
     </nav>
@@ -30,23 +83,41 @@
             <span>FISIOLOGIA DO CORPO</span>
             <h2>Sinais Vitais</h2>
         </div>
-        
-            <select id="pais_referencia" class="opcoes">
-               <option value="Angola">Angola</option>
-               <option value="Portugal">Portugal</option>
-            </select>
+
+
 
         <div class="calculator-box" data-aos="fade-up">
-            
-            <div class="container-campos">
+            <div class="container-campos" id="contexto-clinico">
+                
+                
+                
+                
+           
 
-                    <select id="faixa_etaria" class="opcoes" style="grid-column: span 2;">
-                        <option value="recem_nascido">Recém-nascido</option>
-                        <option value="lactante">Lactante</option>
-                        <option value="crianca">Criança</option>
-                        <option value="adulto" selected>Adulto</option>
-                    </select>
+    <div id="controles-padrao" class="wrapper-selects">
+        <select id="pais_referencia" class="opcoes">
+            <option value="Angola">Angola</option>
+            <option value="Portugal">Portugal</option>
+        </select>
+        <select id="faixa_etaria" class="opcoes" style="width: 50%;">
+            <option value="recem_nascido">Recém-nascido</option>
+            <option value="adulto" selected>Adulto</option>
+        </select>
+    </div>
 
+    <div id="tag-paciente" class="tag-ativa" style="display: none;" onclick="toggleMenu()">
+        <span class="status-dot"></span>
+        <div class="info-paciente">
+            <h3 id="nome-exibicao">Nome</h3>
+            <p id="detalhes-exibicao">Detalhes</p>
+        </div>
+    </div>
+                
+                
+                
+                
+                
+               
                 <div class="entradas_de_dados floating-group">
                     <i class="ri-heart-pulse-fill"></i>
                     <input type="number" id="fc" placeholder=" ">
@@ -90,14 +161,26 @@
                     </div>
                 </div>
             </div>
+
             
-            <div class="caxa_de_botoes">
-                <button class="botao" onclick="interpretar()">Interpretar</button>
-                <div id="limpador" onclick="limparSinais()">
-                    <i class="ri-delete-bin-line"></i>
-                </div>
-            </div>
-        </div>
+
+<div class="caxa_de_botoes">
+    <button class="botao" onclick="interpretar()">Interpretar</button>
+    
+    <button id="btn-exportar" class="botao-exportar" style="display: none;" onclick="exportarPDF()" title="Exportar Histórico em PDF">
+        <i class="ri-download-2-line"></i>
+    </button>
+    
+    <button class="btn-abrir-menu" onclick="toggleMenu()">
+        <i class="ri-user-settings-line"></i>
+    </button>
+    
+    <div id="limpador" onclick="limparSinais()">
+        <i class="ri-delete-bin-line"></i>
+    </div>
+</div>
+            
+      
 
         <div class="resultado-display" id="resultado" data-aos="fade-up" style="display: none;"></div>
     </section>
@@ -105,9 +188,20 @@
     <footer>
         <p><strong>Mpindi TecMed</strong></p>
     </footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+ <!-- Em vez de display:none -->
+<div style="position: absolute; visibility: hidden; height: 0; width: 0; overflow: hidden;">
+    <canvas id="pdfChart" width="1200" height="600"></canvas>
+</div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>AOS.init({duration: 800});</script>
+    <script>AOS.init({ duration: 800 });</script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init({ duration: 800 });</script>
     <script src="script.js"></script>
 </body>
+
 </html>

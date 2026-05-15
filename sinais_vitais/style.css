@@ -72,6 +72,253 @@ nav {
     cursor: pointer;
 }
 
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    left: -320px;
+    top: 0;
+    width: 320px;
+    height: 100%;
+    background: var(--card-bg);
+    z-index: 1000;
+    padding: 20px;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+.sidebar.active { left: 0; }
+
+.instrucao { font-size: 14px; margin-bottom: 15px; margin-top: 8px; }
+
+
+
+.row-selects { display: flex; gap: 10px; margin: 10px 0; }
+
+.btn-add { background: var(--primary); color: white;
+    width: 100%;
+    border-radius: 8px;
+    border: none;
+    padding: 12px;
+}
+
+.btn-abrir-menu {
+    flex: 1;
+    border: none;
+    border: solid 1px var(--primary);
+    border-radius: 8px;
+    background: none;
+}
+
+.close-btn {
+    position: absolute;
+    background: none;
+    border: none;
+    top: 15px;
+    right: 15px; 
+}
+.close-btn i {
+    color: var(--primary);
+    font-size: 1.9rem;
+}
+
+.btn-abrir-menu i {
+    color: green;
+    font-size: 1.5rem;
+}
+
+.btn-padrao { background: var(--bg); color: var(--texto); padding: 12px;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.divisor-menu { border: 0.5px solid var(--sombra); margin: 15px 0; }
+
+/* Lista Vertical de Pacientes */
+.lista-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.perfil-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg);
+    padding: 12px 15px;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.perfil-item:hover {
+    transform: translateX(5px);
+    background: #e8eee8;
+}
+
+.perfil-info {
+    cursor: pointer;
+    flex-grow: 1;
+}
+
+.perfil-info strong {
+    display: block;
+    font-size: 1rem;
+    color: var(--text);
+}
+
+.perfil-info span {
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
+
+.btn-remover-perfil {
+    background: none;
+    border: none;
+    color: red;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.btn-remover-perfil:hover {
+    background: rgba(255, 68, 68, 0.1);
+}
+
+/* Estilo do Botão Exportar na Calculator Box */
+.botao-exportar {
+    flex: 1;
+    background: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    animation: popIn 0.3s ease;
+}
+
+@keyframes popIn {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+}
+
+/* --- ESTILO DOS INPUTS NO MENU (Simulando a Calculadora) --- */
+.cadastro-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    border: none;
+    border-radius: 8px;
+    padding: 0.2rem;
+    background: var(--bg);
+}
+
+.p-nome {
+    background: white;
+    width: 100%;
+    height: 50px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.p-nome input {
+    padding: 15px 5px 5px 35px;
+    width: 100%;
+    background: none;
+    border: none;
+    border-bottom: solid 2px var(--primary);
+    color: var(--primary);
+    font-weight: bold;
+}
+
+.p-nome i {
+    position: absolute;
+    left: 10px;
+    color: var(--primary);
+}
+
+.opcoes-menu {
+    align-items: center;
+    border-radius: 16px;
+    background-color: white;
+    border: none;
+    padding: 0.6rem;
+    color: green;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+}
+
+/* Melhoria visual do botão exportar na calculadora */
+.botao-exportar i {
+    font-size: 1.4rem;
+}
+
+/* Garante que os selects se comportem como os originais */
+.wrapper-selects {
+    display: flex;
+    gap: 10px;
+    grid-column: 1 / -1;
+}
+
+/* Garante que a Tag ocupe exatamente o mesmo espaço */
+.tag-ativa {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    justify-content: center;
+    min-height: 60px;
+    background: rgba(0, 132, 61, 0.05);
+    border-radius: 12px;
+    padding: 12px;
+    cursor: pointer;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    background: #00ff00;
+    border-radius: 50%;
+    margin-right: 12px;
+    box-shadow: 0 0 5px #00ff00;
+    flex-shrink: 0;
+    align-self: center;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.4; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0.4; transform: scale(0.8); }
+}
+
+/* Garante que o conteúdo da sidebar tenha scroll se a lista for longa */
+.sidebar-content {
+    overflow-y: auto;
+    flex: 1;
+}
+
+.lista-titulo {
+    font-weight: bold;
+    font-size: 0.7rem;
+    margin: 15px 0 5px 0;
+    color: var(--primary);
+}
+
 /* --- SECTION ÚNICA --- */
 .main-tool {
     flex: 1;
@@ -108,7 +355,6 @@ nav {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
-
 .opcoes {
     align-items: center;
     border-radius: 16px;
@@ -129,10 +375,12 @@ nav {
     background: white;
 }
 
+/* Container que segura ambos */
 .container-campos {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 15px;
+    grid-column: 1 / -1;
 }
 
 .entradas_de_dados {
@@ -213,7 +461,6 @@ input:not(:placeholder-shown)~.label-flutuante {
     border-radius: 8px;
     padding: 5px 15px;
     box-shadow: 0 4px 12px var(--sombra);
-
 }
 
 .sub-field {
@@ -267,7 +514,7 @@ input:not(:placeholder-shown)~.label-flutuante {
 }
 
 .botao {
-    flex: 5;
+    flex: 3;
     padding: 15px;
     background: var(--primary);
     color: white;
@@ -294,7 +541,7 @@ input:not(:placeholder-shown)~.label-flutuante {
     border-radius: 20px;
     font-size: 0.9rem;
     color: white;
-    line-height: 1.5;
+    line-height: 2;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -303,21 +550,10 @@ input:not(:placeholder-shown)~.label-flutuante {
 }
 
 @keyframes vibration {
-    0% {
-        transform: translateX(0);
-    }
-
-    25% {
-        transform: translateX(-4px);
-    }
-
-    50% {
-        transform: translateX(4px);
-    }
-
-    100% {
-        transform: translateX(0);
-    }
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    50% { transform: translateX(4px); }
+    100% { transform: translateX(0); }
 }
 
 .vibrar {
