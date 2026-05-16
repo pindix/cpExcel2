@@ -16,6 +16,8 @@ themeBtn.addEventListener('click', () => {
 });
 
 
+
+
 // LÓGICA DE INICIALIZAÇÃO (Ao carregar a página)
 window.addEventListener('load', () => {
 
@@ -26,23 +28,4 @@ window.addEventListener('load', () => {
         const themeIcon = document.getElementById('themeIcon');
         if(themeIcon) themeIcon.className = 'ri-sun-line';
     }
-});
-
-// Lógica do Modal de Modo Teste
-document.addEventListener("DOMContentLoaded", () => {
-    const testModal = document.getElementById("testModeModal");
-    const acceptBtn = document.getElementById("btnAcceptTest");
-
-    // Verifica se o usuário já aceitou nesta sessão
-    if (!sessionStorage.getItem("testModeAccepted")) {
-        testModal.style.display = "flex";
-        document.body.style.overflow = "hidden"; // Bloqueia scroll enquanto não aceitar
-    }
-
-    acceptBtn.addEventListener("click", () => {
-        sessionStorage.setItem("testModeAccepted", "true");
-        testModal.style.fadeOut = "0.3s";
-        testModal.style.display = "none";
-        document.body.style.overflow = "auto"; // Libera scroll
-    });
 });

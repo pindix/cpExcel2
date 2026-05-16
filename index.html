@@ -8,35 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-B3S0VRQ3GQ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-B3S0VRQ3GQ');
-</script>
 </head>
 <body>
-  <div id="testModeModal" class="modal-overlay-test">
-    <div class="modal-content-test">
-        <div class="test-icon">
-            <i class="ri-flask-line"></i>
-        </div>
-        <h3>Site em modo de Teste</h3>
-        <p>
-            Este sistema está atualmente em fase de <strong>Esperimentação</strong>. 
-            Os cálculos e dados apresentados podem conter inconsistências.
-        </p>
-        <div class="warning-box">
-            <i class="ri-error-warning-line"></i>
-            <span>Não utilize estes resultados para administração real de medicamentos.</span>
-        </div>
-        <button id="btnAcceptTest" class="btn-accept-test">Compreendo e Aceito</button>
-    </div>
-</div>
+  
     <button class="theme-toggle" id="themeBtn">
         <i class="ri-moon-line" id="themeIcon"></i>
     </button>
@@ -174,13 +148,13 @@
             <i class="ri-water-flash-line"></i>
             <span>Gotejamento</span>
         </a>
-
-        <a href="sinais_vitais/index.html" class="bento-item card-largo">
+        
+        <a href="formula_internacional/index.html" class="bento-item card-medio" style="background: var(--primary-soft);">
             <div class="bento-content">
-                <i class="ri-heart-pulse-line"></i>
+                <i class="ri-global-line"></i>
                 <div class="bento-text">
-                    <h3>Sinais Vitais</h3>
-                    <p>Monitorização de parâmetros fisiológicos e escalas de alerta.</p>
+                    <h3>Formula Internacional</h3>
+                    <p>Calcule a quantida a administrar para qualquer medicamento líquido.</p>
                 </div>
             </div>
         </a>
@@ -204,16 +178,19 @@
             <i class="ri-temp-hot-line"></i>
             <span>Sistema ABO</span>
         </a>
+
         
-        <a href="formula_internacional/index.html" class="bento-item card-medio" style="background: var(--primary-soft);">
+        <a href="sinais_vitais/index.html" class="bento-item card-largo">
             <div class="bento-content">
-                <i class="ri-global-line"></i>
+                <i class="ri-heart-pulse-line"></i>
                 <div class="bento-text">
-                    <h3>Formula Internacional</h3>
-                    <p>Calcule a quantida a administrar para qualquer medicamento líquido.</p>
+                    <h3>Sinais Vitais</h3>
+                    <p>Monitorização de parâmetros fisiológicos e escalas de alerta.</p>
                 </div>
             </div>
         </a>
+
+        
     </div>
 </section>
 
