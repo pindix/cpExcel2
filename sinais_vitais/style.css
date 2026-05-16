@@ -102,13 +102,7 @@ nav {
     padding: 12px;
 }
 
-.btn-abrir-menu {
-    flex: 1;
-    border: none;
-    border: solid 1px var(--primary);
-    border-radius: 8px;
-    background: none;
-}
+
 
 .close-btn {
     position: absolute;
@@ -122,10 +116,6 @@ nav {
     font-size: 1.9rem;
 }
 
-.btn-abrir-menu i {
-    color: green;
-    font-size: 1.5rem;
-}
 
 .btn-padrao { background: var(--bg); color: var(--texto); padding: 12px;
     width: 100%;
@@ -191,20 +181,9 @@ nav {
     background: rgba(255, 68, 68, 0.1);
 }
 
-/* Estilo do Botão Exportar na Calculator Box */
-.botao-exportar {
-    flex: 1;
-    background: #2196F3;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 1.2rem;
-    animation: popIn 0.3s ease;
-}
+
+
+
 
 @keyframes popIn {
     from { transform: scale(0); }
@@ -262,10 +241,7 @@ nav {
     width: 100%;
 }
 
-/* Melhoria visual do botão exportar na calculadora */
-.botao-exportar i {
-    font-size: 1.4rem;
-}
+
 
 /* Garante que os selects se comportem como os originais */
 .wrapper-selects {
@@ -370,6 +346,9 @@ nav {
     margin-bottom: 4px;
 }
 
+.faixa-option.oculto {
+    display: none;
+}
 #pais_referencia {
     width: 50%;
     background: white;
@@ -514,14 +493,52 @@ input:not(:placeholder-shown)~.label-flutuante {
 }
 
 .botao {
-    flex: 3;
-    padding: 15px;
+    flex: 1;
+    padding: 0.2rem;
     background: var(--primary);
     color: white;
     border: none;
     border-radius: 12px;
     font-weight: bold;
     cursor: pointer;
+}
+
+.btn-abrir-menu,
+.botao-exportar {
+    
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    text-align: center;
+    padding: 10px 2px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* Estilos específicos */
+.btn-abrir-menu {
+    background: var(--bg);
+    border: 1.5px solid var(--primary);
+    color: var(--primary);
+    flex: 1;
+}
+
+.botao-exportar {
+    background: #2196F3;
+    border: none;
+    color: white;
+    flex: 1.5;
+}
+
+/* Ícones */
+.btn-abrir-menu i,
+.botao-exportar i {
+    font-size: 1.2rem;
 }
 
 #limpador {
