@@ -75,9 +75,10 @@ nav {
 /* Sidebar */
 .sidebar {
     position: fixed;
-    left: -320px;
+    left: -380px;
     top: 0;
-    width: 320px;
+    width: 90%;
+    max-width: 380px;
     height: 100%;
     background: var(--card-bg);
     z-index: 1000;
