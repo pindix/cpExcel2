@@ -9,7 +9,7 @@
 }
 
 [data-theme="dark"] {
-    --bg: #121212;
+    --bg: black;
     --card-bg: #1e1e1e;
     --text: #f0f2f0;
     --sombra: none;
@@ -33,46 +33,145 @@ body {
 }
 
 
-/* --- BARRA DE TOPO --- */
-nav {
-    padding: 10px;
+/* ================================================================
+   WEB HEADER - NOVO ESTILO
+   ================================================================ */
+
+.web-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    max-width: 800px;
+    justify-content: space-around;
+    padding: 12px 20px;
+    max-width: 420px;
     margin: 0 auto;
     width: 100%;
-    position: relative;
+    gap: 12px;
+    margin-top: 10px;
 }
 
-.btn-back {
-    text-decoration: none;
-    color: var(--primary);
-    font-weight: 600;
+/* Card dos controles */
+.header-controls {
     display: flex;
     align-items: center;
-    gap:5px;
+    gap: 6px;
+    background: var(--card-bg);
+    padding: 6px 12px;
+    border-radius: 40px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 132, 61, 0.08);
+    flex-shrink: 0;
 }
 
-.help-icon {
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--primary);
+.btn-icon {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     text-decoration: none;
-    left: 50%; top: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-}
-
-.theme-toggle {
-    background: none;
-    border: none;
     color: var(--text);
-    font-size: 1.5rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 20px;
+    border: none;
+    background: transparent;
     cursor: pointer;
+    transition: 0.2s;
 }
 
-/* --- SECTION ÚNICA --- */
+.btn-icon i {
+    font-size: 1rem;
+}
+
+.btn-icon:hover {
+    background: rgba(0, 132, 61, 0.08);
+    color: var(--primary);
+}
+
+.btn-icon span {
+    display: inline-block;
+}
+
+/* Divisor do header */
+.divider-header {
+    opacity: 0.2;
+    color: var(--text);
+    font-size: 0.8rem;
+}
+
+/* Título da ferramenta */
+.header-title {
+    flex-shrink: 0;
+}
+
+.tool-badge {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: -0.3px;
+    padding: 4px 0;
+    background: none;
+}
+
+
+
+/* Responsividade para mobile */
+@media (max-width: 480px) {
+    .web-header {
+        padding: 10px 16px;
+        gap: 8px;
+    }
+
+    .header-controls {
+        padding: 4px 10px;
+        gap: 4px;
+        flex-wrap: nowrap;
+    }
+
+    .btn-icon {
+        font-size: 0.7rem;
+        padding: 3px 6px;
+    }
+
+    .btn-icon i {
+        font-size: 0.85rem;
+    }
+
+    .btn-icon span {
+        display: none;
+        /* Esconde o texto em telas muito pequenas, mantém só ícone */
+    }
+
+    .tool-badge {
+        font-size: 0.95rem;
+    }
+
+    /* Em telas muito pequenas, mostra o texto dos ícones com abreviação */
+    @media (max-width: 360px) {
+        .btn-icon span {
+            display: none;
+        }
+        .divider-header {
+            display: none;
+        }
+        .header-controls {
+            gap: 2px;
+            padding: 4px 8px;
+        }
+    }
+}
+
+/* Em telas médias, mostra os textos */
+@media (min-width: 481px) and (max-width: 768px) {
+    .btn-icon span {
+        display: inline-block;
+    }
+}
+
+
+
+/* ==========================================================================
+   SECTION ÚNICA
+   ========================================================================== */
 .main-tool {
     flex: 1;
     display: flex;
@@ -84,61 +183,42 @@ nav {
     width: 100%;
 }
 
-.tool-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.tool-header h2 {
-    font-size: 1.8rem;
-    color: var(--primary);
-}
-
-.tool-header span {
-    font-size: 0.8rem;
-    opacity: 0.7;
-    letter-spacing: 1px;
-}
-
-/* Contentor dos Comandos (A sua DIV) */
 .calculator-box {
     background: var(--card-bg);
     width: 100%;
     padding: 20px;
     border-radius: 24px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    z-index: 300;
 }
 
-
+/* ==========================================================================
+   GRID COM LARGURAS PERSONALIZADAS (SEM DISTORÇÃO)
+   ========================================================================== */
 .container-campos {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
     width: 100%;
-    margin: 0 auto;
-    row-gap: 8px;
     margin-bottom: 0.6rem;
 }
 
-
-/* Campos*/
+/* Campos - ESTILO ORIGINAL MANTIDO */
 .entradas_de_dados {
     width: 100%;
     height: 40px;
     position: relative;
     display: flex;
     align-items: center;
-    padding: 4px;
+    padding: 1.6rem 10px;
     background: var(--bg);
     box-shadow: 0 4px 12px var(--sombra);
     border-radius: 4px;
     margin-bottom: 8px;
 }
 
-
-
 .entradas_de_dados input {
-    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+    padding: 0.5rem 0.5rem 0.5rem 1.7rem;
     width: 100%;
     background: none;
     border: none;
@@ -153,18 +233,19 @@ nav {
     background: var(--card-bg);
     padding: 2px;
     border-radius: 2px;
-    z-index: 1;
+
 }
 
 .entradas_de_dados select {
     position: absolute;
     right: 4px;
-    width: 3.5rem;
+    width: 5.5rem;
     border: none;
     color: green;
     font-weight: bold;
     background: var(--bg);
     font-size: 11px;
+    padding: 0 1.3rem 0 0; 
 }
 
 .entradas_de_dados p {
@@ -173,42 +254,83 @@ nav {
     right: 8px;
     color: green;
     font-size: 0.9rem;
-    width: 3rem;
-    height: 60%;
+    width: 1rem;
+    height: 55%;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
 
-
-
-
-
-
-
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-5px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* ==========================================================================
+   LABELS FLUTUANTES (ADICIONADAS SEM QUEBRAR O ORIGINAL)
+   ========================================================================== */
+.label-flutuante {
+    position: absolute;
+    left: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.9rem;
+    color: var(--text);
+    opacity: 0.5;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    white-space: nowrap;
 }
 
-.entradas_de_dados {
-    animation: fadeIn 0.5s ease-out;
+.entradas_de_dados input:focus ~ .label-flutuante,
+.entradas_de_dados input:not(:placeholder-shown) ~ .label-flutuante {
+    top: 6px;
+    font-size: 0.7rem;
+    opacity: 0.7;
+}
+
+/* Remove placeholder visual mas mantém funcionalidade */
+.entradas_de_dados input::placeholder {
+    opacity: 0;
 }
 
 
+
+
+/* ==========================================================================
+   LABEL DA CONCENTRAÇÃO - SEMPRE NO TOPO
+   ========================================================================== */
+
+/* 🔥 Força o label do campo concentração a ficar sempre no topo */
+#concentracao ~ .label-flutuante {
+    top: 6px !important;
+    font-size: 0.7rem !important;
+    opacity: 0.5 !important;
+    color: var(--text) !important;
+}
+
+/* 🔥 Mantém o estilo consistente com os outros campos */
+.entradas_de_dados input:focus ~ .label-flutuante,
+.entradas_de_dados input:not(:placeholder-shown) ~ .label-flutuante {
+    top: 6px;
+    font-size: 0.7rem;
+    opacity: 0.5;
+}
+
+/* 🔥 Para o campo concentração, a cor fica mais vibrante */
+#concentracao:focus ~ .label-flutuante {
+    color: var(--text) !important;
+    opacity: 0.5 !important;
+}
+
+/* ==========================================================================
+   BOTÕES
+   ========================================================================== */
+
+
+
+
+
+   
 .botao   {
     flex: 5;
-    width: 100%;
-    padding: 15px;
+    padding: 13px;
     background: var(--primary);
     color: white;
     border: none;
@@ -223,7 +345,7 @@ nav {
     background-color: #f44336;
     color: white;
     border: none;
-    border-radius: 100%;
+    border-radius: 12px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -234,23 +356,502 @@ nav {
     display: flex;
     gap: 10px;
     width: 100%;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
-/* O Resultado */
+
+ 
+
+
+
+/* ==========================================================================
+   RESULTADO FÓRMULA INTERNACIONAL - ESTILO IGUAL À DOSAGEM
+   ========================================================================== */
+
 .resultado-display {
     margin-top: 25px;
-    padding: 15px;
-    background: var(--primary);
-    color: white;
-    border-radius: 24px;
-    font-weight: 600;
-    font-size: 1.2rem;
-    min-height: 0px;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 132, 61, 0.3);
-    width: 70%;
+    background: transparent;
+    border-radius: 0;
+    font-weight: 400;
+    font-size: 1rem;
+    box-shadow: none;
+    width: 100%;
+    border-radius: 20px;
 }
+
+.internacional-container {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Card principal - MESMO ESTILO DA DOSAGEM */
+.internacional-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 20px 18px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 132, 61, 0.08);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Cabeçalho do card - MESMO ESTILO */
+.internacional-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.internacional-card .card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    background: rgba(0, 132, 61, 0.1);
+    color: var(--primary);
+}
+
+.internacional-card .card-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--text);
+}
+
+/* Dose central - MESMO ESTILO */
+.dose-central {
+    text-align: center;
+    padding: 8px 0 5px 0;
+}
+
+.dose-volume {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.2;
+}
+
+.dose-unidade {
+    font-size: 0.9rem;
+    font-weight: 400;
+    opacity: 0.6;
+}
+
+.dose-intervalo {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin-top: 8px;
+    font-weight: 500;
+}
+
+/* Totais - EXATAMENTE IGUAL À DOSAGEM */
+.internacional-totais {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    background: rgba(0, 132, 61, 0.05);
+    border-radius: 16px;
+    padding: 12px 8px;
+    margin-top: 16px;
+}
+
+.total-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--primary);
+}
+
+.total-item i {
+    font-size: 1rem;
+    color: var(--primary);
+}
+/* Dark mode */
+[data-theme="dark"] .internacional-card {
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .internacional-card .card-status {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .internacional-info {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+    .internacional-card {
+        padding: 16px 14px;
+    }
+    
+    .dose-volume {
+        font-size: 1.8rem;
+    }
+    
+    .info-item {
+        font-size: 0.75rem;
+        gap: 10px;
+    }
+    
+    .info-item i {
+        font-size: 1rem;
+        width: 24px;
+    }
+}
+
+/* Mensagem de erro */
+.internacional-erro {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 20px;
+    background: #ef4444;
+    color: white;
+}
+
+.internacional-erro i {
+    font-size: 1.5rem;
+}
+
+.internacional-erro span {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   ANIMAÇÕES
+   ========================================================================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes vibration {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.entradas_de_dados {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.vibrar {
+    animation: vibration 0.2s ease-in-out;
+}
+
+
+
+/* ==========================================================================
+   RESPONSIVIDADE
+   ========================================================================== */
+
+@media (max-width: 480px) {
+    .resultado-card {
+        padding: 18px 16px;
+    }
+    
+    .dose-volume {
+        font-size: 2.5rem;
+    }
+    
+    .dose-intervalo {
+        font-size: 0.75rem;
+    }
+    
+    .info-vertical-item {
+        font-size: 0.8rem;
+        gap: 10px;
+    }
+    
+    .info-vertical-item i {
+        font-size: 1rem;
+        width: 24px;
+    }
+}
+
+@media (max-width: 380px) {
+    .dose-volume {
+        font-size: 2rem;
+    }
+    
+    .info-vertical-item {
+        font-size: 0.75rem;
+    }
+}
+
+/* ==========================================================================
+   DARK MODE
+   ========================================================================== */
+[data-theme="dark"] .resultado-card {
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .entradas_de_dados select {
+    background: var(--bg);
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   SELECTS PERSONALIZADOS - UNIDADES (Dosagem e Concentração)
+   ========================================================================== */
+
+/* ===== CONTAINER DO SELECT ===== */
+.custom-select-unidade {
+    position: relative;
+    flex-shrink: 0;
+    min-width: 65px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-right: 2px;
+}
+
+/* ===== TRIGGER (botão) - ESTRUTURA FLEXÍVEL ===== */
+.custom-select-trigger-unidade {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2px;
+    padding: 2px 4px 2px 2px;
+    background: rgba(0, 132, 61, 0.05);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    height: 100%;
+    min-height: 26px;
+    max-width: 100%;
+}
+
+.custom-select-trigger-unidade:hover {
+    background: rgba(0, 132, 61, 0.05);
+}
+
+/* ===== TEXTO SELECIONADO ===== */
+.custom-select-trigger-unidade .unidade-texto {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 55px;
+    text-align: right;
+    padding-right: 0px;
+    line-height: 1.2;
+    opacity: 0.7;
+}
+
+/* ===== SETA (ARROW) - SEMPRE VISÍVEL E NUNCA SOBREPOSTA ===== */
+.custom-select-trigger-unidade .unidade-arrow {
+    font-size: 0.9rem !important;
+    color: var(--text) !important;
+    opacity: 0.8 !important;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-left: 0px;
+    position: relative;
+    background: none;
+}
+
+.custom-select-trigger-unidade.aberto .unidade-arrow {
+    transform: rotate(180deg);
+    opacity: 1 !important;
+}
+
+/* ===== OPÇÕES DO SELECT ===== */
+.custom-select-options-unidade {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: -4px;
+    background: var(--card-bg);
+    border: 1px solid rgba(0, 132, 61, 0.12);
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    padding: 4px;
+    z-index: 9999;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.25s ease;
+    visibility: hidden;
+    min-width: 140px;
+}
+
+.custom-select-options-unidade.aberto {
+    max-height: 240px;
+    overflow-y: auto;
+    opacity: 1;
+    visibility: visible;
+}
+
+.custom-select-options-unidade::-webkit-scrollbar {
+    width: 3px;
+}
+
+.custom-select-options-unidade::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 3px;
+}
+
+/* ===== OPÇÃO INDIVIDUAL ===== */
+.custom-select-option-unidade {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding: 6px 14px !important;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 28px;
+}
+
+.custom-select-option-unidade:hover {
+    background: rgba(0, 132, 61, 0.06);
+}
+
+.custom-select-option-unidade.selecionado {
+    background: rgba(0, 132, 61, 0.08);
+}
+
+.custom-select-option-unidade .option-label {
+    font-size: 0.65rem !important;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+    text-align: left;
+    width: 100%;
+}
+
+/* ===== GRUPOS (optgroup) ===== */
+.custom-select-options-unidade .option-group-label {
+    font-size: 0.55rem;
+    font-weight: 600;
+    color: var(--primary);
+    padding: 6px 14px 2px 14px;
+    opacity: 0.7;
+    letter-spacing: 0.3px;
+    border-bottom: 1px solid rgba(0, 132, 61, 0.06);
+    margin-bottom: 2px;
+}
+
+.custom-select-options-unidade .option-group-label:not(:first-child) {
+    margin-top: 6px;
+}
+
+/* ===== DARK MODE ===== */
+[data-theme="dark"] .custom-select-options-unidade {
+    background: #2a2a2a;
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .custom-select-option-unidade:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .custom-select-option-unidade.selecionado {
+    background: rgba(0, 132, 61, 0.2);
+}
+
+[data-theme="dark"] .custom-select-options-unidade .option-group-label {
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+    color: #4ade80;
+}
+
+[data-theme="dark"] .custom-select-trigger-unidade .unidade-arrow {
+    color: #f0f2f0 !important;
+    opacity: 0.9 !important;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 480px) {
+    .custom-select-unidade {
+        min-width: 50px;
+    }
+    .custom-select-trigger-unidade .unidade-texto {
+        font-size: 0.7rem;
+        max-width: 80px;
+    }
+    .custom-select-options-unidade {
+        min-width: 160px;
+        right: -8px;
+    }
+    .custom-select-option-unidade .option-label {
+        font-size: 0.6rem !important;
+    }
+    .custom-select-trigger-unidade .unidade-arrow {
+        font-size: 0.8rem !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .custom-select-unidade {
+        min-width: 40px;
+    }
+    .custom-select-trigger-unidade .unidade-texto {
+        font-size: 0.45rem;
+        max-width: 60px;
+    }
+    .custom-select-options-unidade {
+        min-width: 100px;
+    }
+    .custom-select-trigger-unidade .unidade-arrow {
+        font-size: 0.7rem !important;
+    }
+}
+
+
+
 
 footer {
     padding: 30px;

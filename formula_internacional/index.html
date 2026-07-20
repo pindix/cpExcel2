@@ -12,69 +12,120 @@
 <body>
 
 
-    <nav>
-        <a href="../index.html" class="btn-back">
-            <i class="ri-arrow-left-line"></i> Início
-        </a>
-        <a href="../ajuda/index.html#internacional" class="help-icon" title="Como funciona?">
-            <i class="ri-question-line"></i> 
-        </a>
-        <button class="theme-toggle" id="themeBtn"> 
-            <i class="ri-moon-line" id="themeIcon"></i>
-        </button>
-    </nav>
-
-
-    <section class="main-tool">
-        <div class="tool-header">
-            <span>CALCULADORA POSOLÓGICA</span>
-            <h2>Fórmula Internacional</h2>
+    
+    <!-- ============================================================ -->
+    <!-- BARRA SUPERIOR - WEB STYLE                                 -->
+    <!-- ============================================================ -->
+    <header class="web-header">
+        <!-- Card com os controles -->
+        <div class="header-controls">
+            <a href="../index.html#ferramentas" class="btn-icon" title="Início">
+                <i class="ri-arrow-left-line"></i>
+                <span>Início</span>
+            </a>
+            <span class="divider-header">|</span>
+            <a href="../ajuda/index.html#internacional" class="btn-icon" title="Ajuda">
+                <i class="ri-question-line"></i>
+                <span>Ajuda</span>
+            </a>
+            <span class="divider-header">|</span>
+            <button class="btn-icon theme-toggle" id="themeBtn" title="Mudar Tema">
+                <i class="ri-moon-line" id="themeIcon"></i>
+                <span>Tema</span>
+            </button>
         </div>
 
+        <!-- Título da ferramenta -->
+        <div class="header-title">
+            <span class="tool-badge">Fórmula Internacional</span>
+        </div>
+    </header>
+
+
+     <section class="main-tool">
+        
+        
         <div class="calculator-box" data-aos="fade-up">
             
             <div class="container-campos">
-                <div class="entradas_de_dados">
-                <i class="ri-scales-2-fill"></i>
-                <input type="number" placeholder="Peso..." id="peso">
-                <p>kg</p>
+                <div class="entradas_de_dados" style="grid-column: span 2;">
+                    <i class="ri-scales-2-fill"></i>
+                    <input type="number" placeholder="Peso..." id="peso">
+                    <label class="label-flutuante">Peso</label>
+                    <p>kg</p>
+                </div>
+                
+                <!-- ============================================================ -->
+                <!-- SELECT DE DOSAGEM - COMPONENTE PERSONALIZADO                  -->
+                <!-- ============================================================ -->
+                <div class="entradas_de_dados" style="grid-column: span 3; position: relative; padding-right: 0;" >
+                    <i class="ri-capsule-line"></i>
+                    <input type="number" placeholder="Dosagem..." id="dosagem">
+                    <label class="label-flutuante">Dose</label>
+                    
+                    <!-- Hidden input para manter compatibilidade -->
+                    <input type="hidden" id="unidade_de_dosagem" value="1">
+                    
+                    <!-- Componente personalizado -->
+                    <div class="custom-select-unidade" id="selectDosagem">
+                        <div class="custom-select-trigger-unidade" onclick="toggleUnidadeSelect('dosagem')">
+                            <span class="unidade-texto" id="unidadeDosagemSelecionada">mg/kg</span>
+                            <i class="ri-arrow-down-s-line unidade-arrow" id="unidadeDosagemArrow"></i>
+                        </div>
+                        <div class="custom-select-options-unidade" id="unidadeDosagemOptions">
+                            <!-- Opções geradas dinamicamente pelo JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ============================================================ -->
+                <!-- SELECT DE CONCENTRAÇÃO - COMPONENTE PERSONALIZADO            -->
+                <!-- ============================================================ -->
+                <div class="entradas_de_dados" style="grid-column: span 3; position: relative; padding-right: 0;">
+                    <i class="ri-bubble-chart-line"></i>
+                    <input type="number" placeholder=" " id="concentracao">
+                    <label class="label-flutuante">Concentração</label>
+                    
+                    <!-- Hidden input para manter compatibilidade -->
+                    <input type="hidden" id="unidade_de_concentracao" value="1">
+                    
+                    <!-- Componente personalizado -->
+                    <div class="custom-select-unidade" id="selectConcentracao">
+                        <div class="custom-select-trigger-unidade" onclick="toggleUnidadeSelect('concentracao')">
+                            <span class="unidade-texto" id="unidadeConcentracaoSelecionada">mg/ml</span>
+                            <i class="ri-arrow-down-s-line unidade-arrow" id="unidadeConcentracaoArrow"></i>
+                        </div>
+                        <div class="custom-select-options-unidade" id="unidadeConcentracaoOptions">
+                            <!-- Opções geradas dinamicamente pelo JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                <div class="entradas_de_dados" style="grid-column: span 2;">
+                    <i class="ri-time-line"></i>
+                    <input type="number" placeholder="Intervalo..." id="intervalo">
+                    <label class="label-flutuante">Intervalo</label>
+                    <p>h</p>
+                </div>
+                
+                
             </div>
-            <div class="entradas_de_dados">
-                <i class="ri-capsule-line"></i>
-                <input type="number" placeholder="Dosagem..." id="dosagem">
-                <select id="unidade_de_dosagem">
-                    <option value="1">mg/kg</option>
-                    <option value="1000">kg</option>
-                    <option value="1">mg</option>
-                </select>
-            </div>
-
-            <div class="entradas_de_dados">
-                <i class="ri-bubble-chart-line"></i>
-                <input type="number" placeholder="Concentração..." id="concentracao">
-                <select id="unidade_de_concentracao">
-                    <option value="1">mg/ml</option>
-                    <option value="1000">kg/ml</option>
-                </select>
-            </div>
-            <div class="entradas_de_dados">
-                <i class="ri-time-line"></i>
-                <input type="number" placeholder="Intervalo..." id="intervalo">
-                <p>horas</p>
-            </div>
-            </div>
+            
+            
             
             <div class="caxa_de_botoes">
                 <button class="botao" onclick="calcular()">Calcular</button>
                 <i class="ri-delete-bin-line" id="limpador" onclick="limpar()"></i>
             </div>
+            
         </div>
-
         <p class="resultado-display" id="resultado" data-aos="fade-up" data-aos-delay="100"></p>
+        
+        
     </section>
 
+  
     <footer>
-            <a style="color: inherit; text-decoration: none;" href="https://wa.me/244929129797?text=Olá!%20Encontrei%20uma%20possível%20inconsistência%20num%20cálculo%20e%20gostaria%20de%20reportar." target="_blank">Reportar erro</a>
+        <p><strong>Mpindi TecMed</strong></p>
     </footer>
 
     <script src="script.js"></script>

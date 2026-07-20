@@ -8,7 +8,7 @@
 }
 
 [data-theme="dark"] {
-    --bg: #121212;
+    --bg: black;
     --card-bg: #1e1e1e;
     --text: #f0f2f0;
     --sombra: none;
@@ -33,46 +33,155 @@ body {
 
 
 
-/* --- BARRA DE TOPO --- */
-nav {
-    padding: 10px;
+/* ================================================================
+   WEB HEADER - NOVO ESTILO
+   ================================================================ */
+
+.web-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    max-width: 800px;
+    justify-content: space-around;
+    padding: 12px 20px;
+    max-width: 420px;
     margin: 0 auto;
     width: 100%;
-    position: relative;
+    gap: 12px;
+    margin-top: 10px;
 }
 
-.btn-back {
-    text-decoration: none;
-    color: var(--primary);
-    font-weight: 600;
+/* Card dos controles */
+.header-controls {
     display: flex;
     align-items: center;
-    gap:5px;
+    gap: 6px;
+    background: var(--card-bg);
+    padding: 6px 12px;
+    border-radius: 40px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 132, 61, 0.08);
+    flex-shrink: 0;
 }
 
-.help-icon {
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--primary);
+.btn-icon {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     text-decoration: none;
-    left: 50%; top: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-}
-
-.theme-toggle {
-    background: none;
-    border: none;
     color: var(--text);
-    font-size: 1.5rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 20px;
+    border: none;
+    background: transparent;
     cursor: pointer;
+    transition: 0.2s;
 }
 
-/* --- SECTION ÚNICA --- */
+.btn-icon i {
+    font-size: 1rem;
+}
+
+.btn-icon:hover {
+    background: rgba(0, 132, 61, 0.08);
+    color: var(--primary);
+}
+
+.btn-icon span {
+    display: inline-block;
+}
+
+/* Divisor do header */
+.divider-header {
+    opacity: 0.2;
+    color: var(--text);
+    font-size: 0.8rem;
+}
+
+/* Título da ferramenta */
+.header-title {
+    flex-shrink: 0;
+}
+
+.tool-badge {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: -0.3px;
+    padding: 4px 0;
+    background: none;
+}
+
+
+
+/* Responsividade para mobile */
+@media (max-width: 480px) {
+    .web-header {
+        padding: 10px 16px;
+        gap: 8px;
+    }
+
+    .header-controls {
+        padding: 4px 10px;
+        gap: 4px;
+        flex-wrap: nowrap;
+    }
+
+    .btn-icon {
+        font-size: 0.7rem;
+        padding: 3px 6px;
+    }
+
+    .btn-icon i {
+        font-size: 0.85rem;
+    }
+
+    .btn-icon span {
+        display: none;
+        /* Esconde o texto em telas muito pequenas, mantém só ícone */
+    }
+
+    .tool-badge {
+        font-size: 0.95rem;
+    }
+
+    /* Em telas muito pequenas, mostra o texto dos ícones com abreviação */
+    @media (max-width: 360px) {
+        .btn-icon span {
+            display: none;
+        }
+        .divider-header {
+            display: none;
+        }
+        .header-controls {
+            gap: 2px;
+            padding: 4px 8px;
+        }
+    }
+}
+
+/* Em telas médias, mostra os textos */
+@media (min-width: 481px) and (max-width: 768px) {
+    .btn-icon span {
+        display: inline-block;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   CONTEÚDO PRINCIPAL
+   ========================================================================== */
 .main-tool {
     flex: 1;
     display: flex;
@@ -84,14 +193,6 @@ nav {
     width: 100%;
 }
 
-.tool-header {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-.tool-header h2 { font-size: 1.8rem; color: var(--primary); }
-.tool-header span { font-size: 0.8rem; opacity: 0.7; letter-spacing: 1px; }
-
 .calculator-box {
     background: var(--card-bg);
     width: 100%;
@@ -100,16 +201,287 @@ nav {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
-/* --- CAMPOS E LABELS --- */
-.nota-label {
-    font-size: 0.7rem;
-    font-weight: bold;
-    color: var(--primary);
-    margin-bottom: 8px;
-    display: block;
-    text-transform: uppercase;
+/* ==========================================================================
+   SELECT PERSONALIZADO - MODO DE CÁLCULO (ESTILO SINAIS VITAIS)
+   ========================================================================== */
+
+.modo-select-container {
+    width: 100%;
+    margin-bottom: 0px;
+    padding: 8px 12px 12px;
+    background: none !important;
+    border-radius: 16px;
+    border: none !important;
+    position: relative;
+    z-index: 100;
 }
 
+/* ===== LABEL FLUTUANTE ===== */
+
+.custom-select-trigger {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 14px 6px 14px;
+    background: var(--card-bg);
+    border: 2px solid var(--primary);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 46px;
+}
+
+.custom-select-trigger .floating-label {
+    position: absolute;
+    left: 14px;
+    top: 6px;
+    transform: translateY(0);
+    font-size: 0.55rem;
+    font-weight: 600;
+    color: var(--primary);
+    opacity: 0.8;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    letter-spacing: 0.3px;
+}
+
+.custom-select-trigger #modoSelecionado {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text);
+    padding-top: 10px;
+}
+
+.custom-select-trigger #modoArrow {
+    font-size: 1.1rem;
+    color: var(--text);
+    opacity: 0.5;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    margin-left: 8px;
+}
+
+.custom-select-trigger.aberto #modoArrow {
+    transform: rotate(180deg);
+}
+
+/* ===== OPÇÕES DO SELECT ===== */
+
+.custom-select-options {
+    position: absolute;
+    top: calc(100% + -6px);
+    left: 0;
+    right: 0;
+    width: 95%;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border: 1px solid rgba(0, 132, 61, 0.15);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    padding: 6px;
+    z-index: 9999 !important;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+    visibility: hidden;
+}
+
+.custom-select-options.aberto {
+    max-height: 280px;
+    overflow-y: auto;
+    opacity: 1;
+    visibility: visible;
+}
+
+.custom-select-options::-webkit-scrollbar {
+    width: 4px;
+}
+
+.custom-select-options::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+}
+
+.custom-select-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.custom-select-option:hover {
+    background: rgba(0, 132, 61, 0.06);
+}
+
+.custom-select-option.selecionado {
+    background: rgba(0, 132, 61, 0.1);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 12px 12px 0;
+}
+
+.custom-select-option i {
+    font-size: 1.1rem;
+    color: var(--primary);
+    flex-shrink: 0;
+    width: 24px;
+    text-align: center;
+}
+
+.custom-select-option .option-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    flex: 1;
+}
+
+.custom-select-option .option-titulo {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.custom-select-option .option-desc {
+    font-size: 0.6rem;
+    color: var(--text);
+    opacity: 0.5;
+} 
+
+/* ==========================================================================
+   DARK MODE
+   ========================================================================== */
+
+[data-theme="dark"] .custom-select-options {
+    background: #2a2a2a;
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .custom-select-option:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .custom-select-option.selecionado {
+    background: rgba(0, 132, 61, 0.2);
+}
+
+[data-theme="dark"] .modo-select-container {
+    background: #1a1a1a;
+    border-color: rgba(255, 255, 255, 0.06);
+}
+/* ==========================================================================
+   TOGGLE HORIZONTAL - MAIS RÁPIDO
+   ========================================================================== */
+
+.toggle-horizontal-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 4px 0;
+    margin-top: 12px;
+}
+
+.toggle-horizontal-container.oculto {
+    display: none;
+}
+
+.toggle-horizontal {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    height: 44px;
+    background: var(--bg);
+    border-radius: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.toggle-horizontal input {
+    display: none;
+}
+
+.toggle-horizontal-label {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4px;
+}
+
+.toggle-option {
+    flex: 1;
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text);
+    opacity: 0.5;
+    z-index: 2;
+    transition: color 0.2s ease;
+    padding: 6px 10px;
+    letter-spacing: 0.3px;
+    user-select: none;
+}
+
+.toggle-option-left {
+    border-radius: 30px 0 0 30px;
+}
+
+.toggle-option-right {
+    border-radius: 0 30px 30px 0;
+}
+
+.toggle-slider-horizontal {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    height: calc(100% - 8px);
+    background: var(--primary);
+    border-radius: 30px;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+    box-shadow: 0 4px 12px rgba(0, 132, 61, 0.25);
+}
+
+.toggle-horizontal input:checked ~ .toggle-horizontal-label .toggle-slider-horizontal {
+    transform: translateX(0);
+}
+
+.toggle-horizontal input:checked ~ .toggle-horizontal-label .toggle-option-left {
+    color: white;
+    opacity: 1;
+}
+
+.toggle-horizontal input:checked ~ .toggle-horizontal-label .toggle-option-right {
+    color: var(--text);
+    opacity: 0.5;
+}
+
+.toggle-horizontal input:not(:checked) ~ .toggle-horizontal-label .toggle-slider-horizontal {
+    transform: translateX(calc(100% + 0px));
+}
+
+.toggle-horizontal input:not(:checked) ~ .toggle-horizontal-label .toggle-option-right {
+    color: white;
+    opacity: 1;
+}
+
+.toggle-horizontal input:not(:checked) ~ .toggle-horizontal-label .toggle-option-left {
+    color: var(--text);
+    opacity: 0.5;
+}
+
+/* ==========================================================================
+   CAMPOS DE ENTRADA
+   ========================================================================== */
 .entradas_de_dados {
     width: 100%;
     height: 50px;
@@ -129,10 +501,11 @@ nav {
     z-index: 1;
 }
 
-.entradas_de_dados input {
+.entradas_de_dados input,
+.entradas_de_dados select {
     width: 100%;
     height: 100%;
-    padding: 15px 10px 5px 35px;
+    padding: 15px 10px 5px 25px;
     background: none;
     border: none;
     border-bottom: 2px solid var(--primary);
@@ -140,11 +513,25 @@ nav {
     font-weight: bold;
     font-family: inherit;
 }
+ 
+.entradas_de_dados select {
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
 
-/* Ajuste específico para input de data */
-input[type="date"] {
+.entradas_de_dados input[type="date"] {
     padding-left: 35px;
 }
+
+.entradas_de_dados input[type="number"]::-webkit-inner-spin-button,
+.entradas_de_dados input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
 
 .label-flutuante {
     position: absolute;
@@ -158,14 +545,432 @@ input[type="date"] {
 }
 
 input:focus ~ .label-flutuante,
-input:not(:placeholder-shown) ~ .label-flutuante {
+input:not(:placeholder-shown) ~ .label-flutuante,
+select:focus ~ .label-flutuante,
+select:not(:placeholder-shown) ~ .label-flutuante {
     top: 8px;
-    font-size: 0.6rem;
+    font-size: 0.7rem;
+    color: var(--text);
     font-weight: bold;
-    color: var(--primary);
 }
 
-/* --- BOTÕES --- */
+input[type="date"]:not(:placeholder-shown) ~ .label-flutuante {
+    top: 8px;
+    font-size: 0.7rem;
+    color: var(--text);
+    font-weight: bold;
+}
+
+
+/* ==========================================================================
+   CAMPOS DINÂMICOS - SIMPLIFICADO
+   ========================================================================== */
+
+.campos-dinamicos-container {
+    width: 100%;
+}
+
+.modo-campos {
+    display: none !important;
+    gap: 12px;
+    width: 100%;
+}
+
+/* DUM - 2 colunas */
+.modo-campos[data-modo="dum"].active {
+    display: grid !important;
+    grid-template-columns: 1fr;
+}
+
+/* IG - 2 colunas (Semanas | Dias) */
+.modo-campos[data-modo="ig"].active {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+}
+
+.modo-campos[data-modo="ig"] .entradas_de_dados {
+    width: 100%;
+}
+
+/* DPP - 1 coluna */
+.modo-campos[data-modo="dpp"].active {
+    display: grid !important;
+    grid-template-columns: 1fr;
+}
+
+/* AU - 1 coluna */
+.modo-campos[data-modo="au"].active {
+    display: grid !important;
+    grid-template-columns: 1fr;
+}
+
+.modo-campos .entradas_de_dados {
+    margin-bottom: 0;
+}
+
+/* Mobile: 1 coluna */
+@media (max-width: 550px) {
+    .modo-campos[data-modo="dum"].active{
+        grid-template-columns: 1fr !important;
+    }
+}
+
+
+
+/* ==========================================================================
+   TOGGLE "NÃO SEI A DUM"
+   ========================================================================== */
+.toggle-naosei-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 4px 0;
+    grid-column: span 2;
+}
+
+.toggle-naosei-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text);
+    user-select: none;
+}
+
+.toggle-naosei-label input {
+    display: none;
+}
+
+.toggle-naosei-slider {
+    position: relative;
+    width: 36px;
+    height: 20px;
+    background: #ccc;
+    border-radius: 20px;
+    transition: 0.3s;
+    flex-shrink: 0;
+}
+
+.toggle-naosei-slider::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: 2px;
+    bottom: 2px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-naosei-label input:checked + .toggle-naosei-slider {
+    background: var(--primary);
+}
+
+.toggle-naosei-label input:checked + .toggle-naosei-slider::before {
+    transform: translateX(16px);
+}
+
+.toggle-naosei-text {
+    font-size: 0.7rem;
+    opacity: 0.7;
+}
+
+
+/* ==========================================================================
+   CAMPOS DA SEMANA (Mês + Semana)
+   ========================================================================== */
+
+.campos-semana {
+    display: none;
+    gap: 12px;
+    width: 100%;
+    grid-column: span 2;
+}
+
+.campos-semana.ativo {
+    display: grid !important;
+    grid-template-columns: 1.2fr 1.2fr 0.8fr;
+}
+
+
+
+
+#dumField.oculto {
+    display: none !important;
+}
+
+/* ==========================================================================
+   INTERVALO - CARROSSEL (21-31) - CENTRALIZADO
+   ========================================================================== */
+
+.intervalo-container {
+    width: 100%;
+    margin-top: 16px;
+    background: var(--bg);
+    border-radius: 12px;
+    padding: 8px 10px 10px;
+    box-shadow: 0 2px 8px var(--sombra);
+}
+
+.intervalo-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text);
+    opacity: 0.5;
+    letter-spacing: 0.5px;
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.intervalo-selector {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+}
+
+.intervalo-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: var(--card-bg);
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.intervalo-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.intervalo-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.intervalo-btn i {
+    font-size: 1rem;
+}
+
+.intervalo-valores-wrapper {
+    overflow: hidden;
+    flex: 1;
+    position: relative;
+}
+
+.intervalo-valores {
+    display: flex;
+    gap: 2px;
+    padding: 0 4px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+}
+
+.intervalo-valor {
+    flex: 0 0 calc(100% / 6);
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text);
+    opacity: 0.4;
+    padding: 6px 0;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    min-width: 0;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.intervalo-valor:hover {
+    opacity: 0.7;
+}
+
+.intervalo-valor.ativo {
+    opacity: 1;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+    background: rgba(0, 132, 61, 0.1);
+}
+
+.intervalo-unidade {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text);
+    opacity: 0.5;
+    flex-shrink: 0;
+    margin-left: 2px;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 480px) {
+    .intervalo-valor {
+        flex: 0 0 calc(100% / 5);
+        font-size: 0.7rem;
+    }
+    .intervalo-valor.ativo {
+        font-size: 0.85rem;
+    }
+    .intervalo-btn {
+        width: 28px;
+        height: 28px;
+    }
+    .intervalo-btn i {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .intervalo-valor {
+        flex: 0 0 calc(100% / 4);
+        font-size: 0.65rem;
+    }
+    .intervalo-valor.ativo {
+        font-size: 0.75rem;
+    }
+}
+
+/* DARK MODE */
+[data-theme="dark"] .intervalo-container {
+    background: #1a1a1a;
+}
+
+[data-theme="dark"] .intervalo-btn {
+    background: #2a2a2a;
+    color: #f0f2f0;
+}
+
+[data-theme="dark"] .intervalo-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+[data-theme="dark"] .intervalo-valor.ativo {
+    background: rgba(0, 132, 61, 0.2);
+}
+/* ==========================================================================
+   TOGGLE HORIZONTAL: CICLO MENSTRUAL | GESTAÇÃO
+   ========================================================================== */
+.toggle-horizontal-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 4px 0;
+    margin-top: 12px;
+}
+
+.toggle-horizontal-container.oculto {
+    display: none;
+}
+
+.toggle-horizontal {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    height: 48px;
+    background: var(--bg);
+    border-radius: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.toggle-horizontal input {
+    display: none;
+}
+
+.toggle-horizontal-label {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4px;
+}
+
+.toggle-option {
+    flex: 1;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text);
+    opacity: 0.5;
+    z-index: 2;
+    transition: color 0.3s ease;
+    padding: 8px 12px;
+    letter-spacing: 0.3px;
+    user-select: none;
+}
+
+.toggle-option-left {
+    border-radius: 30px 0 0 30px;
+}
+
+.toggle-option-right {
+    border-radius: 0 30px 30px 0;
+}
+
+.toggle-slider-horizontal {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    height: calc(100% - 8px);
+    background: var(--primary);
+    border-radius: 30px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+    box-shadow: 0 4px 12px rgba(0, 132, 61, 0.25);
+}
+
+.toggle-horizontal input:checked ~ .toggle-horizontal-label .toggle-slider-horizontal {
+    transform: translateX(0);
+}
+
+.toggle-horizontal input:checked ~ .toggle-horizontal-label .toggle-option-left {
+    color: white;
+    opacity: 1;
+}
+
+.toggle-horizontal input:checked ~ .toggle-horizontal-label .toggle-option-right {
+    color: var(--text);
+    opacity: 0.5;
+}
+
+.toggle-horizontal input:not(:checked) ~ .toggle-horizontal-label .toggle-slider-horizontal {
+    transform: translateX(calc(100% + 0px));
+}
+
+.toggle-horizontal input:not(:checked) ~ .toggle-horizontal-label .toggle-option-right {
+    color: white;
+    opacity: 1;
+}
+
+.toggle-horizontal input:not(:checked) ~ .toggle-horizontal-label .toggle-option-left {
+    color: var(--text);
+    opacity: 0.5;
+}
+
+/* ==========================================================================
+   BOTÕES
+   ========================================================================== */
 .caxa_de_botoes {
     display: flex;
     gap: 10px;
@@ -181,6 +986,12 @@ input:not(:placeholder-shown) ~ .label-flutuante {
     border-radius: 12px;
     font-weight: bold;
     cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.botao:hover {
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(0, 132, 61, 0.3);
 }
 
 #limpador {
@@ -192,27 +1003,1273 @@ input:not(:placeholder-shown) ~ .label-flutuante {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.2s ease;
 }
 
-/* --- RESULTADO --- */
+#limpador:hover {
+    background-color: #d32f2f;
+    transform: scale(1.02);
+}
+
+/* ==========================================================================
+   RESULTADO
+   ========================================================================== */
 .resultado-display {
-    margin-top: 25px;
-    padding: 20px;
-    background: var(--primary);
-    color: white;
+    margin-top: 20px;
+    padding: 0;
     border-radius: 24px;
-    width: 90%;
-    box-shadow: 0 5px 15px rgba(0, 132, 61, 0.2);
-    line-height: 1.6;
+    background: transparent;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.vibrar { animation: vibration 0.2s ease-in-out; }
+
+
+
+
+
+
+/* ==========================================================================
+   ERROS
+   ========================================================================== */
+.erro-global {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #f44336;
+    color: white;
+    padding: 16px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.erro-global i {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.erro-global strong {
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   CARD DE PROGRESSO DA GESTAÇÃO
+   ========================================================================== */
+.card-progresso {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 16px;
+    border: 1px solid rgba(0, 132, 61, 0.08);
+}
+
+.progresso-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.progresso-titulo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.progresso-titulo i {
+    font-size: 1.2rem;
+}
+
+.progresso-semanas {
+    font-size: 0.75rem;
+    background: rgba(0, 132, 61, 0.1);
+    padding: 4px 12px;
+    border-radius: 20px;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.progresso-barra-wrapper {
+    margin: 12px 0 8px;
+}
+
+.progresso-barra {
+    width: 100%;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progresso-barra-preenchimento {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--primary), #2ecc71);
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+.progresso-marcadores {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding: 0 4px;
+}
+
+.progresso-marcador {
+    font-size: 0.6rem;
+    color: #94a3b8;
+    text-align: center;
+    flex: 1;
+}
+
+.progresso-marcador.ativo {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.trimestre-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-top: 12px;
+}
+
+.alerta-pos-termo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(245, 158, 11, 0.2);
+    border-left: 4px solid #f59e0b;
+    padding: 10px 14px;
+    margin-top: 12px;
+    border-radius: 0 12px 12px 0;
+}
+
+.alerta-pos-termo i {
+    color: #f59e0b;
+    font-size: 1.2rem;
+}
+
+.alerta-pos-termo span {
+    font-size: 0.75rem;
+    color: #f59e0b;
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   CARDS DE RESULTADO - DESIGN ELEGANTE
+   ========================================================================== */
+
+/* Container dos cards */
+.resultado-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+/* Card base - elegante e minimalista */
+.card-resultado {
+    background: none;
+    border-radius: 0;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Barra lateral colorida */
+.card-resultado::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    border-radius: 20px;
+}
+
+/* Ícone do card */
+.card-resultado .card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.card-resultado .card-icon i {
+    font-size: 1.2rem;
+}
+
+/* Conteúdo do card */
+.card-resultado .card-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.card-resultado .card-label {
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    opacity: 0.5;
+    color: var(--text);
+}
+
+.card-resultado .card-valor {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+    margin-top: 1px;
+}
+
+.card-resultado .card-sub {
+    font-size: 0.6rem;
+    opacity: 0.4;
+    color: var(--text);
+    margin-top: 1px;
+}
+
+/* Badge pequeno */
+.card-resultado .card-badge {
+    font-size: 0.55rem;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.04);
+    color: var(--text);
+    
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+/* ===== CARD DUM ===== */
+.card-dum::before { background: var(--primary); }
+.card-dum .card-icon { background: rgba(0, 132, 61, 0.1); color: var(--primary); }
+.card-dum .card-valor { color: var(--primary); }
+.card-dum .card-badge { background: rgba(0, 132, 61, 0.08); color: var(--primary); }
+
+/* ===== CARD DPP ===== */
+.card-dpp::before { background: #f59e0b; }
+.card-dpp .card-icon { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+.card-dpp .card-valor { color: #f59e0b; }
+.card-dpp .card-badge { background: rgba(245, 158, 11, 0.08); color: #f59e0b; }
+
+/* ===== CARD IG ===== */
+.card-ig::before { background: #3b82f6; }
+.card-ig .card-icon { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+.card-ig .card-valor { color: #3b82f6; }
+.card-ig .card-badge { background: rgba(59, 130, 246, 0.08); color: #3b82f6; }
+
+/* ===== CARD AU ===== */
+.card-au::before { background: #8b5cf6; }
+.card-au .card-icon { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
+.card-au .card-valor { color: #8b5cf6; }
+.card-au .card-badge { background: rgba(139, 92, 246, 0.08); color: #8b5cf6; }
+
+/* ===== DARK MODE ===== */
+[data-theme="dark"] .card-resultado {
+    border-color: rgba(255, 255, 255, 0.04);
+    box-shadow: none;
+}
+
+[data-theme="dark"] .card-resultado .card-badge {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 480px) {
+    .card-resultado {
+        padding: 12px 14px;
+        gap: 12px;
+    }
+    .card-resultado .card-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+    .card-resultado .card-icon i {
+        font-size: 1rem;
+    }
+    .card-resultado .card-valor {
+        font-size: 1rem;
+    }
+}
+
+
+
+
+/* ==========================================================================
+   CARD DUM - MODO DPP (SEM PROGRESSO)
+   ========================================================================== */
+
+.card-resultado.card-dum .card-sub {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 500;
+}
+
+.card-resultado.card-dum .card-sub i {
+    font-size: 0.9rem;
+}
+
+
+/* Badge com cores específicas para cada situação */
+.card-resultado.card-dum .card-badge[style*="background: #ef444415"] {
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.card-resultado.card-dum .card-badge[style*="background: #3b82f615"] {
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.card-resultado.card-dum .card-badge[style*="background: #f59e0b15"] {
+    border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+ 
+
+
+/* ==========================================================================
+   CARD DO CICLO MENSTRUAL
+   ========================================================================== */
+.card-ciclo {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 16px;
+    border: 1px solid rgba(0, 132, 61, 0.08);
+    margin-top: 0;
+}
+
+.card-ciclo.erro {
+    background: rgba(245, 158, 11, 0.05);
+    border-color: #f59e0b;
+}
+
+.card-ciclo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.card-ciclo-titulo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.card-ciclo-titulo i {
+    font-size: 1.2rem;
+}
+
+.card-ciclo-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.card-ciclo-periodicidade {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg);
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.periodicidade-item {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    flex-wrap: wrap;
+}
+
+.periodicidade-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+    opacity: 0.6;
+}
+
+.periodicidade-valor {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.periodicidade-dias {
+    font-size: 0.65rem;
+    opacity: 0.6;
+}
+
+.card-ciclo-previsoes {
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.previsao-titulo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.previsao-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.previsao-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: var(--bg);
+    font-size: 0.8rem;
+}
+
+.previsao-item.previsao-destaque {
+    background: rgba(0, 132, 61, 0.1);
+}
+
+.previsao-numero {
+    font-weight: 600;
+    color: var(--primary);
+    font-size: 0.7rem;
+    min-width: 24px;
+}
+
+.previsao-data {
+    flex: 1;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.previsao-badge {
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: white;
+    background: var(--primary);
+    padding: 2px 10px;
+    border-radius: 12px;
+}
+
+.card-ciclo-ovulacao {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.ciclo-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.ciclo-item-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    opacity: 0.6;
+}
+
+.ciclo-item-valor {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.card-ciclo-nota {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    background: rgba(0, 132, 61, 0.05);
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-size: 0.7rem;
+    opacity: 0.7;
+    line-height: 1.4;
+}
+
+.card-ciclo-nota i {
+    font-size: 1rem;
+    color: var(--primary);
+    margin-top: 2px;
+}
+
+/* ==========================================================================
+   PRECISÃO CARD
+   ========================================================================== */
+.precisao-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 16px;
+    margin-bottom: 12px;
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.precisao-card i {
+    font-size: 1.2rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.precisao-card.sucesso {
+    background: rgba(0, 132, 61, 0.08);
+}
+
+.precisao-card.sucesso i {
+    color: var(--primary);
+}
+
+.precisao-card.sucesso strong {
+    color: var(--primary);
+}
+
+.precisao-card.aviso {
+    background: rgba(245, 158, 11, 0.08);
+}
+
+.precisao-card.aviso i {
+    color: #f59e0b;
+}
+
+.precisao-card.aviso strong {
+    color: #f59e0b;
+}
+
+.precisao-card p {
+    margin: 4px 0 0 0;
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   ESTILOS PARA DETALHES MÉDICOS (VERSÃO LAPIDADA)
+   ========================================================================== */
+
+.detalhes-medicos-wrapper {
+    margin-top: 16px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--card-bg);
+    
+    transition: all 0.3s ease;
+}
+
+.detalhes-medicos-toggle {
+    width: 100%;
+    padding: 14px 20px;
+    background: none;
+    border: 2px solid rgba(0, 132, 61, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+    border-radius: 20px;
+    font-family: inherit;
+    margin-bottom: 10px;
+}
+
+.detalhes-medicos-toggle:hover {
+    background: rgba(0, 132, 61, 0.04);
+}
+
+.detalhes-medicos-toggle .toggle-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.detalhes-medicos-toggle .toggle-left i {
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+
+.detalhes-medicos-toggle .toggle-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+    color: var(--text);
+    opacity: 0.5;
+}
+
+.detalhes-medicos-toggle.aberto .toggle-icon {
+    transform: rotate(180deg);
+}
+
+.detalhes-medicos-conteudo {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                padding 0.3s ease;
+    padding: 0 20px;
+}
+
+.detalhes-medicos-conteudo.aberto {
+    max-height: 5000px;
+    padding: 0 20px 20px;
+}
+
+/* ===== SEÇÕES INTERNAS ===== */
+.detalhes-secao {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.detalhes-secao:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+
+.detalhes-secao-titulo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text);
+    opacity: 0.5;
+    margin-bottom: 10px;
+}
+
+.detalhes-secao-titulo i {
+    font-size: 0.9rem;
+}
+
+/* ===== ITENS ===== */
+.detalhes-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    font-size: 0.8rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.detalhes-item:last-child {
+    border-bottom: none;
+}
+
+.detalhes-item-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text);
+    opacity: 0.7;
+}
+
+.detalhes-item-label i {
+    font-size: 0.9rem;
+    opacity: 0.5;
+    width: 18px;
+    text-align: center;
+}
+
+.detalhes-item-valor {
+    font-weight: 600;
+    color: var(--text);
+    text-align: right;
+    font-size: 0.8rem;
+}
+
+.detalhes-item-valor.destaque {
+    color: var(--primary);
+}
+
+.detalhes-item-valor.alerta {
+    color: #ef4444;
+}
+
+.detalhes-item-valor.atencao {
+    color: #f59e0b;
+}
+
+/* ===== BADGES ===== */
+.detalhes-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.6rem;
+    font-weight: 600;
+}
+
+.detalhes-badge.sucesso {
+    background: rgba(0, 132, 61, 0.1);
+    color: var(--primary);
+}
+
+.detalhes-badge.alerta {
+    background: rgba(245, 158, 11, 0.12);
+    color: #f59e0b;
+}
+
+.detalhes-badge.perigo {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.detalhes-badge.atencao {
+    background: rgba(245, 158, 11, 0.08);
+    color: #d97706;
+}
+
+/* ===== LISTA DE EXAMES ===== */
+.exames-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+}
+
+.exame-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 10px;
+    background: var(--bg);
+    font-size: 0.7rem;
+    transition: all 0.2s ease;
+}
+
+.exame-item i {
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+.exame-item .exame-status {
+    margin-left: auto;
+    font-size: 0.55rem;
+    font-weight: 700;
+    padding: 1px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+.exame-item .exame-status.pendente {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+}
+
+.exame-item .exame-status.realizado {
+    background: rgba(0, 132, 61, 0.1);
+    color: var(--primary);
+}
+
+.exame-item .exame-status.urgente {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.exame-item .exame-periodo {
+    font-size: 0.55rem;
+    opacity: 0.5;
+    margin-left: 4px;
+}
+
+/* ===== VACINAS ===== */
+.vacina-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: var(--bg);
+    margin-bottom: 4px;
+    font-size: 0.75rem;
+}
+
+.vacina-item:last-child {
+    margin-bottom: 0;
+}
+
+.vacina-item .vacina-info {
+    flex: 1;
+}
+
+.vacina-item .vacina-nome {
+    font-weight: 600;
+}
+
+.vacina-item .vacina-periodo {
+    font-size: 0.6rem;
+    opacity: 0.5;
+    display: block;
+}
+
+.vacina-item .vacina-status {
+    font-size: 0.55rem;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+}
+
+.vacina-item .vacina-status.recomendada {
+    background: rgba(0, 132, 61, 0.1);
+    color: var(--primary);
+}
+
+.vacina-item .vacina-status.ideal {
+    background: rgba(0, 132, 61, 0.1);
+    color: var(--primary);
+}
+
+.vacina-item .vacina-status.alerta {
+    background: rgba(245, 158, 11, 0.12);
+    color: #f59e0b;
+}
+
+/* ===== CALCULADORA DE PESO ===== */
+.peso-calculadora {
+    background: none;
+    border-radius: 12px;
+    padding: 0 4px;
+}
+
+.peso-calculadora .entradas_de_dados {
+    height: 44px;
+}
+
+.peso-calculadora .entradas_de_dados input {
+    font-size: 0.8rem;
+    padding-top: 14px;
+}
+
+.resultado-peso-card {
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg);
+}
+
+.resultado-peso-card.sucesso {
+    border-left: 3px solid var(--primary);
+}
+
+.resultado-peso-card.alerta {
+    border-left: 3px solid #f59e0b;
+}
+
+.resultado-peso-card.perigo {
+    border-left: 3px solid #ef4444;
+}
+
+.resultado-peso-card i {
+    font-size: 1.2rem;
+}
+
+.resultado-peso-card .peso-detalhes {
+    flex: 1;
+}
+
+.resultado-peso-card .peso-detalhes .peso-recomendado {
+    font-weight: 700;
+    color: var(--text);
+}
+
+/* ===== SINAIS DE ALERTA ===== */
+.alertas-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.alerta-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 0 10px 10px 0;
+    background: rgba(239, 68, 68, 0.04);
+    border-left: 3px solid #ef4444;
+    font-size: 0.7rem;
+}
+
+.alerta-item i {
+    color: #ef4444;
+    font-size: 0.9rem;
+}
+
+.alerta-item .alerta-texto {
+    flex: 1;
+}
+
+.alerta-item .alerta-urgencia {
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: #ef4444;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 550px) {
+    .exames-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .detalhes-medicos-toggle {
+        font-size: 0.75rem;
+        padding: 12px 16px;
+    }
+    
+    .detalhes-medicos-conteudo.aberto {
+        padding: 0 ;
+    }
+    
+    .detalhes-item {
+        font-size: 0.7rem;
+        padding: 5px 0;
+    }
+    
+    .vacina-item {
+        font-size: 0.7rem;
+        padding: 6px 10px;
+    }
+    
+    .alerta-item {
+        font-size: 0.65rem;
+        padding: 6px 10px;
+        flex-wrap: wrap;
+    }
+    
+    .alerta-item .alerta-urgencia {
+        font-size: 0.5rem;
+        white-space: normal;
+    }
+}
+
+/* ===== DARK MODE ===== */
+[data-theme="dark"] .detalhes-medicos-wrapper {
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .detalhes-medicos-toggle:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .detalhes-secao {
+    border-top-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .detalhes-item {
+    border-bottom-color: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .exame-item,
+[data-theme="dark"] .vacina-item {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .alerta-item {
+    background: rgba(239, 68, 68, 0.08);
+}
+
+[data-theme="dark"] .detalhes-badge.sucesso {
+    background: rgba(0, 132, 61, 0.2);
+}
+
+[data-theme="dark"] .detalhes-badge.alerta {
+    background: rgba(245, 158, 11, 0.2);
+}
+
+[data-theme="dark"] .detalhes-badge.perigo {
+    background: rgba(239, 68, 68, 0.2);
+}
+
+
+
+[data-theme="dark"] .resultado-peso-card {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+
+
+/* ==========================================================================
+   ANIMAÇÕES
+   ========================================================================== */
+.vibrar {
+    animation: vibration 0.2s ease-in-out;
+}
 
 @keyframes vibration {
     0% { transform: translateX(0); }
     25% { transform: translateX(-5px); }
     50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
     100% { transform: translateX(0); }
 }
+
+
+/* ==========================================================================
+   DARK MODE
+   ========================================================================== */
+[data-theme="dark"] .card-ciclo {
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .card-ciclo-status {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .card-ciclo-previsoes,
+[data-theme="dark"] .card-ciclo-ovulacao {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .previsao-item {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .previsao-item.previsao-destaque {
+    background: rgba(0, 132, 61, 0.15);
+}
+
+[data-theme="dark"] .card-ciclo-nota {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .card-progresso,
+[data-theme="dark"] .card-obstetrico,
+[data-theme="dark"] .card-ciclo {
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .progresso-barra {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .custom-select-trigger {
+    background: #1a1a1a;
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .custom-select-trigger:hover {
+    border-color: var(--primary);
+}
+
+[data-theme="dark"] .custom-select-dropdown {
+    background: #1a1a1a;
+    border-color: var(--primary);
+}
+
+[data-theme="dark"] .custom-select-option {
+    border-bottom-color: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .custom-select-option:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .custom-select-option.active {
+    background: var(--primary);
+}
+
+[data-theme="dark"] .custom-select-option-title {
+    color: #f0f2f0;
+}
+
+[data-theme="dark"] .custom-select-option-desc {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+[data-theme="dark"] .toggle-horizontal {
+    background: #1a1a1a;
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .toggle-slider-horizontal {
+    box-shadow: 0 4px 12px rgba(0, 132, 61, 0.4);
+}
+
+[data-theme="dark"] .toggle-horizontal input:not(:checked) ~ .toggle-horizontal-label .toggle-option-right {
+    color: white;
+}
+
+[data-theme="dark"] .toggle-horizontal input:checked ~ .toggle-horizontal-label .toggle-option-left {
+    color: white;
+}
+
+[data-theme="dark"] .precisao-card.sucesso {
+    background: rgba(0, 132, 61, 0.15);
+}
+
+[data-theme="dark"] .precisao-card.aviso {
+    background: rgba(245, 158, 11, 0.15);
+}
+
+
+
+[data-theme="dark"] .intervalo-btn {
+    background: #2a2a2a;
+    color: #f0f2f0;
+}
+
+[data-theme="dark"] .intervalo-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+[data-theme="dark"] .toggle-naosei-slider {
+    background: #555;
+}
+
+[data-theme="dark"] .toggle-naosei-label input:checked + .toggle-naosei-slider {
+    background: var(--primary);
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE
+   ========================================================================== */
+@media (max-width: 550px) {
+    .modo-campos.active {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .modo-campos .entradas_de_dados {
+        grid-column: span 1;
+    }
+    
+    .campos-semana.active {
+        grid-template-columns: 1fr;
+    }
+    
+    .toggle-naosei-container {
+        grid-column: span 1;
+    }
+    
+    .intervalo-valores {
+        gap: 1px;
+    }
+    
+    .intervalo-valor {
+        font-size: 0.65rem;
+        padding: 4px 4px;
+        min-width: 18px;
+    }
+    
+    .intervalo-valor.ativo {
+        font-size: 0.85rem;
+        padding: 4px 8px;
+    }
+    
+    .toggle-horizontal {
+        max-width: 100%;
+        height: 44px;
+    }
+    
+    .toggle-option {
+        font-size: 0.7rem;
+        padding: 6px 10px;
+    }
+    
+    .card-ciclo-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .card-ciclo-status {
+        align-self: flex-start;
+    }
+    
+    .card-ciclo-periodicidade {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+    }
+    
+    .periodicidade-item {
+        justify-content: space-between;
+    }
+    
+    .card-ciclo-ovulacao {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .previsao-item {
+        font-size: 0.7rem;
+        padding: 4px 8px;
+    }
+    
+    .progresso-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+
+
+
+
+
+
+
+
 
 footer { padding: 40px; text-align: center; font-size: 0.8rem; opacity: 0.6; }

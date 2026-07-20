@@ -11,55 +11,87 @@
 </head>
 <body>
 
-    <nav>
-        <a href="../index.html" class="btn-back">
-            <i class="ri-arrow-left-line"></i> Início
-        </a>
-        <a href="../ajuda/index.html#pesoIdade" class="help-icon" title="Como funciona?">
-            <i class="ri-question-line"></i> 
-        </a>
-        <button class="theme-toggle" id="themeBtn"> 
-            <i class="ri-moon-line" id="themeIcon"></i>
-        </button>
-    </nav>
 
-
-
-<section class="main-tool">
-    <div class="tool-header">
-        <span>PEDIATRIA (0-14 ANOS)</span>
-        <h2>Peso ⇄ Idade</h2>
-    </div>
-
-    <div class="calculator-box" data-aos="fade-up">
-        <span class="nota-label">O que deseja calcular?</span>
-        <div class="entradas_de_dados full-width" style="margin-bottom: 20px;">
-            <i class="ri-arrow-left-right-line"></i>
-            <select id="modo_calculo" onchange="ajustarInterface()">
-                <option value="pesoParaIdade">Descobrir Idade pelo Peso</option>
-                <option value="idadeParaPeso">Descobrir Peso pela Idade</option>
-            </select>
+    <!-- ============================================================ -->
+    <!-- BARRA SUPERIOR - WEB STYLE                                 -->
+    <!-- ============================================================ -->
+    <header class="web-header">
+        <!-- Card com os controles -->
+        <div class="header-controls">
+            <a href="../index.html#ferramentas" class="btn-icon" title="Início">
+                <i class="ri-arrow-left-line"></i>
+                <span>Início</span>
+            </a>
+            <span class="divider-header">|</span>
+            <a href="../ajuda/index.html#pesoIdade" class="btn-icon" title="Ajuda">
+                <i class="ri-question-line"></i>
+                <span>Ajuda</span>
+            </a>
+            <span class="divider-header">|</span>
+            <button class="btn-icon theme-toggle" id="themeBtn" title="Mudar Tema">
+                <i class="ri-moon-line" id="themeIcon"></i>
+                <span>Tema</span>
+            </button>
         </div>
 
-        <div class="entradas_de_dados">
-            <i id="icone_input" class="ri-scales-3-line"></i>
-            <input type="number" id="valor_entrada" placeholder=" ">
-            <label id="label_dinamica" class="label-flutuante">Peso (kg)</label>
-            <p id="unidade_dinamica">kg</p>
+        <!-- Título da ferramenta -->
+        <div class="header-title">
+            <span class="tool-badge">Peso ⇄ Idade</span>
         </div>
+    </header>
+
+    <section class="main-tool">
         
-        <div class="caxa_de_botoes">
-            <button class="botao" onclick="calcularAntropometria()">Calcular</button>
-            <div id="limpador" onclick="limparAntropometria()">
-                <i class="ri-delete-bin-line"></i>
+        
+        <div class="calculator-box" data-aos="fade-up">
+            
+            
+            <!-- ============================================================ -->
+            <!-- SELECT DE MODO - COMPONENTE PERSONALIZADO (SEM ÍCONE)        -->
+            <!-- ============================================================ -->
+            <div class="entradas_de_dados full-width" style="margin-bottom: 20px; position: relative; padding-right: 0;">
+                <!-- Ícone removido! -->
+                
+                <!-- Hidden input para manter compatibilidade -->
+                <input type="hidden" id="modo_calculo" value="pesoParaIdade">
+                
+                <!-- Componente personalizado -->
+                <div class="custom-select-antropometria" id="selectModo">
+                    <div class="custom-select-trigger-antropometria" onclick="toggleModoSelect()">
+                        <span class="modo-texto" id="modoSelecionado">Descobrir Idade pelo Peso</span>
+                        <i class="ri-arrow-down-s-line modo-arrow" id="modoArrow"></i>
+                    </div>
+                    <div class="custom-select-options-antropometria" id="modoOptions">
+                        <div class="custom-select-option-antropometria" data-value="pesoParaIdade" onclick="selecionarModo('pesoParaIdade', 'Descobrir Idade pelo Peso')">
+                            <span class="option-label">Descobrir Idade pelo Peso</span>
+                        </div>
+                        <div class="custom-select-option-antropometria" data-value="idadeParaPeso" onclick="selecionarModo('idadeParaPeso', 'Descobrir Peso pela Idade')">
+                            <span class="option-label">Descobrir Peso pela Idade</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="entradas_de_dados">
+                <i id="icone_input" class="ri-scales-3-line"></i>
+                <input type="number" id="valor_entrada" placeholder=" " oninput="removerValorErro()">
+                <label id="label_dinamica" class="label-flutuante">Peso (kg)</label>
+                <p id="unidade_dinamica">kg</p>
+            </div>
+            
+            <div class="caxa_de_botoes">
+                <button class="botao" onclick="calcularAntropometria()">Calcular</button>
+                <div id="limpador" onclick="limparAntropometria()">
+                    <i class="ri-delete-bin-line"></i>
+                </div>
             </div>
         </div>
-    </div>
+        
+        <div class="resultado-display" id="resultado" data-aos="fade-up" style="display: none;"></div>
+        
+        <p class="nota"><i class="ri-alert-line"></i> Atenção: Cálculo restrito a pacientes pediátricos (até 14 anos ou 50kg).</p>
+    </section>
 
-    <div class="resultado-display" id="resultado" data-aos="fade-up" style="display: none;"></div>
-    
-    <p class="nota"><i class="ri-alert-line"></i> Atenção: Cálculo restrito a pacientes pediátricos (até 14 anos ou 50kg).</p>
-</section>
+
 
     <footer><p><strong>Mpindi TecMed</strong></p></footer>
 

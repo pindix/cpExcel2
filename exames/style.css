@@ -42,43 +42,138 @@ html, body {
 
 
 
-/* --- BARRA DE TOPO --- */
-nav {
-    padding: 10px;
+/* ================================================================
+   WEB HEADER - NOVO ESTILO
+   ================================================================ */
+
+.web-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    max-width: 800px;
+    justify-content: space-around;
+    padding: 12px 20px;
+    max-width: 420px;
     margin: 0 auto;
     width: 100%;
-    position: relative;
+    gap: 12px;
+    margin-top: 10px;
 }
 
-.btn-back {
-    text-decoration: none;
-    color: var(--primary);
-    font-weight: 600;
+/* Card dos controles */
+.header-controls {
     display: flex;
     align-items: center;
-    gap:5px;
+    gap: 6px;
+    background: var(--card-bg);
+    padding: 6px 12px;
+    border-radius: 40px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 132, 61, 0.08);
+    flex-shrink: 0;
 }
 
-.help-icon {
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--primary);
+.btn-icon {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     text-decoration: none;
-    left: 50%; top: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
+    color: var(--text);
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 20px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
-.theme-toggle {
-    background: none;
-    border: none;
+.btn-icon i {
+    font-size: 1rem;
+}
+
+.btn-icon:hover {
+    background: rgba(0, 132, 61, 0.08);
+    color: var(--primary);
+}
+
+.btn-icon span {
+    display: inline-block;
+}
+
+/* Divisor do header */
+.divider-header {
+    opacity: 0.2;
     color: var(--text);
-    font-size: 1.5rem;
-    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+/* Título da ferramenta */
+.header-title {
+    flex-shrink: 0;
+}
+
+.tool-badge {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: -0.3px;
+    padding: 4px 0;
+    background: none;
+}
+
+
+
+/* Responsividade para mobile */
+@media (max-width: 480px) {
+    .web-header {
+        padding: 10px 16px;
+        gap: 8px;
+    }
+
+    .header-controls {
+        padding: 4px 10px;
+        gap: 4px;
+        flex-wrap: nowrap;
+    }
+
+    .btn-icon {
+        font-size: 0.7rem;
+        padding: 3px 6px;
+    }
+
+    .btn-icon i {
+        font-size: 0.85rem;
+    }
+
+    .btn-icon span {
+        display: none;
+        /* Esconde o texto em telas muito pequenas, mantém só ícone */
+    }
+
+    .tool-badge {
+        font-size: 0.95rem;
+    }
+
+    /* Em telas muito pequenas, mostra o texto dos ícones com abreviação */
+    @media (max-width: 360px) {
+        .btn-icon span {
+            display: none;
+        }
+        .divider-header {
+            display: none;
+        }
+        .header-controls {
+            gap: 2px;
+            padding: 4px 8px;
+        }
+    }
+}
+
+/* Em telas médias, mostra os textos */
+@media (min-width: 481px) and (max-width: 768px) {
+    .btn-icon span {
+        display: inline-block;
+    }
 }
 
 /* --- SECTION ÚNICA --- */
@@ -230,9 +325,8 @@ input:not(:placeholder-shown) ~ .label-flutuante {
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     z-index: 100; display: none;
     max-height: 200px; overflow-y: auto;
-    padding: 0.3rem;
 }
-.sugestao-item { padding: 12px; cursor: pointer; background: var(--bg); border-radius: 16px; margin-bottom: 4px; color: var(--primary);}
+.sugestao-item { padding: 12px; cursor: pointer; border-bottom: 1px solid rgba(0,0,0,0.05); }
 .sugestao-item:hover { background: var(--bg); color: var(--primary); }
 
 /* Icones do Resultado */

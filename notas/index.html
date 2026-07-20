@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <style>
+        /* Tema inline para evitar flash branco */
+        :root {
+            --bg-inline: #f0f2f0;
+            --text-inline: #1a2a21;
+        }
+        [data-theme="dark"] {
+            --bg-inline: black;
+            --text-inline: #f0f2f0;
+        }
+        html { background-color: var(--bg-inline); }
+        body { background-color: var(--bg-inline); color: var(--text-inline); }
+        body::before { display: none; }
+    </style>
+    <script>
+        (function() {
+            const tema = localStorage.getItem('tema');
+            if (tema === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.body.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloco de Notas | Mpindi TecMed</title>
+    <link rel="stylesheet" href="../assets/css/remixicon.css">
+    <link rel="stylesheet" href="../assets/css/aos.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+
+
+    <!-- ============================================================ -->
+    <!-- BARRA SUPERIOR - WEB STYLE                                 -->
+    <!-- ============================================================ -->
+    <header class="web-header">
+        <!-- Card com os controles -->
+        <div class="header-controls">
+            <a href="../index.html#ferramentas" class="btn-icon" title="Início">
+                <i class="ri-arrow-left-line"></i>
+                <span>Início</span>
+            </a>
+            <span class="divider-header">|</span>
+            <button class="btn-icon theme-toggle" id="themeBtn" title="Mudar Tema">
+                <i class="ri-moon-line" id="themeIcon"></i>
+                <span>Tema</span>
+            </button>
+        </div>
+
+        <!-- Título da ferramenta -->
+        <div class="header-title">
+            <span class="tool-badge">Bloco de Notas</span>
+        </div>
+    </header>
+
+
+
+    <!-- ================================================================== -->
+    <!-- CONTEÚDO PRINCIPAL -->
+    <!-- ================================================================== -->
+    <section class="main-tool">
+        
+        <!-- ÁREA DE EDIÇÃO -->
+        <div id="area-edicao" class="area-edicao">
+            <div class="editor-wrapper">
+                <div class="editor-header">
+                    <div class="editor-header-left">
+                        <span id="editor-status" class="editor-status">📝 Nova nota</span>
+                        <span class="editor-shortcut"></span>
+                    </div>
+                    <span id="editor-data" class="editor-data"></span>
+                </div>
+                
+                <div class="editor-titulo-wrapper">
+                    <input type="text" id="editor-titulo" placeholder="Título da nota..." maxlength="60">
+                    <i class="ri-pencil-line"></i>
+                </div>
+                
+                <textarea id="editor-nota" placeholder="Escreva a sua nota clínica aqui..."></textarea>
+            </div>
+        </div>
+
+        <!-- ÁREA DE LISTA -->
+        <div id="area-lista" class="area-lista" style="display: none;">
+            <div id="lista-notas" class="lista-notas"></div>
+        </div>
+
+        <!-- MENU FLUTUANTE -->
+        <div class="menu-flutuante" id="menuFlutuante">
+            <button id="btn-nova-nota" class="menu-btn active" title="Nova nota">
+                <i class="ri-add-line"></i>
+                <span>Nova</span>
+            </button>
+            
+            <button id="btn-listar-notas" class="menu-btn" title="Ver todas as notas">
+                <i class="ri-list-check-2"></i>
+                <span>Lista</span>
+                <span id="badge-contador" class="badge">0</span>
+            </button>
+            
+            <button id="btn-salvar" class="menu-btn btn-salvar" title="Salvar nota" style="display: none;">
+                <i class="ri-save-line"></i>
+                <span>Salvar</span>
+            </button>
+            
+            <button id="btn-limpar-todas" class="menu-btn danger" title="Limpar todas as notas">
+                <i class="ri-delete-bin-line"></i>
+                <span>Limpar</span>
+            </button>
+        </div>
+    </section>
+
+    <footer class="plain-footer">
+        <div class="footer-inline">
+            <span>&copy; 2026 Mpindi TecMed</span>
+            <span class="footer-sep">|</span>
+        </div>
+    </footer>
+
+    <script src="../assets/js/aos.js"></script>
+    <script src="../assets/js/persistencia.js"></script>
+    <script>AOS.init({ duration: 800 });</script>
+    <script src="script.js"></script>
+</body>
+</html>

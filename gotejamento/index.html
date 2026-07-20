@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,64 +10,108 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <nav>
-        <a href="../index.html" class="btn-back">
-            <i class="ri-arrow-left-line"></i> Início
-        </a>
-        <a href="../ajuda/index.html#gotejamento" class="help-icon" title="Como funciona?">
-            <i class="ri-question-line"></i> 
-        </a>
-        <button class="theme-toggle" id="themeBtn"> 
-            <i class="ri-moon-line" id="themeIcon"></i>
-        </button>
-    </nav>
+
+    <!-- ============================================================ -->
+    <!-- BARRA SUPERIOR - WEB STYLE                                 -->
+    <!-- ============================================================ -->
+    <header class="web-header">
+        <!-- Card com os controles -->
+        <div class="header-controls">
+            <a href="../index.html#ferramentas" class="btn-icon" title="Início">
+                <i class="ri-arrow-left-line"></i>
+                <span>Início</span>
+            </a>
+            <span class="divider-header">|</span>
+            <a href="../ajuda/index.html#gotejamento" class="btn-icon" title="Ajuda">
+                <i class="ri-question-line"></i>
+                <span>Ajuda</span>
+            </a>
+            <span class="divider-header">|</span>
+            <button class="btn-icon theme-toggle" id="themeBtn" title="Mudar Tema">
+                <i class="ri-moon-line" id="themeIcon"></i>
+                <span>Tema</span>
+            </button>
+        </div>
+
+        <!-- Título da ferramenta -->
+        <div class="header-title">
+            <span class="tool-badge">Gotejamento</span>
+        </div>
+    </header>
 
 
     <section class="main-tool">
-        <div class="tool-header">
-            <span>CALCULADORA POSOLÓGICA</span>
-            <h2>Calculo de Gotejamento</h2>
-        </div>
 
         <div class="calculator-box" data-aos="fade-up">
             <p class="nota"><i class="ri-information-line"></i>Coloque só os valores que tem</p>
             <div class="container-campos">
-                <div class="entradas_de_dados">
-                <i class="ri-flask-line"></i>
-                <input type="number" placeholder="Volume..." id="volume">
-                <select id="unidade_de_volume">
-                    <option value="1">ml</option>
-                    <option value="1000">L</option>
-                </select>
+
+                <!-- ============================================================ -->
+                <!-- SELECT DE VOLUME - COMPONENTE PERSONALIZADO                   -->
+                <!-- ============================================================ -->
+                <div class="entradas_de_dados" style="position: relative; padding-right: 0;">
+                    <i class="ri-flask-line"></i>
+                    <input type="number" placeholder="" id="volume">
+                    <label class="label-flutuante">Volume</label>
+
+                    <!-- Hidden input para manter compatibilidade -->
+                    <input type="hidden" id="unidade_de_volume" value="1">
+
+                    <!-- Componente personalizado -->
+                    <div class="custom-select-unidade" id="selectVolume">
+                        <div class="custom-select-trigger-unidade" onclick="toggleUnidadeSelect('volume')">
+                            <span class="unidade-texto" id="unidadeVolumeSelecionada">ml</span>
+                            <i class="ri-arrow-down-s-line unidade-arrow" id="unidadeVolumeArrow"></i>
+                        </div>
+                        <div class="custom-select-options-unidade" id="unidadeVolumeOptions">
+                            <!-- Opções geradas dinamicamente pelo JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============================================================ -->
+                <!-- SELECT DE TEMPO - COMPONENTE PERSONALIZADO                   -->
+                <!-- ============================================================ -->
+                <div class="entradas_de_dados" style="position: relative; padding-right: 0;">
+                    <i class="ri-time-line"></i>
+                    <input type="number" placeholder="" id="tempo">
+                    <label class="label-flutuante">Tempo</label>
+
+                    <!-- Hidden input para manter compatibilidade -->
+                    <input type="hidden" id="unidade_de_tempo" value="1">
+
+                    <!-- Componente personalizado -->
+                    <div class="custom-select-unidade" id="selectTempo">
+                        <div class="custom-select-trigger-unidade" onclick="toggleUnidadeSelect('tempo')">
+                            <span class="unidade-texto" id="unidadeTempoSelecionada">h</span>
+                            <i class="ri-arrow-down-s-line unidade-arrow" id="unidadeTempoArrow"></i>
+                        </div>
+                        <div class="custom-select-options-unidade" id="unidadeTempoOptions">
+                            <!-- Opções geradas dinamicamente pelo JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="entradas_de_dados" id="campo_de_macrogotas">
+                    <i class="ri-drop-line"></i>
+                    <input type="number" placeholder="Macrogotas..." id="macrogotas">
+                    <label class="label-flutuante">Macrogotas</label>
+                </div>
+                <div class="entradas_de_dados" id="campo_de_peso">
+                    <i class="ri-drizzle-line"></i>
+                    <input type="number" placeholder="Microgotas..." id="microgotas">
+                    <label class="label-flutuante">Microgotas</label>
+                </div>
+
+
             </div>
-            <div class="entradas_de_dados">
-                <i class="ri-time-line"></i>
-                <input type="number" placeholder="Tempo..." id="tempo">
-                <select id="unidade_de_tempo">
-                    <option value="1">h</option>
-                    <option value="60">min</option>
-                </select>
-            </div>
-            
-                
-            <div class="entradas_de_dados" id="campo_de_macrogotas">
-                <i class="ri-drop-line"></i>
-                <input type="number" placeholder="Macrogotas..." id="macrogotas">
-                <p>macro</p>
-            </div>
-            <div class="entradas_de_dados" id="campo_de_peso">
-                <i class="ri-drizzle-line"></i>
-                <input type="number" placeholder="Microgotas..." id="microgotas">
-                <p>micro</p>
-            </div>
-              
-            
-        </div>
-            
-            
- 
+
+
+
             <div class="caxa_de_botoes">
                 <button class="botao" onclick="calcular()">Calcular</button>
                 <i class="ri-delete-bin-line" id="limpador" onclick="limpar()"></i>
@@ -76,17 +121,20 @@
         <p class="resultado-display" id="resultado" data-aos="fade-up" data-aos-delay="100"></p>
     </section>
 
-    <footer>          <a style="color: inherit; text-decoration: none;" href="https://wa.me/244929129797?text=Olá!%20Encontrei%20uma%20possível%20inconsistência%20num%20cálculo%20e%20gostaria%20de%20reportar." target="_blank">Reportar erro</a>
+  
+    <footer>
+        <p><strong>Mpindi TecMed</strong></p>
     </footer>
 
     <script src="script.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-<script>
-  AOS.init({
-    duration: 1000,
-    once: true
-  });
-</script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
 </body>
+
 </html>

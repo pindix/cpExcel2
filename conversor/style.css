@@ -9,7 +9,7 @@
 }
 
 [data-theme="dark"] {
-    --bg: #121212;
+    --bg: black;
     --card-bg: #1e1e1e;
     --text: #f0f2f0;
     --sombra: none;
@@ -32,44 +32,152 @@ body {
     min-height: 100vh;
 }
 
-/* --- BARRA DE TOPO --- */
-nav {
-    padding: 10px;
+/* ================================================================
+   WEB HEADER - NOVO ESTILO
+   ================================================================ */
+
+.web-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    max-width: 800px;
+    justify-content: space-around;
+    padding: 12px 20px;
+    max-width: 420px;
     margin: 0 auto;
     width: 100%;
-    position: relative;
+    gap: 12px;
+    margin-top: 10px;
 }
 
-.btn-back {
-    text-decoration: none;
-    color: var(--primary);
-    font-weight: 600;
+/* Card dos controles */
+.header-controls {
     display: flex;
     align-items: center;
-    gap:5px;
+    gap: 6px;
+    background: var(--card-bg);
+    padding: 6px 12px;
+    border-radius: 40px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 132, 61, 0.08);
+    flex-shrink: 0;
 }
 
-.help-icon {
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--primary);
+.btn-icon {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     text-decoration: none;
-    left: 50%; top: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
+    color: var(--text);
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 20px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
-.theme-toggle {
-    background: none;
-    border: none;
-    color: var(--text);
-    font-size: 1.5rem;
-    cursor: pointer;
+.btn-icon i {
+    font-size: 1rem;
 }
+
+.btn-icon:hover {
+    background: rgba(0, 132, 61, 0.08);
+    color: var(--primary);
+}
+
+.btn-icon span {
+    display: inline-block;
+}
+
+/* Divisor do header */
+.divider-header {
+    opacity: 0.2;
+    color: var(--text);
+    font-size: 0.8rem;
+}
+
+/* Título da ferramenta */
+.header-title {
+    flex-shrink: 0;
+}
+
+.tool-badge {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: -0.3px;
+    padding: 4px 0;
+    background: none;
+}
+
+
+
+/* Responsividade para mobile */
+@media (max-width: 480px) {
+    .web-header {
+        padding: 10px 16px;
+        gap: 8px;
+    }
+
+    .header-controls {
+        padding: 4px 10px;
+        gap: 4px;
+        flex-wrap: nowrap;
+    }
+
+    .btn-icon {
+        font-size: 0.7rem;
+        padding: 3px 6px;
+    }
+
+    .btn-icon i {
+        font-size: 0.85rem;
+    }
+
+    .btn-icon span {
+        display: none;
+        /* Esconde o texto em telas muito pequenas, mantém só ícone */
+    }
+
+    .tool-badge {
+        font-size: 0.95rem;
+    }
+
+    /* Em telas muito pequenas, mostra o texto dos ícones com abreviação */
+    @media (max-width: 360px) {
+        .btn-icon span {
+            display: none;
+        }
+        .divider-header {
+            display: none;
+        }
+        .header-controls {
+            gap: 2px;
+            padding: 4px 8px;
+        }
+    }
+}
+
+/* Em telas médias, mostra os textos */
+@media (min-width: 481px) and (max-width: 768px) {
+    .btn-icon span {
+        display: inline-block;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* --- SECTION ÚNICA --- */
 .main-tool {
@@ -106,6 +214,7 @@ nav {
     padding: 30px;
     border-radius: 24px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    z-index: 200;
 }
 
 
@@ -143,6 +252,41 @@ nav {
     color: green;
 }
 
+
+
+
+/* ==========================================================================
+   LABELS FLUTUANTES (ADICIONADAS SEM QUEBRAR O ORIGINAL)
+   ========================================================================== */
+.label-flutuante {
+    position: absolute;
+    left: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.9rem;
+    color: var(--text);
+    opacity: 0.5;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.entradas_de_dados input:focus ~ .label-flutuante,
+.entradas_de_dados input:not(:placeholder-shown) ~ .label-flutuante {
+    top: 4px;
+    font-size: 0.55rem;
+    opacity: 0.7;
+}
+
+/* Remove placeholder visual mas mantém funcionalidade */
+.entradas_de_dados input::placeholder {
+    opacity: 0;
+}
+
+
+
+
+
 .entradas_de_dados i {
     position: absolute;
     left: 6px;
@@ -156,11 +300,12 @@ nav {
 .entradas_de_dados select {
     position: absolute;
     right: 4px;
-    width: 5rem;
+    width: 7rem;
     border: none;
     color: green;
     font-weight: bold;
     background: var(--bg);
+    padding: 0 0.9rem 0 0;
 }
 
 .entradas_de_dados p {
@@ -214,7 +359,7 @@ nav {
     background-color: #f44336;
     color: white;
     border: none;
-    border-radius: 100%;
+    border-radius: 12px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -228,31 +373,217 @@ nav {
     margin-top: 2rem;
 }
 
-/* O Resultado */
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   RESULTADO CONVERSOR - ELEGANTE E PROFISSIONAL
+   ========================================================================== */
+
 .resultado-display {
     margin-top: 25px;
-    padding: 15px;
-    background: var(--primary);
-    color: white;
-    border-radius: 24px;
+    background: transparent;
+    border-radius: 0;
     font-weight: 400;
-    font-size: 1.2rem;
-    min-height: 0px;
-    box-shadow: 0 5px 15px rgba(0, 132, 61, 0.3);
-    width: 90%;
-}
-.centro {
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: 900;
+    font-size: 1rem;
+    box-shadow: none;
+    width: 100%;
 }
 
-footer {
-    padding: 30px;
+.conversor-container {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Card único */
+.conversor-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 28px 24px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 132, 61, 0.08);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+
+
+/* Cabeçalho */
+.conversor-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.conversor-card .card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    background: rgba(0, 132, 61, 0.1);
+    color: var(--primary);
+}
+
+.conversor-card .card-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--text);
+}
+
+/* Mensagem principal */
+.conversor-mensagem {
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 8px;
+}
+
+.conversor-destaque {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    display: inline-block;
+    margin: 0 4px;
+}
+
+/* Origem do frasco */
+.conversor-origem {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text);
+    opacity: 0.7;
+    margin-bottom: 24px;
+}
+
+.conversor-origem strong {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* Referência adicional */
+.conversor-referencia {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    font-size: 0.7rem;
+    color: var(--text);
     opacity: 0.6;
 }
+
+.referencia-divisor {
+    opacity: 0.4;
+}
+
+/* Mensagem de erro */
+.conversor-erro {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 30px;
+    background: #ef4444;
+    color: white;
+}
+
+.conversor-erro i {
+    font-size: 1.5rem;
+}
+
+.conversor-erro span {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Dark mode */
+[data-theme="dark"] .conversor-card {
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .conversor-card .card-status {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .conversor-referencia {
+    border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+    .conversor-card {
+        padding: 20px 16px;
+    }
+    
+    .conversor-mensagem {
+        font-size: 1rem;
+    }
+    
+    .conversor-destaque {
+        font-size: 1.8rem;
+    }
+    
+    .conversor-origem {
+        font-size: 0.8rem;
+    }
+    
+    .conversor-card .card-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+    }
+    
+    .conversor-referencia {
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .referencia-divisor {
+        display: none;
+    }
+}
+
+@media (max-width: 360px) {
+    .conversor-destaque {
+        font-size: 1.5rem;
+    }
+    
+    .conversor-mensagem {
+        font-size: 0.9rem;
+    }
+}
+
+
+
+
+
+
 
 
 
@@ -270,3 +601,241 @@ footer {
 .vibrar {
     animation: vibration 0.2s ease-in-out;
 }
+
+
+
+
+
+
+/* ==========================================================================
+   SELECTS PERSONALIZADOS - UNIDADES (Conversor)
+   ========================================================================== */
+
+/* ===== CONTAINER DO SELECT ===== */
+.custom-select-unidade {
+    position: relative;
+    flex-shrink: 0;
+    min-width: 65px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-right: 2px;
+    
+}
+
+/* ===== TRIGGER (botão) ===== */
+.custom-select-trigger-unidade {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2px;
+    padding: 2px 4px 2px 2px;
+    background: rgba(0, 132, 61, 0.05);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    height: 100%;
+    min-height: 26px;
+    max-width: 100%;
+}
+
+
+/* ===== TEXTO SELECIONADO ===== */
+.custom-select-trigger-unidade .unidade-texto {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80px;
+    min-width: 30px;
+    text-align: right;
+    padding-right: 2px;
+    line-height: 1.2;
+    flex-shrink: 1;
+}
+
+/* ===== SETA (ARROW) ===== */
+.custom-select-trigger-unidade .unidade-arrow {
+    font-size: 0.9rem !important;
+    color: var(--text) !important;
+    opacity: 0.8 !important;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-left: 0px;
+    position: relative;
+    z-index: 2;
+}
+
+.custom-select-trigger-unidade.aberto .unidade-arrow {
+    transform: rotate(180deg);
+    opacity: 1 !important;
+}
+
+/* ===== OPÇÕES DO SELECT ===== */
+.custom-select-options-unidade {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: -4px;
+    background: var(--card-bg);
+    border: 1px solid rgba(0, 132, 61, 0.12);
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    padding: 4px;
+    z-index: 9999 !important;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.25s ease;
+    visibility: hidden;
+    min-width: 140px;
+}
+
+.custom-select-options-unidade.aberto {
+    max-height: 240px;
+    overflow-y: auto;
+    opacity: 1;
+    visibility: visible;
+}
+
+.custom-select-options-unidade::-webkit-scrollbar {
+    width: 3px;
+}
+
+.custom-select-options-unidade::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 3px;
+}
+
+/* ===== OPÇÃO INDIVIDUAL ===== */
+.custom-select-option-unidade {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding: 6px 14px !important;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 28px;
+}
+
+.custom-select-option-unidade:hover {
+    background: rgba(0, 132, 61, 0.06);
+}
+
+.custom-select-option-unidade.selecionado {
+    background: rgba(0, 132, 61, 0.08);
+}
+
+.custom-select-option-unidade .option-label {
+    font-size: 0.65rem !important;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+    text-align: left;
+    width: 100%;
+}
+
+/* ===== GRUPOS (optgroup) ===== */
+.custom-select-options-unidade .option-group-label {
+    font-size: 0.55rem;
+    font-weight: 600;
+    color: var(--primary);
+    padding: 6px 14px 2px 14px;
+    opacity: 0.7;
+    letter-spacing: 0.3px;
+    border-bottom: 1px solid rgba(0, 132, 61, 0.06);
+    margin-bottom: 2px;
+}
+
+.custom-select-options-unidade .option-group-label:not(:first-child) {
+    margin-top: 6px;
+}
+
+/* ===== DARK MODE ===== */
+[data-theme="dark"] .custom-select-options-unidade {
+    background: #2a2a2a;
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .custom-select-option-unidade:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .custom-select-option-unidade.selecionado {
+    background: rgba(0, 132, 61, 0.2);
+}
+
+[data-theme="dark"] .custom-select-options-unidade .option-group-label {
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+    color: #4ade80;
+}
+
+[data-theme="dark"] .custom-select-trigger-unidade .unidade-arrow {
+    color: #f0f2f0 !important;
+    opacity: 0.9 !important;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 480px) {
+    .custom-select-unidade {
+        min-width: 60px;
+    }
+    .custom-select-trigger-unidade .unidade-texto {
+        font-size: 0.7rem;
+        max-width: 90px;
+        min-width: 25px;
+    }
+    .custom-select-options-unidade {
+        min-width: 120px;
+        right: -8px;
+    }
+    .custom-select-option-unidade .option-label {
+        font-size: 0.6rem !important;
+    }
+    .custom-select-trigger-unidade .unidade-arrow {
+        font-size: 0.8rem !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .custom-select-unidade {
+        min-width: 50px;
+    }
+    .custom-select-trigger-unidade .unidade-texto {
+        font-size: 0.5rem;
+        max-width: 45px;
+        min-width: 20px;
+    }
+    .custom-select-options-unidade {
+        min-width: 100px;
+    }
+    .custom-select-trigger-unidade .unidade-arrow {
+        font-size: 0.7rem !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+footer {
+    padding: 30px;
+    text-align: center;
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+
+

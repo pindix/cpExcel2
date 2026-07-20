@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-pt">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,118 +9,36 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div id="sidebar" class="sidebar">
-    <div class="sidebar-header">
-        <h3>Gestão de Monitorização</h3>
-        <button onclick="toggleMenu()" class="close-btn"><i class="ri-close-line"></i></button>
-    </div>
-    <div class="sidebar-content">
-     
-        <p class="instrucao">Adicione um perfil e obtenha em PDF um registro com gráfico de sinais vitais de vários pacientes. Esse registos só estará disponível nesse navegador.</p>
-        
-        <div class="cadastro-box">
-            
-            <div class="row-selects">
-                     <select id="p-pais" class="opcoes-menu" onchange="atualizarFaixasPorPaisMenu()">
-    <option disabled selected>Selecione um País</option>
-    <optgroup label="🌍 Comunidade dos Países de Língua Portuguesa (CPLP)">
-        <option value="Angola">🇦🇴 Angola</option>
-        <option value="Brasil">🇧🇷 Brasil</option>
-        <option value="Cabo_Verde">🇨🇻 Cabo Verde</option>
-        <option value="Guine_Bissau">🇬🇼 Guiné Bissau</option>
-        <option value="Guine_Equatorial">🇬🇶 Guiné Equatorial</option>
-        <option value="Mocambique">🇲🇿 Moçambique</option>
-        <option value="Portugal">🇵🇹 Portugal</option>
-        <option value="Sao_Tome_Principe">🇸🇹 São Tomé e Príncipe</option>
-        <option value="Timor_Leste">🇹🇱 Timor Leste</option>
-    </optgroup>
-    <optgroup label="🌎 Países Adicionais">
-        <option value="Estados_Unidos">🇺🇸 Estados Unidos</option>
-        <option value="Reino_Unido">🇬🇧 Reino Unido</option>
-        <option value="Alemanha">🇩🇪 Alemanha</option>
-        <option value="Canada">🇨🇦 Canadá</option>
-        <option value="Australia">🇦🇺 Austrália</option>
-        <option value="Japao">🇯🇵 Japão</option>
-    </optgroup>
-</select>
-        
-        <select id="p-faixa" class="opcoes-menu">
-    <option disabled selected>Selecione a Faixa Etária</option>
-    
-    <!-- Recém-nascidos e Lactentes -->
-    <option class="faixa-option" data-paises="Angola,Brasil,Portugal" value="recem_nascido_0_1m">🍼 Recém-nascido (0-1 mês)</option>
-    <option class="faixa-option" data-paises="Angola,Brasil,Portugal" value="lactente_1_12m">👶 Lactente (1-12 meses)</option>
-    
-    <!-- Crianças (Angola, Brasil, Portugal) -->
-    <option class="faixa-option" data-paises="Angola,Brasil,Portugal" value="crianca_1_3">🧒 Criança (1-3 anos)</option>
-    <option class="faixa-option" data-paises="Angola,Brasil,Portugal" value="crianca_3_6">🧒 Criança (3-6 anos)</option>
-    <option class="faixa-option" data-paises="Angola,Brasil,Portugal" value="crianca_6_12">🧒 Criança (6-12 anos)</option>
-    
-    <!-- Crianças (outros países) -->
-    <option class="faixa-option" data-paises="Cabo_Verde,Guine_Bissau,Mocambique,Timor_Leste,Sao_Tome_Principe,Estados_Unidos,Reino_Unido" value="crianca_1_5">🧒 Criança (1-5 anos)</option>
-    <option class="faixa-option" data-paises="Cabo_Verde,Guine_Bissau,Mocambique,Timor_Leste,Sao_Tome_Principe,Estados_Unidos,Reino_Unido" value="crianca_6_12">🧒 Criança (6-12 anos)</option>
-    
-    <!-- Adolescentes -->
-    <option class="faixa-option" data-paises="Angola,Brasil,Portugal" value="adolescente_12_18">👦 Adolescente (12-18 anos)</option>
-    <option class="faixa-option" data-paises="Cabo_Verde,Guine_Bissau,Mocambique,Timor_Leste,Sao_Tome_Principe,Estados_Unidos,Reino_Unido" value="adolescente_13_18">👦 Adolescente (13-18 anos)</option>
-    
-    <!-- Adultos -->
-    <option class="faixa-option" data-paises="Angola,Portugal,Cabo_Verde,Guine_Bissau,Mocambique,Timor_Leste,Sao_Tome_Principe,Estados_Unidos,Reino_Unido,Alemanha,Canada,Australia,Japao" value="adulto">👨 Adulto (18-60 anos)</option>
-    <option class="faixa-option" data-paises="Brasil" value="adulto_feminino">👩 Adulto Feminino (18-60 anos)</option>
-    <option class="faixa-option" data-paises="Brasil" value="adulto_masculino">👨 Adulto Masculino (18-60 anos)</option>
-    
-    <!-- Idosos -->
-    <option class="faixa-option" data-paises="Angola,Portugal" value="idoso_60mais">👴 Idoso (60+ anos)</option>
-    <option class="faixa-option" data-paises="Cabo_Verde,Reino_Unido,Timor_Leste,Sao_Tome_Principe" value="idoso">👴 Idoso (60+ anos)</option>
-    <option class="faixa-option" data-paises="Estados_Unidos" value="idoso_65mais">👴 Idoso (65+ anos)</option>
-    <option class="faixa-option" data-paises="Brasil" value="idoso_feminino">👵 Idoso Feminino (60+ anos)</option>
-    <option class="faixa-option" data-paises="Brasil" value="idoso_masculino">👴 Idoso Masculino (60+ anos)</option>
-    <option class="faixa-option" data-paises="Alemanha,Canada,Australia" value="idoso">👴 Idoso (60+ anos)</option>
-</select>
-            </div>
-                <div class="p-nome floating-group">
-                    <i class="ri-user-3-fill"></i>
-                    <input maxlength="40" type="text" id="p-nome" placeholder=" ">
-                    <label class="label-flutuante">Nome do Paciente</label>
-                </div>
-            
-                    <button class="btn-add" onclick="cadastrarPaciente()">
-                        Adicionar paciente
-                 <i class="ri-user-add-fill"></i>
-                  </button>
-            
+
+    <!-- ============================================================ -->
+    <!-- BARRA SUPERIOR - WEB STYLE                                 -->
+    <!-- ============================================================ -->
+    <header class="web-header">
+        <!-- Card com os controles -->
+        <div class="header-controls">
+            <a href="../index.html#ferramentas" class="btn-icon" title="Início">
+                <i class="ri-arrow-left-line"></i>
+                <span>Início</span>
+            </a>
+            <span class="divider-header">|</span>
+            <a href="../ajuda/index.html#diluicao" class="btn-icon" title="Ajuda">
+                <i class="ri-question-line"></i>
+                <span>Ajuda</span>
+            </a>
+            <span class="divider-header">|</span>
+            <button class="btn-icon theme-toggle" id="themeBtn" title="Mudar Tema">
+                <i class="ri-moon-line" id="themeIcon"></i>
+                <span>Tema</span>
+            </button>
         </div>
 
-        <hr class="divisor-menu">
-
-        <button class="btn-padrao" onclick="ativarModoPadrao()">
-            <i class="ri-refresh-line"></i> Ativar Modo Sem Paciente
-        </button>
-        
-        <div class="lista-titulo">PACIENTES MONITORIZADOS</div>
-        
-        
-        <div id="lista-pacientes" class="lista-vertical">
-            </div>
-    </div>
-</div>
-<div id="overlay" onclick="toggleMenu()" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:999;"></div>
-
-
-    <nav>
-        <a href="../index.html" class="btn-back">
-            <i class="ri-arrow-left-line"></i> Início
-        </a>
-        <a href="../ajuda/index.html#sinais" class="help-icon" title="Como funciona?">
-            <i class="ri-question-line"></i>
-        </a>
-        <button class="theme-toggle" id="themeBtn">
-            <i class="ri-moon-line" id="themeIcon"></i>
-        </button>
-    </nav>
+        <!-- Título da ferramenta -->
+        <div class="header-title">
+            <span class="tool-badge">Sinais Vitais</span>
+        </div>
+    </header>
 
 
 
@@ -130,92 +47,23 @@
             <span>FISIOLOGIA DO CORPO</span>
             <h2>Sinais Vitais</h2>
         </div>
-
-
+        
+            <select id="pais_referencia" class="opcoes">
+               <option value="Angola">Angola</option>
+               <option value="Portugal">Portugal</option>
+            </select>
 
         <div class="calculator-box" data-aos="fade-up">
-            <div class="container-campos" id="contexto-clinico">
-                
-                
-                
-                
-           
+            
+            <div class="container-campos">
 
-    <div id="controles-padrao" class="wrapper-selects">
-      <select id="pais_referencia" class="opcoes" onchange="atualizarFaixasPorPais()">
-    <option disabled selected>Selecione um País</option>
-    <optgroup label="🌍 Comunidade dos Países de Língua Portuguesa (CPLP)">
-        <option value="Angola">🇦🇴 Angola</option>
-        <option value="Brasil">🇧🇷 Brasil</option>
-        <option value="Cabo_Verde">🇨🇻 Cabo Verde</option>
-        <option value="Guine_Bissau">🇬🇼 Guiné Bissau</option>
-        <option value="Guine_Equatorial">🇬🇶 Guiné Equatorial</option>
-        <option value="Mocambique">🇲🇿 Moçambique</option>
-        <option value="Portugal">🇵🇹 Portugal</option>
-        <option value="Sao_Tome_Principe">🇸🇹 São Tomé e Príncipe</option>
-        <option value="Timor_Leste">🇹🇱 Timor Leste</option>
-    </optgroup>
-    <optgroup label="🌎 Países Adicionais">
-        <option value="Estados_Unidos">🇺🇸 Estados Unidos</option>
-        <option value="Reino_Unido">🇬🇧 Reino Unido</option>
-        <option value="Alemanha">🇩🇪 Alemanha</option>
-        <option value="Canada">🇨🇦 Canadá</option>
-        <option value="Australia">🇦🇺 Austrália</option>
-        <option value="Japao">🇯🇵 Japão</option>
-    </optgroup>
-</select>
-<select id="faixa_etaria" class="opcoes" style="width: 50%;">
-    <option disabled selected>Selecione a Faixa Etária</option>
-    
-    <!-- Recém-nascidos e Lactentes -->
-    <option class="faixa-option" data-paises="Angola,Brasil,Portugal" value="recem_nascido_0_1m">🍼 Recém-nascido (0-1 mês)</option>
-    <option class="faixa-option" data-paises="Angola,Brasil,Portugal" value="lactente_1_12m">👶 Lactente (1-12 meses)</option>
-    
-    <!-- Crianças (Angola, Brasil, Portugal) -->
-    <option class="faixa-option" data-paises="Angola,Brasil,Portugal" value="crianca_1_3">🧒 Criança (1-3 anos)</option>
-    <option class="faixa-option" data-paises="Angola,Brasil,Portugal" value="crianca_3_6">🧒 Criança (3-6 anos)</option>
-    <option class="faixa-option" data-paises="Angola,Brasil,Portugal" value="crianca_6_12">🧒 Criança (6-12 anos)</option>
-    
-    <!-- Crianças (outros países) -->
-    <option class="faixa-option" data-paises="Cabo_Verde,Guine_Bissau,Mocambique,Timor_Leste,Sao_Tome_Principe,Estados_Unidos,Reino_Unido" value="crianca_1_5">🧒 Criança (1-5 anos)</option>
-    <option class="faixa-option" data-paises="Cabo_Verde,Guine_Bissau,Mocambique,Timor_Leste,Sao_Tome_Principe,Estados_Unidos,Reino_Unido" value="crianca_6_12">🧒 Criança (6-12 anos)</option>
-    
-    <!-- Adolescentes -->
-    <option class="faixa-option" data-paises="Angola,Brasil,Portugal" value="adolescente_12_18">👦 Adolescente (12-18 anos)</option>
-    <option class="faixa-option" data-paises="Cabo_Verde,Guine_Bissau,Mocambique,Timor_Leste,Sao_Tome_Principe,Estados_Unidos,Reino_Unido" value="adolescente_13_18">👦 Adolescente (13-18 anos)</option>
-    
-    <!-- Adultos -->
-    <option class="faixa-option" data-paises="Angola,Portugal,Cabo_Verde,Guine_Bissau,Mocambique,Timor_Leste,Sao_Tome_Principe,Estados_Unidos,Reino_Unido,Alemanha,Canada,Australia,Japao" value="adulto">👨 Adulto (18-60 anos)</option>
-    <option class="faixa-option" data-paises="Brasil" value="adulto_feminino">👩 Adulto Feminino (18-60 anos)</option>
-    <option class="faixa-option" data-paises="Brasil" value="adulto_masculino">👨 Adulto Masculino (18-60 anos)</option>
-    
-    <!-- Idosos -->
-    <option class="faixa-option" data-paises="Angola,Portugal" value="idoso_60mais">👴 Idoso (60+ anos)</option>
-    <option class="faixa-option" data-paises="Cabo_Verde,Reino_Unido,Timor_Leste,Sao_Tome_Principe" value="idoso">👴 Idoso (60+ anos)</option>
-    <option class="faixa-option" data-paises="Estados_Unidos" value="idoso_65mais">👴 Idoso (65+ anos)</option>
-    <option class="faixa-option" data-paises="Brasil" value="idoso_feminino">👵 Idoso Feminino (60+ anos)</option>
-    <option class="faixa-option" data-paises="Brasil" value="idoso_masculino">👴 Idoso Masculino (60+ anos)</option>
-    <option class="faixa-option" data-paises="Alemanha,Canada,Australia" value="idoso">👴 Idoso (60+ anos)</option>
-</select>
-    </div>
-                
-                
-                
-                
+                    <select id="faixa_etaria" class="opcoes" style="grid-column: span 2;">
+                        <option value="recem_nascido">Recém-nascido</option>
+                        <option value="lactante">Lactante</option>
+                        <option value="crianca">Criança</option>
+                        <option value="adulto" selected>Adulto</option>
+                    </select>
 
-    <div id="tag-paciente" class="tag-ativa" style="display: none;" onclick="toggleMenu()">
-        <span class="status-dot"></span>
-        <div class="info-paciente">
-            <h3 id="nome-exibicao">Nome</h3>
-            <p id="detalhes-exibicao">Detalhes</p>
-        </div>
-    </div>
-                
-                
-                
-                
-                
-               
                 <div class="entradas_de_dados floating-group">
                     <i class="ri-heart-pulse-fill"></i>
                     <input type="number" id="fc" placeholder=" ">
@@ -259,26 +107,14 @@
                     </div>
                 </div>
             </div>
-
             
-
-<div class="caxa_de_botoes">
-    <button class="botao" onclick="interpretar()">Interpretar</button>
-    
-    <button id="btn-exportar" class="botao-exportar" style="display: none;" onclick="exportarPDF()" title="Exportar Histórico em PDF">
-        <i class="ri-download-2-line"></i> Gráfico/Relatório PDF
-    </button>
-    
-    <button class="btn-abrir-menu" onclick="toggleMenu()">
-       <i class="ri-user-settings-line"></i> Pacientes
-    </button>
-    
-    <div id="limpador" onclick="limparSinais()">
-        <i class="ri-delete-bin-line"></i>
-    </div>
-</div>
-            
-      
+            <div class="caxa_de_botoes">
+                <button class="botao" onclick="interpretar()">Interpretar</button>
+                <div id="limpador" onclick="limparSinais()">
+                    <i class="ri-delete-bin-line"></i>
+                </div>
+            </div>
+        </div>
 
         <div class="resultado-display" id="resultado" data-aos="fade-up" style="display: none;"></div>
     </section>
@@ -286,20 +122,9 @@
     <footer>
         <p><strong>Mpindi TecMed</strong></p>
     </footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
- <!-- Em vez de display:none -->
-<div style="position: absolute; visibility: hidden; height: 0; width: 0; overflow: hidden;">
-    <canvas id="pdfChart" width="1200" height="600"></canvas>
-</div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>AOS.init({ duration: 800 });</script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>AOS.init({ duration: 800 });</script>
+    <script>AOS.init({duration: 800});</script>
     <script src="script.js"></script>
 </body>
-
 </html>

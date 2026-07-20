@@ -11,54 +11,101 @@
 </head>
 <body>
 
-    <nav>
-        <a href="../index.html" class="btn-back">
-            <i class="ri-arrow-left-line"></i> Início
-        </a>
-        <a href="../ajuda/index.html#conversor" class="help-icon" title="Como funciona?">
-            <i class="ri-question-line"></i> 
-        </a>
-        <button class="theme-toggle" id="themeBtn"> 
-            <i class="ri-moon-line" id="themeIcon"></i>
-        </button>
-    </nav>
-    <section class="main-tool">
-        <div class="tool-header">
-            <span>CALCULADORA POSOLÓGICA</span>
-            <h2>Conversor</h2>
+    
+    <!-- ============================================================ -->
+    <!-- BARRA SUPERIOR - WEB STYLE                                 -->
+    <!-- ============================================================ -->
+    <header class="web-header">
+        <!-- Card com os controles -->
+        <div class="header-controls">
+            <a href="../index.html#ferramentas" class="btn-icon" title="Início">
+                <i class="ri-arrow-left-line"></i>
+                <span>Início</span>
+            </a>
+            <span class="divider-header">|</span>
+            <a href="../ajuda/index.html#conversor" class="btn-icon" title="Ajuda">
+                <i class="ri-question-line"></i>
+                <span>Ajuda</span>
+            </a>
+            <span class="divider-header">|</span>
+            <button class="btn-icon theme-toggle" id="themeBtn" title="Mudar Tema">
+                <i class="ri-moon-line" id="themeIcon"></i>
+                <span>Tema</span>
+            </button>
         </div>
+
+        <!-- Título da ferramenta -->
+        <div class="header-title">
+            <span class="tool-badge">Conversor</span>
+        </div>
+    </header>
+
+
+
+    <section class="main-tool">
         <div class="calculator-box" data-aos="fade-up">
-          <p class="textos"> <i class="ri-information-line"></i> Concentração e quantidade do medicamento indicado</p>
-           
-                <div class="entradas_de_dados">
+            <p class="textos"> <i class="ri-information-line"></i> Concentração e quantidade do medicamento indicado</p>
+
+            <!-- ============================================================ -->
+            <!-- SELECT DE CONCENTRAÇÃO INDICADO - COMPONENTE PERSONALIZADO    -->
+            <!-- ============================================================ -->
+            <div class="entradas_de_dados" style="position: relative; padding-right: 0;">
                 <i class="ri-bubble-chart-line"></i>
-                <input type="number" placeholder="Concentração..." id="indicado">
-                <select id="unidade_do_indicado">
-                    <option value="1">mg/ml</option>
-                    <option value="1000">kg/ml</option>
-                </select>
+                <input type="number" placeholder="" id="indicado">
+                <label class="label-flutuante">Concentração</label>
+                
+                <!-- Hidden input para manter compatibilidade -->
+                <input type="hidden" id="unidade_do_indicado" value="1">
+                
+                <!-- Componente personalizado -->
+                <div class="custom-select-unidade" id="selectIndicado">
+                    <div class="custom-select-trigger-unidade" onclick="toggleUnidadeSelect('indicado')">
+                        <span class="unidade-texto" id="unidadeIndicadoSelecionada">mg/ml</span>
+                        <i class="ri-arrow-down-s-line unidade-arrow" id="unidadeIndicadoArrow"></i>
+                    </div>
+                    <div class="custom-select-options-unidade" id="unidadeIndicadoOptions">
+                        <!-- Opções geradas dinamicamente pelo JavaScript -->
+                    </div>
+                </div>
             </div>
+
             <div class="entradas_de_dados">
                 <i class="ri-syringe-line"></i>
-                <input type="number" placeholder="Quantidade..." id="ml">
+                <input type="number" placeholder="" id="ml">
+                <label class="label-flutuante">Quantidade</label>
                 <p>ml</p>
             </div>
-            
-            
-            <p style="margin-top: 1rem;" class="textos"> <i class="ri-information-line"></i> Concentração do medicamento disponível.</p>
-            <div class="entradas_de_dados">
-                <i class="ri-bubble-chart-line"></i>
-                <input type="number" placeholder="Concentração..." id="disponivel">
-                <select id="unidade_do_disponivel">
-                    <option value="1">mg/ml</option>
-                    <option value="1000">kg/ml</option>
-                </select>
-            </div>
-            
 
+
+            <p style="margin-top: 1rem;" class="textos"> <i class="ri-information-line"></i> Concentração do medicamento disponível.</p>
             
+            <!-- ============================================================ -->
+            <!-- SELECT DE CONCENTRAÇÃO DISPONÍVEL - COMPONENTE PERSONALIZADO  -->
+            <!-- ============================================================ -->
+            <div class="entradas_de_dados" style="position: relative; padding-right: 0;">
+                <i class="ri-bubble-chart-line"></i>
+                <input type="number" placeholder="" id="disponivel">
+                <label class="label-flutuante">Concentração</label>
+                
+                <!-- Hidden input para manter compatibilidade -->
+                <input type="hidden" id="unidade_do_disponivel" value="1">
+                
+                <!-- Componente personalizado -->
+                <div class="custom-select-unidade" id="selectDisponivel">
+                    <div class="custom-select-trigger-unidade" onclick="toggleUnidadeSelect('disponivel')">
+                        <span class="unidade-texto" id="unidadeDisponivelSelecionada">mg/ml</span>
+                        <i class="ri-arrow-down-s-line unidade-arrow" id="unidadeDisponivelArrow"></i>
+                    </div>
+                    <div class="custom-select-options-unidade" id="unidadeDisponivelOptions">
+                        <!-- Opções geradas dinamicamente pelo JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+
+
             <div class="caxa_de_botoes">
-                <button class="botao" onclick="calcular()" >Calcular</button>
+                <button class="botao" onclick="calcular()">Converter</button>
                 <i class="ri-delete-bin-line" id="limpador" onclick="limpar()"></i>
             </div>
         </div>
@@ -66,8 +113,9 @@
         <p class="resultado-display" id="resultado" data-aos="fade-up" data-aos-delay="100"></p>
     </section>
 
+
     <footer>
-            <a style="color: inherit; text-decoration: none;" href="https://wa.me/244929129797?text=Olá!%20Encontrei%20uma%20possível%20inconsistência%20num%20cálculo%20e%20gostaria%20de%20reportar." target="_blank">Reportar erro</a>
+        <p><strong>Mpindi TecMed</strong></p>
     </footer>
 
     <script src="script.js"></script>

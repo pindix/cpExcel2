@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,74 +10,119 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <nav>
-        <a href="../index.html" class="btn-back">
-            <i class="ri-arrow-left-line"></i> Início
-        </a>
-        <a href="../ajuda/index.html#sangue" class="help-icon" title="Como funciona?">
-            <i class="ri-question-line"></i> 
-        </a>
-        <button class="theme-toggle" id="themeBtn"> 
-            <i class="ri-moon-line" id="themeIcon"></i>
-        </button>
-    </nav>
+
+    <!-- ============================================================ -->
+    <!-- BARRA SUPERIOR - WEB STYLE                                 -->
+    <!-- ============================================================ -->
+    <header class="web-header">
+        <!-- Card com os controles -->
+        <div class="header-controls">
+            <a href="../index.html#ferramentas" class="btn-icon" title="Início">
+                <i class="ri-arrow-left-line"></i>
+                <span>Início</span>
+            </a>
+            <span class="divider-header">|</span>
+            <a href="../ajuda/index.html#sangue" class="btn-icon" title="Ajuda">
+                <i class="ri-question-line"></i>
+                <span>Ajuda</span>
+            </a>
+            <span class="divider-header">|</span>
+            <button class="btn-icon theme-toggle" id="themeBtn" title="Mudar Tema">
+                <i class="ri-moon-line" id="themeIcon"></i>
+                <span>Tema</span>
+            </button>
+        </div>
+
+        <!-- Título da ferramenta -->
+        <div class="header-title">
+            <span class="tool-badge">Sistema ABO</span>
+        </div>
+    </header>
 
 
 
     <section class="main-tool">
-        <div class="tool-header">
-            <span>HEMOTERAPIA & GENÉTICA</span>
-            <h2>Grupo Sanguíneo</h2>
-        </div>
 
         <div class="calculator-box" data-aos="fade-up">
-            
-            <span class="nota-label">1. Compatibilidade (Clínica)</span>
+
+            <span class="nota-label">Compatibilidade Clínica</span>
             <div class="grid-sangue">
-                <div class="entradas_de_dados">
+                <!-- ===== SELECT PACIENTE ===== -->
+                <div class="entradas_de_dados" style="position: relative; padding-right: 0;">
+
+                    <label class="label-flutuante">Grupo do paciente</label>
                     <i class="ri-user-received-line"></i>
-                    <select id="tipo_paciente">
-                        <option value="" disabled selected>Paciente...</option>
-                        <option value="A+">A+</option><option value="A-">A-</option>
-                        <option value="B+">B+</option><option value="B-">B-</option>
-                        <option value="AB+">AB+</option><option value="AB-">AB-</option>
-                        <option value="O+">O+</option><option value="O-">O-</option>
-                    </select>
+                    <input type="hidden" id="tipo_paciente" value="">
+                    <div class="custom-select-sangue" id="selectPaciente">
+                        <div class="custom-select-trigger-sangue" onclick="toggleSangueSelect('paciente')">
+                            <span class="sangue-texto" id="pacienteSelecionado">Selecione...</span>
+                            <i class="ri-arrow-down-s-line sangue-arrow" id="pacienteArrow"></i>
+                        </div>
+                        <div class="custom-select-options-sangue" id="pacienteOptions">
+                            <!-- Opções geradas dinamicamente -->
+                        </div>
+                    </div>
                 </div>
-                <div class="entradas_de_dados">
+
+                <!-- ===== SELECT DOADOR ===== -->
+                <div class="entradas_de_dados" style="position: relative; padding-right: 0;">
+
+                    <label class="label-flutuante">Grupo do doador</label>
                     <i class="ri-hand-heart-line"></i>
-                    <select id="tipo_doador">
-                        <option value="" disabled selected>Doador...</option>
-                        <option value="A+">A+</option><option value="A-">A-</option>
-                        <option value="B+">B+</option><option value="B-">B-</option>
-                        <option value="AB+">AB+</option><option value="AB-">AB-</option>
-                        <option value="O+">O+</option><option value="O-">O-</option>
-                    </select>
+                    <input type="hidden" id="tipo_doador" value="">
+                    <div class="custom-select-sangue" id="selectDoador">
+                        <div class="custom-select-trigger-sangue" onclick="toggleSangueSelect('doador')">
+                            <span class="sangue-texto" id="doadorSelecionado">Selecionar...</span>
+                            <i class="ri-arrow-down-s-line sangue-arrow" id="doadorArrow"></i>
+                        </div>
+                        <div class="custom-select-options-sangue" id="doadorOptions">
+                            <!-- Opções geradas dinamicamente -->
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <span class="nota-label" style="margin-top: 20px;">2. Herança (Biológica)</span>
+            <span class="nota-label" style="margin-top: 20px;">Herança Biológica</span>
             <div class="grid-sangue">
-                <div class="entradas_de_dados">
+                <!-- ===== SELECT PAI ===== -->
+                <div class="entradas_de_dados" style="position: relative; padding-right: 0;">
+
+                    <label class="label-flutuante">Grupo do pai</label>
                     <i class="ri-men-line"></i>
-                    <select id="sangue_pai">
-                        <option value="" disabled selected>Pai...</option>
-                        <option value="A">A</option><option value="B">B</option>
-                        <option value="AB">AB</option><option value="O">O</option>
-                    </select>
+                    <input type="hidden" id="sangue_pai" value="">
+                    <div class="custom-select-sangue" id="selectPai">
+                        <div class="custom-select-trigger-sangue" onclick="toggleSangueSelect('pai')">
+                            <span class="sangue-texto" id="paiSelecionado">Selecione...</span>
+                            <i class="ri-arrow-down-s-line sangue-arrow" id="paiArrow"></i>
+                        </div>
+                        <div class="custom-select-options-sangue" id="paiOptions">
+                            <!-- Opções geradas dinamicamente -->
+                        </div>
+                    </div>
                 </div>
-                <div class="entradas_de_dados">
+
+                <!-- ===== SELECT MÃE ===== -->
+
+                <div class="entradas_de_dados" style="position: relative; padding-right: 0;">
+
+                    <label class="label-flutuante">Grupo da mãe</label>
                     <i class="ri-women-line"></i>
-                    <select id="sangue_mae">
-                        <option value="" disabled selected>Mãe...</option>
-                        <option value="A">A</option><option value="B">B</option>
-                        <option value="AB">AB</option><option value="O">O</option>
-                    </select>
+                    <input type="hidden" id="sangue_mae" value="">
+                    <div class="custom-select-sangue" id="selectMae">
+                        <div class="custom-select-trigger-sangue" onclick="toggleSangueSelect('mae')">
+                            <span class="sangue-texto" id="maeSelecionado">Selecione...</span>
+                            <i class="ri-arrow-down-s-line sangue-arrow" id="maeArrow"></i>
+                        </div>
+                        <div class="custom-select-options-sangue" id="maeOptions">
+                            <!-- Opções geradas dinamicamente -->
+                        </div>
+                    </div>
                 </div>
             </div>
-            
+
             <div class="caxa_de_botoes">
                 <button class="botao" onclick="analisarSangue()">Analisar</button>
                 <div id="limpador" onclick="limparSangue()">
@@ -88,10 +134,14 @@
         <div class="resultado-display" id="resultado" data-aos="fade-up" style="display: none;"></div>
     </section>
 
-    <footer><p><strong>Mpindi TecMed</strong></p></footer>
+
+    <footer>
+        <p><strong>Mpindi TecMed</strong></p>
+    </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>AOS.init({duration: 800});</script>
+    <script>AOS.init({ duration: 800 });</script>
     <script src="script.js"></script>
 </body>
+
 </html>

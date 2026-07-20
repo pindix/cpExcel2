@@ -11,50 +11,256 @@
 </head>
 <body>
 
-    <nav>
-        <a href="../index.html" class="btn-back">
-            <i class="ri-arrow-left-line"></i> Início
-        </a>
-        <a href="../ajuda/index.html#gestograma" class="help-icon" title="Como funciona?">
-            <i class="ri-question-line"></i> 
-        </a>
-        <button class="theme-toggle" id="themeBtn"> 
-            <i class="ri-moon-line" id="themeIcon"></i>
-        </button>
-    </nav>
-
-
-
-    <section class="main-tool">
-        <div class="tool-header">
-            <span>SAÚDE MATERNO-INFANTIL</span>
-            <h2>Gestograma</h2>
+ 
+    <!-- ============================================================ -->
+    <!-- BARRA SUPERIOR - WEB STYLE                                 -->
+    <!-- ============================================================ -->
+    <header class="web-header">
+        <!-- Card com os controles -->
+        <div class="header-controls">
+            <a href="../index.html#ferramentas" class="btn-icon" title="Início">
+                <i class="ri-arrow-left-line"></i>
+                <span>Início</span>
+            </a>
+            <span class="divider-header">|</span>
+            <a href="../ajuda/index.html#gotejamento" class="btn-icon" title="Ajuda">
+                <i class="ri-question-line"></i>
+                <span>Ajuda</span>
+            </a>
+            <span class="divider-header">|</span>
+            <button class="btn-icon theme-toggle" id="themeBtn" title="Mudar Tema">
+                <i class="ri-moon-line" id="themeIcon"></i>
+                <span>Tema</span>
+            </button>
         </div>
 
+        <!-- Título da ferramenta -->
+        <div class="header-title">
+            <span class="tool-badge">Gestograma</span>
+        </div>
+    </header>
+
+    <!-- ================================================================== -->
+    <!-- CONTEÚDO PRINCIPAL -->
+    <!-- ================================================================== -->
+    <section class="main-tool">
+        
+        
+        
+        <!-- ========================================================== -->
+        <!-- SELECT PERSONALIZADO - MODO DE CÁLCULO                     -->
+        <!-- ========================================================== -->
+        <div class="modo-select-container" id="modoSelectContainer">
+            <div class="custom-select" id="customSelect">
+                <div class="custom-select-trigger" onclick="toggleModoSelect()">
+                    <span class="floating-label">Modo de Cálculo</span>
+                    <span id="modoSelecionado">Trabalhar com DUM</span>
+                    <i class="ri-arrow-down-s-line" id="modoArrow"></i>
+                </div>
+                <div class="custom-select-options" id="modoOptions">
+                    <div class="custom-select-option" data-value="dum" onclick="selecionarModo('dum')">
+                        <i class="ri-calendar-event-line"></i>
+                        <div class="option-content">
+                            <span class="option-titulo">Trabalhar com DUM</span>
+                            <span class="option-desc">Usar a Data da Última Menstruação para calcular o progresso da gestação ou ciclo menstrual</span>
+                        </div>
+                    </div>
+                    <div class="custom-select-option" data-value="ig" onclick="selecionarModo('ig')">
+                        <i class="ri-bar-chart-2-line"></i>
+                        <div class="option-content">
+                            <span class="option-titulo">Trabalhar com Idade Gestacional</span>
+                            <span class="option-desc">Use a Idade Gestacional por ecografia para calcular a DPP e DUM</span>
+                        </div>
+                    </div>
+                    <div class="custom-select-option" data-value="dpp" onclick="selecionarModo('dpp')">
+                        <i class="ri-calendar-event-fill"></i>
+                        <div class="option-content">
+                            <span class="option-titulo">Trabalhar com a DPP</span>
+                            <span class="option-desc">Use a DPP para achar a DUM e o progresso da gestação se possível</span>
+                        </div>
+                    </div>
+                    <div class="custom-select-option" data-value="au" onclick="selecionarModo('au')">
+                        <i class="ri-ruler-line"></i>
+                        <div class="option-content">
+                            <span class="option-titulo">Trabalhar com Altura Uterina</span>
+                            <span class="option-desc">Use a Altura Uterina para ter um valor aproximado da idade Gestacional</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        
         <div class="calculator-box" data-aos="fade-up">
             
-            <span class="nota-label">Data da Última Menstruação (DUM)</span>
-            <div class="entradas_de_dados floating-group">
-                <i class="ri-calendar-event-line"></i>
-                <input type="date" id="dum_data" placeholder=" ">
-            </div>
-
-            <div class="entradas_de_dados floating-group" style="margin-top: 15px;">
-                <i class="ri-loop-left-line"></i>
-                <input type="number" id="ciclo_dias" value="28" placeholder=" ">
-                <label class="label-flutuante">Duração do Ciclo (dias)</label>
+            <!-- ========================================================== -->
+            <!-- CAMPOS DINÂMICOS                                            -->
+            <!-- ========================================================== -->
+            <div class="campos-dinamicos-container" id="camposContainer">
+                
+                <!-- MODO 1: DUM -->
+                <div class="modo-campos active" data-modo="dum">
+                    <div class="entradas_de_dados floating-group" id="dumField">
+                        <i class="ri-calendar-event-line"></i>
+                        <input type="date" id="dum_data" placeholder=" ">
+                        <label class="label-flutuante">Data da Última Menstruação (DUM)</label>
+                    </div>
+                    
+                    
+                    <!-- Campos da semana (Mês + Semana + Ano) -->
+                    <div class="campos-semana" id="camposSemana">
+                        
+                        <label class="intervalo-label" style="grid-column: span 3;">Se não sabe a DUM, diga quando ela aconteceu</label>
+                        
+                        <div class="entradas_de_dados floating-group" style="flex: 2;">
+                            <i class="ri-calendar-event-line"></i>
+                            <select id="mes_dum">
+                                <option value="0">Janeiro</option>
+                                <option value="1">Fevereiro</option>
+                                <option value="2">Março</option>
+                                <option value="3">Abril</option>
+                                <option value="4">Maio</option>
+                                <option value="5">Junho</option>
+                                <option value="6">Julho</option>
+                                <option value="7">Agosto</option>
+                                <option value="8">Setembro</option>
+                                <option value="9">Outubro</option>
+                                <option value="10">Novembro</option>
+                                <option value="11">Dezembro</option>
+                            </select>
+                            <label class="label-flutuante">Mês</label>
+                        </div>
+                        
+                        <div class="entradas_de_dados floating-group" style="flex: 1;">
+                            <i class="ri-calendar-event-line"></i>
+                            <select id="semana_dum">
+                                <option value="1">1ª semana</option>
+                                <option value="2" selected>2ª semana</option>
+                                <option value="3">3ª semana</option>
+                                <option value="4">4ª semana</option>
+                            </select>
+                            <label class="label-flutuante">Semana</label>
+                        </div>
+                        <div class="entradas_de_dados floating-group" style="flex: 1;">
+                            <i class="ri-calendar-event-line"></i>
+                            <select id="ano_dum">
+                                <option value="2025">2025</option>
+                                <option value="2026" selected>2026</option>
+                            </select>
+                            <label class="label-flutuante">Ano</label>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="toggle-naosei-container">
+                        <label class="toggle-naosei-label">
+                            <span class="toggle-naosei-text">Não sei a data exata</span>
+                            <input type="checkbox" id="toggleNaoSeiDum">
+                            <span class="toggle-naosei-slider"></span>
+                        </label>
+                    </div>
+                    
+                </div>
+                
+                <!-- MODO 2: IG -->
+                <div class="modo-campos" data-modo="ig">
+                    <div class="entradas_de_dados floating-group" style="flex: 1;">
+                        <i class="ri-calendar-event-line"></i>
+                        <input type="number" id="ig_semanas" placeholder=" " min="0" max="44">
+                        <label class="label-flutuante">Semanas</label>
+                    </div>
+                    <div class="entradas_de_dados floating-group" style="flex: 1;">
+                        <i class="ri-calendar-event-line"></i>
+                        <input type="number" id="ig_dias" placeholder=" " min="0" max="6">
+                        <label class="label-flutuante">Dias</label>
+                    </div>
+                </div>
+                
+                <!-- MODO 3: DPP -->
+                <div class="modo-campos" data-modo="dpp">
+                    <div class="entradas_de_dados floating-group">
+                        <i class="ri-calendar-event-line"></i>
+                        <input type="date" id="dpp_data" placeholder=" ">
+                        <label class="label-flutuante">Data Provável do Parto (DPP)</label>
+                    </div>
+                </div>
+                
+                <!-- MODO 4: AU -->
+                <div class="modo-campos" data-modo="au">
+                    <div class="entradas_de_dados floating-group">
+                        <i class="ri-ruler-line"></i>
+                        <input type="number" id="altura_uterina" placeholder=" " step="0.5" min="0" max="50">
+                        <label class="label-flutuante">Altura Uterina (cm)</label>
+                    </div>
+                </div>
+                
             </div>
             
+            <!-- INTERVALO (21-31 com navegação) -->
+            <div class="intervalo-container">
+                <label class="intervalo-label">Intervalo do Ciclo</label>
+                <div class="intervalo-selector">
+                    <button class="intervalo-btn" id="intervaloMenos" aria-label="Diminuir">
+                        <i class="ri-arrow-left-s-line"></i>
+                    </button>
+                    <div class="intervalo-valores-wrapper">
+                        <div class="intervalo-valores" id="intervaloValores">
+                            <span class="intervalo-valor" data-valor="21">21</span>
+                            <span class="intervalo-valor" data-valor="22">22</span>
+                            <span class="intervalo-valor" data-valor="23">23</span>
+                            <span class="intervalo-valor" data-valor="24">24</span>
+                            <span class="intervalo-valor" data-valor="25">25</span>
+                            <span class="intervalo-valor" data-valor="26">26</span>
+                            <span class="intervalo-valor" data-valor="27">27</span>
+                            <span class="intervalo-valor ativo" data-valor="28">28</span>
+                            <span class="intervalo-valor" data-valor="29">29</span>
+                            <span class="intervalo-valor" data-valor="30">30</span>
+                            <span class="intervalo-valor" data-valor="31">31</span>
+                        </div>
+                    </div>
+                    <span class="intervalo-unidade">dias</span>
+                    <button class="intervalo-btn" id="intervaloMais" aria-label="Aumentar">
+                        <i class="ri-arrow-right-s-line"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- ========================================================== -->
+            <!-- TOGGLE HORIZONTAL (aparece apenas no modo DUM)              -->
+            <!-- ========================================================== -->
+            <div class="toggle-horizontal-container" id="toggleContainer">
+                <div class="toggle-horizontal">
+                    <input type="checkbox" id="toggleModo">
+                    <label for="toggleModo" class="toggle-horizontal-label">
+                        <span class="toggle-option toggle-option-left">Ciclo Menstrual</span>
+                        <span class="toggle-option toggle-option-right">Gestação</span>
+                        <span class="toggle-slider-horizontal"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- ========================================================== -->
+            <!-- BOTÕES                                                      -->
+            <!-- ========================================================== -->
             <div class="caxa_de_botoes">
-                <button class="botao" onclick="calcularObstetricia()">Calcular DPP e IG</button>
+                <button class="botao" id="btnCalcular">Calcular DPP e IG</button>
                 <div id="limpador" onclick="limparObstetricia()">
                     <i class="ri-delete-bin-line"></i>
                 </div>
             </div>
+            
         </div>
-
-        <div class="resultado-display" id="resultado" data-aos="fade-up" style="display: none;"></div>
+        
+        <!-- ========================================================== -->
+        <!-- RESULTADO                                                   -->
+        <!-- ========================================================== -->
+        <div class="resultado-display" id="resultado"  style="display: none;"></div>
     </section>
+
 
     <footer><p><strong>Mpindi TecMed</strong></p></footer>
 

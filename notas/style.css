@@ -1,0 +1,813 @@
+:root {
+    --primary: #00843d;
+    --white: #ffffff;
+    --bg: #f0f2f0;
+    --text: #1a2a21;
+    --card-bg: #ffffff;
+    --sombra: #e0dada;
+    --card-bg2: #ffffff;
+    --mat: black;
+}
+
+[data-theme="dark"] {
+    --bg: black;
+    --card-bg: #121212;
+    --text: #f0f2f0;
+    --sombra: none;
+    --card-bg2: #121212;
+    --mat: white;
+    --white: black;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../assets/fonts/Poppins-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../assets/fonts/Poppins-Bold.ttf') format('truetype');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: 0.3s;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* ================================================================
+   WEB HEADER - NOVO ESTILO
+   ================================================================ */
+
+.web-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 12px 20px;
+    max-width: 420px;
+    margin: 0 auto;
+    width: 100%;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+/* Card dos controles */
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--card-bg);
+    padding: 6px 12px;
+    border-radius: 40px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 132, 61, 0.08);
+    flex-shrink: 0;
+}
+
+.btn-icon {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 20px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-icon i {
+    font-size: 1rem;
+}
+
+.btn-icon:hover {
+    background: rgba(0, 132, 61, 0.08);
+    color: var(--primary);
+}
+
+.btn-icon span {
+    display: inline-block;
+}
+
+/* Divisor do header */
+.divider-header {
+    opacity: 0.2;
+    color: var(--text);
+    font-size: 0.8rem;
+}
+
+/* Título da ferramenta */
+.header-title {
+    flex-shrink: 0;
+}
+
+.tool-badge {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: -0.3px;
+    padding: 4px 0;
+    background: none;
+}
+
+
+
+/* Responsividade para mobile */
+@media (max-width: 480px) {
+    .web-header {
+        padding: 10px 16px;
+        gap: 8px;
+    }
+
+    .header-controls {
+        padding: 4px 10px;
+        gap: 4px;
+        flex-wrap: nowrap;
+    }
+
+    .btn-icon {
+        font-size: 0.7rem;
+        padding: 3px 6px;
+    }
+
+    .btn-icon i {
+        font-size: 0.85rem;
+    }
+
+    .btn-icon span {
+        display: none;
+        /* Esconde o texto em telas muito pequenas, mantém só ícone */
+    }
+
+    .tool-badge {
+        font-size: 0.95rem;
+    }
+
+    /* Em telas muito pequenas, mostra o texto dos ícones com abreviação */
+    @media (max-width: 360px) {
+        .btn-icon span {
+            display: none;
+        }
+        .divider-header {
+            display: none;
+        }
+        .header-controls {
+            gap: 2px;
+            padding: 4px 8px;
+        }
+    }
+}
+
+/* Em telas médias, mostra os textos */
+@media (min-width: 481px) and (max-width: 768px) {
+    .btn-icon span {
+        display: inline-block;
+    }
+}
+
+
+
+
+
+/* ==========================================================================
+   MAIN TOOL
+   ========================================================================== */
+.main-tool {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 80px 0;
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ==========================================================================
+   EDITOR
+   ========================================================================== */
+.area-edicao {
+    flex: 1;
+    display: flex;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.editor-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--card-bg);
+    border-radius: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 132, 61, 0.08);
+    overflow: hidden;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(0, 132, 61, 0.08);
+    flex-shrink: 0;
+}
+
+.editor-header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.editor-status {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.editor-shortcut {
+    font-size: 0.65rem;
+    opacity: 0.5;
+    color: var(--text);
+}
+
+.editor-data {
+    font-size: 0.65rem;
+    color: var(--text);
+}
+
+.editor-titulo-wrapper {
+    position: relative;
+    padding: 0 20px 8px 20px;
+    border-bottom: 1px solid rgba(0, 132, 61, 0.06);
+    flex-shrink: 0;
+}
+
+.editor-titulo-wrapper i {
+    position: absolute;
+    left: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary);
+    font-size: 0.9rem;
+    opacity: 0.4;
+}
+
+.editor-titulo-wrapper input {
+    width: 100%;
+    padding: 8px 0 8px 32px;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+}
+
+.editor-titulo-wrapper input:focus {
+    outline: none;
+}
+
+.editor-wrapper textarea {
+    flex: 1;
+    width: 100%;
+    padding: 16px 20px 20px 20px;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    resize: none;
+    font-family: 'Poppins', sans-serif;
+    min-height: 150px;
+}
+
+.editor-wrapper textarea:focus {
+    outline: none;
+}
+
+/* ==========================================================================
+   ÁREA DE LISTA
+   ========================================================================== */
+.area-lista {
+    flex: 1;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.area-lista::-webkit-scrollbar {
+    width: 6px;
+}
+.area-lista::-webkit-scrollbar-track {
+    background: transparent;
+}
+.area-lista::-webkit-scrollbar-thumb {
+    background: rgba(0, 132, 61, 0.2);
+    border-radius: 3px;
+}
+
+.lista-notas {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+    justify-content: center;
+    align-content: flex-start;
+}
+
+.nota-vazio {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--text);
+    opacity: 0.4;
+}
+
+.nota-vazio i {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 16px;
+}
+.nota-vazio p {
+    font-size: 1rem;
+}
+.nota-vazio small {
+    font-size: 0.7rem;
+}
+
+/* ==========================================================================
+   NOTA ITEM
+   ========================================================================== */
+.nota-item {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 16px 18px;
+    border: 1px solid rgba(0, 132, 61, 0.08);
+    transition: all 0.2s;
+    animation: fadeIn 0.3s ease-out;
+    width: fit-content;
+    max-width: 320px;
+    min-width: 200px;
+    flex: 0 1 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.nota-item .nota-titulo {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.3;
+    max-width: 280px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ===== TEXTO DA NOTA (CORRIGIDO) ===== */
+.nota-item .nota-texto {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--text);
+    opacity: 0.9;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin-bottom: 8px;
+    max-height: 100px;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    position: relative;
+    cursor: default;
+}
+
+/* Gradiente quando colapsado */
+.nota-item .nota-texto.colapsado::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 35px;
+    background: linear-gradient(transparent, var(--card-bg));
+    pointer-events: none;
+    border-radius: 0 0 12px 12px;
+}
+
+/* Quando expandido, remove gradiente e limites */
+.nota-item .nota-texto.expandido {
+    max-height: none;
+    overflow: visible;
+}
+
+.nota-item .nota-texto.expandido::after {
+    display: none;
+}
+
+/* ===== BOTÃO EXPANDIR ===== */
+.btn-expandir {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-size: 0.75rem;
+    cursor: pointer;
+    padding: 4px 0 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 500;
+    transition: all 0.2s;
+    width: fit-content;
+}
+
+.btn-expandir:hover {
+    opacity: 0.8;
+}
+
+.btn-expandir i {
+    font-size: 0.9rem;
+}
+
+/* ===== FOOTER DA NOTA ===== */
+.nota-item .nota-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-top: 1px solid rgba(0, 132, 61, 0.08);
+    padding-top: 10px;
+    margin-top: 4px;
+}
+
+.nota-item .nota-data {
+    font-size: 0.65rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nota-item .nota-acoes {
+    display: flex;
+    gap: 4px;
+}
+
+.btn-nota {
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.btn-nota:hover {
+    opacity: 0.8;
+    background: rgba(0, 132, 61, 0.05);
+}
+
+.btn-nota.danger:hover {
+    opacity: 1;
+    color: #f44336;
+    background: rgba(244, 67, 54, 0.08);
+}
+
+.btn-nota .ri-edit-line { color: var(--primary); }
+.btn-nota .ri-file-copy-line { color: #2196F3; }
+.btn-nota .ri-delete-bin-line { color: #f44336; }
+
+/* ==========================================================================
+   MENU FLUTUANTE
+   ========================================================================== */
+.menu-flutuante {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--card-bg);
+    border-radius: 60px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(0, 132, 61, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 8px;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    max-width: 95%;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.menu-flutuante::-webkit-scrollbar {
+    display: none;
+}
+
+.menu-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: transparent;
+    border: none;
+    border-radius: 40px;
+    color: var(--text);
+    opacity: 0.5;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.menu-btn:hover {
+    opacity: 0.8;
+    background: rgba(0, 132, 61, 0.05);
+}
+
+.menu-btn.active {
+    opacity: 1;
+    color: var(--primary);
+    background: rgba(0, 132, 61, 0.08);
+}
+
+.menu-btn i {
+    font-size: 1.1rem;
+}
+
+.menu-btn .badge {
+    background: var(--primary);
+    color: white;
+    padding: 0 8px;
+    border-radius: 20px;
+    font-size: 0.6rem;
+    min-width: 18px;
+    text-align: center;
+}
+
+.menu-btn.btn-salvar {
+    color: var(--primary);
+    opacity: 1;
+    background: rgba(0, 132, 61, 0.1);
+}
+
+.menu-btn.btn-salvar:hover {
+    background: rgba(0, 132, 61, 0.2);
+}
+
+.menu-btn.danger:hover {
+    color: #f44336;
+    background: rgba(244, 67, 54, 0.08);
+}
+
+.menu-divider {
+    width: 1px;
+    height: 28px;
+    background: rgba(0, 0, 0, 0.08);
+    flex-shrink: 0;
+}
+[data-theme="dark"] .menu-divider {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* ==========================================================================
+   ANIMAÇÕES
+   ========================================================================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.plain-footer {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: transparent;
+    text-align: center;
+    margin-top: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.footer-inline {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px 16px;
+    font-size: 0.7rem;
+    color: grey;
+}
+
+.footer-inline a {
+    color: grey;
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px dotted grey;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.footer-inline a:hover {
+    color: var(--primary-dark);
+    border-bottom-color: var(--primary-dark);
+}
+
+.footer-sep {
+    opacity: 0.4;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE
+   ========================================================================== */
+@media (max-width: 550px) {
+    .area-edicao {
+        padding: 12px;
+    }
+    
+    .editor-header {
+        padding: 12px 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .editor-header-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .editor-titulo-wrapper {
+        padding: 0 14px 6px 14px;
+    }
+    
+    .editor-titulo-wrapper i {
+        left: 18px;
+    }
+    
+    .editor-titulo-wrapper input {
+        padding: 6px 0 6px 28px;
+        font-size: 0.8rem;
+    }
+    
+    .editor-wrapper textarea {
+        padding: 12px 14px 16px 14px;
+        font-size: 0.85rem;
+        min-height: 120px;
+    }
+    
+    .area-lista {
+        padding: 12px;
+    }
+    
+    .nota-item {
+        max-width: 280px;
+        min-width: 160px;
+        padding: 12px 14px;
+    }
+    
+    .nota-item .nota-titulo {
+        font-size: 0.85rem;
+        max-width: 220px;
+    }
+    
+    .nota-item .nota-texto {
+        font-size: 0.8rem;
+        max-height: 80px;
+    }
+    
+    .btn-expandir {
+        font-size: 0.7rem;
+    }
+    
+    .menu-flutuante {
+        padding: 4px 6px;
+        border-radius: 40px;
+        gap: 2px;
+    }
+    
+    .menu-btn {
+        padding: 8px 12px;
+        font-size: 0.7rem;
+    }
+    
+    .menu-btn span {
+        display: none;
+    }
+    
+    .menu-btn i {
+        font-size: 1.2rem;
+    }
+    
+    .menu-btn .badge {
+        font-size: 0.5rem;
+        min-width: 16px;
+        padding: 0 6px;
+    }
+    
+    .nota-item .nota-acoes .btn-nota span {
+        display: none;
+    }
+}
+
+@media (max-width: 400px) {
+    .nota-item {
+        max-width: 100%;
+        min-width: 100%;
+    }
+    
+    .nota-item .nota-titulo {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 380px) {
+    .menu-flutuante {
+        padding: 4px;
+    }
+    
+    .menu-btn {
+        padding: 6px 10px;
+    }
+}
+
+/* ==========================================================================
+   DARK MODE AJUSTES
+   ========================================================================== */
+[data-theme="dark"] .menu-flutuante {
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .nota-item {
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .nota-item .nota-texto.colapsado::after {
+    background: linear-gradient(transparent, var(--card-bg));
+}
+
+[data-theme="dark"] .nota-item .nota-footer {
+    border-top-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .editor-wrapper {
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .editor-header {
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .editor-titulo-wrapper {
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+}

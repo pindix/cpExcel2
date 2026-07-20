@@ -10,56 +10,104 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+ 
+    
+    <!-- ============================================================ -->
+    <!-- BARRA SUPERIOR - WEB STYLE                                 -->
+    <!-- ============================================================ -->
+    <header class="web-header">
+        <!-- Card com os controles -->
+        <div class="header-controls">
+            <a href="../index.html#ferramentas" class="btn-icon" title="Início">
+                <i class="ri-arrow-left-line"></i>
+                <span>Início</span>
+            </a>
+            <span class="divider-header">|</span>
+            <a href="../ajuda/index.html#diluicao" class="btn-icon" title="Ajuda">
+                <i class="ri-question-line"></i>
+                <span>Ajuda</span>
+            </a>
+            <span class="divider-header">|</span>
+            <button class="btn-icon theme-toggle" id="themeBtn" title="Mudar Tema">
+                <i class="ri-moon-line" id="themeIcon"></i>
+                <span>Tema</span>
+            </button>
+        </div>
 
-    <nav>
-        <a href="../index.html" class="btn-back">
-            <i class="ri-arrow-left-line"></i> Início
-        </a>
-        <a href="../ajuda/index.html#diluicao" class="help-icon" title="Como funciona?">
-            <i class="ri-question-line"></i> 
-        </a>
-        <button class="theme-toggle" id="themeBtn"> 
-            <i class="ri-moon-line" id="themeIcon"></i>
-        </button>
-    </nav>
+        <!-- Título da ferramenta -->
+        <div class="header-title">
+            <span class="tool-badge">Recosntituição</span>
+        </div>
+    </header>
 
 
     <section class="main-tool">
-        <div class="tool-header">
-            <span>Calculadora Posloógica</span>
-            <h2>Diluição</h2>
-        </div>
 
         <div class="calculator-box" data-aos="fade-up">
-            
+
             <span class="nota-label">Apresentação do Frasco</span>
             <div class="campos-fundidos" id="caixa_mestre">
-                <div class="sub-campo">
+                <div class="sub-campo" style="position: relative;">
                     <input type="number" id="massa_valor" placeholder=" ">
                     <label>Massa</label>
-                    <select id="massa_unidade" class="select-embutido">
-                        <option value="mg">mg</option>
-                        <option value="g">g</option>
-                    </select>
+
+                    <!-- Hidden input para manter compatibilidade -->
+                    <input type="hidden" id="massa_unidade" value="mg">
+                    
+                    <!-- Componente personalizado -->
+                    <div class="custom-select-diluicao" id="selectMassa">
+                        <div class="custom-select-trigger-diluicao" onclick="toggleDiluicaoSelect('massa')">
+                            <span class="unidade-texto" id="massaUnidadeSelecionada">mg</span>
+                            <i class="ri-arrow-down-s-line unidade-arrow" id="massaUnidadeArrow"></i>
+                        </div>
+                        <div class="custom-select-options-diluicao" id="massaUnidadeOptions">
+                            <!-- Opções geradas dinamicamente -->
+                        </div>
+                    </div>
                 </div>
                 <span class="divisor">/</span>
-                <div class="sub-campo">
+                <div class="sub-campo" style="position: relative;">
                     <input type="number" id="vol_valor" placeholder=" ">
                     <label>Capacidade</label>
-                    <select id="vol_unidade" class="select-embutido">
-                        <option value="ml">ml</option>
-                        <option value="l">L</option>
-                    </select>
+
+                    <!-- Hidden input para manter compatibilidade -->
+                    <input type="hidden" id="vol_unidade" value="ml">
+                    
+                    <!-- Componente personalizado -->
+                    <div class="custom-select-diluicao" id="selectVolume">
+                        <div class="custom-select-trigger-diluicao" onclick="toggleDiluicaoSelect('volume')">
+                            <span class="unidade-texto" id="volumeUnidadeSelecionada">mL</span>
+                            <i class="ri-arrow-down-s-line unidade-arrow" id="volumeUnidadeArrow"></i>
+                        </div>
+                        <div class="custom-select-options-diluicao" id="volumeUnidadeOptions">
+                            <!-- Opções geradas dinamicamente -->
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="entradas_de_dados floating-group" style="margin-top: 20px;">
+            <div class="entradas_de_dados floating-group" style="margin-top: 20px; position: relative; padding-right: 0;">
                 <i class="ri-syringe-line"></i>
                 <input type="number" id="dose_indicada" placeholder=" ">
-                <label class="label-flutuante">Dose Indicada (Opcional)</label>
-                <p id="label_unidade_dinamica">mg</p>
+                <label class="label-flutuante">Dose Indicada (opcional)</label>
+                
+                <!-- Hidden input para manter compatibilidade -->
+                <input type="hidden" id="dose_unidade" value="mg">
+                
+                <!-- Componente personalizado -->
+                <div class="custom-select-diluicao" id="selectDose" style="z-index: 1;">
+                    <div class="custom-select-trigger-diluicao" onclick="toggleDiluicaoSelect('dose')">
+                        <span class="unidade-texto" id="doseUnidadeSelecionada">mg</span>
+                        <i class="ri-arrow-down-s-line unidade-arrow" id="doseUnidadeArrow"></i>
+                    </div>
+                    <div class="custom-select-options-diluicao" id="doseUnidadeOptions">
+                        <!-- Opções geradas dinamicamente -->
+                    </div>
+                </div>
             </div>
-            
+
+
+
             <div class="caxa_de_botoes">
                 <button class="botao" onclick="calcularDiluicao()">Calcular</button>
                 <div id="limpador" onclick="limparDiluicao()">

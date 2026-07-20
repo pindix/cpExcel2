@@ -8,7 +8,7 @@
 }
 
 [data-theme="dark"] {
-    --bg: #121212;
+    --bg: black;
     --card-bg: #1e1e1e;
     --text: #f0f2f0;
     --sombra: none;
@@ -32,44 +32,138 @@ body {
 }
 
 
+/* ================================================================
+   WEB HEADER - NOVO ESTILO
+   ================================================================ */
 
-/* --- BARRA DE TOPO --- */
-nav {
-    padding: 10px;
+.web-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    max-width: 800px;
+    justify-content: space-around;
+    padding: 12px 20px;
+    max-width: 420px;
     margin: 0 auto;
     width: 100%;
-    position: relative;
+    gap: 12px;
+    margin-top: 10px;
 }
 
-.btn-back {
-    text-decoration: none;
-    color: var(--primary);
-    font-weight: 600;
+/* Card dos controles */
+.header-controls {
     display: flex;
     align-items: center;
-    gap:5px;
+    gap: 6px;
+    background: var(--card-bg);
+    padding: 6px 12px;
+    border-radius: 40px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 132, 61, 0.08);
+    flex-shrink: 0;
 }
 
-.help-icon {
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--primary);
+.btn-icon {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     text-decoration: none;
-    left: 50%; top: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
+    color: var(--text);
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 20px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
-.theme-toggle {
-    background: none;
-    border: none;
+.btn-icon i {
+    font-size: 1rem;
+}
+
+.btn-icon:hover {
+    background: rgba(0, 132, 61, 0.08);
+    color: var(--primary);
+}
+
+.btn-icon span {
+    display: inline-block;
+}
+
+/* Divisor do header */
+.divider-header {
+    opacity: 0.2;
     color: var(--text);
-    font-size: 1.5rem;
-    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+/* Título da ferramenta */
+.header-title {
+    flex-shrink: 0;
+}
+
+.tool-badge {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: -0.3px;
+    padding: 4px 0;
+    background: none;
+}
+
+
+
+/* Responsividade para mobile */
+@media (max-width: 480px) {
+    .web-header {
+        padding: 10px 16px;
+        gap: 8px;
+    }
+
+    .header-controls {
+        padding: 4px 10px;
+        gap: 4px;
+        flex-wrap: nowrap;
+    }
+
+    .btn-icon {
+        font-size: 0.7rem;
+        padding: 3px 6px;
+    }
+
+    .btn-icon i {
+        font-size: 0.85rem;
+    }
+
+    .btn-icon span {
+        display: none;
+        /* Esconde o texto em telas muito pequenas, mantém só ícone */
+    }
+
+    .tool-badge {
+        font-size: 0.95rem;
+    }
+
+    /* Em telas muito pequenas, mostra o texto dos ícones com abreviação */
+    @media (max-width: 360px) {
+        .btn-icon span {
+            display: none;
+        }
+        .divider-header {
+            display: none;
+        }
+        .header-controls {
+            gap: 2px;
+            padding: 4px 8px;
+        }
+    }
+}
+
+/* Em telas médias, mostra os textos */
+@media (min-width: 481px) and (max-width: 768px) {
+    .btn-icon span {
+        display: inline-block;
+    }
 }
 
 /* --- SECTION ÚNICA --- */
@@ -106,6 +200,7 @@ nav {
     padding: 20px;
     border-radius: 24px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    z-index: 200;
 }
 
 .nota-label {
@@ -115,6 +210,7 @@ nav {
     margin-bottom: 10px;
     display: block;
     opacity: 0.8;
+    text-align: center;
 }
 
 .grid-sangue {
@@ -136,24 +232,21 @@ nav {
 }
 
 .entradas_de_dados i {
-    position: absolute;
-    left: 10px;
     color: var(--primary);
     font-size: 1.1rem;
+    margin-left: 12px;
 }
 
-.entradas_de_dados select {
+.entradas_de_dados select { 
     width: 100%;
     height: 100%;
     padding-left: 35px;
     background: transparent;
     border: none;
-    border-bottom: 2px solid var(--primary);
     color: var(--primary);
     font-size: 0.8rem;
     font-weight: 600;
     cursor: pointer;
-    appearance: none;
 }
 
 .caxa_de_botoes {
@@ -184,56 +277,230 @@ nav {
     cursor: pointer;
 }
 
-/* RESULTADO COM ESTRUTURA CENTRALIZADA */
+
+
+
+
+
+
+
+/* ==========================================================================
+   RESULTADO SISTEMA ABO - ESTILO PREMIUM
+   ========================================================================== */
+
 .resultado-display {
-    margin-top: 20px;
-    padding: 25px 20px;
-    color: white;
+    margin-top: 25px;
+    background: transparent;
+    border-radius: 30px;
+    font-weight: 400;
+    font-size: 1rem;
+    box-shadow: none;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.sangue-container {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Card principal */
+.sangue-card {
+    background: var(--card-bg);
     border-radius: 20px;
-    width: 80%;
-    box-shadow: 0 5px 15px rgba(0, 132, 61, 0.2);
-    line-height: 1.5;
+    padding: 20px 18px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 132, 61, 0.08);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Cabeçalho do card */
+.sangue-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.sangue-card .card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    background: rgba(0, 132, 61, 0.1);
+    color: var(--primary);
+}
+
+.sangue-card .card-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--text);
+}
+
+/* Ícone central de compatibilidade */
+.sangue-icone-central {
     text-align: center;
+    padding: 16px 0 12px 0;
 }
 
-.res-icon {
-    font-size: 3rem;
-    margin-bottom: 10px;
-    display: block;
+.sangue-icone-central i {
+    font-size: 3.5rem;
+    display: inline-block;
 }
 
-.res-titulo {
+/* Status de compatibilidade */
+.sangue-status {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.sangue-status .status-texto {
     font-size: 1.2rem;
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
-.res-sub {
+/* Informação da compatibilidade */
+.sangue-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    background: var(--bg);
+    border-radius: 16px;
+    padding: 14px 16px;
+    margin: 8px 0;
+    flex-wrap: wrap;
+}
+
+.sangue-info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     font-size: 0.85rem;
-    opacity: 0.9;
-    display: block;
+    font-weight: 500;
+    color: var(--text);
 }
 
-hr {
-    margin: 20px 0;
-    opacity: 0.3;
-    border: 0;
-    border-top: 1px solid white;
+.sangue-info-item i {
+    font-size: 1.2rem;
+    color: var(--primary);
 }
 
-.heranca-box {
-    text-align: left;
-    padding: 0.3rem;
-    border-radius: 12px;
+.sangue-info-item strong {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* Separador */
+.sangue-divisor {
+    margin: 16px 0;
+    border: none;
+    height: 1px;
+    background: rgba(0, 132, 61, 0.15);
+}
+
+/* Herança - box de resultados */
+.sangue-heranca {
+    background: rgba(0, 132, 61, 0.05);
+    border-radius: 0px 16px 16px 0px;
+    padding: 14px 16px;
+    margin-top: 8px;
+    border-left: 3px solid var(--primary);
+}
+
+.heranca-titulo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--primary);
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.heranca-titulo i {
+    font-size: 1rem;
+}
+
+.heranca-grupos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.grupo-sangue-badge {
     background: var(--primary);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 40px;
+    font-size: 0.8rem;
+    font-weight: 600;
 }
 
-.heranca-box b {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 0.95rem;
+/* Dark mode */
+[data-theme="dark"] .sangue-card {
+    border-color: rgba(255, 255, 255, 0.06);
 }
+
+[data-theme="dark"] .sangue-card .card-status {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .sangue-heranca {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+    .sangue-card {
+        padding: 16px 14px;
+    }
+    
+    .sangue-icone-central i {
+        font-size: 2.8rem;
+    }
+    
+    .sangue-status .status-texto {
+        font-size: 1rem;
+    }
+    
+    .sangue-info-item {
+        font-size: 0.75rem;
+    }
+    
+    .grupo-sangue-badge {
+        padding: 4px 10px;
+        font-size: 0.7rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 .vibrar {
     animation: vibration 0.2s ease-in-out;
@@ -254,6 +521,563 @@ hr {
         transform: translateX(4px);
     }
 }
+
+
+
+
+
+
+
+.label-flutuante {
+    position: absolute;
+    left: 32px;
+    transform: translateY(-50%);
+
+    color: var(--text);
+    opacity: 0.5;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    white-space: nowrap;
+    top: 6px !important;
+    font-size: 0.7rem !important;
+    opacity: 0.5 !important;
+    color: var(--text) !important;
+}
+
+
+
+
+/* ==========================================================================
+   SELECTS PERSONALIZADOS - SISTEMA ABO
+   ========================================================================== */
+
+/* ===== CONTAINER DO SELECT ===== */
+.custom-select-sangue {
+    position: relative;
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: 4px;
+    min-width: 0;
+}
+
+/* ===== TRIGGER (botão) ===== */
+.custom-select-trigger-sangue {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+    padding: 2px 8px 2px 4px;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    height: 100%;
+    min-height: 28px;
+}
+
+
+
+/* ===== TEXTO SELECIONADO ===== */
+.custom-select-trigger-sangue .sangue-texto {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+    padding-right: 4px;
+    line-height: 1.2;
+}
+
+.custom-select-trigger-sangue .sangue-texto.selecionado {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* ===== SETA (ARROW) ===== */
+.custom-select-trigger-sangue .sangue-arrow {
+    font-size: 0.9rem !important;
+    color: var(--text) !important;
+    opacity: 0.6 !important;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    line-height: 1;
+    position: relative;
+    z-index: 2;
+}
+
+.custom-select-trigger-sangue.aberto .sangue-arrow {
+    transform: rotate(180deg);
+    opacity: 1 !important;
+}
+
+/* ===== OPÇÕES DO SELECT ===== */
+.custom-select-options-sangue {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: var(--card-bg);
+    border: 1px solid rgba(0, 132, 61, 0.12);
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    padding: 4px;
+    z-index: 9999 !important;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+    visibility: hidden;
+    min-width: 140px;
+}
+
+.custom-select-options-sangue.aberto {
+    max-height: 220px;
+    overflow-y: auto;
+    opacity: 1;
+    visibility: visible;
+}
+
+.custom-select-options-sangue::-webkit-scrollbar {
+    width: 4px;
+}
+
+.custom-select-options-sangue::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+}
+
+/* ===== OPÇÃO INDIVIDUAL ===== */
+.custom-select-option-sangue {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding: 8px 14px !important;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 32px;
+}
+
+.custom-select-option-sangue:hover {
+    background: rgba(0, 132, 61, 0.06);
+}
+
+.custom-select-option-sangue.selecionado {
+    background: rgba(0, 132, 61, 0.1);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 6px 6px 0;
+}
+
+.custom-select-option-sangue .option-label {
+    font-size: 0.8rem !important;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+    text-align: left;
+    width: 100%;
+}
+
+.custom-select-option-sangue .option-label.destaque {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+/* ===== DARK MODE ===== */
+[data-theme="dark"] .custom-select-options-sangue {
+    background: #2a2a2a;
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .custom-select-option-sangue:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .custom-select-option-sangue.selecionado {
+    background: rgba(0, 132, 61, 0.2);
+}
+
+[data-theme="dark"] .custom-select-trigger-sangue .sangue-arrow {
+    color: #f0f2f0 !important;
+    opacity: 0.8 !important;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 480px) {
+    .custom-select-trigger-sangue .sangue-texto {
+        font-size: 0.9rem;
+    }
+    .custom-select-options-sangue {
+        min-width: 120px;
+    }
+    .custom-select-option-sangue .option-label {
+        font-size: 0.8rem !important;
+    }
+    .custom-select-trigger-sangue .sangue-arrow {
+        font-size: 0.8rem !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .custom-select-trigger-sangue .sangue-texto {
+        font-size: 0.9rem;
+    }
+    .custom-select-options-sangue {
+        min-width: 100px;
+    }
+    .custom-select-trigger-sangue .sangue-arrow {
+        font-size: 0.7rem !important;
+    }
+}
+
+/* ===== AJUSTE PARA O CONTAINER PAI ===== */
+.entradas_de_dados {
+    padding-right: 4px;
+}
+
+.entradas_de_dados i {
+    z-index: 2;
+}
+
+/* ==========================================================================
+   RESULTADO SISTEMA ABO - ESTILO PREMIUM (IGUAL AOS SINAIS VITAIS)
+   ========================================================================== */
+
+.resultado-display {
+    margin-top: 25px;
+    background: transparent;
+    border-radius: 0;
+    font-weight: 400;
+    font-size: 1rem;
+    box-shadow: none;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.sangue-container {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Card principal - MESMO ESTILO DOS SINAIS VITAIS */
+.sangue-card {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 24px 22px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 132, 61, 0.08);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+.sangue-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--primary);
+    opacity: 0.2;
+}
+
+/* Cabeçalho do card - MESMO ESTILO */
+.sangue-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.sangue-card .card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    background: rgba(0, 132, 61, 0.1);
+    color: var(--primary);
+}
+
+.sangue-card .card-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--text);
+}
+
+.sangue-card .card-status i {
+    font-size: 0.9rem;
+}
+
+/* Ícone central de compatibilidade */
+.sangue-icone-central {
+    text-align: center;
+    padding: 20px 0 16px 0;
+}
+
+.sangue-icone-central i {
+    font-size: 4rem;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+/* Status de compatibilidade */
+.sangue-status {
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.sangue-status .status-texto {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.sangue-status .status-texto.compativel {
+    color: #22c55e;
+}
+
+.sangue-status .status-texto.incompativel {
+    color: #ef4444;
+}
+
+/* Informação da compatibilidade - ESTILO IGUAL AOS CARDS */
+.sangue-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background: var(--bg);
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin: 8px 0;
+    flex-wrap: wrap;
+}
+
+.sangue-info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.sangue-info-item i {
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+
+.sangue-info-item .sangue-tipo {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.sangue-info-item .sangue-tipo.doador-tipo {
+    color: #3b82f6;
+}
+
+.sangue-info-item .sangue-tipo.paciente-tipo {
+    color: #ef4444;
+}
+
+.sangue-info-divider {
+    width: 1px;
+    height: 30px;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .sangue-info-divider {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Separador */
+.sangue-divisor {
+    margin: 20px 0;
+    border: none;
+    height: 1px;
+    background: rgba(0, 132, 61, 0.12);
+}
+
+/* Herança - box de resultados - ESTILO IGUAL AOS CARDS */
+.sangue-heranca {
+    background: rgba(0, 132, 61, 0.04);
+    border-radius: 0 16px 16px 0;
+    padding: 16px 18px;
+    margin-top: 8px;
+    border-left: 4px solid var(--primary);
+}
+
+.heranca-titulo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--primary);
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.heranca-titulo i {
+    font-size: 1rem;
+}
+
+.heranca-grupos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.grupo-sangue-badge {
+    background: var(--primary);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 40px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.grupo-sangue-badge:hover {
+    transform: scale(1.05);
+}
+
+/* ===== DARK MODE ===== */
+[data-theme="dark"] .sangue-card {
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .sangue-card .card-status {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .sangue-heranca {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .sangue-info {
+    background: #1a1a1a;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 480px) {
+    .sangue-card {
+        padding: 18px 14px;
+    }
+    
+    .sangue-card .card-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .sangue-card .card-status {
+        font-size: 0.65rem;
+        padding: 4px 10px;
+    }
+    
+    .sangue-icone-central i {
+        font-size: 3rem;
+    }
+    
+    .sangue-status .status-texto {
+        font-size: 1.1rem;
+    }
+    
+    .sangue-info {
+        gap: 12px;
+        padding: 12px 14px;
+    }
+    
+    .sangue-info-item {
+        font-size: 0.75rem;
+    }
+    
+    .sangue-info-item .sangue-tipo {
+        font-size: 0.95rem;
+    }
+    
+    .grupo-sangue-badge {
+        padding: 4px 12px;
+        font-size: 0.7rem;
+    }
+    
+    .sangue-info-divider {
+        height: 20px;
+    }
+}
+
+@media (max-width: 380px) {
+    .sangue-card {
+        padding: 14px 12px;
+    }
+    
+    .sangue-icone-central i {
+        font-size: 2.5rem;
+    }
+    
+    .sangue-status .status-texto {
+        font-size: 1rem;
+    }
+    
+    .sangue-info-item {
+        font-size: 0.7rem;
+    }
+    
+    .sangue-info-item .sangue-tipo {
+        font-size: 0.85rem;
+    }
+}
+
+/* ===== ANIMAÇÃO DE ENTRADA ===== */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sangue-card {
+    animation: slideUp 0.4s ease-out;
+}
+
+
+
+
+
+
+
 
 footer {
     padding: 30px;
