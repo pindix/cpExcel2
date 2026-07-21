@@ -1,0 +1,294 @@
+:root {
+    --primary: #00843d;
+    --primary-dark: #00632e;
+    --primary-soft: #eafaf1;
+    --text: black;
+    --gray: #6d7c74;
+    --white: #ffffff;
+    --milk-solid: #f0f2f0;
+    --section-2-bg: #f0f2f0;
+    --footer-bg: #1a2a21;
+    --sombra: #e0dada;
+    --subCard: #ffffff;
+    --borda-bento: 1px solid rgba(0, 132, 61, 0.08);
+    --shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Cores do Tema Escuro */
+[data-theme="dark"] {
+    --white: black;
+    /* Fundo da Section 1 */
+    --milk-solid: #1e1e1e;
+    /* Fundo dos Cards e Section 2 */
+    --section-2-bg: #1e1e1e;
+    --text: #f0f2f0;
+    /* Texto principal */
+    --gray: #a0a0a0;
+    /* Texto secundário */
+    --primary-soft: #1a3326;
+    /* Hover dos cards no modo escuro */
+    --border-color: #333333;
+    --sombra: none;
+    --subCard: #1e1e1e;
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.4);
+    --borda-bento: none;
+}
+
+
+
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text);
+    background-color: var(--white);
+    overflow-x: hidden;
+}
+
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
+
+
+
+
+
+/* HEADER ESTILO VIDRO WINDOWS 11 (Mica/Acrylic) */
+.ajuda-nav-glass {
+    position: fixed;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 700px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.6);
+    /* Transparência base branca */
+    backdrop-filter: blur(15px) saturate(180%);
+    /* O segredo do vidro */
+    -webkit-backdrop-filter: blur(15px) saturate(180%);
+    border-radius: 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Borda subtil */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    /* Sombra leve */
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    transition: background 0.3s, border 0.3s, box-shadow 0.3s;
+}
+
+[data-theme="dark"] .ajuda-nav-glass {
+    background: rgba(20, 20, 20, 0.6);
+    /* Transparência base escura */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* BOTÃO VOLTAR ESTILIZADO */
+.btn-voltar-estilizado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background-color: var(--white);
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 6px var(--sombra);
+    transition: 0.2s ease-in-out;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="dark"] .btn-voltar-estilizado {
+    background-color: #2a2a2a;
+    color: var(--white);
+    border-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn-voltar-estilizado:hover {
+    transform: translateX(-3px);
+    /* Animação subtil indicando volta */
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+
+
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-main);
+    font-size: 1.15rem;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+
+.theme-toggle:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+
+
+/* Resto da estilização técnica (pode ir para o style.css) */
+.help-container-main {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.guia-artigo {
+    margin-bottom: 50px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(68, 65, 65, 0.562);
+}
+
+[data-theme="dark"] .guia-artigo {
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+.guia-artigo h2 {
+    font-size: 1.3rem;
+    color: var(--primary);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+}
+
+.guia-artigo h3 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    color: var(--text);
+    opacity: 0.6;
+    font-weight: 600;
+}
+
+.guia-artigo p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+.formula-tecnica {
+    background: rgba(0, 132, 61, 0.05);
+    border-left: 3px solid var(--primary);
+    padding: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+    margin-top: 15px;
+    color: var(--primary);
+    border-radius: 0 8px 8px 0;
+}
+
+.link-ferramenta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: var(--primary);
+    color: white !important;
+    /* Garante que o texto seja branco */
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 132, 61, 0.2);
+}
+
+.link-ferramenta i {
+    font-size: 1.1rem;
+}
+
+.link-ferramenta:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 132, 61, 0.3);
+}
+
+/* Ajuste no modo escuro se necessário */
+[data-theme="dark"] .link-ferramenta {
+    box-shadow: none;
+}
+
+
+/* ==========================================================================
+   FOOTER GLOBAL
+   ========================================================================== */
+.plain-footer {
+    width: 100%;
+    padding: 20px 15px;
+    background-color: transparent;
+    /* Sem fundo */
+    text-align: center;
+    margin-top: auto;
+    /* Cola no fundo se o conteúdo for curto */
+}
+
+.footer-inline {
+    display: flex;
+    flex-wrap: wrap;
+    /* Itens quebram linha em mobile */
+    justify-content: center;
+    align-items: center;
+    gap: 8px 16px;
+    /* Espaço entre itens */
+    
+    font-size: 0.8rem;
+    color: grey;
+}
+
+.footer-inline a {
+    color: grey;
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px dotted grey;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.footer-inline a:hover {
+    color: var(--primary-dark);
+    border-bottom-color: var(--primary-dark);
+}
+
+.footer-sep {
+    opacity: 0.4;
+}

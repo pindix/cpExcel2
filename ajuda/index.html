@@ -1,280 +1,145 @@
 <!DOCTYPE html>
 <html lang="pt-pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guia Técnico | Mpindi TecMed</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
     <style>
-        /* Estilos Específicos para a Página de Ajuda (vão para o style.css depois) */
-    
-    html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 80px;
-}
-        /* HEADER ESTILO VIDRO WINDOWS 11 (Mica/Acrylic) */
-        .ajuda-nav-glass {
-            position: fixed;
-            left: 50%;
-            top: 0;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 700px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.6); /* Transparência base branca */
-            backdrop-filter: blur(15px) saturate(180%); /* O segredo do vidro */
-            -webkit-backdrop-filter: blur(15px) saturate(180%);
-            border-radius: 0;
-            border: 1px solid rgba(255, 255, 255, 0.2); /* Borda subtil */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Sombra leve */
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            transition: background 0.3s, border 0.3s, box-shadow 0.3s;
-        }
-
-        [data-theme="dark"] .ajuda-nav-glass {
-            background: rgba(20, 20, 20, 0.6); /* Transparência base escura */
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        /* BOTÃO VOLTAR ESTILIZADO */
-        .btn-voltar-estilizado {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            background-color: var(--white);
-            color: var(--primary);
-            text-decoration: none;
-            font-size: 1.2rem;
-            box-shadow: 0 2px 6px var(--sombra);
-            transition: 0.2s ease-in-out;
-            border: 1px solid rgba(0,0,0,0.03);
-        }
-
-        [data-theme="dark"] .btn-voltar-estilizado {
-            background-color: #2a2a2a;
-            color: var(--white);
-            border-color: rgba(255,255,255,0.05);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        }
-
-        .btn-voltar-estilizado:hover {
-            transform: translateX(-3px); /* Animação subtil indicando volta */
-            background-color: var(--primary);
-            color: var(--white);
-        }
-
-        /* Resto da estilização técnica (pode ir para o style.css) */
-        .help-container-main {
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .guia-artigo {
-            margin-bottom: 50px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid rgba(68, 65, 65, 0.562);
-        }
-
-        [data-theme="dark"] .guia-artigo { border-bottom-color: rgba(255,255,255,0.05); }
-
-        .guia-artigo h2 {
-            font-size: 1.3rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 600;
-        }
-
-        .guia-artigo h3 {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 20px;
-            margin-bottom: 8px;
-            color: var(--text);
-            opacity: 0.6;
-            font-weight: 600;
-        }
-
-        .guia-artigo p {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            color: var(--text);
-            margin-bottom: 10px;
-        }
-
-        .formula-tecnica {
-            background: rgba(0, 132, 61, 0.05);
-            border-left: 3px solid var(--primary);
-            padding: 15px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.85rem;
-            margin-top: 15px;
-            color: var(--primary);
-            border-radius: 0 8px 8px 0;
-        }
-
-        .link-ferramenta {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: var(--primary);
-    color: white !important; /* Garante que o texto seja branco */
-    text-decoration: none;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 132, 61, 0.2);
-}
-
-.link-ferramenta i {
-    font-size: 1.1rem;
-}
-
-.link-ferramenta:hover {
-    background-color: var(--primary-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0, 132, 61, 0.3);
-}
-
-/* Ajuste no modo escuro se necessário */
-[data-theme="dark"] .link-ferramenta {
-    box-shadow: none;
-}
+        
+      
     </style>
 </head>
-<body class="ajuda-body">
 
+<body class="ajuda-body">
+    
     <nav class="ajuda-nav-glass">
         <a href="../index.html" class="btn-voltar-estilizado" title="Voltar ao Início">
-            <i class="ri-arrow-left-line"></i>
+            <i class="ri-home-4-line"></i>
         </a>
         <span style="font-weight: 600; font-size: 0.95rem; color: var(--text);">Guia de Uso</span>
         <button class="theme-toggle" id="themeBtn" style="position: relative; top: 0; right: 0; padding: 0; background: none; box-shadow: none; color: var(--primary);">
             <i class="ri-moon-line" id="themeIcon"></i>
         </button>
     </nav>
-
+    
     <div class="help-container-main">
         <header class="tool-header" style="margin-top: 4rem;">
             <h1 style="color: var(--primary); font-size: 1.8rem; font-weight: 700;">Como cada ferramenta funciona?</h1>
             <p style="opacity: 0.7; font-size: 0.9rem;">Entenda a lógica e as referências por trás de cada cálculo da plataforma.</p>
         </header>
-
-<main style="margin-top: 50px;">
-    <article class="guia-artigo" id="dosagem">
-        <h2><i class="ri-capsule-fill"></i> Cálculo de Dosagem</h2>
-        <h3>O que fazer</h3>
-        <p>Introduza o nome do fármaco e selecione o padrão desejado (Global ou Local). Preencha a concentração disponível e a dose prescrita.</p>
-        <h3>Definição Técnica</h3>
-        <p>Determina com precisão a quantidade volumétrica de uma solução medicamentosa necessária para atingir a massa terapêutica prescrita, adaptando-se a diferentes diretrizes institucionais.</p>
-        <div class="formula-tecnica">Volume (ml) = (Dose Prescrita * Volume Total do Frasco) / Concentração Total Disponível</div>
-        <a href="../dosagem/index.html" class="link-ferramenta"><i class="ri-external-link-line"></i> Aceder à Ferramenta</a>
-    </article>
-
-    <article class="guia-artigo" id="internacional">
-        <h2><i class="ri-global-line"></i> Fórmula Internacional (Regra de Três)</h2>
-        <h3>O que fazer</h3>
-        <p>Utilizada para cálculos diretos de proporcionalidade. Permite calcular a dose final com ou sem a variável de peso (mg/kg), ideal para fármacos com dosagem fixa ou baseada em superfície corporal.</p>
-        <h3>Definição Técnica</h3>
-        <p>Aplica o princípio da Regra de Três Simples para isolar a incógnita da dose ou volume, garantindo que a relação massa-volume seja mantida rigorosamente.</p>
-        <div class="formula-tecnica">X ml = (Dose Desejada (mg) * Volume do Veículo (ml)) / Concentração Apresentada (mg)</div>
-        <a href="../formula_internacional/index.html" class="link-ferramenta"><i class="ri-external-link-line"></i> Aceder à Ferramenta</a>
-    </article>
-
-    <article class="guia-artigo" id="gotejamento">
-        <h2><i class="ri-drop-line"></i> Gotejamento (Macro e Microgotas)</h2>
-        <h3>O que fazer</h3>
-        <p>Preencha pelo menos dois dos quatro campos disponíveis (Volume, Tempo, Gotas ou Microgotas). O sistema utiliza o fator de gotejamento padrão para calcular as variáveis restantes.</p>
-        <h3>Definição Técnica</h3>
-        <p>Calcula a taxa de infusão venosa contínua. Considera a convenção médica de que 1 ml corresponde a 20 macrogotas ou 60 microgotas.</p>
-        <div class="formula-tecnica">Gotas/min = Volume Total (ml) / (Tempo em horas * 3)</div>
-        <a href="../gotejamento/index.html" class="link-ferramenta"><i class="ri-external-link-line"></i> Aceder à Ferramenta</a>
-    </article>
-
-    <article class="guia-artigo" id="conversor">
-        <h2><i class="ri-exchange-box-line"></i> Conversor de Recipiente</h2>
-        <h3>O que fazer</h3>
-        <p>Insira os dados do frasco original e a capacidade do novo recipiente disponível. Útil para transferências entre seringas ou frascos de diferentes volumes mantendo a mesma massa medicamentosa.</p>
-        <h3>Definição Técnica</h3>
-        <p>Garante a equivalência posológica durante a transposição de fármacos entre recipientes de capacidades distintas, recalculando o volume final para manter a concentração original.</p>
-        <a href="../conversor/index.html" class="link-ferramenta"><i class="ri-external-link-line"></i> Aceder à Ferramenta</a>
-    </article>
-
-    <article class="guia-artigo" id="diluicao">
-        <h2><i class="ri-flask-line"></i> Diluição e Reconstituição</h2>
-        <h3>O que fazer</h3>
-        <p>Informe a concentração inicial e o volume de diluente adicionado. O sistema indicará a nova concentração da substância e o volume exato a administrar conforme a dose.</p>
-        <h3>Definição Técnica</h3>
-        <p>Mede a redução da concentração de um soluto através da adição de solvente. Crucial para o preparo de antibióticos e eletrólitos de alta vigilância.</p>
-        <div class="formula-tecnica">C1 * V1 = C2 * V2</div>
-        <a href="../diluicao/index.html" class="link-ferramenta"><i class="ri-external-link-line"></i> Aceder à Ferramenta</a>
-    </article>
-
-    <article class="guia-artigo" id="exames">
-        <h2><i class="ri-search-eye-line"></i> Interpretação de Exames</h2>
-        <h3>O que fazer</h3>
-        <p>Insira os valores laboratoriais obtidos. O sistema processa os dados e indica se o resultado se encontra dentro do intervalo de referência ou se apresenta desvio clínico.</p>
-        <h3>Definição Técnica</h3>
-        <p>Análise comparativa automática baseada em valores normativos laboratoriais para triagem rápida de resultados normais, anormais, positivos ou negativos.</p>
-        <a href="../exames/index.html" class="link-ferramenta"><i class="ri-external-link-line"></i> Aceder à Ferramenta</a>
-    </article>
-
-    <article class="guia-artigo" id="sangue">
-        <h2><i class="ri-test-tube-line"></i> Compatibilidade ABO/Rh e Hereditariedade</h2>
-        <h3>O que fazer</h3>
-        <p>Selecione os tipos sanguíneos para validar a compatibilidade transfusional ou prever as com- binações fenotípicas possíveis para descendentes.</p>
-        <h3>Definição Técnica</h3>
-        <p>Utiliza a lógica imunológica de antígenos e anticorpos eritrocitários e os princípios da genética mendeliana para determinar interações sanguíneas seguras.</p>
-        <a href="../sangue/index.html" class="link-ferramenta"><i class="ri-external-link-line"></i> Aceder à Ferramenta</a>
-    </article>
-
-    <article class="guia-artigo" id="gestograma">
-        <h2><i class="ri-calendar-check-line"></i> Gestograma (Cálculo Obstétrico)</h2>
-        <h3>O que fazer</h3>
-        <p>Insira a Data da Última Menstruação (DUM) e a duração do ciclo menstrual.</p>
-        <h3>Definição Técnica</h3>
-        <p>Baseado na Regra de Naegele e no calendário obstétrico, determina a Idade Gestacional (IG), a Data Provável do Parto (DPP) e o trimestre gestacional atual.</p>
-        <a href="../gestograma/index.html" class="link-ferramenta"><i class="ri-external-link-line"></i> Aceder à Ferramenta</a>
-    </article>
-
-    <article class="guia-artigo" id="pesoIdade">
-        <h2><i class="ri-scales-3-line"></i> Estimativa de Peso e Idade</h2>
-        <h3>O que fazer</h3>
-        <p>Indique a idade para estimar o peso ideal ou insira o peso para estimar a idade cronológica (aplicável até aos 14 anos).</p>
-        <h3>Definição Técnica</h3>
-        <p>Utiliza fórmulas antropométricas (como as fórmulas de Weech e Nelson) para fornecer parâmetros de referência em situações onde a pesagem direta é impossível (emergências).</p>
-        <div class="formula-tecnica">Peso (1-6 anos) = (Idade * 2) + 8</div>
-        <a href="../peso_idade/index.html" class="link-ferramenta"><i class="ri-external-link-line"></i> Aceder à Ferramenta</a>
-    </article>
-
-    <article class="guia-artigo" id="sinais">
-        <h2><i class="ri-heart-pulse-line"></i> Análise de Sinais Vitais</h2>
-        <h3>O que fazer</h3>
-        <p>Insira os dados de Frequência Cardíaca, Tensão Arterial, Temperatura e Saturação.</p>
-        <h3>Definição Técnica</h3>
-        <p>Triagem clínica imediata que classifica os parâmetros hemodinâmicos e térmicos em categorias de normalidade ou estados de alerta (Bradicardia, Taquicardia, Febre, etc.).</p>
-        <a href="../sinais_vitais/index.html" class="link-ferramenta"><i class="ri-external-link-line"></i> Aceder à Ferramenta</a>
-    </article>
-</main>
+        
+        
+        <main style="margin-top: 50px;">
+            <article class="guia-artigo" id="dosagem">
+                <h2><i class="ri-capsule-fill"></i> Cálculo de Dosagem</h2>
+                <h3>O que fazer</h3>
+                <p>Escolha a referência (OMS, MSF ou país específico), digite o nome do medicamento e preencha os campos solicitados (peso, idade, etc.). Clique em "Calcular" para obter a dose recomendada.</p>
+                <h3>Definição Técnica</h3>
+                <p>Calcula a dose terapêutica com base em diretrizes institucionais. A fórmula baseia-se na relação entre a dose prescrita por kg de peso e a concentração do fármaco disponível.</p>
+                <div class="formula-tecnica">Dose (ml) = (Dose prescrita × Peso) / Concentração</div>
+                <a href="../dosagem/index.html" class="link-ferramenta"><i class="ri-external-link-line"></i> Aceder à Ferramenta</a>
+            </article>
+            
+            <article class="guia-artigo" id="internacional">
+                <h2><i class="ri-global-line"></i> Fórmula Internacional</h2>
+                <h3>O que fazer</h3>
+                <p>Insira o peso, a dosagem e a concentração do medicamento. Pode mudar as unidades da concentração e dose (mg, g, mg/5ml, g/ml, etc.) nos seletores. Em doses fixas não é necessário preencher o peso. O campo "Intervalo" é opcional: se preenchido, o sistema divide o volume a administrar pelo número de tomas quando a unidade da dose for diária (ex: mg/kg/dia).</p>
+                <h3>Definição Técnica</h3>
+                <p>Aplica a Regra de Três Simples para calcular o volume a administrar. Se a unidade da dose for diária (ex: mg/kg/dia), o volume a administrar é dividido pelo intervalo em horas para obter o volume por toma. Caso contrário, o intervalo é usado apenas para calcular o número de tomas.</p>
+                <div class="formula-tecnica">Volume (ml) = (Dose × Peso) / Concentração</div>
+                <a href="../formula_internacional/index.html" class="link-ferramenta"><i class="ri-external-link-line"></i> Aceder à Ferramenta</a>
+            </article>
+            
+            <article class="guia-artigo" id="gotejamento">
+                <h2><i class="ri-drop-line"></i> Gotejamento</h2>
+                <h3>O que fazer</h3>
+                <p>Preencha apenas dois campos (Volume, Tempo, Macrogotas ou Microgotas). O sistema calcula os restantes automaticamente. Não pode preencher apenas gotas (macro ou micro) sem Volume ou Tempo.</p>
+                <h3>Definição Técnica</h3>
+                <p>Calcula a taxa de infusão venosa. A convenção médica estabelece que 1 ml = 20 macrogotas = 60 microgotas. A fórmula base é: Gotas/min = Volume (ml) / (Tempo (h) × 3).</p>
+                <div class="formula-tecnica">Gotas/min = Volume Total (ml) / (Tempo em horas × 3)</div>
+                <a href="../gotejamento/index.html" class="link-ferramenta"><i class="ri-external-link-line"></i> Aceder à Ferramenta</a>
+            </article>
+            
+            <article class="guia-artigo" id="conversor">
+                <h2><i class="ri-exchange-box-line"></i> Conversor de Recipiente</h2>
+                <h3>O que fazer</h3>
+                <p>Insira a concentração e a quantidade do frasco original, depois a concentração do novo recipiente. O sistema calcula o volume equivalente a usar no novo frasco.</p>
+                <h3>Definição Técnica</h3>
+                <p>Mantém a massa do princípio ativo ao transferir entre recipientes. Usa a regra: Massa = Concentração × Volume. O volume no novo recipiente é calculado como: V₂ = (C₁ × V₁) / C₂.</p>
+                <div class="formula-tecnica">V₂ = (Concentração₁ × Volume₁) / Concentração₂</div>
+                <a href="../conversor/index.html" class="link-ferramenta"><i class="ri-external-link-line"></i> Aceder à Ferramenta</a>
+            </article>
+            
+            <article class="guia-artigo" id="diluicao">
+                <h2><i class="ri-flask-line"></i> Reconstituição de Medicamentos</h2>
+                <h3>O que fazer</h3>
+                <p>Informe a massa do fármaco (ex: 500 mg) e o volume de diluente adicionado ao frasco. O sistema calcula a concentração final em mg/ml. Se desejar, insira a dose indicada para saber o volume a administrar. As unidades podem ser alteradas nos seletores.</p>
+                <h3>Definição Técnica</h3>
+                <p>Calcula a concentração final após reconstituição de um pó ou liofilizado. A fórmula baseia-se na relação: Concentração = Massa do fármaco / Volume total da solução. Este cálculo é essencial para preparar medicamentos injetáveis como antibióticos, antifúngicos e quimioterápicos.</p>
+                <div class="formula-tecnica">Concentração Final = Massa do Fármaco / Volume Total</div>
+                <a href="../diluicao/index.html" class="link-ferramenta"><i class="ri-external-link-line"></i> Aceder à Ferramenta</a>
+            </article>
+            
+            <article class="guia-artigo" id="exames">
+                <h2><i class="ri-search-eye-line"></i> Laboratório e Escalas</h2>
+                <h3>O que fazer</h3>
+                <p>Insira os valores laboratoriais obtidos. O sistema processa os dados e indica se o resultado se
+                    encontra dentro do intervalo de referência ou se apresenta desvio clínico. <br>
+                    O sistema também analisa escalas, como índice de Apgar e muitas outras escalas.</p>
+                <h3>Definição Técnica</h3>
+                <p>Análise comparativa automática baseada em valores normativos laboratoriais para triagem rápida de
+                    resultados normais, anormais, positivos ou negativos.</p>
+                <a href="../exames/index.html" class="link-ferramenta"><i class="ri-external-link-line"></i> Aceder à
+                    Ferramenta</a>
+            </article>
+            
+            <article class="guia-artigo" id="sangue">
+                <h2><i class="ri-test-tube-line"></i> Compatibilidade ABO/Rh e Hereditariedade</h2>
+                <h3>O que fazer</h3>
+                <p>Selecione o grupo do paciente e do doador para verificar a compatibilidade. Selecione os grupos dos pais para prever os possíveis tipos sanguíneos dos filhos.</p>
+                <h3>Definição Técnica</h3>
+                <p>Baseia-se na genética mendeliana: os alelos A e B são dominantes sobre O. A compatibilidade segue a regra: o paciente pode receber apenas sangue que não contenha anticorpos contra os antigénios do seu próprio grupo.</p>
+                <a href="../sangue/index.html" class="link-ferramenta"><i class="ri-external-link-line"></i> Aceder à Ferramenta</a>
+            </article>
+            
+            <article class="guia-artigo" id="gestograma">
+                <h2><i class="ri-calendar-check-line"></i> Gestograma (Cálculo Obstétrico)</h2>
+                <h3>O que fazer</h3>
+                <p>Escolha o modo de cálculo: DUM, IG, DPP ou Altura Uterina. Preencha os campos solicitados. O sistema calcula a idade gestacional, a DPP e o trimestre atual.</p>
+                <h3>Definição Técnica</h3>
+                <p>Aplica a Regra de Naegele: DPP = DUM + 280 dias (40 semanas). A IG é calculada subtraindo a DUM da data atual. Com a AU, usa-se a fórmula: IG (semanas) ≈ AU (cm) para gestações entre 20 e 32 semanas.</p>
+                <div class="formula-tecnica">DPP = DUM + 280 dias | IG = Data Atual - DUM</div>
+                <a href="../gestograma/index.html" class="link-ferramenta"><i class="ri-external-link-line"></i> Aceder à Ferramenta</a>
+            </article>
+            
+            <article class="guia-artigo" id="pesoIdade">
+                <h2><i class="ri-scales-3-line"></i> Estimativa de Peso e Idade</h2>
+                <h3>O que fazer</h3>
+                <p>Escolha o modo: "Descobrir Idade pelo Peso" ou "Descobrir Peso pela Idade". Insira o valor correspondente. O sistema estima o resultado para crianças até 14 anos ou 50 kg.</p>
+                <h3>Definição Técnica</h3>
+                <p>Usa fórmulas antropométricas pediátricas: Para 1-6 anos: Peso = (Idade × 2) + 8. Para 6-14 anos: Peso = (Idade × 3) + 3. Para inversão, isola-se a variável alvo.</p>
+                <div class="formula-tecnica">Peso (1-6 anos) = (Idade × 2) + 8</div>
+                <a href="../peso_idade/index.html" class="link-ferramenta"><i class="ri-external-link-line"></i> Aceder à Ferramenta</a>
+            </article>
+            
+            <article class="guia-artigo" id="sinais">
+                <h2><i class="ri-heart-pulse-line"></i> Análise de Sinais Vitais</h2>
+                <h3>O que fazer</h3>
+                <p>Preencha um ou mais campos: Frequência Cardíaca, Tensão Arterial, Frequência Respiratória, Temperatura ou Saturação. O sistema classifica cada valor como normal ou alterado.</p>
+                <h3>Definição Técnica</h3>
+                <p>Compara os valores inseridos com faixas de referência padrão. Classifica como: Bradicardia/Taquicardia, Hipotensão/Hipertensão, Bradipneia/Taquipneia, Hipotermia/Febre, ou Hipóxia/Normoxia.</p>
+                <a href="../sinais_vitais/index.html" class="link-ferramenta"><i class="ri-external-link-line"></i> Aceder à Ferramenta</a>
+            </article>
+        </main>
+        
+        
     </div>
-
+    
     <script src="../script.js"></script>
 </body>
+
 </html>
