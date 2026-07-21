@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Técnico | Mpindi TecMed</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* Estilos Específicos para a Página de Ajuda (vão para o style.css depois) */
+    
+    html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 75px;
+}
+        /* HEADER ESTILO VIDRO WINDOWS 11 (Mica/Acrylic) */
+        .ajuda-nav-glass {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 760px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.6); /* Transparência base branca */
+            backdrop-filter: blur(15px) saturate(180%); /* O segredo do vidro */
+            -webkit-backdrop-filter: blur(15px) saturate(180%);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Borda subtil */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Sombra leve */
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            transition: background 0.3s, border 0.3s, box-shadow 0.3s;
+        }
+
+        [data-theme="dark"] .ajuda-nav-glass {
+            background: rgba(20, 20, 20, 0.6); /* Transparência base escura */
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* BOTÃO VOLTAR ESTILIZADO */
+        .btn-voltar-estilizado {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background-color: var(--white);
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 6px var(--sombra);
+            transition: 0.2s ease-in-out;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        [data-theme="dark"] .btn-voltar-estilizado {
+            background-color: #2a2a2a;
+            color: var(--white);
+            border-color: rgba(255,255,255,0.05);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .btn-voltar-estilizado:hover {
+            transform: translateX(-3px); /* Animação subtil indicando volta */
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        /* Resto da estilização técnica (pode ir para o style.css) */
+        .help-container-main {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .guia-artigo {
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(68, 65, 65, 0.562);
+        }
+
+        [data-theme="dark"] .guia-artigo { border-bottom-color: rgba(255,255,255,0.05); }
+
+        .guia-artigo h2 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+
+        .guia-artigo h3 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            color: var(--text);
+            opacity: 0.6;
+            font-weight: 600;
+        }
+
+        .guia-artigo p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .formula-tecnica {
+            background: rgba(0, 132, 61, 0.05);
+            border-left: 3px solid var(--primary);
+            padding: 15px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            margin-top: 15px;
+            color: var(--primary);
+            border-radius: 0 8px 8px 0;
+        }
+    </style>
+</head>
+<body class="ajuda-body">
+
+    <nav class="ajuda-nav-glass">
+        <a href="../index.html" class="btn-voltar-estilizado" title="Voltar ao Início">
+            <i class="ri-arrow-left-line"></i>
+        </a>
+        <span style="font-weight: 600; font-size: 0.95rem; color: var(--text);">Guia de Uso</span>
+        <button class="theme-toggle" id="themeBtn" style="position: relative; top: 0; right: 0; padding: 0; background: none; box-shadow: none; color: var(--primary);">
+            <i class="ri-moon-line" id="themeIcon"></i>
+        </button>
+    </nav>
+
+    <div class="help-container-main">
+        <header class="tool-header" style="margin-top: 4rem;">
+            <h1 style="color: var(--primary); font-size: 1.8rem; font-weight: 700;">Como cada ferramenta funciona?</h1>
+            <p style="opacity: 0.7; font-size: 0.9rem;">Entenda a lógica e as referências por trás de cada cálculo da plataforma.</p>
+        </header>
+
+        <main style="margin-top: 50px;">
+            <article class="guia-artigo" id="dosagem">
+                <h2><i class="ri-capsule-fill"></i> Calculadora Posológica</h2>
+                <h3>O que fazer</h3>
+                <p>Introduza a concentração do fármaco disponível no frasco (mg) e o volume total do mesmo (ml). Depois, insira a dose exata prescrita.</p>
+                <h3>Como Funciona</h3>
+                <p>O sistema aplica uma conversão direta de massa (mg) para volume (ml), baseada na concentração fornecida.</p>
+                <div class="formula-tecnica">Volume = (Dose Desejada * Vol. Frasco) / Conc. Frasco</div>
+            </article>
+
+            <article class="guia-artigo" id="internacional">
+                <h2><i class="ri-global-line"></i> Fórmula Internacional</h2>
+                <h3>O que fazer</h3>
+                <p>Usada quando a prescrição está definida em "mg/kg". Insira o peso do paciente (kg) e a dose recomendada por quilo.</p>
+                <h3>Como Funciona</h3>
+                <p>Multiplica o peso total pela dose unitária recomendada, definindo a dose total necessária para aquele paciente.</p>
+                <div class="formula-tecnica">Dose Total = Peso (kg) * Dose Recomendada (mg)</div>
+            </article>
+
+            <article class="guia-artigo" id="gotejamento">
+                <h2><i class="ri-drop-line"></i> Gotejamento de Soro</h2>
+                <h3>O que fazer</h3>
+                <p>Insira o volume total da infusão (ml) e o tempo previsto para correr (em horas ou minutos).</p>
+                <h3>Como Funciona</h3>
+                <p>Baseado na convenção médica de que 1 ml = 20 gotas (macrogotas). Define a velocidade de infusão para macrogotas e microgotas.</p>
+                <div class="formula-tecnica">Gotas/min = Volume (ml) / (Tempo em horas * 3)</div>
+            </article>
+
+            <article class="guia-artigo" id="conversao">
+                <h2><i class="ri-exchange-box-line"></i> Conversão</h2>
+                <h3>O que fazer</h3>
+                <p>Útil para transferir uma dosagem de um frasco com concentração conhecida (Conc. A) para um recipiente de volume diferente (Seringa B).</p>
+                <h3>Como Funciona</h3>
+                <p>Garante que a proporção e a quantidade total do princípio ativo se mantenham constantes durante a transferência entre recipientes.</p>
+            </article>
+
+            <article class="guia-artigo" id="diluicao">
+                <h2><i class="ri-exchange-box-line"></i> Diluição</h2>
+                <h3>O que fazer</h3>
+                <p>Útil para transferir uma dosagem de um frasco com concentração conhecida (Conc. A) para um recipiente de volume diferente (Seringa B).</p>
+                <h3>Como Funciona</h3>
+                <p>Garante que a proporção e a quantidade total do princípio ativo se mantenham constantes durante a transferência entre recipientes.</p>
+            </article>
+
+            <article class="guia-artigo" id="gestograma">
+                <h2><i class="ri-heart-pulse-line"></i> Gestograma (Regra de Naegele)</h2>
+                <h3>O que fazer</h3>
+                <p>Selecione o primeiro dia da Última Menstruação (DUM).</p>
+                <h3>Como Funciona</h3>
+                <p>Calcula a Data Provável do Parto (DPP) e a Idade Gestacional (IG). A DPP é baseada na soma de 7 dias à DUM, subtração de 3 meses e soma de 1 ano. </p>
+                <div class="formula-tecnica">DPP = (DUM + 7 dias) / (Mês DUM - 3) / (Ano DUM + 1)</div>
+            </article>
+
+            <article class="guia-artigo" id="sangue">
+                <h2><i class="ri-test-tube-line"></i> Sistema ABO/Rh</h2>
+                <h3>O que fazer</h3>
+                <p>Selecione o grupo do receptor e do doador para validar a segurança de uma transfusão.</p>
+                <h3>Como Funciona</h3>
+                <p>O sistema cruza os antígenos e anticorpos correspondentes a cada grupo sanguíneo. Uma incompatibilidade indica risco de reação hemolítica grave.</p>
+            </article>
+
+            <article class="guia-artigo" id="exames">
+                <h2><i class="ri-test-tube-line"></i> Compatibilidade ABO/Rh</h2>
+                <h3>O que fazer</h3>
+                <p>Selecione o grupo do receptor e do doador para validar a segurança de uma transfusão.</p>
+                <h3>Como Funciona</h3>
+                <p>O sistema cruza os antígenos e anticorpos correspondentes a cada grupo sanguíneo. Uma incompatibilidade indica risco de reação hemolítica grave.</p>
+            </article>
+
+            <article class="guia-artigo" id="pesoIdade">
+                <h2><i class="ri-user-search-line"></i> Estimativa de Peso/Idade</h2>
+                <h3>O que fazer</h3>
+                <p>Insira o peso para estimar a idade ou vice-versa em situações de emergência pediátrica.</p>
+                <h3>Como Funciona</h3>
+                <p>Utiliza fórmulas estatísticas médias (como Weech ou Nelson) baseadas no desenvolvimento infantil padrão. </p>
+                <div class="formula-tecnica">Peso (1-6 anos) = (Idade * 2) + 8</div>
+            </article>
+        </main>
+
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>
