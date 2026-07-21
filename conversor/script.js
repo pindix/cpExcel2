@@ -42,12 +42,7 @@ const UNIDADES_CONCENTRACAO = [
     { id: 'conc_7', value: '0.01', label: 'mg/100ml', grupo: '🧪 Concentração (massa/volume)' },
     { id: 'conc_8', value: '10', label: '% (1% = 10mg/ml)', grupo: '📊 Percentual' },
     { id: 'conc_9', value: '1', label: '% (peso/volume)', grupo: '📊 Percentual' },
-    { id: 'conc_10', value: '1', label: 'UI/ml', grupo: '⚕️ Unidades Especiais' },
-    { id: 'conc_11', value: '0.001', label: 'UI/L', grupo: '⚕️ Unidades Especiais' },
-    { id: 'conc_12', value: '1', label: 'mEq/ml', grupo: '⚕️ Unidades Especiais' },
-    { id: 'conc_13', value: '0.001', label: 'mEq/L', grupo: '⚕️ Unidades Especiais' },
-    { id: 'conc_14', value: '1', label: 'mmol/ml', grupo: '⚕️ Unidades Especiais' },
-    { id: 'conc_15', value: '0.001', label: 'mmol/L', grupo: '⚕️ Unidades Especiais' }
+    
 ];
 
 // ============================================================
