@@ -2,16 +2,44 @@
 <html lang="pt-pt">
 
 <head>
+    
+    
+    
+    <!-- ==========================================
+       PREVENIR FLASH BRANCO (SOLUÇÃO EXCLUSIVA)
+    =========================================== -->
+    <script>
+        // Apenas prevenir flash - NADA de CSS inline
+        (function() {
+            const tema = localStorage.getItem('matclinica-theme');
+            if (tema === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    
+    
+    
+    
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MatClinica - Mpindi TecMed</title>
+    <title>MatClinica</title>
     <!-- Fontes e Ícones Limpos -->
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <!-- AOS Library CSS -->
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
+    <!-- ==========================================
+   FAVICON (Usando o logo da MatClínica)
+=========================================== -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/imagens/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/imagens/logo.png">
+    <link rel="apple-touch-icon" href="assets/imagens/logo.png">
+    
 </head>
 
 <body>
@@ -24,7 +52,7 @@
             <!-- Esquerda: Logótipo -->
             <div class="nav-logo">
                 <div class="logo-icon-placeholder">
-                    <img src="logo.png" alt="Mpindi TecMed - MatClínica" class="logo-img">
+                    <img src="assets/imagens/logo.png" alt="Mpindi TecMed - MatClínica" class="logo-img">
                 </div>
             </div>
             
@@ -41,11 +69,71 @@
             <div class="nav-right-actions nav-glass-card">
                 <a href="#" class="btn-app btn-download-nav"><i class="ri-google-play-line"></i> Baixar APP</a>
                 <button class="theme-toggle" id="themeBtn"><i class="ri-moon-line" id="themeIcon"></i></button>
-                <a href="#" class="btn-login">Login</a>
-                <button class="mobile-menu-btn"><i class="ri-menu-line"></i></button>
+                <a href="#" class="btn-login" onclick="semLogin()">Login</a>
+                <!-- Botão Hamburger unificado -->
+                <button class="btn-hamburger-menu" id="btnHamburgerMenu" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </div>
     </nav>
+    
+    
+    
+    <!-- ==========================================
+   MENU OVERLAY (UNIFICAÇÃO: Menu lateral unificado)
+=========================================== -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+    
+    <!-- ==========================================
+   MENU LATERAL (UNIFICAÇÃO: Menu lateral unificado)
+=========================================== -->
+    <div class="menu-lateral" id="menuLateral">
+        <div class="menu-header">
+            <div class="menu-header-icon">
+                <img src="assets/imagens/logo.png" alt="Logo MatClínica">
+            </div>
+            <h3><span class="matClinica">Mat</span>Clínica</h3>
+            <p>Suporte de Decisão Clínica</p>
+        </div>
+        <div class="menu-items">
+            <a href="#ferramentas" class="menu-item" data-page="ferramentas">
+                <div class="menu-item-icon"><i class="ri-tools-line"></i></div>
+                <span>Ferramentas</span>
+                <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+            </a>
+            <a href="#sobre" class="menu-item" data-page="sobre">
+                <div class="menu-item-icon"><i class="ri-information-line"></i></div>
+                <span>Sobre</span>
+                <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+            </a>
+            <a href="#seguranca" class="menu-item" data-page="seguranca">
+                <div class="menu-item-icon"><i class="ri-shield-check-line"></i></div>
+                <span>Segurança</span>
+                <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+            </a>
+            <a href="ajuda/index.html" class="menu-item" data-page="ajuda">
+                <div class="menu-item-icon"><i class="ri-question-line"></i></div>
+                <span>Como funciona</span>
+                <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+            </a>
+            <div class="contacto">
+                <a href="https://wa.me/244929129797" title="WhatsApp"><i class="ri-whatsapp-line"></i></a>
+                <a href="mailto:sebastiaompindi@gmail.com" title="Email"><i class="ri-mail-line"></i></a>
+            </div>
+        </div>
+        <div class="menu-item tema-toggle-menu" id="themeBtnMenu" style="background: none; border: solid 2px var(--text); color: var(--text);">
+            <div class="menu-item-icon"><i class="ri-moon-line" id="themeIconMenu"></i></div>
+            <span>Mudar Tema</span>
+            <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+        </div>
+        <div class="menu-footer">
+            <small>© 2026 Mpindi TecMed</small>
+            <small>Versão 1.0.0</small>
+        </div>
+    </div>
     
     <!-- ==========================================
        HERO SECTION
@@ -62,8 +150,8 @@
                         <a href="#" class="btn-hero-tools"><i class="ri-google-play-line"></i> Baixar App</a>
                         <!-- <a href="#sobre" class="btn-hero-about"><i class="ri-information-line"></i> Sobre</a> -->
                     </div>
-                
-            </div>
+                    
+                </div>
         </header>
     </div>
     
@@ -371,47 +459,48 @@
     </section>
     
     
-
+    
     <!-- ==========================================
        FOOTER (GLASSMORPHISM)
     =========================================== -->
-<footer class="footer-static">
-    <div class="footer-container">
-        <div class="footer-column brand">
-            <h3>MatClínica</h3>
-            <p>Soluções digitais para suporte à decisão clínica. Precisão e rapidez no atendimento ao paciente.</p>
-        </div>
-
-        <div class="footer-column links">
-            <h4>Navegação</h4>
-            <ul>
-                <li><a href="#ferramentas"><i class="ri-apps-2-line"></i> Todas as Ferramentas</a></li>
-                <li><a href="ajuda/index.html"><i class="ri-question-line"></i> Como cada ferramentas Funciona?</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-column contact">
-            <h4>Suporte Profissional</h4>
-            <div class="social-row">
-                <a href="https://wa.me/244929129797" class="footer-icon wa" title="WhatsApp">
-                    <i class="ri-whatsapp-line"></i>
-                </a>
-                <a href="mailto:sebastiaompindi@gmail.com" class="footer-icon mail" title="Email">
-                    <i class="ri-mail-line"></i>
-                </a>
+    <footer class="footer-static">
+        <div class="footer-container">
+            <div class="footer-column brand">
+                <h3>MatClínica</h3>
+                <p>Soluções digitais para suporte à decisão clínica. Precisão e rapidez no atendimento ao paciente.</p>
+            </div>
+            
+            <div class="footer-column links">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="#ferramentas"><i class="ri-apps-2-line"></i> Todas as Ferramentas</a></li>
+                    <li><a href="ajuda/index.html"><i class="ri-question-line"></i> Como cada ferramentas Funciona?</a></li>
+                    
+                </ul>
+            </div>
+            
+            <div class="footer-column contact">
+                <h4>Suporte Profissional</h4>
+                <div class="social-row">
+                    <a href="https://wa.me/244929129797" class="footer-icon wa" title="WhatsApp">
+                        <i class="ri-whatsapp-line"></i>
+                    </a>
+                    <a href="mailto:sebastiaompindi@gmail.com" class="footer-icon mail" title="Email">
+                        <i class="ri-mail-line"></i>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="footer-disclaimer">
-        <p><strong>Aviso:</strong> Estas ferramentas são auxiliares. O uso dos resultados é de inteira responsabilidade do profissional de saúde assistente. Não substitui a avaliação clínica direta.</p>
-    </div>
-
-    <div class="footer-copy">
-        <p>&copy; 2026 Mpindi TecMed</p>
-    </div>
-</footer>
-
+        
+        <div class="footer-disclaimer">
+            <p><strong>Aviso:</strong> Estas ferramentas são auxiliares. O uso dos resultados é de inteira responsabilidade do profissional de saúde assistente. Não substitui a avaliação clínica direta.</p>
+        </div>
+        
+        <div class="footer-copy">
+            <p>&copy; 2026 Mpindi TecMed</p>
+        </div>
+    </footer>
+    
     
     <!-- ==========================================
        BOTÃO FIXO DE INTERFACE INTELIGENTE
@@ -422,19 +511,19 @@
     
     <script src="script.js"></script>
     
-      <!-- AOS Library JS -->
-<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        AOS.init({
-            // Configurações globais recomendadas:
-            duration: 800,     // Duração da animação em milissegundos (0.8s)
-            // once: true,        // A animação acontece apenas uma vez ao rolar para baixo
-            offset: 100,       // Distância em px do elemento até o topo da tela para disparar
-            easing: 'ease-out-cubic' // Curva de aceleração suave
+    <!-- AOS Library JS -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            AOS.init({
+                // Configurações globais recomendadas:
+                duration: 800, // Duração da animação em milissegundos (0.8s)
+                // once: true,        // A animação acontece apenas uma vez ao rolar para baixo
+                offset: 100, // Distância em px do elemento até o topo da tela para disparar
+                easing: 'ease-out-cubic' // Curva de aceleração suave
+            });
         });
-    });
-</script>
+    </script>
     
     
 </body>

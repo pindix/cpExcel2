@@ -268,6 +268,365 @@ body {
     padding-left: 4px;
 }
 
+
+
+
+
+
+/* ==========================================================================
+   MENU LATERAL UNIFICADO (UNIFICAÇÃO: Menu lateral unificado)
+   ========================================================================== */
+
+/* Menu Overlay */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 1500;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.menu-overlay.ativo {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Menu Lateral */
+.menu-lateral {
+    position: fixed;
+    top: 0;
+    right: -270px;
+    width: 250px;
+    height: 100%;
+    z-index: 1600;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 20px 12px;
+    gap: 6px;
+    background: var(--bg-canvas);
+    box-shadow: -8px 0 30px rgba(0, 0, 0, 0.15);
+}
+
+.menu-lateral.ativo {
+    right: 0;
+}
+
+.menu-header {
+    padding: 10px 4px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 132, 61, 0.15);
+    margin-bottom: 10px;
+}
+
+.menu-header-icon {
+    width: 56px;
+    height: 56px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: white;
+    margin: 0 auto 12px;
+    overflow: hidden;
+}
+
+.menu-header-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.menu-header h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 4px;
+}
+
+.matClinica {
+    color: var(--text-main);
+}
+
+.menu-header p {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+.menu-items {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0.5rem;
+    text-decoration: none;
+    color: var(--text-muted);
+    border-radius: 20px;
+    background: var(--bg-system);
+    transition: all 0.25s ease;
+    font-weight: 500;
+    width: fit-content;
+}
+
+.menu-item:hover {
+    background: var(--primary-soft);
+    color: var(--primary);
+}
+
+.menu-item.active {
+    background: var(--primary-soft);
+    color: var(--primary);
+}
+
+.menu-item-icon {
+    width: 20px;
+    height: 20px;
+    background: var(--bg-canvas);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.menu-item:hover .menu-item-icon {
+    color: var(--primary);
+}
+
+.menu-item span {
+    flex: 1;
+    font-size: 0.95rem;
+}
+
+.menu-item-arrow {
+    font-size: 1.1rem;
+    transition: 0.2s;
+    color: var(--text-muted);
+}
+
+.menu-item:hover .menu-item-arrow {
+    opacity: 1;
+    transform: translateX(3px);
+    color: var(--primary);
+}
+
+.contacto {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.5rem;
+}
+
+.contacto a {
+    text-decoration: none;
+}
+
+.contacto i {
+    border: solid 2px var(--text-muted);
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    transition: all 0.25s ease;
+}
+
+.contacto i:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: scale(1.05);
+}
+
+.tema-toggle-menu {
+    cursor: pointer;
+    border: solid 2px var(--text-muted) !important;
+    color: var(--text-muted) !important;
+}
+
+.tema-toggle-menu:hover {
+    border-color: var(--primary) !important;
+    color: var(--primary) !important;
+    background: var(--primary-soft) !important;
+}
+
+.menu-footer {
+    padding: 20px 4px;
+    text-align: right;
+    border-top: 1px solid rgba(0, 132, 61, 0.15);
+    opacity: 0.6;
+    font-size: 0.75rem;
+    margin-top: auto;
+    background: transparent;
+}
+
+.menu-footer small {
+    display: block;
+    line-height: 1.8;
+    color: var(--text-muted);
+}
+
+.menu-lateral::-webkit-scrollbar {
+    width: 4px;
+}
+.menu-lateral::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+}
+
+/* Modo Escuro - Menu Lateral */
+[data-theme="dark"] .menu-lateral {
+    background: #1a1a1a;
+    box-shadow: -8px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .menu-header {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .menu-item {
+    background: rgba(255, 255, 255, 0.05);
+    color: #aaa;
+}
+
+[data-theme="dark"] .menu-item:hover {
+    background: rgba(0, 132, 61, 0.15);
+    color: #2ed573;
+}
+
+[data-theme="dark"] .menu-item.active {
+    background: rgba(0, 132, 61, 0.15);
+    color: #2ed573;
+}
+
+[data-theme="dark"] .menu-item-icon {
+    background: rgba(255, 255, 255, 0.05);
+    color: #aaa;
+}
+
+[data-theme="dark"] .menu-item:hover .menu-item-icon {
+    color: #2ed573;
+}
+
+[data-theme="dark"] .contacto i {
+    border-color: #555;
+    color: #888;
+}
+
+[data-theme="dark"] .contacto i:hover {
+    border-color: #2ed573;
+    color: #2ed573;
+}
+
+[data-theme="dark"] .menu-footer {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .menu-footer small {
+    color: #888;
+}
+
+[data-theme="dark"] .tema-toggle-menu {
+    border-color: #555 !important;
+    color: #888 !important;
+}
+
+[data-theme="dark"] .tema-toggle-menu:hover {
+    border-color: #2ed573 !important;
+    color: #2ed573 !important;
+    background: rgba(46, 213, 115, 0.1) !important;
+}
+
+/* ==========================================================================
+   BOTÃO HAMBURGER (UNIFICAÇÃO: Menu lateral unificado)
+   ========================================================================== */
+
+/* Estilo do botão hamburger para o menu */
+.btn-hamburger-menu {
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    z-index: 2000;
+    position: relative;
+}
+
+.btn-hamburger-menu span {
+    display: block;
+    width: 24px;
+    height: 2.5px;
+    background: var(--text-main);
+    border-radius: 3px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+}
+
+.btn-hamburger-menu.ativo span:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg);
+}
+.btn-hamburger-menu.ativo span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+.btn-hamburger-menu.ativo span:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
+}
+
+/* Mostrar apenas no mobile */
+@media (max-width: 992px) {
+    .btn-hamburger-menu {
+        display: flex;
+    }
+}
+
+/* Ajuste do botão mobile existente */
+.mobile-menu-btn {
+    display: none;
+}
+
+@media (max-width: 992px) {
+    .mobile-menu-btn {
+        display: block;
+        background: none;
+        border: none;
+        color: var(--text-main);
+        font-size: 1.35rem;
+        cursor: pointer;
+        padding-left: 4px;
+    }
+}
+
+
+
+
 /* ==========================================================================
    4. HERO: ALINHAMENTO À ESQUERDA GARANTIDO NO MOBILE E DESKTOP
    ========================================================================== */

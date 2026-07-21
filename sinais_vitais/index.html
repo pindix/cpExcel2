@@ -1,13 +1,72 @@
 <!DOCTYPE html>
 <html lang="pt-pt">
 <head>
+    
+    
+    
+    
+    
+    <style>
+    /* Tema inline para evitar flash branco */
+    :root {
+        --bg-inline: white;
+        --text-inline: #1a2a21;
+    }
+    
+    [data-theme="dark"] {
+        --bg-inline: black;
+        --text-inline: white;
+    }
+    
+    /* Aplica o fundo imediatamente */
+    html {
+        background-color: var(--bg-inline);
+    }
+    
+    body {
+        background-color: var(--bg-inline);
+        color: var(--text-inline);
+    }
+    
+    /* Força o fundo antes do JS carregar */
+    body::before {
+        display: none;
+    }
+</style>
+
+<script>
+    // Ler tema do localStorage ANTES do CSS carregar
+    (function() {
+        const tema = localStorage.getItem('tema');
+        if (tema === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.body.setAttribute('data-theme', 'dark');
+        }
+    })();
+</script> 
+    
+    
+    
+    
+    
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sinais Vitais | Mpindi TecMed</title>
+    <title>Sinais Vitais | MatClínica</title>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    
+    <!-- ==========================================
+   FAVICON (Usando o logo da MatClínica)
+=========================================== -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/imagens/logo.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/imagens/logo.png">
+<link rel="apple-touch-icon" href="assets/imagens/logo.png">
+    
+    
+    
 </head>
 <body>
 
