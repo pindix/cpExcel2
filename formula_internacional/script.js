@@ -24,46 +24,42 @@ themeBtn.addEventListener('click', () => {
 });
 
 // ============================================================
-// DADOS DAS UNIDADES (com IDs únicos)
+// DADOS DAS UNIDADES (LIMPEZA: Removidas opções de taxa de infusão e unidades especiais)
 // ============================================================
 const UNIDADES_DOSAGEM = [
+    // 💊 Dose por peso
     { id: 'dosagem_1', value: '1', label: 'mg/kg', grupo: '💊 Dose por peso' },
     { id: 'dosagem_2', value: '1000', label: 'g/kg', grupo: '💊 Dose por peso' },
     { id: 'dosagem_3', value: '0.001', label: 'mcg/kg', grupo: '💊 Dose por peso' },
     { id: 'dosagem_4', value: '0.000001', label: 'ng/kg', grupo: '💊 Dose por peso' },
     { id: 'dosagem_5', value: '1', label: 'mg/kg/dia', grupo: '💊 Dose por peso' },
     { id: 'dosagem_6', value: '1000', label: 'g/kg/dia', grupo: '💊 Dose por peso' },
+    // 💊 Dose fixa
     { id: 'dosagem_7', value: '1', label: 'mg', grupo: '💊 Dose fixa' },
     { id: 'dosagem_8', value: '1000', label: 'g', grupo: '💊 Dose fixa' },
     { id: 'dosagem_9', value: '0.001', label: 'mcg', grupo: '💊 Dose fixa' },
     { id: 'dosagem_10', value: '0.000001', label: 'ng', grupo: '💊 Dose fixa' },
-    { id: 'dosagem_11', value: '1', label: 'mcg/kg/min', grupo: '📊 Taxa de Infusão' },
-    { id: 'dosagem_12', value: '0.06', label: 'mcg/kg/h', grupo: '📊 Taxa de Infusão' },
-    { id: 'dosagem_13', value: '1', label: 'mg/kg/h', grupo: '📊 Taxa de Infusão' }
+    { id: 'dosagem_11', value: '1', label: 'mg/dia', grupo: '💊 Dose fixa' },
+    { id: 'dosagem_12', value: '1000', label: 'g/dia', grupo: '💊 Dose fixa' },
+    { id: 'dosagem_13', value: '0.001', label: 'mcg/dia', grupo: '💊 Dose fixa' },
+    // Removido: Taxa de Infusão (/h, /min) e Unidades Especiais (UI, mEq, mmol)
 ];
 
 const UNIDADES_CONCENTRACAO = [
+    // 🧪 Concentração (massa/volume)
     { id: 'concentracao_1', value: '1', label: 'mg/ml', grupo: '🧪 Concentração (massa/volume)' },
     { id: 'concentracao_2', value: '1000', label: 'g/ml', grupo: '🧪 Concentração (massa/volume)' },
-
-    { id: 'concentracao_33', value: '0.2', label: 'mg/5ml', grupo: '🧪 Concentração (massa/volume)' },
-    { id: 'concentracao_44', value: '200', label: 'g/5ml', grupo: '🧪 Concentração (massa/volume)' }, 
-    { id: 'concentracao_55', value: '100', label: 'g/10ml', grupo: '🧪 Concentração (massa/volume)' },
-    { id: 'concentracao_66', value: '0.1', label: 'mg/10ml', grupo: '🧪 Concentração (massa/volume)' },
-
     { id: 'concentracao_3', value: '0.001', label: 'mcg/ml', grupo: '🧪 Concentração (massa/volume)' },
     { id: 'concentracao_4', value: '0.000001', label: 'ng/ml', grupo: '🧪 Concentração (massa/volume)' },
     { id: 'concentracao_5', value: '0.001', label: 'mg/L', grupo: '🧪 Concentração (massa/volume)' },
     { id: 'concentracao_6', value: '1', label: 'g/L', grupo: '🧪 Concentração (massa/volume)' },
     { id: 'concentracao_7', value: '0.001', label: 'mg/100ml', grupo: '🧪 Concentração (massa/volume)' },
-    { id: 'concentracao_8', value: '10', label: '% (1% = 10mg/ml)', grupo: '📊 Percentual' },
-    { id: 'concentracao_9', value: '1', label: '% (peso/volume)', grupo: '📊 Percentual' },
-    { id: 'concentracao_10', value: '1', label: 'UI/ml', grupo: '⚕️ Unidades Especiais' },
-    { id: 'concentracao_11', value: '1', label: 'UI/L', grupo: '⚕️ Unidades Especiais' },
-    { id: 'concentracao_12', value: '1', label: 'mEq/ml', grupo: '⚕️ Unidades Especiais' },
-    { id: 'concentracao_13', value: '1', label: 'mEq/L', grupo: '⚕️ Unidades Especiais' },
-    { id: 'concentracao_14', value: '1', label: 'mmol/ml', grupo: '⚕️ Unidades Especiais' },
-    { id: 'concentracao_15', value: '1', label: 'mmol/L', grupo: '⚕️ Unidades Especiais' }
+    { id: 'concentracao_8', value: '0.2', label: 'mg/5ml', grupo: '🧪 Concentração (massa/volume)' },
+    { id: 'concentracao_9', value: '100', label: 'g/10ml', grupo: '🧪 Concentração (massa/volume)' },
+    // 📊 Percentual
+    { id: 'concentracao_10', value: '10', label: '% (1% = 10mg/ml)', grupo: '📊 Percentual' },
+    { id: 'concentracao_11', value: '1', label: '% (peso/volume)', grupo: '📊 Percentual' },
+    // Removido: Unidades Especiais (UI, mEq, mmol)
 ];
 
 // ============================================================
@@ -252,6 +248,9 @@ function retirar_bordas() {
     });
 }
 
+// ============================================================
+// FUNÇÃO CALCULAR (CORRIGIDA)
+// ============================================================
 function calcular() {
     const resultado = document.getElementById("resultado");
     resultado.classList.remove("vibrar");
@@ -343,14 +342,49 @@ function calcular() {
         return valor.toFixed(2);
     }
 
+    // CORREÇÃO: Lógica de dose diária vs dose por administração
+    // Verifica se a opção da dose selecionada contém "/dia"
+    const unidadeDosagemSelecionada = document.getElementById('unidadeDosagemSelecionada').textContent;
+    const isDoseDiaria = unidadeDosagemSelecionada.includes('/dia');
+
+    // Cálculo base: dose * peso (sempre em mg)
     const doseDiariaMg = vpeso * vdosagem;
-    const doseDiariaMl = doseDiariaMg / vconcentracao;
+    let doseAdminMg = doseDiariaMg; // Inicializa com o valor diário
+
+    // Se NÃO for dose diária (ex: mg/kg, mg), a dose já é por administração
+    if (!isDoseDiaria) {
+        doseAdminMg = vdosagem; // A dose inserida já é por administração (não multiplica pelo peso)
+        // Se a dose for por peso (mg/kg) mas não for diária, multiplica pelo peso
+        if (unidadeDosagemSelecionada.includes('/kg') && !unidadeDosagemSelecionada.includes('/dia')) {
+            doseAdminMg = vpeso * vdosagem;
+        }
+        // Se for dose fixa (mg, g, mcg) sem /kg, usa o valor diretamente
+    }
+
+    // O volume por administração é sempre: doseAdminMg / concentracao
+    const volumePorAdmin = doseAdminMg / vconcentracao;
 
     let html = '';
 
     if (intervaloHoras !== null && intervaloHoras > 0) {
         const numeroTomas = 24 / intervaloHoras;
-        const volumePorToma = doseDiariaMl / numeroTomas;
+        let volumePorToma = volumePorAdmin; // Inicializa com o volume por administração
+
+        // CORREÇÃO: Só divide pelo número de tomadas se for dose diária
+        if (isDoseDiaria) {
+            // Para dose diária, o volume por toma é o volume diário dividido pelo número de tomadas
+            const doseDiariaVolume = doseAdminMg / vconcentracao;
+            volumePorToma = doseDiariaVolume / numeroTomas;
+        } else {
+            // Para dose por administração, o volume por toma é o volume calculado diretamente
+            volumePorToma = volumePorAdmin;
+        }
+
+        // CORREÇÃO: Ajuste para o caso de intervalo > 24h
+        if (intervaloHoras > 24) {
+            // Para intervalo > 24h, a dose é única (1 toma)
+            volumePorToma = volumePorAdmin;
+        }
 
         if (intervaloHoras === 24) {
             html = `
@@ -368,7 +402,7 @@ function calcular() {
                         
                         <div class="dose-central">
                             <div class="dose-volume">
-                                ${formatarNumero(doseDiariaMl)} <span class="dose-unidade">mL</span>
+                                ${formatarNumero(volumePorToma)} <span class="dose-unidade">mL</span>
                             </div>
                             <div class="dose-intervalo">
                                 1 vez por dia
@@ -379,7 +413,6 @@ function calcular() {
             `;
         } else if (intervaloHoras > 24) {
             const dias = intervaloHoras / 24;
-            const volumePorToma = doseDiariaMl;
             let textoIntervalo = '';
 
             if (dias === 1.5) {
@@ -423,6 +456,7 @@ function calcular() {
                 </div>
             `;
         } else {
+            // Intervalo entre 1 e 23 horas
             html = `
                 <div class="internacional-container">
                     <div class="internacional-card">
@@ -445,18 +479,18 @@ function calcular() {
                             </div>
                         </div>
                         
-                                        <div class="internacional-totais">
+                        <div class="internacional-totais">
                             <div class="total-item">
                                 <i class="ri-repeat-line"></i>
                                 <span>${formatarNumero(numeroTomas)} toma(s)/dia</span>
                             </div>
                             <div class="total-item">
                                 <i class="ri-drop-line"></i>
-                                <span>${formatarNumero(doseDiariaMl)} mL/dia</span>
+                                <span>${formatarNumero(volumePorToma * numeroTomas)} mL/dia</span>
                             </div>
                             <div class="total-item">
                                 <i class="ri-scales-2-line"></i>
-                                <span>${formatarNumero(doseDiariaMg)} mg/dia</span>
+                                <span>${formatarNumero(doseAdminMg)} mg/dia</span>
                             </div>
                         </div>
                     </div>
@@ -464,6 +498,7 @@ function calcular() {
             `;
         }
     } else {
+        // Sem intervalo
         html = `
             <div class="internacional-container">
                 <div class="internacional-card">
@@ -479,8 +514,9 @@ function calcular() {
                     
                     <div class="dose-central">
                         <div class="dose-volume">
-                            ${formatarNumero(doseDiariaMl)} <span class="dose-unidade">mL</span>
+                            ${formatarNumero(volumePorAdmin)} <span class="dose-unidade">mL</span>
                         </div>
+                        ${isDoseDiaria ? `<div class="dose-intervalo">Dose diária total</div>` : `<div class="dose-intervalo">Dose por administração</div>`}
                     </div>
                 </div>
             </div>
@@ -495,6 +531,7 @@ function calcular() {
     campo_concentracao.style.borderBottom = "solid 2px var(--primary)";
     campo_intervalo.style.borderBottom = "solid 2px var(--primary)";
 }
+
 
 campo_peso.addEventListener("input", retirar_bordas);
 campo_dosagem.addEventListener("input", retirar_bordas);
