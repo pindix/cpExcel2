@@ -82,7 +82,7 @@ html {
     backdrop-filter: blur(15px) saturate(180%);
     /* O segredo do vidro */
     -webkit-backdrop-filter: blur(15px) saturate(180%);
-    border-radius: 0;
+    border-radius: 0 0 24px 24px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     /* Borda subtil */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -133,7 +133,9 @@ html {
     color: var(--white);
 }
 
-
+.btn-voltar-estilizado i {
+    color: var(--text);
+}
 
 
 .theme-toggle {

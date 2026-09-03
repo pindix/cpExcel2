@@ -188,7 +188,62 @@
         
     </div>
     
-    <script src="../script.js"></script>
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const themeBtn = document.getElementById('themeBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const root = document.documentElement;
+
+    function aplicarTema(tema) {
+
+        root.setAttribute('data-theme', tema);
+
+        localStorage.setItem('matclinica-theme', tema);
+
+        if (themeIcon) {
+            if (tema === 'dark') {
+                themeIcon.className = 'ri-sun-line';
+                themeBtn.setAttribute(
+                    'aria-label',
+                    'Mudar para tema claro'
+                );
+            } else {
+                themeIcon.className = 'ri-moon-line';
+                themeBtn.setAttribute(
+                    'aria-label',
+                    'Mudar para tema escuro'
+                );
+            }
+        }
+    }
+
+    function obterTema() {
+        return localStorage.getItem('matclinica-theme') || 'light';
+    }
+
+    /* Aplicar tema inicial */
+    aplicarTema(obterTema());
+
+    /* Alternar tema */
+    if (themeBtn) {
+
+        themeBtn.addEventListener('click', () => {
+
+            const temaAtual = obterTema();
+
+            const novoTema =
+                temaAtual === 'dark'
+                    ? 'light'
+                    : 'dark';
+
+            aplicarTema(novoTema);
+        });
+
+    }
+
+});
+</script>
 </body>
 
 </html>
