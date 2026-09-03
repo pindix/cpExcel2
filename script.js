@@ -1,301 +1,847 @@
-/*
- * script.js — Mpindi TecMed / MatClínica
- * SOLUÇÃO EXCLUSIVA - Sem interferências do Bloco de Notas
- */
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // ==========================================================================
-    // 1. TEMA - APENAS FUNCIONALIDADE BÁSICA
-    // ==========================================================================
-    const themeBtn = document.getElementById('themeBtn');
-    const themeIcon = document.getElementById('themeIcon');
-    const body = document.body;
-    
-    // Verificar se o tema já foi aplicado pelo script no head
-    const temaAtual = localStorage.getItem('matclinica-theme');
-    if (temaAtual === 'dark') {
-        body.setAttribute('data-theme', 'dark');
-        if (themeIcon) themeIcon.className = 'ri-sun-line';
-    } else {
-        body.removeAttribute('data-theme');
-        if (themeIcon) themeIcon.className = 'ri-moon-line';
+/* =========================================================
+   MATCLÍNICA — SCRIPT DA NAVBAR
+   Menu baseado no HeroSection.jsx
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const btnHistoria = document.getElementById('btnHistoria');
+const historiaContainer = document.getElementById('historiaContainer');
+
+if (btnHistoria && historiaContainer) {
+
+    btnHistoria.addEventListener('click', () => {
+
+        const isOpen = historiaContainer.classList.toggle('active');
+
+        btnHistoria.classList.toggle('active', isOpen);
+
+        btnHistoria.setAttribute(
+            'aria-expanded',
+            isOpen ? 'true' : 'false'
+        );
+
+        historiaContainer.setAttribute(
+            'aria-hidden',
+            isOpen ? 'false' : 'true'
+        );
+
+        btnHistoria.querySelector('span').textContent =
+            isOpen ? 'Ocultar história' : 'Ver história';
+
+    });
+
+}
+
+    /* =====================================================
+       ELEMENTOS
+       ===================================================== */
+
+    const pillArea = document.getElementById("mcPillArea");
+    const menuToggle = document.getElementById("mcMenuToggle");
+    const menuIcon = document.getElementById("mcMenuIcon");
+
+    const themeBtn = document.getElementById("themeBtn");
+    const themeIcon = document.getElementById("themeIcon");
+
+    if (!pillArea || !menuToggle) {
+        console.warn("Navbar MatClínica não encontrada.");
+        return;
     }
-    
-    // Alternar tema
+
+
+    /* =====================================================
+       SEÇÕES DA MATCLÍNICA
+       ===================================================== */
+
+    const sections = [
+        {
+            id: "inicio",
+            target: "hero",
+            label: "Início",
+            icon: "ri-home-4-line"
+        },
+
+        {
+            id: "sobre",
+            target: "sobre",
+            label: "Sobre",
+            icon: "ri-information-line"
+        },
+
+        {
+            id: "seguranca",
+            target: "seguranca",
+            label: "Refências",
+            icon: "ri-shield-check-line"
+        },
+
+        {
+            id: "ferramentas",
+            target: "ferramentas",
+            label: "Ferramentas",
+            icon: "ri-tools-line"
+        }
+    ];
+
+
+    /* =====================================================
+       ESTADO
+       ===================================================== */
+
+    let currentIndex = 0;
+    let isOpen = false;
+
+    let renderFrame = null;
+    let scrollFrame = null;
+
+
+    /* =====================================================
+       TEMA
+       ===================================================== */
+
+    function getCurrentTheme() {
+
+        const savedTheme =
+            localStorage.getItem("matclinica-theme");
+
+        if (savedTheme === "dark") {
+            return "dark";
+        }
+
+        if (savedTheme === "light") {
+            return "light";
+        }
+
+        const htmlTheme =
+            document.documentElement.getAttribute("data-theme");
+
+        return htmlTheme === "dark"
+            ? "dark"
+            : "light";
+    }
+
+
+    function updateThemeIcon(theme) {
+
+        if (!themeIcon) {
+            return;
+        }
+
+        if (theme === "dark") {
+
+            themeIcon.className =
+                "ri-sun-line";
+
+            themeBtn.setAttribute(
+                "aria-label",
+                "Mudar para tema claro"
+            );
+
+        } else {
+
+            themeIcon.className =
+                "ri-moon-line";
+
+            themeBtn.setAttribute(
+                "aria-label",
+                "Mudar para tema escuro"
+            );
+        }
+    }
+
+
+    function applyTheme(theme) {
+
+        const root =
+            document.documentElement;
+
+        const body =
+            document.body;
+
+        if (theme === "dark") {
+
+            root.setAttribute(
+                "data-theme",
+                "dark"
+            );
+
+            body.setAttribute(
+                "data-theme",
+                "dark"
+            );
+
+            localStorage.setItem(
+                "matclinica-theme",
+                "dark"
+            );
+
+        } else {
+
+            root.setAttribute(
+                "data-theme",
+                "light"
+            );
+
+            body.setAttribute(
+                "data-theme",
+                "light"
+            );
+
+            localStorage.setItem(
+                "matclinica-theme",
+                "light"
+            );
+        }
+
+        updateThemeIcon(theme);
+    }
+
+
+    let currentTheme =
+        getCurrentTheme();
+
+    applyTheme(currentTheme);
+
+
     if (themeBtn) {
-        themeBtn.addEventListener('click', () => {
-            const isDark = body.getAttribute('data-theme') === 'dark';
-            
-            if (isDark) {
-                body.removeAttribute('data-theme');
-                document.documentElement.removeAttribute('data-theme');
-                if (themeIcon) themeIcon.className = 'ri-moon-line';
-                localStorage.setItem('matclinica-theme', 'light');
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                document.documentElement.setAttribute('data-theme', 'dark');
-                if (themeIcon) themeIcon.className = 'ri-sun-line';
-                localStorage.setItem('matclinica-theme', 'dark');
+
+        themeBtn.addEventListener(
+            "click",
+            () => {
+
+                const theme =
+                    getCurrentTheme();
+
+                applyTheme(
+                    theme === "dark"
+                        ? "light"
+                        : "dark"
+                );
             }
-        });
+        );
     }
-    
-    // ==========================================================================
-    // 2. NAVEGAÇÃO - EFEITO MITOSE (SE EXISTIR)
-    // ==========================================================================
-    const navLinks = document.querySelectorAll('.nav-link');
-    const mitoseBlob = document.querySelector('.mitose-blob');
-    
-    function atualizarPosicaoMitose(targetLink) {
-        if (!targetLink || !mitoseBlob) return;
-        mitoseBlob.style.width = `${targetLink.offsetWidth}px`;
-        mitoseBlob.style.left = `${targetLink.offsetLeft}px`;
-    }
-    
-    const activeLinkInicial = document.querySelector('.nav-link.active');
-    if (activeLinkInicial) {
-        setTimeout(() => atualizarPosicaoMitose(activeLinkInicial), 100);
-    }
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            navLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-            atualizarPosicaoMitose(link);
-        });
-    });
-    
-    // ==========================================================================
-    // 3. SCROLL - SECÇÃO ATIVA
-    // ==========================================================================
-    const sections = document.querySelectorAll('.section-scroll');
-    const floatingToolsBtn = document.getElementById('stickyToolsBtn');
-    
-    window.addEventListener('scroll', () => {
-        let seccaoAtualId = 'hero';
-        
-        sections.forEach(seccao => {
-            const seccaoTop = seccao.offsetTop - 140;
-            if (window.scrollY >= seccaoTop) {
-                seccaoAtualId = seccao.getAttribute('id');
+
+
+    /* =====================================================
+       CRIAR PÍLULA
+       ===================================================== */
+
+    function createPill(
+        section,
+        className,
+        clickHandler
+    ) {
+
+        const button =
+            document.createElement("button");
+
+        button.type = "button";
+
+        button.className =
+            className;
+
+        button.textContent =
+            section.label;
+
+        button.setAttribute(
+            "aria-label",
+            `Ir para ${section.label}`
+        );
+
+        button.addEventListener(
+            "click",
+            (event) => {
+
+                event.stopPropagation();
+
+                clickHandler();
             }
-        });
-        
-        const linkCorrespondente = document.querySelector(`.nav-link[data-sec="${seccaoAtualId}"]`);
-        if (linkCorrespondente && !linkCorrespondente.classList.contains('active')) {
-            navLinks.forEach(l => l.classList.remove('active'));
-            linkCorrespondente.classList.add('active');
-            atualizarPosicaoMitose(linkCorrespondente);
-        }
-        
-        // Botão flutuante
-        const ferramentasSec = document.getElementById('ferramentas');
-        if (ferramentasSec && floatingToolsBtn) {
-            const limiteFerramentas = ferramentasSec.offsetTop - 250;
-            if (window.scrollY >= limiteFerramentas) {
-                floatingToolsBtn.classList.add('hidden');
-            } else {
-                floatingToolsBtn.classList.remove('hidden');
-            }
-        }
-    });
-    
-    // ==========================================================================
-    // 4. REDIMENSIONAMENTO
-    // ==========================================================================
-    window.addEventListener('resize', () => {
-        const linkAtivoAtual = document.querySelector('.nav-link.active');
-        atualizarPosicaoMitose(linkAtivoAtual);
-    });
-    
-    // ==========================================================================
-    // 5. INICIALIZAR AOS
-    // ==========================================================================
-    if (typeof AOS !== 'undefined') {
-        AOS.init({
-            duration: 800,
-            offset: 100,
-            easing: 'ease-out-cubic'
-        });
+        );
+
+        return button;
     }
-});
 
 
+    /* =====================================================
+       ANIMAÇÃO DE TRANSIÇÃO
+       ===================================================== */
 
+    function animateRender(renderFunction) {
 
-
-/*
- * UNIFICAÇÃO: Menu lateral unificado
- * Script para controlar o menu lateral (abrir/fechar, overlay, animações)
- */
-document.addEventListener('DOMContentLoaded', function() {
-    // ==========================================================================
-    // MENU LATERAL UNIFICADO
-    // ==========================================================================
-    const btnHamburger = document.querySelector('.btn-hamburger-menu') || document.getElementById('btnHamburgerMenu');
-    const menuOverlay = document.getElementById('menuOverlay');
-    const menuLateral = document.getElementById('menuLateral');
-    const menuItems = document.querySelectorAll('.menu-item');
-    
-    // Se o botão hamburger não existir, criar um na navbar
-    if (!btnHamburger) {
-        const navRight = document.querySelector('.nav-right-actions');
-        if (navRight) {
-            const hamburger = document.createElement('button');
-            hamburger.className = 'btn-hamburger-menu';
-            hamburger.id = 'btnHamburgerMenu';
-            hamburger.setAttribute('aria-label', 'Menu');
-            hamburger.innerHTML = `
-                <span></span>
-                <span></span>
-                <span></span>
-            `;
-            // Inserir antes do primeiro elemento ou no início
-            navRight.insertBefore(hamburger, navRight.firstChild);
+        if (renderFrame) {
+            cancelAnimationFrame(renderFrame);
         }
-    }
-    
-    // Re-atribuir após possível criação
-    const btnHamburgerFinal = document.querySelector('.btn-hamburger-menu') || document.getElementById('btnHamburgerMenu');
-    
-    if (btnHamburgerFinal && menuOverlay && menuLateral) {
-        function abrirMenu() {
-            btnHamburgerFinal.classList.add('ativo');
-            menuOverlay.classList.add('ativo');
-            menuLateral.classList.add('ativo');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function fecharMenu() {
-            btnHamburgerFinal.classList.remove('ativo');
-            menuOverlay.classList.remove('ativo');
-            menuLateral.classList.remove('ativo');
-            document.body.style.overflow = '';
-        }
-        
-        btnHamburgerFinal.addEventListener('click', () => {
-            if (menuLateral.classList.contains('ativo')) {
-                fecharMenu();
-            } else {
-                abrirMenu();
-            }
-        });
-        
-        menuOverlay.addEventListener('click', fecharMenu);
-        
-        menuItems.forEach(item => {
-            item.addEventListener('click', (e) => {
-                // Remover active de todos
-                menuItems.forEach(i => i.classList.remove('active'));
-                // Adicionar active ao clicado
-                item.classList.add('active');
-                // Fechar menu após clicar
-                setTimeout(fecharMenu, 200);
+
+        pillArea.classList.add("mc-menu-changing");
+
+        renderFrame = requestAnimationFrame(() => {
+
+            renderFunction();
+
+            requestAnimationFrame(() => {
+
+                pillArea.classList.remove(
+                    "mc-menu-changing"
+                );
+
             });
-        });
-        
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && menuLateral.classList.contains('ativo')) {
-                fecharMenu();
-            }
-        });
-        
-        // Suporte a toque para deslizar fechar (mobile)
-        let touchStartXMenu = 0;
-        let touchStartYMenu = 0;
-        menuLateral.addEventListener('touchstart', (e) => {
-            touchStartXMenu = e.touches[0].clientX;
-            touchStartYMenu = e.touches[0].clientY;
-        }, { passive: true });
-        
-        menuLateral.addEventListener('touchmove', (e) => {
-            // Prevenir scroll enquanto arrasta para fechar
-            const touchX = e.touches[0].clientX;
-            const touchY = e.touches[0].clientY;
-            const diffX = touchStartXMenu - touchX;
-            const diffY = Math.abs(touchStartYMenu - touchY);
-            
-            // Se arrastar para a direita (diffX < 0) e movimento for mais horizontal que vertical
-            if (diffX < -30 && diffY < 50) {
-                e.preventDefault();
-                fecharMenu();
-            }
-        }, { passive: false });
-        
-        menuLateral.addEventListener('touchend', (e) => {
-            const touchEndX = e.changedTouches[0].clientX;
-            const touchEndY = e.changedTouches[0].clientY;
-            const diffX = touchStartXMenu - touchEndX;
-            const diffY = Math.abs(touchStartYMenu - touchEndY);
-            
-            if (diffX < -50 && diffY < 100) {
-                fecharMenu();
-            }
+
         });
     }
-    
-    // ==========================================================================
-    // TEMA DO MENU (Sincronizar com o tema principal)
-    // ==========================================================================
-    const themeBtnMenu = document.getElementById('themeBtnMenu');
-    const themeIconMenu = document.getElementById('themeIconMenu');
-    const body = document.body;
-    
-    // Função para atualizar ícone do tema no menu
-    function atualizarIconeMenu() {
-        if (themeIconMenu) {
-            const isDark = body.getAttribute('data-theme') === 'dark';
-            themeIconMenu.className = isDark ? 'ri-sun-line' : 'ri-moon-line';
+
+
+    /* =====================================================
+       MENU FECHADO
+       ===================================================== */
+
+    function renderClosedMenu() {
+
+        pillArea.innerHTML = "";
+
+        const wrapper =
+            document.createElement("div");
+
+        wrapper.className =
+            "mc-closed-menu";
+
+
+        /* =================================================
+           SEÇÃO ANTERIOR — SOMENTE A IMEDIATAMENTE ANTERIOR
+           ================================================= */
+
+        if (currentIndex > 0) {
+
+            const previousSection =
+                sections[currentIndex - 1];
+
+            const previousContainer =
+                document.createElement("div");
+
+            previousContainer.className =
+                "mc-previous-pills";
+
+
+            const pill =
+                createPill(
+                    previousSection,
+                    "mc-previous-pill",
+                    () => {
+
+                        goToSection(
+                            currentIndex - 1
+                        );
+                    }
+                );
+
+
+            previousContainer.appendChild(pill);
+
+            wrapper.appendChild(
+                previousContainer
+            );
+        }
+
+
+        /* =================================================
+           LINHA ATIVA
+           ================================================= */
+
+        const activeRow =
+            document.createElement("div");
+
+        activeRow.className =
+            "mc-active-row";
+
+
+        const activePill =
+            document.createElement("div");
+
+        activePill.className =
+            "mc-active-pill";
+
+        activePill.textContent =
+            sections[currentIndex].label;
+
+
+        const activeIcon =
+            document.createElement("div");
+
+        activeIcon.className =
+            "mc-active-icon";
+
+
+        const icon =
+            document.createElement("i");
+
+        icon.className =
+            sections[currentIndex].icon;
+
+
+        activeIcon.appendChild(icon);
+
+        activeRow.appendChild(
+            activePill
+        );
+
+        activeRow.appendChild(
+            activeIcon
+        );
+
+        wrapper.appendChild(
+            activeRow
+        );
+
+
+        /* =================================================
+           PRÓXIMAS SEÇÕES
+           ================================================= */
+
+        const nextSections =
+            sections.slice(
+                currentIndex + 1,
+                currentIndex + 3
+            );
+
+
+        if (nextSections.length > 0) {
+
+            const nextContainer =
+                document.createElement("div");
+
+            nextContainer.className =
+                "mc-next-pills";
+
+
+            nextSections.forEach(
+                (section, relativeIndex) => {
+
+                    const actualIndex =
+                        currentIndex +
+                        relativeIndex +
+                        1;
+
+
+                    const pill =
+                        createPill(
+                            section,
+                            "mc-next-pill",
+                            () => {
+
+                                goToSection(
+                                    actualIndex
+                                );
+                            }
+                        );
+
+
+                    nextContainer.appendChild(
+                        pill
+                    );
+                }
+            );
+
+
+            wrapper.appendChild(
+                nextContainer
+            );
+        }
+
+
+        pillArea.appendChild(
+            wrapper
+        );
+    }
+
+
+    /* =====================================================
+       MENU ABERTO
+       ===================================================== */
+
+    function renderOpenMenu() {
+
+        pillArea.innerHTML = "";
+
+        const menu =
+            document.createElement("div");
+
+        menu.className =
+            "mc-open-menu";
+
+
+        sections.forEach(
+            (section, index) => {
+
+                const item =
+                    document.createElement("div");
+
+                item.className =
+                    "mc-open-item";
+
+
+                if (
+                    index === currentIndex
+                ) {
+
+                    item.classList.add(
+                        "active"
+                    );
+                }
+
+
+                const label =
+                    document.createElement("div");
+
+                label.className =
+                    "mc-open-label";
+
+                label.textContent =
+                    section.label;
+
+
+                const iconBox =
+                    document.createElement("div");
+
+                iconBox.className =
+                    "mc-open-icon";
+
+
+                const icon =
+                    document.createElement("i");
+
+                icon.className =
+                    section.icon;
+
+
+                iconBox.appendChild(icon);
+
+
+                item.appendChild(label);
+
+                item.appendChild(iconBox);
+
+
+                item.addEventListener(
+                    "click",
+                    () => {
+
+                        goToSection(index);
+                    }
+                );
+
+
+                menu.appendChild(item);
+            }
+        );
+
+
+        pillArea.appendChild(menu);
+    }
+
+
+    /* =====================================================
+       RENDER GERAL
+       ===================================================== */
+
+    function renderMenu(animated = false) {
+
+        const renderFunction =
+            isOpen
+                ? renderOpenMenu
+                : renderClosedMenu;
+
+
+        if (animated) {
+
+            animateRender(
+                renderFunction
+            );
+
+        } else {
+
+            renderFunction();
         }
     }
-    
-    // Atualizar ícone inicial
-    atualizarIconeMenu();
-    
-    // Sincronizar com o botão de tema principal
-    const themeBtnPrincipal = document.getElementById('themeBtn');
-    if (themeBtnPrincipal) {
-        themeBtnPrincipal.addEventListener('click', function() {
-            // Atualizar após mudança de tema (com pequeno delay)
-            setTimeout(atualizarIconeMenu, 50);
+
+
+    /* =====================================================
+       IR PARA UMA SEÇÃO
+       ===================================================== */
+
+    function goToSection(index) {
+
+        if (
+            index < 0 ||
+            index >= sections.length
+        ) {
+            return;
+        }
+
+
+        const section =
+            sections[index];
+
+        const element =
+            document.getElementById(
+                section.target
+            );
+
+
+        if (!element) {
+            return;
+        }
+
+
+        currentIndex =
+            index;
+
+
+        isOpen =
+            false;
+
+
+        updateMenuButton();
+
+        renderMenu(true);
+
+
+        /*
+         * Pequeno atraso para permitir
+         * que a animação do menu comece
+         * antes do scroll.
+         */
+
+        setTimeout(() => {
+
+    if (section.target === "hero") {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
         });
+        return;
     }
-    
-    // Alternar tema pelo menu
-    if (themeBtnMenu) {
-        themeBtnMenu.addEventListener('click', function() {
-            // Simular clique no botão de tema principal
-            if (themeBtnPrincipal) {
-                themeBtnPrincipal.click();
-            } else {
-                // Fallback: alternar manualmente
-                const isDark = body.getAttribute('data-theme') === 'dark';
-                if (isDark) {
-                    body.removeAttribute('data-theme');
-                    document.documentElement.removeAttribute('data-theme');
-                    localStorage.setItem('matclinica-theme', 'light');
-                    if (themeIconMenu) themeIconMenu.className = 'ri-moon-line';
-                } else {
-                    body.setAttribute('data-theme', 'dark');
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                    localStorage.setItem('matclinica-theme', 'dark');
-                    if (themeIconMenu) themeIconMenu.className = 'ri-sun-line';
+
+    element.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+}, 80);
+    }
+
+
+    /* =====================================================
+       BOTÃO ABRIR / FECHAR
+       ===================================================== */
+
+    function updateMenuButton() {
+
+        menuToggle.setAttribute(
+            "aria-expanded",
+            isOpen ? "true" : "false"
+        );
+
+
+        menuToggle.setAttribute(
+            "aria-label",
+            isOpen
+                ? "Fechar menu"
+                : "Abrir menu"
+        );
+
+
+        if (menuIcon) {
+
+            menuIcon.className =
+                isOpen
+                    ? "ri-close-line"
+                    : "ri-menu-line";
+        }
+    }
+
+
+    menuToggle.addEventListener(
+        "click",
+        (event) => {
+
+            event.stopPropagation();
+
+
+            isOpen =
+                !isOpen;
+
+
+            updateMenuButton();
+
+            renderMenu(true);
+        }
+    );
+
+
+    /* =====================================================
+       DETECTAR SEÇÃO ATUAL
+       ===================================================== */
+
+    function detectCurrentSection() {
+
+        const detectionPoint =
+            window.scrollY +
+            window.innerHeight * 0.38;
+
+
+        let detectedIndex = 0;
+
+
+        sections.forEach(
+            (section, index) => {
+
+                const element =
+                    document.getElementById(
+                        section.target
+                    );
+
+
+                if (!element) {
+                    return;
+                }
+
+
+                const rect =
+                    element.getBoundingClientRect();
+
+
+                const sectionTop =
+                    rect.top +
+                    window.scrollY;
+
+
+                if (
+                    detectionPoint >=
+                    sectionTop
+                ) {
+
+                    detectedIndex =
+                        index;
                 }
             }
-            // Fechar menu após mudar tema
-            if (menuLateral && menuLateral.classList.contains('ativo')) {
-                setTimeout(() => {
-                    if (btnHamburgerFinal) btnHamburgerFinal.classList.remove('ativo');
-                    menuOverlay.classList.remove('ativo');
-                    menuLateral.classList.remove('ativo');
-                    document.body.style.overflow = '';
-                }, 200);
-            }
-        });
+        );
+
+
+        if (
+            detectedIndex ===
+            currentIndex
+        ) {
+            return;
+        }
+
+
+        currentIndex =
+            detectedIndex;
+
+
+        /*
+         * Só atualizamos visualmente
+         * quando o menu está fechado.
+         */
+
+        if (!isOpen) {
+
+            renderMenu(true);
+        }
     }
+
+
+    /* =====================================================
+       SCROLL OTIMIZADO
+       ===================================================== */
+
+    window.addEventListener(
+        "scroll",
+        () => {
+
+            if (scrollFrame) {
+                return;
+            }
+
+
+            scrollFrame =
+                requestAnimationFrame(
+                    () => {
+
+                        detectCurrentSection();
+
+                        scrollFrame =
+                            null;
+                    }
+                );
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    /* =====================================================
+       ESC
+       ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        (event) => {
+
+            if (
+                event.key === "Escape" &&
+                isOpen
+            ) {
+
+                isOpen =
+                    false;
+
+                updateMenuButton();
+
+                renderMenu(true);
+            }
+        }
+    );
+
+
+    /* =====================================================
+       REDIMENSIONAMENTO
+       ===================================================== */
+
+    window.addEventListener(
+        "resize",
+        () => {
+
+            if (!isOpen) {
+
+                renderMenu(false);
+            }
+        }
+    );
+
+
+    /* =====================================================
+       INICIALIZAÇÃO
+       ===================================================== */
+
+    detectCurrentSection();
+
+    updateMenuButton();
+
+    renderMenu(false);
+
+
+    /* =====================================================
+       LOGIN
+       ===================================================== */
+
+    window.semLogin =
+        function () {
+
+            alert(
+                "Login ainda não está Disponível!"
+            );
+        };
+
 });
-
-
-function semLogin() {
-    alert('Login ainda não está Disponível!')
-}
