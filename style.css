@@ -1031,7 +1031,7 @@ html[data-theme="light"] .mc-open-item:not(.active):hover .mc-open-label {
         width: 32px;
         height: 32px;
 
-        top: -17px;
+        top: -20px;
         left: -18px;
     }
 
@@ -1136,7 +1136,7 @@ html[data-theme="light"] .mc-open-item:not(.active):hover .mc-open-label {
     left: 0;
     width: 100%;
     z-index: -1;
-    padding-top: 140px ;
+    padding-top: 140px;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -1395,6 +1395,7 @@ html[data-theme="light"] .mc-open-item:not(.active):hover .mc-open-label {
     .hero-title,
     .hero-desc {
         text-align: left !important;
+
     }
     
     .hero-buttons {
@@ -2988,6 +2989,20 @@ html[data-theme="light"] .mc-open-item:not(.active):hover .mc-open-label {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* =========================================================
    AJUSTE FINAL — RESPONSIVIDADE DA NAVBAR MATCLÍNICA
    ========================================================= */
@@ -3208,6 +3223,17 @@ body[data-theme="dark"] .mc-nav::before {
 
 @media (max-width: 650px) {
 
+    .hero-section {
+        padding-top: 40px;
+    }
+
+    .hero-title {
+        font-size: 2.3rem;
+    }
+    .hero-desc {
+        font-size: 0.8rem;
+    }
+
     .mc-nav {
 
         height: 78px;
@@ -3225,7 +3251,7 @@ body[data-theme="dark"] .mc-nav::before {
 
     .mc-logo img {
 
-        width: 42px;
+        width: 42px; 
 
         height: 42px;
 
@@ -3325,7 +3351,7 @@ body[data-theme="dark"] .mc-nav::before {
 
         top: -18px;
 
-        right: 72px;
+        left: -40px;
 
     }
 
@@ -3498,10 +3524,9 @@ body[data-theme="dark"] .mc-nav::before {
         white-space: nowrap;
 
     }
-
     .mc-nav-app span {
 
-        display: inline;
+        display: none;
 
     }
 
@@ -3631,12 +3656,6 @@ body[data-theme="dark"] .mc-nav::before {
         font-size: 8px;
 
         white-space: nowrap;
-
-    }
-
-    .mc-nav-app span {
-
-        display: inline;
 
     }
 
