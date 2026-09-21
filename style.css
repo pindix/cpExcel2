@@ -1140,7 +1140,7 @@ html[data-theme="light"] .mc-open-item:not(.active):hover .mc-open-label {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: var(--bg-canvas);
+    background: var(--white);
 }
 
 .hero-container {
@@ -1320,7 +1320,7 @@ html[data-theme="light"] .mc-open-item:not(.active):hover .mc-open-label {
 }
 
 .info-box {
-    background: var(--bg-canvas);
+    background: var(--white);
     padding: 40px 30px 30px;
     border-radius: 20px;
     position: relative;
@@ -1417,6 +1417,13 @@ html[data-theme="light"] .mc-open-item:not(.active):hover .mc-open-label {
     .sobre-section {
         padding-left: 24px;
         padding-right: 24px;
+    }
+
+    .sobre-header h2 {
+        font-size: 2.1rem;
+    }
+    .sobre-main-text {
+        font-size: 1.1rem;
     }
 
     .btn-historia {
@@ -2795,10 +2802,7 @@ html[data-theme="light"] .mc-open-item:not(.active):hover .mc-open-label {
         grid-template-columns: 1fr;
         text-align: center;
     }
-    
-    .hero-desc {
-        margin: 0 auto 36px;
-    }
+
     
     .hero-buttons {
         justify-content: center;
@@ -2816,6 +2820,378 @@ html[data-theme="light"] .mc-open-item:not(.active):hover .mc-open-label {
         padding: 40px 24px;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   REPORTAR ERRO — SECÇÃO
+   ========================================================= */
+
+.reportar-erro-section {
+    padding: 100px 13%;
+    background: var(--bg-system);
+    position: relative;
+    isolation: isolate;
+}
+
+.reportar-erro-container {
+    max-width: 720px;
+    margin: 0 auto;
+    background: var(--bg-canvas);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--borda-bento);
+    transition: var(--transition-smooth);
+}
+
+[data-theme="dark"] .reportar-erro-container {
+    background: var(--bento-fundo);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.reportar-erro-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -1px;
+    color: var(--text-main);
+}
+
+.reportar-erro-subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 36px;
+    line-height: 1.6;
+}
+
+/* --- Campos --- */
+
+.reportar-erro-field {
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.reportar-erro-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 8px;
+}
+
+.reportar-erro-required {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.reportar-erro-optional {
+    font-weight: 400;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+/* --- Inputs e Textareas --- */
+
+.reportar-erro-input,
+.reportar-erro-textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    border: 1.5px solid var(--borda-bento);
+    background: var(--bg-system);
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: var(--transition-smooth);
+    outline: none;
+    resize: vertical;
+}
+
+.reportar-erro-textarea {
+    min-height: 100px;
+}
+
+.reportar-erro-input:focus,
+.reportar-erro-textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-soft);
+}
+
+[data-theme="dark"] .reportar-erro-input,
+[data-theme="dark"] .reportar-erro-textarea {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .reportar-erro-input:focus,
+[data-theme="dark"] .reportar-erro-textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 132, 61, 0.2);
+}
+
+/* --- Select Personalizado --- */
+
+/* Esconde o select nativo */
+.reportar-erro-select-native {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 0;
+    height: 0;
+}
+
+/* UI do select */
+.reportar-erro-select {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    border: 1.5px solid var(--borda-bento);
+    background: var(--bg-system);
+    color: var(--text-main);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    font-size: 0.95rem;
+    user-select: none;
+}
+
+.reportar-erro-select:hover {
+    border-color: var(--primary);
+}
+
+.reportar-erro-select.active {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-soft);
+}
+
+.reportar-erro-select i {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    transition: transform 0.3s ease;
+}
+
+.reportar-erro-select.active i {
+    transform: rotate(180deg);
+}
+
+.reportar-erro-select-value {
+    color: var(--text-muted);
+}
+
+.reportar-erro-select-value.has-value {
+    color: var(--text-main);
+}
+
+/* Lista de opções */
+.reportar-erro-select-list {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    width: 100%;
+    background: var(--bg-canvas);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--borda-bento);
+    box-shadow: var(--shadow-card);
+    list-style: none;
+    padding: 6px;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.25s ease;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+[data-theme="dark"] .reportar-erro-select-list {
+    background: var(--bento-fundo);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.reportar-erro-select-list.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.reportar-erro-select-list li {
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    transition: background 0.2s ease;
+}
+
+.reportar-erro-select-list li:hover {
+    background: var(--primary-soft);
+    color: var(--primary);
+}
+
+.reportar-erro-select-list li.selected {
+    background: var(--primary);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* --- Botão --- */
+
+.reportar-erro-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px 32px;
+    border: none;
+    border-radius: var(--radius-pill);
+    background: var(--primary);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    box-shadow: 0 12px 28px rgba(0, 132, 61, 0.25);
+    margin-top: 8px;
+}
+
+.reportar-erro-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 36px rgba(0, 132, 61, 0.35);
+}
+
+.reportar-erro-btn:active {
+    transform: translateY(0);
+}
+
+/* --- Mensagem de Sucesso --- */
+
+.reportar-erro-sucesso {
+    text-align: center;
+    padding: 40px 20px;
+    animation: reportarFadeIn 0.5s ease;
+}
+
+.reportar-erro-sucesso i {
+    font-size: 3.5rem;
+    color: var(--primary);
+    margin-bottom: 16px;
+    display: block;
+}
+
+.reportar-erro-sucesso p {
+    font-size: 1.1rem;
+    color: var(--text-main);
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* =========================================================
+   REPORTAR ERRO — BOTÃO "ESTÁ BEM" (REPOR FORMULÁRIO)
+   ========================================================= */
+
+.reportar-erro-reset-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 28px;
+    padding: 12px 32px;
+    border: 1.5px solid var(--primary);
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--primary);
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.reportar-erro-reset-btn:hover {
+    background: var(--primary);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 132, 61, 0.25);
+}
+
+.reportar-erro-reset-btn:active {
+    transform: translateY(0);
+}
+
+[data-theme="dark"] .reportar-erro-reset-btn {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+[data-theme="dark"] .reportar-erro-reset-btn:hover {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+/* Ajuste responsivo */
+@media (max-width: 768px) {
+    .reportar-erro-reset-btn {
+        width: 100%;
+        padding: 12px 24px;
+        font-size: 0.9rem;
+    }
+}
+
+@keyframes reportarFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Responsivo --- */
+
+@media (max-width: 768px) {
+    .reportar-erro-section {
+        padding: 60px 16px;
+    }
+
+    .reportar-erro-container {
+        padding: 32px 20px;
+        border-radius: 20px;
+    }
+
+    .reportar-erro-title {
+        font-size: 1.7rem;
+    }
+
+    .reportar-erro-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 28px;
+    }
+
+    .reportar-erro-btn {
+        padding: 14px 24px;
+        font-size: 0.95rem;
+    }
+}
+
+
+
+
 
 
 
@@ -3231,7 +3607,7 @@ body[data-theme="dark"] .mc-nav::before {
         font-size: 2.3rem;
     }
     .hero-desc {
-        font-size: 0.8rem;
+        font-size: 1rem;
     }
 
     .mc-nav {

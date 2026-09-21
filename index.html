@@ -115,7 +115,7 @@
                         <strong>Uma plataforma. Dezenas de ferramentas. Menos complicação no seu dia.</strong>
                     </p>
 
-
+ 
                     <div class="hero-buttons">
                         <a href="#" class="btn-hero-tools"><i class="ri-google-play-line"></i> Baixar App</a>
                         <!-- <a href="#sobre" class="btn-hero-about"><i class="ri-information-line"></i> Sobre</a> -->
@@ -557,6 +557,104 @@
         </div>
     </section>
 
+
+
+    <!-- ==========================================
+     REPORTAR ERRO
+=========================================== -->
+<section id="reportar-erro" class="reportar-erro-section section-scroll">
+    <div class="reportar-erro-container" data-aos="fade-up">
+
+        <span class="section-tag">Feedback</span>
+        <h2 class="reportar-erro-title">Encontrou um erro?</h2>
+        <p class="reportar-erro-subtitle">
+            A tua opinião é muito importante para nós. Se encontraste algum problema, por favor reporta-o abaixo.
+        </p>
+
+        <!-- REPORTAR ERRO: Formulário com FormSubmit -->
+<form id="reportarErroForm" class="reportar-erro-form" novalidate>
+
+    <!-- REPORTAR ERRO: Campos escondidos do FormSubmit -->
+    <input type="hidden" name="_subject" value="Reporte de Erro — MatClínica">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_next" value="https://teusite.com/#reportar-erro">
+
+    <!-- Select Personalizado -->
+    <div class="reportar-erro-field">
+        <label class="reportar-erro-label" for="reportarFerramenta">Ferramenta com erro</label>
+
+        <select id="reportarFerramenta" name="Ferramenta" class="reportar-erro-select-native" required>
+            <option value="" disabled selected>Seleciona uma ferramenta</option>
+            <option value="Gestograma">Gestograma</option>
+            <option value="Cálculo de Dosagem">Cálculo de Dosagem</option>
+            <option value="Fórmula Internacional">Fórmula Internacional</option>
+            <option value="Gotejamento">Gotejamento</option>
+            <option value="Conversor">Conversor</option>
+            <option value="Sinais Vitais">Sinais Vitais</option>
+            <option value="Interpretador Clínico">Interpretador Clínico</option>
+            <option value="Diluição">Diluição</option>
+            <option value="Sistema ABO">Sistema ABO</option>
+            <option value="Bloco de Notas">Bloco de Notas</option>
+            <option value="Achar Peso e Idade">Achar Peso e Idade</option>
+            <option value="Outro">Outro</option>
+        </select>
+
+        <div class="reportar-erro-select" id="reportarErroSelect" tabindex="0" role="combobox" aria-expanded="false">
+            <span class="reportar-erro-select-value" id="reportarErroSelectValue">Seleciona uma ferramenta</span>
+            <i class="ri-arrow-down-s-line"></i>
+        </div>
+
+        <ul class="reportar-erro-select-list" id="reportarErroSelectList" role="listbox">
+            <li role="option" data-value="Gestograma">Gestograma</li>
+            <li role="option" data-value="Cálculo de Dosagem">Cálculo de Dosagem</li>
+            <li role="option" data-value="Fórmula Internacional">Fórmula Internacional</li>
+            <li role="option" data-value="Gotejamento">Gotejamento</li>
+            <li role="option" data-value="Conversor">Conversor</li>
+            <li role="option" data-value="Sinais Vitais">Sinais Vitais</li>
+            <li role="option" data-value="Interpretador Clínico">Interpretador Clínico</li>
+            <li role="option" data-value="Diluição">Diluição</li>
+            <li role="option" data-value="Sistema ABO">Sistema ABO</li>
+            <li role="option" data-value="Bloco de Notas">Bloco de Notas</li>
+            <li role="option" data-value="Achar Peso e Idade">Achar Peso e Idade</li>
+            <li role="option" data-value="Outro">Outro</li>
+        </ul>
+    </div>
+
+    <div class="reportar-erro-field">
+        <label class="reportar-erro-label" for="reportarDescricao">Descrição do erro <span class="reportar-erro-required">*</span></label>
+        <textarea id="reportarDescricao" name="Descrição" class="reportar-erro-textarea" placeholder="Descreve o erro que encontraste..." required></textarea>
+    </div>
+
+    <div class="reportar-erro-field">
+        <label class="reportar-erro-label" for="reportarEmail">O teu email <span class="reportar-erro-optional">(opcional, se quiseres resposta)</span></label>
+        <input type="email" id="reportarEmail" name="Email" class="reportar-erro-input" placeholder="exemplo@email.com">
+    </div>
+
+    <div class="reportar-erro-field">
+        <label class="reportar-erro-label" for="reportarPassos">Como chegaste a este erro? <span class="reportar-erro-optional">(opcional)</span></label>
+        <textarea id="reportarPassos" name="Passos" class="reportar-erro-textarea" placeholder="Passos para reproduzir o erro..."></textarea>
+    </div>
+
+    <button type="submit" class="reportar-erro-btn">
+        <i class="ri-send-plane-line"></i> Enviar Reporte
+    </button>
+
+</form>
+
+        <!-- Mensagem de fallback (escondida inicialmente) -->
+<div id="reportarErroSucesso" class="reportar-erro-sucesso" style="display: none;">
+    <i class="ri-check-double-line"></i>
+    <p id="reportarErroMensagem"></p>
+
+    <!-- REPORTAR ERRO: Botão para repor o formulário -->
+    <button type="button" id="reportarErroReset" class="reportar-erro-reset-btn">
+        Está bem
+    </button>
+</div>
+
+    </div>
+</section>
 
 
     <!-- ==========================================
