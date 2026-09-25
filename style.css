@@ -1,369 +1,2337 @@
+/* ==========================================================================
+   1. VARIÁVEIS DE SISTEMA E TEMAS (WINDOWS FLUENT / ULTRA-CLEAN)
+   ========================================================================== */
 :root {
     --primary: #00843d;
     --primary-dark: #00632e;
-    --primary-soft: #eafaf1;
-    --text: #1a2a21; 
-    --gray: #6d7c74;
-    --white: #ffffff;
-    --milk-solid: #f0f2f0;
-    --section-2-bg: #f0f2f0;
-    --footer-bg: #1a2a21;
-    --sombra: #e0dada;
-    --subCard: #ffffff;
+    --primary-soft: rgba(0, 132, 61, 0.05);
+    
+    /* Cores do Modo Claro */
+    --bg-system: #f3f6f4;
+    --bg-canvas: #ffffff;
+    --text-main: #111a14;
+    --text-muted: #526357;
+    --white: white;
+
+    
     --borda-bento: rgba(0, 132, 61, 0.08);
+    
     --shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.05);
     --bento-fundo: #ffffff;
-    --mat: black;
+
+    
+    /* Efeito Acrílico Windows */
+    --glass-bg: rgba(255, 255, 255, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.8);
+    --glass-accent: rgba(0, 132, 61, 0.1);
+    
+    /* Degradê de Sombra INTENSIFICADO para o Fundo da Navbar (Modo Claro) */
+    --nav-shadow-bg: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.40) 0%,
+            /* Mais escuro no topo */
+            rgba(0, 0, 0, 0.18) 45%,
+            /* Transição média mais visível */
+            rgba(0, 0, 0, 0.05) 75%,
+            /* Suavização estendida */
+            rgba(0, 0, 0, 0) 100%
+            /* Desaparece completamente */
+        );
+    
+    --shadow-card: 0 16px 48px rgba(0, 0, 0, 0.04);
+    --radius-lg: 28px;
+    --radius-md: 16px;
+    --radius-pill: 40px;
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Cores do Tema Escuro */
 [data-theme="dark"] {
+    /* Cores do Modo Escuro */
+    --bg-system: #0d0f0e;
+    --bg-canvas: #141715;
+    --text-main: #f0f4f1;
+    --text-muted: #94a398;
     --white: black;
-    /* Fundo da Section 1 */
-    --milk-solid: #1e1e1e;
-    /* Fundo dos Cards e Section 2 */
-    --section-2-bg: #1e1e1e;
-    --text: #f0f2f0;
-    /* Texto principal */
-    --gray: #a0a0a0;
-    /* Texto secundário */
+    
     --primary-soft: #1a3326;
-    /* Hover dos cards no modo escuro */
-    --border-color: var(--primary);
-    --sombra: none;
-    --subCard: #1e1e1e;
+    
     --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.4);
     --borda-bento: none;
     --bento-fundo: #1e1e1e;
-    --mat: white;
+
+    /* Efeito Acrílico Windows Dark */
+    --glass-bg: rgba(20, 23, 21, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-accent: rgba(0, 132, 61, 0.15);
+    
+    /* Degradê de Sombra INTENSIFICADO para o Fundo da Navbar (Modo Escuro) */
+    --nav-shadow-bg: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.85) 0%,
+            /* Penumbra bem densa no topo */
+            rgba(0, 0, 0, 0.45) 50%,
+            /* Garante alto contraste com texto claro */
+            rgba(0, 0, 0, 0.15) 80%,
+            rgba(0, 0, 0, 0) 100%);
+    
+    --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
-@font-face {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url('assets/fonts/Poppins-Regular.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
-    src: url('assets/fonts/Poppins-Bold.ttf') format('truetype');
-}
-
+/* ==========================================================================
+   2. RESET E REGRAS GLOBAIS
+   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    transition: background-color 0.3s, color 0.3s;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-html {
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
     scroll-behavior: smooth;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
-    color: var(--text);
-    background-color: var(--white);
-    overflow-x: hidden;
+    background-color: var(--bg-system);
+    color: var(--text-main);
+    line-height: 1.6;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.section-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--primary);
+    display: block;
+    margin-bottom: 12px;
 }
 
 
-/* ==========================================================================
-   NAVEGAÇÃO SUPERIOR
-   ========================================================================== */
-.nav-topo {
+
+
+
+
+/* =========================================================
+   MATCLÍNICA — NAVBAR / MENU ESTILO HEROSECTION
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   VARIÁVEIS
+   --------------------------------------------------------- */
+
+:root {
+    --mc-nav-text: #18181b;
+    --mc-nav-muted: #52525b;
+    --mc-nav-bg: rgba(255, 255, 255, 0.88);
+
+    --mc-pill-dark: #27272a;
+    --mc-pill-darker: #18181b;
+
+    --mc-light-bg: #ffffff;
+    --mc-light-soft: #e4e4e7;
+
+    --mc-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.16);
+}
+
+html[data-theme="dark"],
+body[data-theme="dark"] {
+    --mc-nav-text: #f4f4f5;
+    --mc-nav-muted: #a1a1aa;
+    --mc-nav-bg: rgba(24, 24, 27, 0.88);
+
+    --mc-light-bg: #27272a;
+    --mc-light-soft: #3f3f46;
+}
+
+
+/* ---------------------------------------------------------
+   NAV PRINCIPAL
+   --------------------------------------------------------- */
+
+.mc-nav {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.6);
-    /* Transparência base branca */
-    backdrop-filter: blur(15px) saturate(180%);
-    /* O segredo do vidro */
-    -webkit-backdrop-filter: blur(15px) saturate(180%);
+
+    width: 100%;
+    height: 90px;
+
+    z-index: 9999;
+
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+
+    padding: 0 32px;
+
+    pointer-events: none;
+}
+
+
+/* ---------------------------------------------------------
+   LOGO
+   --------------------------------------------------------- */
+
+.mc-nav-left {
+    justify-self: start;
+    pointer-events: auto;
+}
+
+.mc-logo {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-    z-index: 1000;
-    border-bottom: 1px solid rgba(0, 132, 61, 0.08);
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+
+    text-decoration: none;
+
+    transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
 }
 
-[data-theme="dark"] .nav-topo {
-    background: #1a1a1ad3;
-    border-bottom: 1px solid #333;
+.mc-logo:hover {
+    transform: scale(1.04);
+    opacity: 0.92;
 }
 
-.nav-logo {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--primary);
-    letter-spacing: -0.3px;
+.mc-logo img {
+    width: 48px;
+    height: 48px;
+
+    object-fit: contain;
+
+    display: block;
 }
 
-.matClinica {
-    color: var(--mat);
-}
 
-/* ==========================================================================
-   BOTÃO HAMBURGER (Animado)
-   ========================================================================== */
-.btn-hamburger {
-    width: 40px;
-    height: 40px;
-    background: none;
-    border: none;
-    cursor: pointer;
+/* ---------------------------------------------------------
+   CENTRO — BAIXAR APP + LOGIN
+   --------------------------------------------------------- */
+
+.mc-nav-center {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-    z-index: 2000;
+
+    gap: 8px;
+
+    pointer-events: auto;
+
+    padding: 5px;
+
+    border-radius: 999px;
+
+    background: var(--mc-nav-bg);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+/* BAIXAR APP */
+
+.mc-nav-app {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    height: 40px;
+
+    padding: 0 17px;
+
+    border-radius: 999px;
+
+    text-decoration: none;
+
+    color: var(--mc-nav-text);
+
+    font-size: 12px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.mc-nav-app:hover {
+    background: rgba(127, 127, 127, 0.12);
+    transform: translateY(-1px);
+}
+
+.mc-nav-app i {
+    font-size: 17px;
+    font-weight:normal;
+}
+
+
+/* LOGIN */
+
+.mc-nav-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 40px;
+
+    padding: 0 18px;
+
+    border-radius: 999px;
+
+    text-decoration: none;
+
+    background: #27272a;
+
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.mc-nav-login:hover {
+    transform: scale(1.04);
+    background: #3f3f46;
+}
+
+
+/* ---------------------------------------------------------
+   ÁREA DO MENU
+   --------------------------------------------------------- */
+
+.mc-nav-menu {
+    justify-self: end;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 8px;
+
+    pointer-events: auto;
+
     position: relative;
+
+    /*
+       Baixamos todo o conjunto para que
+       o botão de tema fique totalmente visível.
+    */
+    margin-top: 28px;
 }
 
-.btn-hamburger span {
-    display: block;
-    width: 24px;
-    height: 2.5px;
-    background: var(--text);
-    border-radius: 3px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: center;
+
+/* ---------------------------------------------------------
+   BOTÃO DE TEMA
+   --------------------------------------------------------- */
+
+.mc-theme-btn {
+    position: absolute;
+
+    top: -20px;
+    left: -33px;
+
+    width: 36px;
+    height: 36px;
+
+    border: none;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    background: #27272a;
+    color: #fbbf24;
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.18);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
 }
 
-/* Animação do Hamburger → X */
-.btn-hamburger.ativo span:nth-child(1) {
-    transform: translateY(7.5px) rotate(45deg);
+.mc-theme-btn:hover {
+    transform: scale(1.08);
 }
 
-.btn-hamburger.ativo span:nth-child(2) {
-    opacity: 0;
-    transform: scaleX(0);
+.mc-theme-btn:active {
+    transform: scale(0.94);
 }
 
-.btn-hamburger.ativo span:nth-child(3) {
-    transform: translateY(-7.5px) rotate(-45deg);
+.mc-theme-btn i {
+    font-size: 17px;
 }
+
+
+/* ---------------------------------------------------------
+   ÁREA DAS PÍLULAS
+   --------------------------------------------------------- */
+
+.mc-pill-area {
+    position: relative;
+
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+}
+
+
+/* =========================================================
+   MENU FECHADO
+   ========================================================= */
+
+.mc-closed-menu {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+}
+
+
+/* ---------------------------------------------------------
+   PÍLULAS ANTERIORES
+   --------------------------------------------------------- */
+
+.mc-previous-pills {
+    position: absolute;
+
+    bottom: calc(100% + 4px);
+
+    right: 34px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    gap: 2px;
+
+    pointer-events: auto;
+
+    z-index: 5;
+}
+
+
+/*
+   A primeira é a seção imediatamente anterior.
+   Quanto mais antiga, mais transparente.
+*/
+
+.mc-previous-pill {
+    border: none;
+
+    padding: 3px 14px;
+
+    min-height: 23px;
+
+    border-radius: 999px;
+
+    background: #27272a;
+
+    color: #d4d4d8;
+
+    font-family: inherit;
+
+    font-size: 10px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    box-shadow:
+        0 3px 9px rgba(0, 0, 0, 0.12);
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+.mc-previous-pill:nth-child(1) {
+    opacity: 0.72;
+}
+
+.mc-previous-pill:nth-child(2) {
+    opacity: 0.48;
+
+    transform: scale(0.96);
+}
+
+.mc-previous-pill:nth-child(3) {
+    opacity: 0.30;
+
+    transform: scale(0.92);
+}
+
+.mc-previous-pill:nth-child(4) {
+    opacity: 0.18;
+
+    transform: scale(0.88);
+}
+
+.mc-previous-pill:hover {
+    opacity: 1;
+
+    transform:
+        translateX(-2px)
+        scale(1.03);
+}
+
+
+/* ---------------------------------------------------------
+   LINHA DO ATIVO
+   --------------------------------------------------------- */
+
+.mc-active-row {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    z-index: 20;
+}
+
+
+/* ---------------------------------------------------------
+   PÍLULA ATIVA
+   --------------------------------------------------------- */
+
+.mc-active-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px;
+
+    padding: 9px 20px;
+
+    border-radius: 999px;
+
+    background: #27272a;
+
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    letter-spacing: 0.01em;
+
+    box-shadow:
+        0 4px 14px rgba(0, 0, 0, 0.18);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.mc-active-pill:hover {
+    transform: translateY(-1px);
+}
+
+
+/* ---------------------------------------------------------
+   ÍCONE DO ATIVO — BOLHA SEPARADA À DIREITA
+   --------------------------------------------------------- */
+
+.mc-active-icon {
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #18181b;
+
+    color: #d4d4d8;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.18);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.mc-active-icon i {
+    font-size: 16px;
+}
+
+.mc-active-icon:hover {
+    transform: scale(1.05);
+}
+
+
+/* ---------------------------------------------------------
+   PRÓXIMAS SEÇÕES
+   --------------------------------------------------------- */
+
+.mc-next-pills {
+    position: absolute;
+
+    top: calc(100% + 4px);
+
+    right: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    gap: 2px;
+
+    pointer-events: auto;
+
+    z-index: 5;
+}
+
+
+/* primeira próxima */
+
+.mc-next-pill {
+    border: none;
+
+    min-height: 25px;
+
+    padding: 4px 16px;
+
+    border-radius: 999px;
+
+    background: #27272a;
+
+    color: #d4d4d8;
+
+    font-family: inherit;
+
+    font-size: 10px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    box-shadow:
+        0 3px 9px rgba(0, 0, 0, 0.12);
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+/*
+   PRIMEIRA PRÓXIMA:
+   fica parcialmente sobre a segunda.
+*/
+
+.mc-next-pill:nth-child(1) {
+    margin-right: 31px;
+
+    opacity: 0.84;
+
+    z-index: 15;
+}
+
+
+/*
+   SEGUNDA PRÓXIMA:
+   deslocada para a direita.
+*/
+
+.mc-next-pill:nth-child(2) {
+    margin-right: 9px;
+
+    opacity: 0.60;
+
+    transform:
+        translateX(22px)
+        scale(0.96);
+
+    z-index: 10;
+}
+
+
+.mc-next-pill:nth-child(1):hover {
+    opacity: 1;
+
+    transform:
+        translateX(0)
+        scale(1.03);
+}
+
+.mc-next-pill:nth-child(2):hover {
+    opacity: 1;
+
+    transform:
+        translateX(22px)
+        scale(1.03);
+}
+
+
+/* =========================================================
+   MENU ABERTO
+   ========================================================= */
+
+.mc-open-menu {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    gap: 7px;
+
+    min-width: 145px;
+
+    padding: 5px 0;
+}
+
+
+/* ---------------------------------------------------------
+   ITEM ABERTO
+   --------------------------------------------------------- */
+
+.mc-open-item {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+
+    width: 100%;
+
+    cursor: pointer;
+
+    user-select: none;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.mc-open-item:hover {
+    transform: translateX(-2px);
+}
+
+
+/* ---------------------------------------------------------
+   LABEL DO MENU ABERTO
+   --------------------------------------------------------- */
+
+.mc-open-label {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 100px;
+
+    padding: 7px 15px;
+
+    border-radius: 999px;
+    background: var(--bg-system);
+
+
+    color: var(--text);
+
+    font-size: 11px;
+    font-weight: 500;
+
+    white-space: nowrap;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/*
+   ITEM ATIVO
+*/
+
+.mc-open-item.active .mc-open-label {
+    background: #3f3f46;
+
+    color: #ffffff;
+
+    font-weight: 700;
+}
+
+
+/*
+   Hover nos itens normais
+*/
+
+.mc-open-item:not(.active):hover .mc-open-label {
+    background: rgba(127, 127, 127, 0.12);
+
+    color: #ffffff;
+}
+
+
+/* ---------------------------------------------------------
+   ÍCONE DO MENU ABERTO
+   --------------------------------------------------------- */
+
+.mc-open-icon {
+    width: 32px;
+    height: 32px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #18181b;
+
+    color: #71717a;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.14);
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+/*
+   ÍCONE DO ITEM ATIVO
+*/
+
+.mc-open-item.active .mc-open-icon {
+    background: #27272a;
+
+    color: #ffffff;
+}
+
+.mc-open-item:not(.active):hover .mc-open-icon {
+    background: #27272a;
+
+    color: #ffffff;
+
+    transform: scale(1.04);
+}
+
+
+/* ---------------------------------------------------------
+   BOTÃO CIRCULAR DO MENU
+   --------------------------------------------------------- */
+
+.mc-menu-toggle {
+    width: 44px;
+    height: 44px;
+
+    flex-shrink: 0;
+
+    border: none;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    background: #27272a;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.30);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.mc-menu-toggle:hover {
+    transform: scale(1.06);
+
+    background: #3f3f46;
+}
+
+.mc-menu-toggle:active {
+    transform: scale(0.94);
+}
+
+.mc-menu-toggle i {
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   TEMA CLARO
+   ========================================================= */
+
+html[data-theme="light"] .mc-active-pill,
+body[data-theme="light"] .mc-active-pill {
+    background: #3f3f46;
+    color: #ffffff;
+}
+
+html[data-theme="light"] .mc-active-icon,
+body[data-theme="light"] .mc-active-icon {
+    background: #e4e4e7;
+    color: #3f3f46;
+}
+
+html[data-theme="light"] .mc-previous-pill,
+body[data-theme="light"] .mc-previous-pill {
+    background: #ffffff;
+    color: #52525b;
+}
+
+html[data-theme="light"] .mc-next-pill,
+body[data-theme="light"] .mc-next-pill {
+    background: #e4e4e7;
+    color: #52525b;
+}
+
+html[data-theme="light"] .mc-open-icon,
+body[data-theme="light"] .mc-open-icon {
+    background: #e4e4e7;
+    color: #52525b;
+}
+
+html[data-theme="light"] .mc-open-item.active .mc-open-icon,
+body[data-theme="light"] .mc-open-item.active .mc-open-icon {
+    background: #27272a;
+    color: #ffffff;
+}
+
+html[data-theme="light"] .mc-open-label {
+    color: #52525b;
+}
+
+html[data-theme="light"] .mc-open-item:not(.active):hover .mc-open-label {
+    color: #18181b;
+}
+
+
+/* =========================================================
+   RESPONSIVO — TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .mc-nav {
+        padding: 0 20px;
+    }
+
+    .mc-nav-center {
+        gap: 3px;
+    }
+
+    .mc-nav-app {
+        padding: 0 12px;
+    }
+
+    .mc-nav-app span {
+        display: inline;
+    }
+
+    .mc-nav-login {
+        padding: 0 14px;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVO — MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    .mc-nav {
+        height: 78px;
+
+        padding:
+            0
+            14px;
+    }
+
+
+    .mc-logo img {
+        width: 42px;
+        height: 42px;
+    }
+
+
+    .mc-nav-center {
+        position: absolute;
+        display: none;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        gap: 3px;
+    }
+
+
+    .mc-nav-app {
+        width: 38px;
+        height: 36px;
+
+        padding: 0;
+
+        justify-content: center;
+    }
+
+
+    .mc-nav-app i {
+        font-size: 17px;
+    }
+
+
+    .mc-nav-login {
+        height: 36px;
+
+        padding: 0 12px;
+
+        font-size: 11px;
+    }
+
+
+    .mc-nav-menu {
+        margin-top: 23px;
+
+        gap: 5px;
+    }
+
+
+    .mc-theme-btn {
+        width: 32px;
+        height: 32px;
+
+        top: -20px;
+        left: -18px;
+    }
+
+
+    .mc-menu-toggle {
+        width: 40px;
+        height: 40px;
+    }
+
+
+    .mc-active-pill {
+        min-width: 82px;
+
+        padding:
+            8px
+            14px;
+
+        font-size: 11px;
+    }
+
+
+    .mc-active-icon {
+        width: 34px;
+        height: 34px;
+    }
+
+
+    .mc-previous-pills {
+        right: 30px;
+    }
+
+
+    .mc-next-pills {
+        right: 0;
+    }
+
+
+    .mc-open-menu {
+        min-width: 130px;
+    }
+
+
+    .mc-open-label {
+        min-width: 88px;
+
+        padding:
+            6px
+            12px;
+
+        font-size: 10px;
+    }
+
+
+    .mc-open-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE MUITO PEQUENO
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .mc-nav {
+        padding: 0 10px;
+    }
+
+    .mc-nav-center {
+        display: none;
+    }
+
+    .mc-nav-menu {
+        margin-top: 23px;
+    }
+
+}
+
+
+
+
+
+
+
 
 /* ==========================================================================
-   MENU OVERLAY (70% ESCURO - SEM FUNDO BRANCO ATRÁS)
+   4. HERO: ALINHAMENTO À ESQUERDA GARANTIDO NO MOBILE E DESKTOP
    ========================================================================== */
-.menu-overlay {
+.hero-pin-wrapper {
+    position: relative;
+    /* Espaçador: controla a distância de scroll durante a qual a secção
+       "sobre" desliza por cima da hero. A hero em si não se move. */
+    height: 100vh;
+}
+
+.hero-section {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    z-index: 1500;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
+    z-index: -1;
+    padding-top: 140px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: var(--white);
 }
 
-.menu-overlay.ativo {
-    opacity: 1;
-    visibility: visible;
+.hero-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 8rem;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: center;
 }
 
-/* ==========================================================================
-   MENU LATERAL (SEM FUNDO BRANCO - APENAS ITENS FLUTUANDO)
-   ========================================================================== */
-.menu-lateral {
-    position: fixed;
-    top: 0;
-    right: -270px;
-    width: 250px;
-    height: 100%;
-    z-index: 1600;
-    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+.hero-text-block {
+    text-align: left !important;
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
-    padding: 20px 12px;
-    gap: 6px;
-    /* SEM background! Transparente! */
-    background: transparent;
+    align-items: flex-start !important;
 }
 
-.menu-lateral.ativo {
-    right: 0;
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+    text-align: left !important;
 }
+
+.hero-title span {
+    color: var(--primary);
+}
+
+.hero-desc {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 580px;
+    margin-bottom: 36px;
+    text-align: left !important;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-start !important;
+    align-items: center;
+    width: 100%;
+}
+
+.btn-hero-tools,
+.btn-hero-about {
+    padding: 14px 30px;
+    border-radius: 40px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition-smooth);
+}
+
+.btn-hero-tools {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+.btn-hero-tools:hover {
+    background: var(--primary-dark);
+}
+
+.btn-hero-tools i {
+    font-weight: normal;
+}
+
+.btn-hero-about {
+    background: var(--primary-soft);
+    color: var(--primary);
+}
+
+.btn-hero-about:hover {
+    background: rgba(0, 132, 61, 0.1);
+}
+
+.hero-matclinica-mask {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 450px;
+    height: 450px;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.matclinica-icon-wrapper {
+    position: absolute;
+    bottom: -100px;
+    right: -50px;
+    width: 100%;
+    height: 100%;
+    color: var(--primary-soft);
+    transform: rotate(130deg);
+    transform-origin: center center;
+    transition: color 0.4s ease;
+}
+
+[data-theme="dark"] .matclinica-icon-wrapper {
+    color: rgba(255, 255, 255, 0.03);
+}
+
+.matclinica-icon-wrapper svg {
+    width: 100%;
+    height: 100%;
+}
+
 
 /* ==========================================================================
-   CABEÇALHO DO MENU (Ícone + Nome - Flutuando)
+   5. SOBRE: CARDS EM GRID (Efeito Elevação Intensificado)
    ========================================================================== */
-.menu-header {
-    padding: 10px 4px 20px;
-    text-align: center;
-    /* SEM background! */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    margin-bottom: 10px;
+.sobre-section {
+    position: relative;
+    isolation: isolate;
+    padding: 120px 13%;
+    background: var(--bg-system);
+    border-radius: 40px 40px 0 0;
+
+    box-shadow: 
+        0 -10px 20px rgba(0, 0, 0, 0.05),
+        0 -25px 50px rgba(0, 0, 0, 0.15),
+        0 -40px 80px rgba(0, 132, 61, 0.08);
+
+    transition: background-color 0.4s ease;
 }
 
-.menu-header-icon {
-    width: 56px;
-    height: 56px;
+/* Ajuste da sombra no Modo Escuro */
+[data-theme="dark"] .sobre-section {
+    
+    box-shadow: 
+        0 -12px 24px rgba(0, 0, 0, 0.4),
+        0 -30px 70px rgba(0, 0, 0, 0.7),
+        0 -50px 90px rgba(0, 0, 0, 0.9);
+}
+
+.sobre-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.sobre-header {
+    width: 100%;
+    margin-bottom: 80px;
+}
+
+.sobre-header h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+}
+
+.sobre-main-text {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+.sobre-main-text strong {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.grid-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.info-box {
+    background: var(--white);
+    padding: 40px 30px 30px;
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+.floating-icon {
+    width: 60px;
+    height: 60px;
     background: var(--primary);
+    color: var(--white);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.8rem;
-    color: white;
-    margin: 0 auto 12px;
+    position: absolute;
+    top: -30px;
+    left: 20px;
+    box-shadow: 0 8px 20px rgba(0, 132, 61, 0.3);
+    border: 5px solid var(--section-2-bg);
 }
 
-.menu-header h3 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--primary);
-    margin-bottom: 4px;
+.info-box h3 {
+    margin-bottom: 12px;
+    font-size: 1.25rem;
+    padding-top: 10px;
 }
 
-.menu-header p {
-    font-size: 0.78rem;
-    color: rgba(255, 255, 255, 0.7);
+.info-box p {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* --- BREAKPOINTS RESPONSIVOS (SOBRE) --- */
+@media (max-width: 1200px) {
+    .grid-info {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 45px 24px;
+    }
+}
+
+@media (max-width: 992px) {
+    .nav-center-toggle {
+        display: none;
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .btn-download-nav {
+        display: none !important;
+    }
+    
+    .btn-login {
+        display: block !important;
+    }
+    
+    .hero-container {
+        grid-template-columns: 1fr;
+        padding: 0 24px;
+    }
+    
+    /* FORÇADO ALINHAMENTO À ESQUERDA NO MOBILE */
+    .hero-text-block {
+        text-align: left !important;
+        align-items: flex-start !important;
+    }
+    
+    .hero-title,
+    .hero-desc {
+        text-align: left !important;
+
+    }
+    
+    .hero-buttons {
+        justify-content: flex-start !important;
+        align-items: flex-start !important;
+        width: 100%;
+    }
+    
+    .hero-desc {
+        margin: 0 0 36px 0;
+    }
+    
+    .hero-matclinica-mask {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .sobre-section {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .sobre-header h2 {
+        font-size: 1.9rem;
+    }
+    .sobre-main-text {
+        font-size: 1.1rem;
+    }
+
+    .btn-historia {
+        margin-bottom: 26px;
+    }
+
+    .historia-text {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .historia-pergunta {
+        font-size: 1.1rem;
+    }
+    .grid-info {
+        gap: 45px 0;
+        grid-template-columns: 1fr;
+    }
 }
 
 /* ==========================================================================
-   ITENS DO MENU (Fundo cinza, padding, border-radius 12px)
+   HISTÓRIA — SOBRE
    ========================================================================== */
-.menu-items {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+
+.btn-historia {
+    display: inline-flex;
+    align-items: center;
     gap: 6px;
+    margin: 0 0 30px;
+    padding: 10px 18px;
+    border: 1px solid var(--primary);
+    border-radius: 50px;
+    background: transparent;
+    color: var(--primary);
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.menu-item {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 0.5rem;
-    /* Padding como pediu */
-    text-decoration: none;
-    color: grey;
-    border-radius: 20px;
-    /* Border-radius como pediu */
-    background: var(--subCard);
-    /* Fundo cinza como pediu */
-    transition: all 0.25s ease;
+.btn-historia i {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.btn-historia:hover {
+    background: var(--primary);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+.btn-historia.active i {
+    transform: rotate(180deg);
+}
+
+
+/* CONTAINER DA HISTÓRIA */
+
+.historia-container {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    overflow: hidden;
+    transition:
+        grid-template-rows 0.55s ease,
+        opacity 0.4s ease,
+        margin-bottom 0.55s ease;
+
+    margin-bottom: 0;
+}
+
+.historia-container.active {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    margin-bottom: 55px;
+}
+
+
+/* ESTE É O ÚNICO FILHO DA GRID
+   PARA A ANIMAÇÃO FUNCIONAR CORRETAMENTE */
+
+.historia-inner {
+    min-height: 0;
+    overflow: hidden;
+}
+
+
+/* LINHA */
+
+.historia-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border-color, rgba(0, 0, 0, 0.1));
+    margin-bottom: 35px;
+}
+
+
+/* PEQUENO TÍTULO */
+
+.historia-label {
+    display: block;
+    margin-bottom: 24px;
+    color: var(--primary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+
+/* TEXTO */
+
+.historia-text {
+    color: var(--text-muted);
+    font-size: 1.08rem;
+    line-height: 1.8;
+}
+
+.historia-text p {
+    margin: 0 0 24px;
+}
+
+.historia-text strong {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+
+/* PERGUNTAS DA HISTÓRIA */
+
+.historia-pergunta {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin: 28px 0 !important;
+}
+
+
+/* DESCRIÇÃO PRINCIPAL */
+
+.sobre-resumo {
+    width: 100%;
+}
+
+
+/* CUIDAR */
+
+.sobre-cuidar {
+    margin-top: 32px;
+    font-size: 1.5rem;
+    line-height: 1.3;
+}
+
+.sobre-cuidar strong {
+    color: var(--primary);
+}
+
+
+/* MODO ESCURO */
+
+[data-theme="dark"] .historia-divider {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .btn-historia {
+        margin-bottom: 26px;
+    }
+
+    .historia-text {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .historia-pergunta {
+        font-size: 1.1rem;
+    }
+
+}
+
+/* ==========================================================================
+   6. SEGURANÇA: GLASSMORPHISM HD REALISTA (TEXTO ESCURO)
+   ========================================================================== */
+
+.seguranca-section {
     position: relative;
-    font-weight: 500;
-    width: fit-content;
+    isolation: isolate; /* garante que o overlay/imagem não vazem para outras secções */
+    padding: 120px 24px;
+    overflow: hidden; /* recorta a imagem de fundo aos limites exatos desta secção */
 }
 
+/*
+ * Camada de imagem de fundo. Posição firme e estática: acompanha o scroll
+ * da página normalmente, como qualquer outro conteúdo, em vez de tentar
+ * imitar `background-attachment: fixed` (que causa lentidão) ou um
+ * contra-scroll via JavaScript (que obrigava o `backdrop-filter` do vidro
+ * por cima a recalcular o desfoque a cada frame, dando um efeito visual de
+ * "reconstrução"/tremor). Sem JS a mexer nela, não há esse custo.
+ */
 
-
-.menu-item-icon {
-    width: 20px;
-    height: 20px;
-    background: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    color: grey;
-    flex-shrink: 0;
-}
-
-.menu-header-icon img {
+.seguranca-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    /* Nova imagem: Médico negro segurando um tablet */
+    background-image: url('https://images.pexels.com/photos/7579831/pexels-photo-7579831.jpeg?auto=compress&cs=tinysrgb&w=2400');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* <-- Faz a imagem ficar imóvel ao rolar a página */
+    z-index: 0;
+}
+/* Camada de vidro/luz sobre a imagem — opacidade baixa de propósito para não esconder a foto */
+.seguranca-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.22), rgba(240, 245, 242, 0.42));
+    backdrop-filter: blur(3px); /* desfoque leve: só o suficiente para destacar o texto sem apagar a foto */
+    -webkit-backdrop-filter: blur(3px);
+    z-index: 1;
+}
+
+.seguranca-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+/* --- PAINEL MESTRE (MODO CLARO) --- */
+
+/* Otimização de GPU para o painel principal e cards da Segurança */
+.glass-master-panel,
+.glass-card-feature {
+    /* Força o navegador a criar uma camada isolada no chip gráfico (GPU) */
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    
+    /* Evita oscilação de renderização no motor do WebKit/Chromium */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    height: fit-content;
 }
 
 
+.glass-master-panel {
+    position: relative;
+    
+    /* Reduzimos a opacidade de 0.75/0.40 para 0.35/0.15 */
+    background: linear-gradient(
+        135deg, 
+        rgba(255, 255, 255, 0.35) 0%, 
+        rgba(255, 255, 255, 0.15) 100%
+    );
+    
+    /* Diminuímos o desfoque de 30px para 12px para revelar mais a imagem */
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    
+    /* Bordas mais finas e cristalinas */
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    
+    border-radius: 36px;
+    padding: 64px 48px;
+    
+    /* Sombra mais leve para combinar com o vidro fino */
+    box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.08),
+        inset 0 1px 2px rgba(255, 255, 255, 0.8),
+        inset 0 -2px 6px rgba(0, 0, 0, 0.02);
+        
+    color: #0b140d;
+    overflow: hidden;
+}
 
-.menu-item span {
-    flex: 1;
+/* Overlay mais escuro no modo dark, mas ainda deixando a foto visível */
+[data-theme="dark"] .seguranca-bg-overlay {
+    background: radial-gradient(circle at 50% 30%, rgba(10, 18, 13, 0.30), rgba(5, 10, 7, 0.50));
+}
+
+/* Reflexo Diagonale de Luz no Vidro */
+.glass-glare {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 45%,
+        rgba(255, 255, 255, 0.18) 50%,
+        transparent 55%
+    );
+    pointer-events: none;
+}
+
+.section-tag-dark {
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #00632e;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.seguranca-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #050a06;
+    margin-bottom: 18px;
+    letter-spacing: -1px;
+}
+
+.seguranca-intro {
+    font-size: 1.08rem;
+    color: #1f2e22;
+    line-height: 1.75;
+    max-width: 960px;
+    margin-bottom: 32px;
+    font-weight: 450;
+}
+
+/* BOTÃO DE AÇÃO */
+.btn-como-funciona {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #00843d;
+    color: #ffffff;
+    padding: 16px 32px;
+    border-radius: 40px;
+    font-weight: 600;
     font-size: 0.95rem;
+    text-decoration: none;
+    box-shadow: 0 12px 28px rgba(0, 132, 61, 0.28);
+    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.menu-item-arrow {
-    font-size: 1.1rem;
-    transition: 0.2s;
-    color: grey;
+.btn-como-funciona:hover {
+    background: #00632e;
+    transform: translateY(-3px);
+    box-shadow: 0 16px 36px rgba(0, 132, 61, 0.38);
 }
 
-.menu-item:hover .menu-item-arrow {
-    opacity: 1;
-    transform: translateX(3px);
+.btn-como-funciona i {
+    transition: transform 0.3s ease;
 }
 
-.contacto {
+.btn-como-funciona:hover i {
+    transform: translateX(4px);
+}
+
+.glass-divider {
+    height: 1px;
+    background: linear-gradient(
+        to right, 
+        rgba(0, 0, 0, 0.02), 
+        rgba(0, 0, 0, 0.15), 
+        rgba(0, 0, 0, 0.02)
+    );
+    margin: 48px 0;
+}
+
+/* GRID DOS CARDS DE RECURSOS */
+.seguranca-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+}
+
+.glass-card-feature {
+    
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 26px;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 
+        0 14px 35px rgba(0, 0, 0, 0.04),
+        inset 0 1px 2px rgba(255, 255, 255, 0.9);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+
+
+    background: rgba(255, 255, 255, 0.75); /* Aumentado ligeiramente a opacidade */
+    backdrop-filter: blur(8px); /* Reduzido de 20px para 8px */
+    -webkit-backdrop-filter: blur(8px);
+}
+
+[data-theme="dark"] .glass-card-feature {
+    background: rgba(20, 31, 23, 0.85); /* Opacidade reforçada no escuro */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.glass-card-feature:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 
+        0 24px 50px rgba(0, 0, 0, 0.09),
+        inset 0 1px 2px #ffffff;
+}
+
+.card-header-glass {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 0.5rem;
+    gap: 16px;
+    margin-bottom: 20px;
 }
 
-.contacto a {
-    text-decoration: none;
-}
-
-.contacto i {
-    border: solid 2px white;
-    border-radius: 50%;
-    height: 40px;
-    width: 40px;
-    background: none;
-    border-radius: 50%;
+.glass-icon-box {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #00843d 0%, #00632e 100%);
+    color: #ffffff;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
-    color: white;
+    font-size: 1.4rem;
+    box-shadow: 0 8px 20px rgba(0, 132, 61, 0.25);
     flex-shrink: 0;
 }
 
-/* ==========================================================================
-   RODAPÉ DO MENU (Transparente)
-   ========================================================================== */
-.menu-footer {
-    padding: 20px 4px;
-    text-align: right;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    opacity: 0.6;
+.card-header-glass h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #060d07;
+    margin-bottom: 2px;
+}
+
+.badge-card {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #00843d;
+    background: rgba(0, 132, 61, 0.08);
+    padding: 3px 10px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.card-desc {
+    font-size: 0.93rem;
+    color: #283a2b;
+    line-height: 1.65;
+    margin-bottom: 28px;
+}
+
+/* CAIXA DE FONTES E MANUAIS */
+.sources-wrapper {
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 18px;
+    padding: 18px;
+    backdrop-filter: blur(10px);
+}
+
+.sources-title {
     font-size: 0.75rem;
-    margin-top: auto;
-    /* SEM background! */
-    background: transparent;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #00632e;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 14px;
 }
 
-.menu-footer small {
-    display: block;
-    line-height: 1.8;
-    color: white;
+.source-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.12);
+    gap: 12px;
+}
+
+.source-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.source-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.source-info strong {
+    font-size: 0.86rem;
+    color: #08120a;
+}
+
+.source-info span {
+    font-size: 0.76rem;
+    color: #435747;
+}
+
+.source-link {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #00843d;
+    text-decoration: none;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(0, 132, 61, 0.06);
+    padding: 6px 12px;
+    border-radius: 20px;
+    transition: all 0.25 ease;
+}
+
+.source-link:hover {
+    background: #00843d;
+    color: #ffffff;
+    transform: scale(1.03);
+}
+
+/* --- SEGURANÇA: SUPORTE COMPLETO AO MODO ESCURO (CARDS) --- */
+
+[data-theme="dark"] .glass-master-panel {
+    /* Reduzimos a opacidade do fundo escuro para deixar a imagem visível */
+    background: linear-gradient(
+        135deg, 
+        rgba(10, 16, 12, 0.45) 0%, 
+        rgba(5, 8, 6, 0.25) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.4),
+        inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .section-tag-dark {
+    color: #2ed573; /* Verde claro neon para destaque no escuro */
+}
+
+[data-theme="dark"] .seguranca-title {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .seguranca-intro {
+    color: #d1dcd3;
+}
+
+[data-theme="dark"] .glass-card-feature {
+    background: rgba(20, 31, 23, 0.65);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 14px 35px rgba(0, 0, 0, 0.3),
+        inset 0 1px 2px rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] .glass-card-feature:hover {
+    background: rgba(28, 44, 32, 0.85);
+    border-color: rgba(46, 213, 115, 0.4);
+    box-shadow: 
+        0 24px 50px rgba(0, 0, 0, 0.45),
+        inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .card-header-glass h3 {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .badge-card {
+    color: #2ed573;
+    background: rgba(46, 213, 115, 0.12);
+}
+
+[data-theme="dark"] .card-desc {
+    color: #c4d4c7;
+}
+
+[data-theme="dark"] .sources-wrapper {
+    background: rgba(12, 20, 14, 0.55);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .sources-title {
+    color: #2ed573;
+}
+
+[data-theme="dark"] .source-item {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .source-info strong {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .source-info span {
+    color: #9ab09f;
+}
+
+[data-theme="dark"] .source-link {
+    color: #2ed573;
+    background: rgba(46, 213, 115, 0.12);
+}
+
+[data-theme="dark"] .source-link:hover {
+    background: #2ed573;
+    color: #050a06;
+}
+
+[data-theme="dark"] .glass-divider {
+    background: linear-gradient(
+        to right, 
+        rgba(255, 255, 255, 0), 
+        rgba(255, 255, 255, 0.15), 
+        rgba(255, 255, 255, 0)
+    );
+}
+
+/* ==========================================================
+   SEGURANÇA — RESPONSIVIDADE MOBILE
+   Versão otimizada para desempenho e estabilidade visual
+   ========================================================== */
+
+@media (max-width: 768px) {
+
+    /* ------------------------------------------------------
+       SECTION
+       ------------------------------------------------------ */
+
+    .seguranca-section {
+        padding: 60px 12px;
+    }
+
+    .seguranca-container {
+        width: 100%;
+        max-width: 100%;
+    }
+
+
+    /* ------------------------------------------------------
+       IMAGEM DE FUNDO
+       ------------------------------------------------------ */
+
+    .seguranca-bg-image {
+        /*
+         * No mobile, fixed pode causar saltos, tremores
+         * e repinturas durante o scroll.
+         */
+
+        /*
+         * Mantemos a imagem, mas evitamos qualquer efeito
+         * adicional de animação.
+         */
+        transform: none;
+    }
+
+
+    /* ------------------------------------------------------
+       OVERLAY
+       ------------------------------------------------------ */
+
+    .seguranca-bg-overlay {
+
+        /*
+         * Blur muito menor no mobile.
+         * O objetivo é manter a profundidade sem obrigar
+         * o navegador a recalcular uma área pesada.
+         */
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+    }
+
+
+    /* ------------------------------------------------------
+       REFLEXO DO VIDRO
+       ------------------------------------------------------ */
+
+    .glass-glare {
+
+        /*
+         * O reflexo diagonal é apenas decorativo.
+         * No mobile ele adiciona ruído visual e processamento
+         * sem trazer benefício real à leitura.
+         */
+        display: none;
+    }
+
+
+    /* ------------------------------------------------------
+       PAINEL PRINCIPAL
+       ------------------------------------------------------ */
+
+    .glass-master-panel {
+        padding: 28px 16px;
+        border-radius: 20px;
+
+        /*
+         * Redução do blur do painel principal.
+         */
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+
+        /*
+         * Evita efeitos adicionais de transformação.
+         */
+        transform: none;
+        will-change: auto;
+    }
+
+
+    /* ------------------------------------------------------
+       CABEÇALHO
+       ------------------------------------------------------ */
+
+    .section-tag-dark {
+        font-size: 0.72rem;
+        letter-spacing: 1.5px;
+    }
+
+    .seguranca-title {
+        font-size: 1.8rem;
+        line-height: 1.2;
+        margin-bottom: 16px;
+    }
+
+    .seguranca-intro {
+        font-size: 0.98rem;
+        line-height: 1.65;
+        margin-bottom: 26px;
+    }
+
+
+    /* ------------------------------------------------------
+       BOTÃO
+       ------------------------------------------------------ */
+
+    .btn-como-funciona {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+    }
+
+
+    /* ------------------------------------------------------
+       DIVISOR
+       ------------------------------------------------------ */
+
+    .glass-divider {
+        margin: 36px 0;
+    }
+
+
+    /* ------------------------------------------------------
+       GRID
+       ------------------------------------------------------ */
+
+    .seguranca-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+
+    /* ------------------------------------------------------
+       CARDS
+       ------------------------------------------------------ */
+
+    .glass-card-feature {
+        padding: 20px 16px;
+        border-radius: 18px;
+
+        /*
+         * Menos blur = menos processamento + imagem
+         * visualmente mais limpa.
+         */
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+
+        /*
+         * A animação hover não faz sentido em touchscreen.
+         * Mantemos a transição para não interferir no AOS,
+         * mas retiramos a promoção constante para GPU.
+         */
+        transform: none;
+        will-change: auto;
+    }
+
+
+    /* ------------------------------------------------------
+       CABEÇALHO DOS CARDS
+       ------------------------------------------------------ */
+
+    .card-header-glass {
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+
+    .glass-icon-box {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        font-size: 1.25rem;
+    }
+
+    .card-header-glass h3 {
+        font-size: 1.15rem;
+    }
+
+    .badge-card {
+        font-size: 0.65rem;
+        padding: 3px 8px;
+    }
+
+
+    /* ------------------------------------------------------
+       TEXTO DOS CARDS
+       ------------------------------------------------------ */
+
+    .card-desc {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-bottom: 22px;
+    }
+
+
+    /* ------------------------------------------------------
+       ÁREA DAS FONTES
+       ------------------------------------------------------ */
+
+    .sources-wrapper {
+
+        /*
+         * No desktop existe bastante vidro sobre vidro.
+         * No mobile deixamos esta camada mais sólida.
+         */
+        background: rgba(255, 255, 255, 0.65);
+
+        /*
+         * Retiramos mais um backdrop-filter.
+         */
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+
+        border-radius: 16px;
+        padding: 16px;
+    }
+
+
+    /* ------------------------------------------------------
+       TÍTULO DAS FONTES
+       ------------------------------------------------------ */
+
+    .sources-title {
+        font-size: 0.7rem;
+        letter-spacing: 0.8px;
+        margin-bottom: 10px;
+    }
+
+
+    /* ------------------------------------------------------
+       ITEM DAS FONTES
+       ------------------------------------------------------ */
+
+    .source-item {
+        gap: 10px;
+        padding: 10px 0;
+    }
+
+    .source-info strong {
+        font-size: 0.82rem;
+    }
+
+    .source-info span {
+        font-size: 0.72rem;
+        line-height: 1.4;
+    }
+
+    .source-link {
+        font-size: 0.72rem;
+        padding: 5px 9px;
+    }
+
+
+    /* ------------------------------------------------------
+       MODO ESCURO
+       ------------------------------------------------------ */
+
+    [data-theme="dark"] .sources-wrapper {
+        background: rgba(12, 20, 14, 0.82);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+
 }
 
 /* ==========================================================================
-   SCROLLBAR DO MENU
+   7. FERRAMENTAS: BENTO GRID
    ========================================================================== */
-.menu-lateral::-webkit-scrollbar {
-    width: 4px;
-}
-
-.menu-lateral::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
-}
-
-
-
 
 .label-ferramentas {
     font-size: 1.8rem;
@@ -381,25 +2349,14 @@ body {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* --- BENTO GRID SYSTEM --- */
 .section-bento {
-    padding: 80px 20px;
-    max-width: 1100px;
+    position: relative;
+    isolation: isolate;
+    padding: 80px 10%;
+    width: 100%;
     margin: 0 auto;
+    background: var(--white);
 }
 
 .bento-grid {
@@ -529,6 +2486,9 @@ body {
 
 /* No mobile, agrupamos os quadrados para ficarem empilhados */
 @media (max-width: 768px) {
+    .section-bento {
+        padding: 80px 10px;
+    }
     .bento-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
@@ -772,95 +2732,493 @@ body {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* --- SECTION 2: INFO --- */
-.section-info {
-    background-color: var(--section-2-bg);
-    padding: 100px 20px 80px;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
+/* ==========================================================================
+   8. INTERFACE FLUTUANTE (BOTÃO FIXO)
+   ========================================================================== */
+.floating-tools-trigger {
+    
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%); /* Centraliza perfeitamente no eixo horizontal */
+    z-index: 9999;
+    /* Mantenha o restante das suas propriedades de estilo aqui (padding, border-radius, background, etc.) */
+    z-index: 9999;
+    transition: var(--transition-smooth);
 }
 
-.grid-info {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 65px 30px;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.info-box {
-    background: var(--white);
-    padding: 40px 30px 30px;
-    border-radius: 20px;
-    position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-}
-
-.floating-icon {
-    width: 60px;
-    height: 60px;
-    background: var(--primary);
-    color: var(--white);
-    border-radius: 50%;
+.floating-tools-trigger a {
+    background: var(--text-main);
+    color: var(--bg-canvas);
+    padding: 14px 24px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 1.8rem;
-    position: absolute;
-    top: -30px;
-    left: 20px;
-    box-shadow: 0 8px 20px rgba(0, 132, 61, 0.3);
-    border: 5px solid var(--section-2-bg);
+    gap: 8px;
 }
 
-.info-box h3 {
-    margin-bottom: 12px;
-    font-size: 1.25rem;
-    padding-top: 10px;
+.floating-tools-trigger.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
 }
 
-.info-box p {
+/* ==========================================================================
+   9. INTERRUPÇÕES DE MEDIA (RESPONSIVIDADE COMPLETA)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .size-large,
+    .size-medium,
+    .size-wide {
+        grid-column: span 2;
+    }
+    
+    .size-square {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 992px) {
+    
+    .nav-center-toggle,
+    .btn-app,
+    .btn-login {
+        display: none;
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    
+    .hero-buttons {
+        justify-content: center;
+    }
+    
+    .hero-matclinica-mask {
+        display: none;
+    }
+    
+    .seguranca-cards-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .sobre-card-panel {
+        padding: 40px 24px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   REPORTAR ERRO — SECÇÃO
+   ========================================================= */
+
+.reportar-erro-section {
+    padding: 100px 13%;
+    background: var(--bg-system);
+    position: relative;
+    isolation: isolate;
+}
+
+.reportar-erro-container {
+    max-width: 720px;
+    margin: 0 auto;
+    background: var(--bg-canvas);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--borda-bento);
+    transition: var(--transition-smooth);
+}
+
+[data-theme="dark"] .reportar-erro-container {
+    background: var(--bento-fundo);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.reportar-erro-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -1px;
+    color: var(--text-main);
+}
+
+.reportar-erro-subtitle {
     font-size: 1rem;
-    color: var(--gray);
+    color: var(--text-muted);
+    margin-bottom: 36px;
     line-height: 1.6;
 }
 
+/* --- Campos --- */
+
+.reportar-erro-field {
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.reportar-erro-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 8px;
+}
+
+.reportar-erro-required {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.reportar-erro-optional {
+    font-weight: 400;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+/* --- Inputs e Textareas --- */
+
+.reportar-erro-input,
+.reportar-erro-textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    border: 1.5px solid var(--borda-bento);
+    background: var(--bg-system);
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: var(--transition-smooth);
+    outline: none;
+    resize: vertical;
+}
+
+.reportar-erro-textarea {
+    min-height: 100px;
+}
+
+.reportar-erro-input:focus,
+.reportar-erro-textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-soft);
+}
+
+[data-theme="dark"] .reportar-erro-input,
+[data-theme="dark"] .reportar-erro-textarea {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .reportar-erro-input:focus,
+[data-theme="dark"] .reportar-erro-textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 132, 61, 0.2);
+}
+
+/* --- Select Personalizado --- */
+
+/* Esconde o select nativo */
+.reportar-erro-select-native {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 0;
+    height: 0;
+}
+
+/* UI do select */
+.reportar-erro-select {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    border: 1.5px solid var(--borda-bento);
+    background: var(--bg-system);
+    color: var(--text-main);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    font-size: 0.95rem;
+    user-select: none;
+}
+
+.reportar-erro-select:hover {
+    border-color: var(--primary);
+}
+
+.reportar-erro-select.active {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-soft);
+}
+
+.reportar-erro-select i {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    transition: transform 0.3s ease;
+}
+
+.reportar-erro-select.active i {
+    transform: rotate(180deg);
+}
+
+.reportar-erro-select-value {
+    color: var(--text-muted);
+}
+
+.reportar-erro-select-value.has-value {
+    color: var(--text-main);
+}
+
+/* Lista de opções */
+.reportar-erro-select-list {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    width: 100%;
+    background: var(--bg-canvas);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--borda-bento);
+    box-shadow: var(--shadow-card);
+    list-style: none;
+    padding: 6px;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.25s ease;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+[data-theme="dark"] .reportar-erro-select-list {
+    background: var(--bento-fundo);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.reportar-erro-select-list.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.reportar-erro-select-list li {
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    transition: background 0.2s ease;
+}
+
+.reportar-erro-select-list li:hover {
+    background: var(--primary-soft);
+    color: var(--primary);
+}
+
+.reportar-erro-select-list li.selected {
+    background: var(--primary);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* --- Botão --- */
+
+.reportar-erro-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px 32px;
+    border: none;
+    border-radius: var(--radius-pill);
+    background: var(--primary);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    box-shadow: 0 12px 28px rgba(0, 132, 61, 0.25);
+    margin-top: 8px;
+}
+
+.reportar-erro-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 36px rgba(0, 132, 61, 0.35);
+}
+
+.reportar-erro-btn:active {
+    transform: translateY(0);
+}
+
+/* --- Mensagem de Sucesso --- */
+
+.reportar-erro-sucesso {
+    text-align: center;
+    padding: 40px 20px;
+    animation: reportarFadeIn 0.5s ease;
+}
+
+.reportar-erro-sucesso i {
+    font-size: 3.5rem;
+    color: var(--primary);
+    margin-bottom: 16px;
+    display: block;
+}
+
+.reportar-erro-sucesso p {
+    font-size: 1.1rem;
+    color: var(--text-main);
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* =========================================================
+   REPORTAR ERRO — BOTÃO "ESTÁ BEM" (REPOR FORMULÁRIO)
+   ========================================================= */
+
+.reportar-erro-reset-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 28px;
+    padding: 12px 32px;
+    border: 1.5px solid var(--primary);
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--primary);
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.reportar-erro-reset-btn:hover {
+    background: var(--primary);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 132, 61, 0.25);
+}
+
+.reportar-erro-reset-btn:active {
+    transform: translateY(0);
+}
+
+[data-theme="dark"] .reportar-erro-reset-btn {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+[data-theme="dark"] .reportar-erro-reset-btn:hover {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+/* Ajuste responsivo */
+@media (max-width: 768px) {
+    .reportar-erro-reset-btn {
+        width: 100%;
+        padding: 12px 24px;
+        font-size: 0.9rem;
+    }
+}
+
+@keyframes reportarFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Responsivo --- */
+
+@media (max-width: 768px) {
+    .reportar-erro-section {
+        padding: 60px 16px;
+    }
+
+    .reportar-erro-container {
+        padding: 32px 20px;
+        border-radius: 20px;
+    }
+
+    .reportar-erro-title {
+        font-size: 1.7rem;
+    }
+
+    .reportar-erro-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 28px;
+    }
+
+    .reportar-erro-btn {
+        padding: 14px 24px;
+        font-size: 0.95rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   10. FOOTER: GLASSMORPHISM REALISTA (MODO CLARO & ESCURO)
+   ========================================================================== */
 .footer-moderno {
-    background-color: #1a2a21;
-    /* Verde escuro profissional */
+    background-color: var(--white); /* Verde escuro profissional */
     color: #ffffff;
     padding: 60px 20px 20px;
     margin-top: 50px;
     text-align: center;
 }
 
-[data-theme="dark"] .footer-moderno {
-    background-color: #0a0a0a;
-}
 
 .footer-static {
-    background-color: #f8faf9;
-    /* Cinza muito claro, quase branco */
+    background-color: #f8faf9; /* Cinza muito claro, quase branco */
     border-top: 1px solid #e0e6e3;
     padding: 40px 20px 20px;
     color: #4a5a51;
 }
 
 [data-theme="dark"] .footer-static {
-    background-color: #161616;
+    background-color: black;
     border-top: 1px solid #2a2a2a;
     color: #a0a0a0;
 }
@@ -904,7 +3262,7 @@ body {
 
 .footer-column ul li {
     margin-bottom: 5px;
-    background: var(--milk-solid);
+    background: var(--bg-system);
     border-radius: 20px;
     padding: 0.5rem;
     width: fit-content;
@@ -946,15 +3304,8 @@ body {
     color: #fff;
 }
 
-.footer-icon.wa:hover {
-    background: #25D366;
-    color: white;
-}
-
-.footer-icon.mail:hover {
-    background: var(--primary);
-    color: white;
-}
+.footer-icon.wa:hover { background: #25D366; color: white; }
+.footer-icon.mail:hover { background: var(--primary); color: white; }
 
 /* Disclaimer */
 .footer-disclaimer {
@@ -972,35 +3323,34 @@ body {
     font-size: 0.75rem;
     opacity: 0.6;
     margin-top: 20px;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-top: 1px solid rgba(0,0,0,0.05);
     padding-top: 20px;
 }
-
 @media (min-width: 768px) {
-    .grid-ferramentas {
-        grid-template-columns: repeat(4, 1fr);
+    .grid-ferramentas { 
+        grid-template-columns: repeat(4, 1fr); 
     }
-
-    .grid-info {
-        grid-template-columns: repeat(2, 1fr);
+    
+    .grid-info { 
+        grid-template-columns: repeat(2, 1fr); 
     }
-
-    .hero h1 {
-        font-size: 3.8rem;
+    
+    .hero h1 { 
+        font-size: 3.8rem; 
     }
-
+    
     /* Esconde o botão no desktop */
-
+    
     .ver-mais {
         display: none;
     }
-
+    
     /* Ferramentas ocultas sempre visíveis no desktop */
     .ferramentas-ocultas {
         opacity: 1 !important;
         max-height: 500px !important;
         margin: 20px auto 0 !important;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, 1fr); 
     }
 }
 
@@ -1017,211 +3367,930 @@ body {
 
 
 
-/* Container das Categorias */
-.menu-categorias-horizontal {
-    display: flex;
-    justify-content: space-around;
-    max-width: 600px;
-    margin: 40px auto 10px;
-    padding: 0 10px;
-}
 
-.item-categoria {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    transition: 0.3s;
-    width: 80px;
-}
 
-.icone-circulo {
-    width: 60px;
-    height: 60px;
-    background: var(--white);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: var(--primary);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    border: 2px solid transparent;
-}
 
-.item-categoria span {
-    font-size: 0.75rem;
-    font-weight: 600;
-    margin-top: 8px;
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   AJUSTE FINAL — RESPONSIVIDADE DA NAVBAR MATCLÍNICA
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   FUNDO / SEPARAÇÃO DA NAVBAR
+   --------------------------------------------------------- */
+
+.mc-nav {
+
+    position: fixed;
+
+    isolation: isolate;
 
 }
 
-/* Estado Ativo */
-.item-categoria.ativo .icone-circulo {
-    border-color: var(--primary);
-    background: var(--primary-soft);
-    transform: translateY(-5px);
-}
+.mc-nav::before {
 
-.item-categoria.ativo span {
-    color: var(--primary);
-}
+    content: "";
 
-
-
-
-
-
-
-
-/* Esconde todos os grupos por padrão */
-.grupo-ferramentas {
-    display: none;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 15px;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-/* Classe que ativa a exibição e animação */
-.grupo-ferramentas.ativo {
-    display: grid;
-    /* Ativa o grid quando a categoria for clicada */
-    opacity: 1;
-    transform: translateY(0);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Painel de Ferramentas (Aberto) */
-.painel-ferramentas {
-    display: none;
-    /* Inicia oculto */
-    margin: 20px auto;
-    max-width: 800px;
-    border-top: 2px solid var(--primary);
-    padding: 25px;
-    position: relative;
-    animation: 0.4s;
-    display: block;
-    /* O painel pai fica sempre em bloco */
-    min-height: 150px;
-    /* Evita que o layout "pule" muito ao trocar */
-}
-
-/* A Seta/Indicador que se move */
-.indicador-origem {
     position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid var(--primary);
-    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
 
-/* Grelha de ferramentas dentro do painel */
-.grid-sub-ferramentas {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 15px;
-}
+    top: 0;
+    left: 0;
 
-.sub-card {
-    background: var(--subCard);
-    padding: 15px;
-    border-radius: 15px;
-    text-decoration: none;
-    color: var(--text);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    transition: 0.2s;
-    height: 5rem;
-    box-shadow: 0 4px 12px var(--sombra);
-}
-
-.sub-card:hover {
-    border-color: var(--primary);
-    transform: translateY(-2px);
-}
-
-.sub-card i {
-    color: var(--primary);
-    font-size: 1.2rem;
-}
-
-.sub-card b {
-    font-size: 0.8rem;
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
-/* ==========================================================================
-   FOOTER GLOBAL
-   ========================================================================== */
-.plain-footer {
     width: 100%;
-    padding: 20px 15px;
-    background-color: transparent;
-    /* Sem fundo */
-    text-align: center;
-    margin-top: auto;
-    /* Cola no fundo se o conteúdo for curto */
+    height: 150px;
+
+    z-index: -1;
+
+    pointer-events: none;
+
+    background: rgba(255, 255, 255, 0.30);
+
+    backdrop-filter: blur(9px);
+
+    -webkit-backdrop-filter: blur(9px);
+
+    /*
+       Faz o efeito de vidro desaparecer
+       suavemente, sem uma borda visível.
+    */
+
+    -webkit-mask-image:
+        linear-gradient(
+            to bottom,
+            black 0%,
+            black 45%,
+            rgba(0, 0, 0, 0.75) 65%,
+            rgba(0, 0, 0, 0.35) 82%,
+            transparent 100%
+        );
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black 0%,
+            black 45%,
+            rgba(0, 0, 0, 0.75) 65%,
+            rgba(0, 0, 0, 0.35) 82%,
+            transparent 100%
+        );
+
 }
 
-.footer-inline {
+/* ---------------------------------------------------------
+   FUNDO / SOMBRA MAIS FORTE NO MODO ESCURO
+   --------------------------------------------------------- */
+
+html[data-theme="dark"] .mc-nav::before,
+body[data-theme="dark"] .mc-nav::before {
+
+    background: rgba(10, 10, 13, 0.42);
+
+}
+/* =========================================================
+   ÁREA DO MENU
+   ========================================================= */
+
+.mc-nav-menu {
+
+    position: relative;
+
     display: flex;
-    flex-wrap: wrap;
-    /* Itens quebram linha em mobile */
-    justify-content: center;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin-top: 28px;
+
+    z-index: 30;
+
+}
+
+
+/* =========================================================
+   BOTÃO DE TEMA
+   ========================================================= */
+
+.mc-theme-btn {
+
+    position: absolute;
+
+    top: -22px;
+
+    right: 92px;
+
+    width: 36px;
+
+    height: 36px;
+
+    flex-shrink: 0;
+
+    border: none;
+
+    border-radius: 50%;
+
+    display: flex;
+
     align-items: center;
-    gap: 8px 16px;
-    /* Espaço entre itens */
 
-    font-size: 0.8rem;
-    color: grey;
+    justify-content: center;
+
+    cursor: pointer;
+
+    background: #27272a;
+
+    color: #fbbf24;
+
+    box-shadow:
+
+        0 5px 16px rgba(0, 0, 0, 0.22);
+
+    transition:
+
+        transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+
+        background 0.3s ease,
+
+        color 0.3s ease;
+
 }
 
-.footer-inline a {
-    color: grey;
-    text-decoration: none;
-    font-weight: 500;
-    border-bottom: 1px dotted grey;
-    transition: color 0.2s, border-color 0.2s;
+.mc-theme-btn:hover {
+
+    transform: translateY(-2px) scale(1.08);
+
 }
 
-.footer-inline a:hover {
-    color: var(--primary-dark);
-    border-bottom-color: var(--primary-dark);
+.mc-theme-btn:active {
+
+    transform: scale(0.94);
+
 }
 
-.footer-sep {
-    opacity: 0.4;
+.mc-theme-btn i {
+
+    font-size: 17px;
+
+}
+
+
+/* =========================================================
+   TABLET — ATÉ 900px
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .mc-nav {
+
+        padding: 0 20px;
+
+    }
+
+    .mc-nav-center {
+
+        gap: 4px;
+
+    }
+
+    /*
+       Baixar APP continua SEMPRE visível.
+    */
+
+    .mc-nav-app {
+
+        padding: 0 10px;
+
+        white-space: nowrap;
+
+    }
+
+    .mc-nav-app span {
+
+        display: inline;
+
+    }
+
+    .mc-nav-login {
+
+        padding: 0 12px;
+
+    }
+
+    .mc-theme-btn {
+
+        right: 82px;
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE — ATÉ 650px
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    .hero-section {
+        padding-top: 0px;
+    }
+
+    .hero-title {
+        font-size: 2.3rem;
+    }
+    .hero-desc {
+        font-size: 1rem;
+    }
+
+    .mc-nav {
+
+        height: 78px;
+
+        padding: 0 14px;
+
+        grid-template-columns: 46px minmax(0, 1fr) auto;
+
+    }
+
+
+    /* -----------------------------------------------------
+       LOGO
+       ----------------------------------------------------- */
+
+    .mc-logo img {
+
+        width: 42px; 
+
+        height: 42px;
+
+    }
+
+
+    /* -----------------------------------------------------
+       CENTRO
+       ----------------------------------------------------- */
+
+    .mc-nav-center {
+
+        position: static;
+
+        transform: none;
+
+        justify-self: center;
+
+        min-width: 0;
+
+        gap: 3px;
+
+        padding: 4px;
+
+    }
+
+    /*
+       Baixar APP continua visível no mobile.
+       A largura passa a adaptar-se ao texto.
+    */
+
+    .mc-nav-app {
+
+        width: auto;
+
+        min-width: 0;
+
+        height: 34px;
+
+        padding: 0 8px;
+
+        justify-content: center;
+
+        gap: 4px;
+
+        white-space: nowrap;
+
+    }
+
+    .mc-nav-app span {
+
+        display: inline;
+
+    }
+
+    .mc-nav-app i {
+
+        font-size: 16px;
+
+    }
+
+    .mc-nav-login {
+
+        height: 34px;
+
+        padding: 0 10px;
+
+        font-size: 10px;
+
+    }
+
+
+    /* -----------------------------------------------------
+       MENU DA DIREITA
+       ----------------------------------------------------- */
+
+    .mc-nav-menu {
+
+        margin-top: 23px;
+
+        gap: 5px;
+
+        flex-shrink: 0;
+
+    }
+
+
+    /* -----------------------------------------------------
+       TEMA
+       ----------------------------------------------------- */
+
+    .mc-theme-btn {
+
+        width: 32px;
+
+        height: 32px;
+
+        top: -18px;
+
+        left: -40px;
+
+    }
+
+    .mc-theme-btn i {
+
+        font-size: 15px;
+
+    }
+
+
+    /* -----------------------------------------------------
+       BOTÃO DO MENU
+       ----------------------------------------------------- */
+
+    .mc-menu-toggle {
+
+        width: 40px;
+
+        height: 40px;
+
+        flex-shrink: 0;
+
+    }
+
+
+    /* -----------------------------------------------------
+       PÍLULA ATIVA
+       ----------------------------------------------------- */
+
+    .mc-active-pill {
+
+        min-width: 74px;
+
+        padding:
+
+            7px
+
+            11px;
+
+        font-size: 10px;
+
+    }
+
+    .mc-active-icon {
+
+        width: 32px;
+
+        height: 32px;
+
+    }
+
+
+    /* -----------------------------------------------------
+       PÍLULA ANTERIOR
+       ----------------------------------------------------- */
+
+    .mc-previous-pills {
+
+        right: 29px;
+
+    }
+
+
+    /* -----------------------------------------------------
+       PRÓXIMAS
+       ----------------------------------------------------- */
+
+    .mc-next-pills {
+
+        right: 0;
+
+    }
+
+
+    /* -----------------------------------------------------
+       MENU ABERTO
+       ----------------------------------------------------- */
+
+    .mc-open-menu {
+
+        min-width: 122px;
+
+    }
+
+    .mc-open-label {
+
+        min-width: 82px;
+
+        padding:
+
+            6px
+
+            10px;
+
+        font-size: 10px;
+
+    }
+
+    .mc-open-icon {
+
+        width: 29px;
+
+        height: 29px;
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE PEQUENO — ATÉ 520px
+   ========================================================= */
+
+@media (max-width: 520px) {
+
+    .mc-nav {
+
+        padding: 0 11px;
+
+        grid-template-columns:
+
+            44px
+
+            minmax(0, 1fr)
+
+            auto;
+
+    }
+
+    .mc-logo img {
+
+        width: 40px;
+
+        height: 40px;
+
+    }
+
+
+    /* -----------------------------------------------------
+       CENTRO
+       ----------------------------------------------------- */
+
+    .mc-nav-center {
+
+        gap: 2px;
+
+        padding: 3px;
+
+    }
+
+    /*
+       Texto "Baixar APP" permanece visível.
+       Apenas reduzimos o espaço lateral.
+    */
+
+    .mc-nav-app {
+
+        width: auto;
+
+        min-width: 0;
+
+        height: 32px;
+
+        padding: 0 6px;
+
+        gap: 3px;
+
+        font-size: 9px;
+
+        white-space: nowrap;
+
+    }
+    .mc-nav-app span {
+
+        display: none;
+
+    }
+
+    .mc-nav-login {
+
+        height: 32px;
+
+        padding: 0 9px;
+
+        font-size: 10px;
+
+    }
+
+
+    /* -----------------------------------------------------
+       MENU
+       ----------------------------------------------------- */
+
+    .mc-nav-menu {
+
+        gap: 4px;
+
+    }
+
+    .mc-menu-toggle {
+
+        width: 38px;
+
+        height: 38px;
+
+    }
+
+    .mc-active-pill {
+
+        min-width: 68px;
+
+        padding:
+
+            7px
+
+            9px;
+
+        font-size: 9.5px;
+
+    }
+
+    .mc-active-icon {
+
+        width: 30px;
+
+        height: 30px;
+
+    }
+
+
+    /* -----------------------------------------------------
+       TEMA
+       ----------------------------------------------------- */
+
+    .mc-theme-btn {
+
+        width: 30px;
+
+        height: 30px;
+
+        top: -17px;
+
+        right: 68px;
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE MUITO PEQUENO — ATÉ 420px
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .mc-nav {
+
+        height: 74px;
+
+        padding: 0 10px;
+
+        grid-template-columns:
+
+            42px
+
+            minmax(0, 1fr)
+
+            auto;
+
+    }
+
+    /*
+       Aqui o centro continua existindo.
+
+       Portanto "Baixar APP" continua visível.
+    */
+
+    .mc-nav-center {
+
+        display: none;
+
+        min-width: 0;
+
+        gap: 2px;
+
+        padding: 2px;
+
+    }
+
+    .mc-nav-app {
+
+        width: auto;
+
+        min-width: 0;
+
+        height: 30px;
+
+        padding: 0 5px;
+
+        gap: 2px;
+
+        font-size: 8px;
+
+        white-space: nowrap;
+
+    }
+
+    .mc-nav-app i {
+
+        font-size: 13px;
+
+    }
+
+    .mc-nav-login {
+
+        height: 30px;
+
+        padding: 0 7px;
+
+        font-size: 8px;
+
+    }
+
+
+    /* -----------------------------------------------------
+       MENU DA DIREITA
+       ----------------------------------------------------- */
+
+    .mc-nav-menu {
+
+        margin-top: 21px;
+
+        gap: 4px;
+
+    }
+
+    .mc-menu-toggle {
+
+        width: 38px;
+
+        height: 38px;
+
+    }
+
+
+    /* -----------------------------------------------------
+       PÍLULA ATIVA
+       ----------------------------------------------------- */
+
+    .mc-active-pill {
+
+        min-width: 65px;
+
+        padding:
+
+            6px
+
+            8px;
+
+        font-size: 9px;
+
+    }
+
+    .mc-active-icon {
+
+        width: 29px;
+
+        height: 29px;
+
+    }
+
+
+    /* -----------------------------------------------------
+       TEMA
+       ----------------------------------------------------- */
+
+    .mc-theme-btn {
+
+        width: 29px;
+
+        height: 29px;
+
+        top: -16px;
+
+        right: 65px;
+
+    }
+
+    .mc-previous-pills {
+
+        right: 27px;
+
+    }
+
+}
+
+
+/* =========================================================
+   TELAS EXTREMAMENTE PEQUENAS — ATÉ 360px
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+    .mc-nav {
+
+        padding: 0 8px;
+
+    }
+
+    .mc-logo img {
+
+        width: 38px;
+
+        height: 38px;
+
+    }
+
+    .mc-nav-center {
+
+        gap: 1px;
+
+    }
+
+    .mc-nav-app {
+
+        padding: 0 4px;
+
+        font-size: 7.5px;
+
+    }
+
+    .mc-nav-app i {
+
+        font-size: 12px;
+
+    }
+
+    .mc-nav-login {
+
+        padding: 0 6px;
+
+        font-size: 7.5px;
+
+    }
+
+    .mc-active-pill {
+
+        min-width: 60px;
+
+        padding:
+
+            6px
+
+            7px;
+
+        font-size: 8.5px;
+
+    }
+
+    .mc-active-icon {
+
+        width: 28px;
+
+        height: 28px;
+
+    }
+
+    .mc-menu-toggle {
+
+        width: 36px;
+
+        height: 36px;
+
+    }
+
+    .mc-theme-btn {
+
+        width: 28px;
+
+        height: 28px;
+
+        right: 62px;
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   REPORTAR ERRO — TODOS OS CAMPOS ALINHADOS 2 A 2
+   (apenas em telas grandes >= 992px)
+   ========================================================= */
+
+@media (min-width: 992px) {
+
+    /* Container mais largo para acomodar 2 colunas confortavelmente */
+    .reportar-erro-container {
+        max-width: 1080px;
+        padding: 56px 64px;
+    }
+
+    /* Formulário vira grid de 2 colunas */
+    .reportar-erro-form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 28px;
+        row-gap: 0;
+    }
+
+    /* Ferramenta — coluna 1, linha 1 */
+    .reportar-erro-form > .reportar-erro-field:nth-of-type(1) {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+    }
+
+    /* Email — coluna 2, linha 1 (ao lado da Ferramenta) */
+    .reportar-erro-form > .reportar-erro-field:nth-of-type(3) {
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+    }
+
+    /* Descrição — coluna 1, linha 2 */
+    .reportar-erro-form > .reportar-erro-field:nth-of-type(2) {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+    }
+
+    /* Passos — coluna 2, linha 2 (ao lado da Descrição) */
+    .reportar-erro-form > .reportar-erro-field:nth-of-type(4) {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+    }
+
+    /* Textareas alinhadas — mesma altura mínima para as duas */
+    .reportar-erro-form > .reportar-erro-field:nth-of-type(2) .reportar-erro-textarea,
+    .reportar-erro-form > .reportar-erro-field:nth-of-type(4) .reportar-erro-textarea {
+        min-height: 140px;
+    }
+
+    /* Botão — largura total, linha 3, centrado */
+    .reportar-erro-form > .reportar-erro-btn {
+        grid-column: 1 / -1;
+        grid-row: 3 / 4;
+        width: 100%;
+        max-width: 320px;
+        justify-self: center;
+        margin-top: 16px;
+    }
 }

@@ -352,7 +352,7 @@ function selecionarFonte(valor) {
         localStorage.setItem('fonte', valor);
         notaFallback.style.display = 'none';
 
-        fonteFeedback.innerHTML = `<div class="feedback-success"><i class="ri-checkbox-circle-line"></i><span>Padrões da <strong>${nomeFonte}</strong> carregados com sucesso!</span></div>`;
+        fonteFeedback.innerHTML = `<div class="feedback-success" style="font-size: 1px"><i class="ri-checkbox-circle-line"></i><span>Padrões da <strong>${nomeFonte}</strong> carregados com sucesso!</span></div>`;
 
         inputNome.value = "";
         inputs.peso.value = ""; inputs.idade.value = "";
@@ -790,6 +790,7 @@ if (intervalo.simples !== undefined) {
     if (opcoes.length > 1) {
         popularCustomSelect('intervalo', opcoes, () => calcularSePronto());
         intervaloSelectEl.style.display = "block";
+        document.getElementById('intervaloSelecionado').parentElement.querySelector('.floating-label').textContent = 'Intervalo';
     } else {
         esconderSelect(intervaloSelectEl);
         intervaloSelectEl.dataset.valorAtual = opcoes[0] ? opcoes[0].valor : '';
@@ -817,24 +818,21 @@ if (intervalo.simples !== undefined) {
         // Pelo menos um dos dois entra no fluxo normal, ou nenhum é visível
         linhaIntervaloDuplo.style.display = "none";
         linhaSecundaria.appendChild(intervaloSelectEl);
+        linhaSecundaria.appendChild(intervaloManutSelectEl);
 
         if (mostrarAtaque) {
             popularCustomSelect('intervalo', opcoesAtaque, () => calcularSePronto());
             intervaloSelectEl.style.display = "block";
-            document.getElementById('intervaloSelecionado').parentElement.querySelector('.floating-label').textContent = 'Intervalo';
+            document.getElementById('intervaloSelecionado').parentElement.querySelector('.floating-label').textContent = 'Intervalo de ataque';
         } else if (intervalo.temAtaque) {
             esconderSelect(intervaloSelectEl);
             intervaloSelectEl.dataset.valorAtual = opcoesAtaque[0] ? opcoesAtaque[0].valor : '';
         } else {
-            // Sem ataque: não mostrar, não guardar
             esconderSelect(intervaloSelectEl);
             intervaloSelectEl.dataset.valorAtual = '';
         }
 
         if (mostrarManut) {
-            // Manutenção com múltiplas opções, mas ataque não visível — coloca na linha dupla
-            linhaIntervaloDuplo.appendChild(intervaloManutSelectEl);
-            linhaIntervaloDuplo.style.display = "flex";
             popularCustomSelect('intervaloManutencao', opcoesManut, () => calcularSePronto());
             intervaloManutSelectEl.style.display = "block";
         } else if (intervalo.temManutencao) {
@@ -849,7 +847,7 @@ if (intervalo.simples !== undefined) {
 
 linhaSecundaria.style.display = "flex";
 
-const selectsVisiveis = [viaSelectEl, intervaloSelectEl, populacaoSelectEl]
+const selectsVisiveis = [viaSelectEl, intervaloSelectEl, intervaloManutSelectEl, populacaoSelectEl]
     .filter(el => el.style.display !== "none");
 if (selectsVisiveis.length <= 1) {
     linhaSecundaria.classList.add('linha-unica');
@@ -1331,28 +1329,3 @@ window.addEventListener('load', () => {
 
 
 
-
-
-
-
-// ajustar o tamanho da concentração, tamanho em sucesso, e transaprencia do label e largura do lable flutuante
-
-// -------------
-// há um problema no clique das sugestões, quando clico numa sugestão de outra referencia
-// aparece sempre: "y" está a ser calculado com base na referência "y", 
-// quero que seja assim: 
-
-// quando clico numa sugestão de um medicamnto de outra fonte que existe na fonte atual, então: 
-// aparece sempre: "y" está a ser calculado com base na referência "y"
-
-// quando clico numa sugestão de um medicamnto de outra fonte que não existe na fonte atual, então: 
-// "x" não está disponível para a referência "y". A dose apresentada é baseada na referência "z".
-
-// esse problema só está no clique das sugestões, quando termino a palavra eu mesmo, acontece como descrevi.
-
-// -------------
-// vamos dar aos selects a mesma disposição que os campos
-// os selects de intervalo, via, população, alinhados horizontalmente como já está, se estiver só, ocupa o espaço todo
-// só que intervalo de ataque e manutenção não entram nesse fluxo, mesmo só, eles ocupam uma linha, deveriam partilahr espaço 
-// se haver outro select, se ataque e manutenção, estiverem ambos exibidos, aí sim, devem ocupar uma linha só os dois.
-// condição clinica/ inidicação, deve ocupar todo o espaço o tempo todo

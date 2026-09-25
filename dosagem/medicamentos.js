@@ -11,7 +11,7 @@ window.BANCO_DADOS = {
       "peso": "40;",
       "dose": "500 mg,1000 mg,500 mg,mg",
       "concentracao": "250 mg/5 ml|50",
-      "intervalo": "12, 8, 24*",
+      "intervalo": "ataque(12, 8)",
       "formula": "{#d/#c} ml",
       "adicionais": "",
       "notas": "Manual de Teste, p. 1"
@@ -121,7 +121,7 @@ window.BANCO_DADOS = {
       "idade": "3;",
       "dose": "ataque(2.4 mg,2.4 mg,2.4 mg,mg/kg);manutencao(1.2 mg,1.2 mg,1.2 mg,mg/kg)",
       "concentracao": "60 mg/1 ml|60",
-      "intervalo": "ataque(12);manutencao(8,12)",
+      "intervalo": "ataque(12, 8)",
       "formula": "{#p*#d_ataque/#c} ml {#p*#d_manutencao/#c} ml",
       "adicionais": "#@@Dose máxima diária: não exceder 4 administrações@#",
       "notas": "Manual de Teste, p. 3"
@@ -241,13 +241,13 @@ window.BANCO_DADOS = {
     {
       "nome": "Testenotasmuitas",
       "condicao": "",
-      "populacao": "",
-      "via": "",
+      "populacao": "gravida",
+      "via": "iv",
       "idade": "",
       "peso": "40;",
       "dose": "200 mg,200 mg,200 mg,mg",
       "concentracao": "200 mg/1 ml|200;",
-      "intervalo": "24*",
+      "intervalo": "24*, 12",
       "formula": "{#d/#c} ml",
       "adicionais": "#@@Não administrar em bólus@#@@Monitorizar sinais de reação alérgica@#@@Não misturar com outros fármacos na mesma seringa@#@@Verificar função hepática antes da administração@#@@Contraindicado em caso de hipersensibilidade conhecida@#@@Ajustar em caso de insuficiência renal grave@#@@Manter o paciente em observação durante 30 minutos após a dose@#",
       "notas": "Manual de Teste, p. 10"

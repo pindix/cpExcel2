@@ -47,6 +47,9 @@ let painelTemp = {
     }
 };
 
+
+const IDADE_MAXIMA_ANOS = 110;
+
 // ============================================================================
 // SECÇÃO 2: UNIDADES DE IDADE E CONVERSÕES
 // ============================================================================
@@ -313,100 +316,100 @@ const DB_VITALS = {
     // Medscape — FC, FR, TA, Temp
     // ═══════════════════════════════════════════════════════════════
     "Medscape": {
-        fc: {
+                fr: {
             "recem_nascido_0_1m": {
                 minMeses: 0, maxMeses: 1,
-                ref: [100, 160],
+                ref: [30, 60],
                 categorias: [
-                    { min: -Infinity, max: 79,  termo: "Bradicardia grave" },
-                    { min: 80,        max: 99,  termo: "Bradicardia" },
-                    { min: 100,       max: 160, termo: "Normocardia" },
-                    { min: 161,       max: 180, termo: "Taquicardia" },
-                    { min: 181,       max: Infinity, termo: "Taquicardia grave" }
+                    { min: -Infinity, max: 14,  termo: "Bradipneia grave" },
+                    { min: 15,        max: 29,  termo: "Bradipneia" },
+                    { min: 30,        max: 60,  termo: "Eupneia" },
+                    { min: 61,        max: 70,  termo: "Taquipneia" },
+                    { min: 71,        max: Infinity, termo: "Taquipneia grave" }
                 ],
                 fonte: "Medscape"
             },
             "lactente_1_12m": {
                 minMeses: 1, maxMeses: 12,
-                ref: [80, 140],
+                ref: [25, 60],
                 categorias: [
-                    { min: -Infinity, max: 69,  termo: "Bradicardia grave" },
-                    { min: 70,        max: 79,  termo: "Bradicardia" },
-                    { min: 80,        max: 140, termo: "Normocardia" },
-                    { min: 141,       max: 160, termo: "Taquicardia" },
-                    { min: 161,       max: Infinity, termo: "Taquicardia grave" }
+                    { min: -Infinity, max: 14,  termo: "Bradipneia grave" },
+                    { min: 15,        max: 24,  termo: "Bradipneia" },
+                    { min: 25,        max: 60,  termo: "Eupneia" },
+                    { min: 61,        max: 70,  termo: "Taquipneia" },
+                    { min: 71,        max: Infinity, termo: "Taquipneia grave" }
                 ],
                 fonte: "Medscape"
             },
             "crianca_1_3": {
                 minMeses: 12, maxMeses: 36,
-                ref: [80, 130],
+                ref: [20, 40],
                 categorias: [
-                    { min: -Infinity, max: 69,  termo: "Bradicardia grave" },
-                    { min: 70,        max: 79,  termo: "Bradicardia" },
-                    { min: 80,        max: 130, termo: "Normocardia" },
-                    { min: 131,       max: 150, termo: "Taquicardia" },
-                    { min: 151,       max: Infinity, termo: "Taquicardia grave" }
+                    { min: -Infinity, max: 13,  termo: "Bradipneia grave" },
+                    { min: 14,        max: 19,  termo: "Bradipneia" },
+                    { min: 20,        max: 40,  termo: "Eupneia" },
+                    { min: 41,        max: 50,  termo: "Taquipneia" },
+                    { min: 51,        max: Infinity, termo: "Taquipneia grave" }
                 ],
                 fonte: "Medscape"
             },
             "crianca_3_6": {
                 minMeses: 36, maxMeses: 72,
-                ref: [80, 120],
+                ref: [20, 40],
                 categorias: [
-                    { min: -Infinity, max: 69,  termo: "Bradicardia grave" },
-                    { min: 70,        max: 79,  termo: "Bradicardia" },
-                    { min: 80,        max: 120, termo: "Normocardia" },
-                    { min: 121,       max: 140, termo: "Taquicardia" },
-                    { min: 141,       max: Infinity, termo: "Taquicardia grave" }
+                    { min: -Infinity, max: 13,  termo: "Bradipneia grave" },
+                    { min: 14,        max: 19,  termo: "Bradipneia" },
+                    { min: 20,        max: 40,  termo: "Eupneia" },
+                    { min: 41,        max: 50,  termo: "Taquipneia" },
+                    { min: 51,        max: Infinity, termo: "Taquipneia grave" }
                 ],
                 fonte: "Medscape"
             },
             "crianca_6_12": {
                 minMeses: 72, maxMeses: 144,
-                ref: [70, 110],
+                ref: [14, 30],
                 categorias: [
-                    { min: -Infinity, max: 59,  termo: "Bradicardia grave" },
-                    { min: 60,        max: 69,  termo: "Bradicardia" },
-                    { min: 70,        max: 110, termo: "Normocardia" },
-                    { min: 111,       max: 130, termo: "Taquicardia" },
-                    { min: 131,       max: Infinity, termo: "Taquicardia grave" }
+                    { min: -Infinity, max: 9,   termo: "Bradipneia grave" },
+                    { min: 10,        max: 13,  termo: "Bradipneia" },
+                    { min: 14,        max: 30,  termo: "Eupneia" },
+                    { min: 31,        max: 40,  termo: "Taquipneia" },
+                    { min: 41,        max: Infinity, termo: "Taquipneia grave" }
                 ],
                 fonte: "Medscape"
             },
             "adolescente_12_18": {
                 minMeses: 144, maxMeses: 216,
-                ref: [60, 105],
+                ref: [12, 20],
                 categorias: [
-                    { min: -Infinity, max: 49,  termo: "Bradicardia grave" },
-                    { min: 50,        max: 59,  termo: "Bradicardia" },
-                    { min: 60,        max: 105, termo: "Normocardia" },
-                    { min: 106,       max: 120, termo: "Taquicardia" },
-                    { min: 121,       max: Infinity, termo: "Taquicardia grave" }
+                    { min: -Infinity, max: 7,   termo: "Bradipneia grave" },
+                    { min: 8,         max: 11,  termo: "Bradipneia" },
+                    { min: 12,        max: 20,  termo: "Eupneia" },
+                    { min: 21,        max: 28,  termo: "Taquipneia" },
+                    { min: 29,        max: Infinity, termo: "Taquipneia grave" }
                 ],
                 fonte: "Medscape"
             },
             "adulto": {
                 minMeses: 216, maxMeses: 720,
-                ref: [60, 100],
+                ref: [12, 20],
                 categorias: [
-                    { min: -Infinity, max: 49,  termo: "Bradicardia grave" },
-                    { min: 50,        max: 59,  termo: "Bradicardia" },
-                    { min: 60,        max: 100, termo: "Normocardia" },
-                    { min: 101,       max: 120, termo: "Taquicardia" },
-                    { min: 121,       max: Infinity, termo: "Taquicardia grave" }
+                    { min: -Infinity, max: 7,   termo: "Bradipneia grave" },
+                    { min: 8,         max: 11,  termo: "Bradipneia" },
+                    { min: 12,        max: 20,  termo: "Eupneia" },
+                    { min: 21,        max: 28,  termo: "Taquipneia" },
+                    { min: 29,        max: Infinity, termo: "Taquipneia grave" }
                 ],
                 fonte: "Medscape"
             },
             "idoso_60mais": {
                 minMeses: 720, maxMeses: 9999,
-                ref: [60, 100],
+                ref: [12, 20],
                 categorias: [
-                    { min: -Infinity, max: 49,  termo: "Bradicardia grave" },
-                    { min: 50,        max: 59,  termo: "Bradicardia" },
-                    { min: 60,        max: 100, termo: "Normocardia" },
-                    { min: 101,       max: 120, termo: "Taquicardia" },
-                    { min: 121,       max: Infinity, termo: "Taquicardia grave" }
+                    { min: -Infinity, max: 7,   termo: "Bradipneia grave" },
+                    { min: 8,         max: 11,  termo: "Bradipneia" },
+                    { min: 12,        max: 20,  termo: "Eupneia" },
+                    { min: 21,        max: 28,  termo: "Taquipneia" },
+                    { min: 29,        max: Infinity, termo: "Taquipneia grave" }
                 ],
                 fonte: "Medscape"
             }
@@ -513,80 +516,80 @@ const DB_VITALS = {
             "recem_nascido_0_1m": {
                 minMeses: 0, maxMeses: 1,
                 local: {
-                    oral:      { ref: [36.5, 37.5], categorias: CATEGORIAS_TEMP_PADRAO(36.5, 37.5), fonte: "Medscape" },
-                    axilar:    { ref: [36.0, 37.0], categorias: CATEGORIAS_TEMP_PADRAO(36.0, 37.0), fonte: "Medscape" },
-                    timpanico: { ref: [36.8, 37.8], categorias: CATEGORIAS_TEMP_PADRAO(36.8, 37.8), fonte: "Medscape" },
-                    retal:     { ref: [37.0, 37.8], categorias: CATEGORIAS_TEMP_PADRAO(37.0, 37.8), fonte: "Medscape" }
+                    oral:      { ref: [36.5, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(36.5, 37.3), fonte: "Medscape" },
+                    axilar:    { ref: [36.0, 36.9], categorias: CATEGORIAS_TEMP_PADRAO(36.0, 36.9), fonte: "Medscape" },
+                    timpanico: { ref: [36.8, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(36.8, 37.3), fonte: "Medscape" },
+                    retal:     { ref: [37.0, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(37.0, 37.3), fonte: "Medscape" }
                 },
                 fonte: "Medscape"
             },
             "lactente_1_12m": {
                 minMeses: 1, maxMeses: 12,
                 local: {
-                    oral:      { ref: [36.5, 37.5], categorias: CATEGORIAS_TEMP_PADRAO(36.5, 37.5), fonte: "Medscape" },
-                    axilar:    { ref: [36.0, 37.0], categorias: CATEGORIAS_TEMP_PADRAO(36.0, 37.0), fonte: "Medscape" },
-                    timpanico: { ref: [36.8, 37.8], categorias: CATEGORIAS_TEMP_PADRAO(36.8, 37.8), fonte: "Medscape" },
-                    retal:     { ref: [37.0, 37.8], categorias: CATEGORIAS_TEMP_PADRAO(37.0, 37.8), fonte: "Medscape" }
+                    oral:      { ref: [36.5, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(36.5, 37.3), fonte: "Medscape" },
+                    axilar:    { ref: [36.0, 36.9], categorias: CATEGORIAS_TEMP_PADRAO(36.0, 36.9), fonte: "Medscape" },
+                    timpanico: { ref: [36.8, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(36.8, 37.3), fonte: "Medscape" },
+                    retal:     { ref: [37.0, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(37.0, 37.3), fonte: "Medscape" }
                 },
                 fonte: "Medscape"
             },
             "crianca_1_3": {
                 minMeses: 12, maxMeses: 36,
                 local: {
-                    oral:      { ref: [36.5, 37.5], categorias: CATEGORIAS_TEMP_PADRAO(36.5, 37.5), fonte: "Medscape" },
-                    axilar:    { ref: [36.0, 37.0], categorias: CATEGORIAS_TEMP_PADRAO(36.0, 37.0), fonte: "Medscape" },
-                    timpanico: { ref: [36.8, 37.8], categorias: CATEGORIAS_TEMP_PADRAO(36.8, 37.8), fonte: "Medscape" },
-                    retal:     { ref: [37.0, 37.8], categorias: CATEGORIAS_TEMP_PADRAO(37.0, 37.8), fonte: "Medscape" }
+                    oral:      { ref: [36.5, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(36.5, 37.3), fonte: "Medscape" },
+                    axilar:    { ref: [36.0, 36.9], categorias: CATEGORIAS_TEMP_PADRAO(36.0, 36.9), fonte: "Medscape" },
+                    timpanico: { ref: [36.8, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(36.8, 37.3), fonte: "Medscape" },
+                    retal:     { ref: [37.0, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(37.0, 37.3), fonte: "Medscape" }
                 },
                 fonte: "Medscape"
             },
             "crianca_3_6": {
                 minMeses: 36, maxMeses: 72,
                 local: {
-                    oral:      { ref: [36.5, 37.5], categorias: CATEGORIAS_TEMP_PADRAO(36.5, 37.5), fonte: "Medscape" },
-                    axilar:    { ref: [36.0, 37.0], categorias: CATEGORIAS_TEMP_PADRAO(36.0, 37.0), fonte: "Medscape" },
-                    timpanico: { ref: [36.8, 37.8], categorias: CATEGORIAS_TEMP_PADRAO(36.8, 37.8), fonte: "Medscape" },
-                    retal:     { ref: [37.0, 37.8], categorias: CATEGORIAS_TEMP_PADRAO(37.0, 37.8), fonte: "Medscape" }
+                    oral:      { ref: [36.5, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(36.5, 37.3), fonte: "Medscape" },
+                    axilar:    { ref: [36.0, 36.9], categorias: CATEGORIAS_TEMP_PADRAO(36.0, 36.9), fonte: "Medscape" },
+                    timpanico: { ref: [36.8, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(36.8, 37.3), fonte: "Medscape" },
+                    retal:     { ref: [37.0, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(37.0, 37.3), fonte: "Medscape" }
                 },
                 fonte: "Medscape"
             },
             "crianca_6_12": {
                 minMeses: 72, maxMeses: 144,
                 local: {
-                    oral:      { ref: [36.5, 37.5], categorias: CATEGORIAS_TEMP_PADRAO(36.5, 37.5), fonte: "Medscape" },
-                    axilar:    { ref: [36.0, 37.0], categorias: CATEGORIAS_TEMP_PADRAO(36.0, 37.0), fonte: "Medscape" },
-                    timpanico: { ref: [36.8, 37.8], categorias: CATEGORIAS_TEMP_PADRAO(36.8, 37.8), fonte: "Medscape" },
-                    retal:     { ref: [37.0, 37.8], categorias: CATEGORIAS_TEMP_PADRAO(37.0, 37.8), fonte: "Medscape" }
+                    oral:      { ref: [36.5, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(36.5, 37.3), fonte: "Medscape" },
+                    axilar:    { ref: [36.0, 36.9], categorias: CATEGORIAS_TEMP_PADRAO(36.0, 36.9), fonte: "Medscape" },
+                    timpanico: { ref: [36.8, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(36.8, 37.3), fonte: "Medscape" },
+                    retal:     { ref: [37.0, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(37.0, 37.3), fonte: "Medscape" }
                 },
                 fonte: "Medscape"
             },
             "adolescente_12_18": {
                 minMeses: 144, maxMeses: 216,
                 local: {
-                    oral:      { ref: [36.5, 37.5], categorias: CATEGORIAS_TEMP_PADRAO(36.5, 37.5), fonte: "Medscape" },
-                    axilar:    { ref: [36.0, 37.0], categorias: CATEGORIAS_TEMP_PADRAO(36.0, 37.0), fonte: "Medscape" },
-                    timpanico: { ref: [36.8, 37.8], categorias: CATEGORIAS_TEMP_PADRAO(36.8, 37.8), fonte: "Medscape" },
-                    retal:     { ref: [37.0, 37.8], categorias: CATEGORIAS_TEMP_PADRAO(37.0, 37.8), fonte: "Medscape" }
+                    oral:      { ref: [36.5, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(36.5, 37.3), fonte: "Medscape" },
+                    axilar:    { ref: [36.0, 36.9], categorias: CATEGORIAS_TEMP_PADRAO(36.0, 36.9), fonte: "Medscape" },
+                    timpanico: { ref: [36.8, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(36.8, 37.3), fonte: "Medscape" },
+                    retal:     { ref: [37.0, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(37.0, 37.3), fonte: "Medscape" }
                 },
                 fonte: "Medscape"
             },
             "adulto": {
                 minMeses: 216, maxMeses: 720,
                 local: {
-                    oral:      { ref: [36.5, 37.5], categorias: CATEGORIAS_TEMP_PADRAO(36.5, 37.5), fonte: "Medscape" },
-                    axilar:    { ref: [36.0, 37.0], categorias: CATEGORIAS_TEMP_PADRAO(36.0, 37.0), fonte: "Medscape" },
-                    timpanico: { ref: [36.8, 37.8], categorias: CATEGORIAS_TEMP_PADRAO(36.8, 37.8), fonte: "Medscape" },
-                    retal:     { ref: [37.0, 37.8], categorias: CATEGORIAS_TEMP_PADRAO(37.0, 37.8), fonte: "Medscape" }
+                    oral:      { ref: [36.5, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(36.5, 37.3), fonte: "Medscape" },
+                    axilar:    { ref: [36.0, 36.9], categorias: CATEGORIAS_TEMP_PADRAO(36.0, 36.9), fonte: "Medscape" },
+                    timpanico: { ref: [36.8, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(36.8, 37.3), fonte: "Medscape" },
+                    retal:     { ref: [37.0, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(37.0, 37.3), fonte: "Medscape" }
                 },
                 fonte: "Medscape"
             },
             "idoso_60mais": {
                 minMeses: 720, maxMeses: 9999,
                 local: {
-                    oral:      { ref: [36.5, 37.5], categorias: CATEGORIAS_TEMP_PADRAO(36.5, 37.5), fonte: "Medscape" },
-                    axilar:    { ref: [36.0, 37.0], categorias: CATEGORIAS_TEMP_PADRAO(36.0, 37.0), fonte: "Medscape" },
-                    timpanico: { ref: [36.8, 37.8], categorias: CATEGORIAS_TEMP_PADRAO(36.8, 37.8), fonte: "Medscape" },
-                    retal:     { ref: [37.0, 37.8], categorias: CATEGORIAS_TEMP_PADRAO(37.0, 37.8), fonte: "Medscape" }
+                    oral:      { ref: [36.5, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(36.5, 37.3), fonte: "Medscape" },
+                    axilar:    { ref: [36.0, 36.9], categorias: CATEGORIAS_TEMP_PADRAO(36.0, 36.9), fonte: "Medscape" },
+                    timpanico: { ref: [36.8, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(36.8, 37.3), fonte: "Medscape" },
+                    retal:     { ref: [37.0, 37.3], categorias: CATEGORIAS_TEMP_PADRAO(37.0, 37.3), fonte: "Medscape" }
                 },
                 fonte: "Medscape"
             }
@@ -1967,13 +1970,48 @@ function togglePainelReferencias() {
         painel.classList.add('aberto');
         
         // Gera as opções dinamicamente para cada sinal
-        ['fc', 'fr', 'temp', 'sato2', 'ta'].forEach(sinal => {
-            const fonteAtual = painelTemp.fontes[sinal]?.fonte || 'OMS';
-            gerarOpcoesFonte(sinal, fonteAtual);
-        });
+        ['fc','fr','temp','sato2','ta'].forEach(sinal => {
+    const fonteAtual = painelTemp.fontes[sinal]?.fonte;
+    gerarOpcoesFonte(sinal, fonteAtual);
+});
         
         sincronizarPainelComEstado();
     }
+}
+
+// Devolve a primeira fonte da BD que tenha dados para este sinal
+function primeiraFonteDisponivel(sinal) {
+    for (const fonte in DB_VITALS) {
+        if (DB_VITALS[fonte] && DB_VITALS[fonte][sinal]) return fonte;
+    }
+    return 'OMS'; // fallback último recurso
+}
+
+// Valida a fonte: se não existir na BD para este sinal, devolve a primeira disponível
+function fonteValida(sinal, fonte) {
+    if (fonte && DB_VITALS[fonte] && DB_VITALS[fonte][sinal]) return fonte;
+    return primeiraFonteDisponivel(sinal);
+}
+
+function sincronizarPainelComEstado() {
+    // Idade
+    const inpIdade = document.getElementById('painelIdadeValor');
+    if (inpIdade) inpIdade.value = painelTemp.idade.valor ?? '';
+
+    const u = UNIDADES_IDADE.find(x => x.value === painelTemp.idade.unidade);
+    const spanIdade = document.getElementById('idadeUnidadeSelecionada');
+    if (spanIdade && u) spanIdade.textContent = u.label;
+
+    // Fontes — validadas contra a BD
+    ['fc','fr','temp','sato2','ta'].forEach(s => {
+        const fonte = fonteValida(s, painelTemp.fontes[s]?.fonte);
+
+        // guarda já corrigido para que "Aplicar" não grave uma fonte inválida
+        painelTemp.fontes[s] = { ...(painelTemp.fontes[s] || {}), fonte };
+
+        const el = document.getElementById('painelFonteSelecionada_' + s);
+        if (el) el.textContent = FONTE_LABELS[fonte] || fonte;
+    });
 }
 
 function fecharPainelReferencias() {
@@ -1995,11 +2033,13 @@ function obterFontesDisponiveis(sinal) {
 // No painel, gerar opções dinamicamente:
 function gerarOpcoesFonte(sinal, fonteAtual) {
     const fontes = obterFontesDisponiveis(sinal);
+    const fonteCorrigida = fonteValida(sinal, fonteAtual);
+
     const container = document.getElementById('painelOptions_' + sinal);
     if (!container) return;
-    
+
     container.innerHTML = fontes.map(f => `
-        <div class="custom-select-option-painel ${f === fonteAtual ? 'selected' : ''}" 
+        <div class="custom-select-option-painel ${f === fonteCorrigida ? 'selected' : ''}"
              data-value="${f}"
              onclick="selecionarPainelFonte('${sinal}', '${f}', '${FONTE_LABELS[f] || f}', event)">
             <span class="option-label">${FONTE_LABELS[f] || f}</span>
@@ -2011,24 +2051,53 @@ function aplicarPainelReferencias() {
     if (pacienteAtivo) return;
 
     const inpIdade = document.getElementById('painelIdadeValor');
-    const val = parseFloat(inpIdade.value);
-    if (inpIdade.value.trim() !== '' && (isNaN(val) || val < 0)) {
-        alert('A idade deve ser um número positivo.');
-        return;
+    const valRaw = inpIdade.value.trim();
+
+    // 1) Campo vazio → idade nula (usa referência de adulto)
+    if (valRaw === '') {
+        referencias.idade = { valor: null, unidade: painelTemp.idade.unidade };
+    } else {
+        const val = parseFloat(valRaw);
+
+        // 2) Tem de ser número
+        if (isNaN(val)) {
+            alert('A idade deve ser um número.');
+            return;
+        }
+
+        // 3) Não pode ser negativa
+        if (val < 0) {
+            alert('A idade não pode ser negativa.');
+            return;
+        }
+
+        // 4) Não pode exceder o limite em anos
+        const meses = unidadeParaMeses(val, painelTemp.idade.unidade);
+        const limiteMeses = IDADE_MAXIMA_ANOS * 12;
+
+        if (meses != null && meses > limiteMeses) {
+            alert(`A idade não pode exceder ${IDADE_MAXIMA_ANOS} anos.`);
+            return;
+        }
+
+        referencias.idade = { valor: val, unidade: painelTemp.idade.unidade };
     }
 
-    referencias.idade = {
-        valor: inpIdade.value.trim() === '' ? null : val,
-        unidade: painelTemp.idade.unidade
-    };
-    referencias.fontes = JSON.parse(JSON.stringify(painelTemp.fontes));
+    // Valida todas as fontes antes de gravar
+    const fontesFinal = {};
+    ['fc','fr','temp','sato2','ta'].forEach(s => {
+        fontesFinal[s] = {
+            ...(painelTemp.fontes[s] || {}),
+            fonte: fonteValida(s, painelTemp.fontes[s]?.fonte)
+        };
+    });
+    referencias.fontes = fontesFinal;
 
     gravarReferencias();
     atualizarBarraResumo();
     sincronizarTempLocalDoCampo();
     fecharPainelReferencias();
 
-    // Se havia resultado na tela, re-interpreta
     const res = document.getElementById('resultado');
     if (res && !res.querySelector('.resultado-placeholder')) {
         interpretar();
