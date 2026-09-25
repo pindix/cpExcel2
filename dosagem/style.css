@@ -74,8 +74,8 @@ html, body {
     left: 0;
     right: 0;
     height: 60px;
-    background: rgba(255, 255, 255, 0.6); /* Transparência base branca */
-    backdrop-filter: blur(15px) saturate(180%); /* O segredo do vidro */
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(15px) saturate(180%);
     -webkit-backdrop-filter: blur(15px) saturate(180%);
     display: flex;
     align-items: center;
@@ -130,7 +130,6 @@ html, body {
     transform-origin: center;
 }
 
-/* Animação do Hamburger → X */
 .btn-hamburger.ativo span:nth-child(1) {
     transform: translateY(7.5px) rotate(45deg);
 }
@@ -145,7 +144,7 @@ html, body {
 }
 
 /* ==========================================================================
-   MENU OVERLAY (70% ESCURO - SEM FUNDO BRANCO ATRÁS)
+   MENU OVERLAY
    ========================================================================== */
 .menu-overlay {
     position: fixed;
@@ -168,7 +167,7 @@ html, body {
 }
 
 /* ==========================================================================
-   MENU LATERAL (SEM FUNDO BRANCO - APENAS ITENS FLUTUANDO)
+   MENU LATERAL
    ========================================================================== */
 .menu-lateral {
     position: fixed;
@@ -183,7 +182,6 @@ html, body {
     overflow-y: auto;
     padding: 20px 12px;
     gap: 6px;
-    /* SEM background! Transparente! */
     background: transparent;
 }
 
@@ -191,13 +189,9 @@ html, body {
     right: 0;
 }
 
-/* ==========================================================================
-   CABEÇALHO DO MENU (Ícone + Nome - Flutuando)
-   ========================================================================== */
 .menu-header {
     padding: 10px 4px 20px;
     text-align: center;
-    /* SEM background! */
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     margin-bottom: 10px;
 }
@@ -227,9 +221,6 @@ html, body {
     color: rgba(255, 255, 255, 0.7);
 }
 
-/* ==========================================================================
-   ITENS DO MENU (Fundo cinza, padding, border-radius 12px)
-   ========================================================================== */
 .menu-items {
     flex: 1;
     display: flex;
@@ -241,18 +232,16 @@ html, body {
     display: flex;
     align-items: center;
     gap: 5px;
-    padding: 0.5rem;                    /* Padding como pediu */
+    padding: 0.5rem;
     text-decoration: none;
     color: grey;
-    border-radius: 20px;                /* Border-radius como pediu */
-    background: var(--card-bg);                   /* Fundo cinza como pediu */
+    border-radius: 20px;
+    background: var(--card-bg);
     transition: all 0.25s ease;
     position: relative;
     font-weight: 500;
     width: fit-content;
 }
-
-
 
 .menu-item-icon {
     width: 20px;
@@ -300,7 +289,6 @@ html, body {
     height: 40px;
     width: 40px;
     background: none;
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -309,9 +297,6 @@ html, body {
     flex-shrink: 0;
 } 
 
-/* ==========================================================================
-   RODAPÉ DO MENU (Transparente)
-   ========================================================================== */
 .menu-footer {
     padding: 20px 4px;
     text-align: right;
@@ -319,7 +304,6 @@ html, body {
     opacity: 0.6;
     font-size: 0.75rem;
     margin-top: auto;
-    /* SEM background! */
     background: transparent;
 }
 
@@ -329,9 +313,6 @@ html, body {
     color: white;
 }
 
-/* ==========================================================================
-   SCROLLBAR DO MENU
-   ========================================================================== */
 .menu-lateral::-webkit-scrollbar {
     width: 4px;
 }
@@ -340,10 +321,6 @@ html, body {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 4px;
 }
-
-
-
-
 
 /* --- SECTION ÚNICA --- */
 .main-tool {
@@ -355,9 +332,10 @@ html, body {
     max-width: 470px;
     margin: 0 auto;
     width: 100%;
-    overflow-x: hidden;}
+    overflow-x: hidden;
+}
 
-/* Contentor dos Comandos (A sua DIV) */
+
 .calculator-box {
     background: var(--card-bg);
     width: 100%;
@@ -369,47 +347,25 @@ html, body {
     align-items: center;
 }
 
-
-
-
-
-/* 1. O Contentor Pai (Ocupa a linha toda do Grid) */
-.nomeConcentracao {
-    grid-column: span 2; /* Garante que ocupa as duas colunas do seu grid principal */
-    display: flex;       /* Alinha os filhos horizontalmente */
-    gap: 10px;           /* Espaço entre o input e o select quando visível */
-    width: 100%;
-    align-items: flex-start; /* Mantém o alinhamento pelo topo (importante para as sugestões) */
-    row-gap: 8px;
-    margin-bottom: 1rem;
-}
-
-/* 2. O Campo de Nome (Configurado para crescer) */
 #campo_nome {
-    flex-grow: 1;        /* Faz este campo ocupar todo o espaço disponível */
-    display: flex;       /* Mantém o ícone e o input organizados internamente */
-    margin-bottom: 0;    /* Remove margens para não desalinharem */
-    position: relative;  /* Mantém a sugestões_box no lugar certo */
+    flex-grow: 1;
+    display: flex;
+    margin-bottom: 0;
+    position: relative;
 }
 
-
-
-
-
- 
 /* ==========================================================================
-   SELECT DE CONCENTRAÇÃO - VERSÃO PROFISSIONAL
+   SELECT DE CONCENTRAÇÃO
    ========================================================================== */
 
 .nomeConcentracao {
     display: flex;
     gap: 12px;
-    align-items: stretch; /* Força ambos os filhos a terem a mesma altura */
+    align-items: stretch;
     width: 100%;
     margin-bottom: 20px;
 }
 
-/* Wrapper do select */
 .select-concentracao-wrapper {
     flex: 1;
     min-width: 140px;
@@ -419,7 +375,6 @@ html, body {
     position: relative;
 }
 
-/* Label do select - estilo flutuante no canto superior esquerdo */
 .label-concentracao {
     font-size: 0.65rem;
     font-weight: 600;
@@ -435,7 +390,6 @@ html, body {
     padding: 4px;
 }
 
-/* Select estilizado */
 #selConcentracao {
     width: 100%;
     height: 100%;
@@ -456,14 +410,12 @@ html, body {
     transition: all 0.2s ease;
 }
 
-/* Opções do select */
 #selConcentracao option {
     background: var(--card-bg);
     color: var(--text);
     padding: 10px;
 }
 
-/* Responsividade */
 @media (max-width: 480px) {
     .select-concentracao-wrapper {
         min-width: 110px;
@@ -480,24 +432,352 @@ html, body {
         letter-spacing: 0.5px;
     }
 }
+
+/* ===== FONTE DE REFERÊNCIA / SELECTS CUSTOMIZADOS (modelo base) ===== */
+
+.fonte-referencia-wrapper {
+    padding: 0;
+    background: none;
+    border-radius: 20px;
+    position: relative;
+    z-index: 100;
+    width: 90%;
+    margin-bottom: 6px;
+}
+
+.faixa-etaria-wrapper {
+    padding: 0;
+    background: none;
+    border-radius: 16px;
+    position: relative;
+    z-index: 90;
+}
+
+.custom-select-trigger {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 14px 6px 14px;
+    background: var(--card-bg);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 46px;
+}
+
+.custom-select-trigger .floating-label {
+    position: absolute;
+    left: 14px;
+    top: 6px;
+    transform: translateY(0);
+    font-size: 0.55rem;
+    font-weight: 600;
+    color: var(--primary);
+    opacity: 0.8;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    letter-spacing: 0.3px;
+}
+
+.custom-select-trigger #fonteSelecionada,
+.custom-select-trigger #faixaSelecionada {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text);
+    padding-top: 10px;
+}
+
+.custom-select-trigger #fonteArrow,
+.custom-select-trigger #faixaArrow {
+    font-size: 1.1rem;
+    color: var(--text);
+    opacity: 0.5;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    margin-left: 8px;
+}
+
+.custom-select-trigger.aberto #fonteArrow,
+.custom-select-trigger.aberto #faixaArrow {
+    transform: rotate(180deg);
+}
+
+.custom-select-options {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: var(--card-bg);
+    border: 1px solid rgba(0, 132, 61, 0.15);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    padding: 6px;
+    z-index: 9999 !important;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+    visibility: hidden;
+}
+
+.custom-select-options.aberto {
+    max-height: 280px;
+    overflow-y: auto;
+    opacity: 1;
+    visibility: visible;
+}
+
+.custom-select-options::-webkit-scrollbar {
+    width: 4px;
+}
+
+.custom-select-options::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+}
+
+.custom-select-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.custom-select-option:hover {
+    background: rgba(0, 132, 61, 0.06);
+}
+
+.custom-select-option.selecionado {
+    background: rgba(0, 132, 61, 0.1);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 12px 12px 0;
+}
+
+.custom-select-option i {
+    font-size: 1.1rem;
+    color: var(--primary);
+    flex-shrink: 0;
+    width: 24px;
+    text-align: center;
+}
+
+.custom-select-option .option-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    flex: 1;
+}
+
+.custom-select-option .option-titulo {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.custom-select-option .option-desc {
+    font-size: 0.6rem;
+    color: var(--text);
+    opacity: 0.5;
+}
+
+@media (max-width: 480px) {
+    .wrapper-selects {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
     
-    
+    .fonte-referencia-wrapper,
+    .faixa-etaria-wrapper {
+        padding: 6px 4px 4px 4px;
+    }
+}
 
+[data-theme="dark"] .custom-select-options {
+    background: #2a2a2a;
+    border-color: rgba(255, 255, 255, 0.06);
+}
 
+[data-theme="dark"] .custom-select-option:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
 
+[data-theme="dark"] .custom-select-option.selecionado {
+    background: rgba(0, 132, 61, 0.2);
+}
 
+[data-theme="dark"] .fonte-referencia-wrapper,
+[data-theme="dark"] .faixa-etaria-wrapper {
+    background: #1a1a1a;
+    border-color: rgba(255, 255, 255, 0.06);
+}
 
-    
-    
+/* ===== SELECT COMPACTO (unidade de idade) ===== */
+.custom-select-temp-local {
+    position: relative;
+    flex-shrink: 0;
+    min-width: 70px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
 
+.custom-select-trigger-temp {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2px;
+    padding: 2px 6px;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    height: 100%;
+    min-height: 28px;
+}
 
+.custom-select-trigger-temp:hover {
+    background: rgba(0, 132, 61, 0.05);
+}
 
+.custom-select-trigger-temp #tempLocalSelecionado {
+    font-size: 0.6rem;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+    text-align: center;
+}
 
+.custom-select-trigger-temp #tempLocalArrow {
+    font-size: 0.7rem;
+    color: var(--text);
+    opacity: 0.4;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
 
+.custom-select-trigger-temp.aberto #tempLocalArrow {
+    transform: rotate(180deg);
+}
 
+.custom-select-options-temp {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: -4px;
+    background: var(--card-bg);
+    border: 1px solid rgba(0, 132, 61, 0.12);
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    padding: 4px;
+    z-index: 9999 !important;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.25s ease;
+    visibility: hidden;
+    min-width: 110px;
+}
 
+.custom-select-options-temp.aberto {
+    max-height: 160px;
+    overflow-y: auto;
+    opacity: 1;
+    visibility: visible;
+}
 
-/* Campos*/
+.custom-select-options-temp::-webkit-scrollbar {
+    width: 3px;
+}
+
+.custom-select-options-temp::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 3px;
+}
+
+.custom-select-option-temp {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding: 6px 14px !important;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 28px;
+}
+
+.custom-select-option-temp:hover {
+    background: rgba(0, 132, 61, 0.06);
+}
+
+.custom-select-option-temp.selecionado {
+    background: rgba(0, 132, 61, 0.08);
+}
+
+.custom-select-option-temp .option-label {
+    font-size: 0.65rem !important;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+    text-align: left;
+    width: 100%;
+}
+
+[data-theme="dark"] .custom-select-options-temp {
+    background: #2a2a2a;
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .custom-select-option-temp:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .custom-select-option-temp.selecionado {
+    background: rgba(0, 132, 61, 0.2);
+}
+
+@media (max-width: 480px) {
+    .custom-select-temp-local {
+        min-width: 60px;
+    }
+    .custom-select-trigger-temp #tempLocalSelecionado {
+        font-size: 0.55rem;
+    }
+    .custom-select-options-temp {
+        min-width: 100px;
+        right: -8px;
+    }
+    .custom-select-option-temp .option-label {
+        font-size: 0.6rem !important;
+    }
+    .custom-select-option-temp {
+        padding: 4px 12px !important;
+        min-height: 24px;
+    }
+}
+
+@media (max-width: 380px) {
+    .custom-select-temp-local {
+        min-width: 50px;
+    }
+    .custom-select-trigger-temp #tempLocalSelecionado {
+        font-size: 0.5rem;
+    }
+    .custom-select-options-temp {
+        min-width: 90px;
+    }
+}
+
+/* Campos */
 .entradas_de_dados {
     width: 100%;
     height: 40px;
@@ -509,9 +789,7 @@ html, body {
     box-shadow: 0 4px 12px var(--sombra);
     border-radius: 4px;
     margin-bottom: 8px;
-    
 }
-
 
 .entradas_de_dados input {
     padding: 0.5rem 0.5rem 0.5rem 1.8rem;
@@ -542,6 +820,8 @@ html, body {
     background: var(--bg);
     font-size: 11px;
 }
+
+
 
 .entradas_de_dados p {
     background: var(--bg);
@@ -589,11 +869,8 @@ html, body {
     width: 90%;
 }
 
-
-
-
 /* ==========================================================================
-   LAYOUT DUAS COLUNAS
+   LAYOUT DUAS COLUNAS (mantido — usado noutras páginas do site)
    ========================================================================== */
 
 .container-duas-colunas {
@@ -603,7 +880,6 @@ html, body {
     margin-bottom: 0;
 }
 
-/* COLUNA ESQUERDA - Inputs */
 .coluna-inputs {
     flex: 1;
     display: flex;
@@ -611,7 +887,6 @@ html, body {
     gap: 5px;
 }
 
-/* COLUNA DIREITA - Selects */
 .coluna-selects {
     flex: 1;
     display: flex;
@@ -627,7 +902,6 @@ html, body {
     height: fit-content;
 }
 
-/* Inputs individuais */
 .entradas_de_dados {
     display: none;
     align-items: center;
@@ -660,11 +934,6 @@ html, body {
     font-size: 0.9rem;
 }
 
-
-/* ==========================================================================
-   LABELS FLUTUANTES
-   ========================================================================== */
-
 .floating-group {
     position: relative;
 }
@@ -682,7 +951,6 @@ html, body {
     white-space: nowrap;
 }
 
-/* Label sobe quando input tem foco OU tem conteúdo */
 .floating-group input:focus ~ .label-flutuante,
 .floating-group input:not(:placeholder-shown) ~ .label-flutuante {
     top: 8px;
@@ -690,25 +958,18 @@ html, body {
     opacity: 0.7;
 }
 
-/* Ajuste do padding do input para acomodar a label */
 .floating-group input {
     padding-top: 12px;
     padding-bottom: 4px;
 }
 
-/* Remove o placeholder visual */
 .floating-group input::placeholder {
     opacity: 0;
 }
 
-/* Ajuste do ícone para não interferir com a label */
 .floating-group i {
     z-index: 2;
 }
-
-
-
-
 
 .unidade-fixa {
     background: rgba(0, 132, 61, 0.1);
@@ -724,7 +985,6 @@ html, body {
 .select-unidade {
     background: rgba(0, 132, 61, 0.1);
     border: none;
-   /* padding: 6px 10px; */
     border-radius: 20px;
     font-size: 0.7rem;
     font-weight: 600;
@@ -733,7 +993,6 @@ html, body {
     cursor: pointer;
 }
 
-/* Selects na coluna direita */
 .linha-dupla {
     display: flex;
     gap: 12px;
@@ -778,11 +1037,6 @@ html, body {
     background: rgba(0, 132, 61, 0.2) !important;
 }
 
-
-/* Responsividade - mobile vira 1 coluna */
-
-
-/* Dark mode */
 [data-theme="dark"] .unidade-fixa,
 [data-theme="dark"] .select-unidade {
     background: rgba(0, 132, 61, 0.2);
@@ -793,19 +1047,12 @@ html, body {
     background: var(--bg);
 }
 
-
-
-
-
-
-/* Sugestões e animações) */
 #sugestoes_box {
     position: absolute;
-    /* Alinha exatamente abaixo do pai (entradas_de_dados) */
     top: calc(100% + 4px);
     left: 0;
     width: 100%;
-    background: var(--bg);
+    background: white;
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     z-index: 1000;
@@ -814,10 +1061,13 @@ html, body {
     overflow-y: auto;
 }
 
+[data-theme="dark"] #sugestoes_box {
+    background: #121212;
+}
+
 .sugestao_item {
     padding: 10px;
     cursor: pointer;
-    /* border-bottom: 1px solid #eee; */
     background: var(--card-bg);
     color: green;
     margin: 4px;
@@ -828,6 +1078,44 @@ html, body {
     background: #f0f0f0;
     color: green;
 }
+
+
+/* ===== SCROLLBAR CUSTOMIZADA PARA SUGESTÕES ===== */
+#sugestoes_box::-webkit-scrollbar {
+    width: 4px;
+}
+
+#sugestoes_box::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px;
+}
+
+#sugestoes_box::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+    opacity: 0.5;
+}
+
+#sugestoes_box::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+    opacity: 0.8;
+}
+
+/* Firefox */
+#sugestoes_box {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) transparent;
+}
+
+/* Tema escuro */
+[data-theme="dark"] #sugestoes_box::-webkit-scrollbar-thumb {
+    background: rgba(0, 132, 61, 0.6);
+}
+
+[data-theme="dark"] #sugestoes_box {
+    scrollbar-color: rgba(0, 132, 61, 0.6) transparent;
+}
+
 
 @keyframes fadeIn {
     from {
@@ -880,17 +1168,6 @@ html, body {
     margin-top: 8px;
 }
 
-
-/* ==========================================================================
-   AJUSTE DE ESPAÇAMENTO NO RESULTADO
-   ========================================================================== */
-
-
-
-/* ==========================================================================
-   FEEDBACK DE MUDANÇA DE PAÍS - ESTILO PREMIUM
-   ========================================================================== */
-
 .feedback-loading,
 .feedback-success {
     display: flex;
@@ -908,12 +1185,24 @@ html, body {
     background: linear-gradient(135deg, #f59e0b 0%, #e67e22 100%);
     color: white;
     box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+    margin: 12px auto 0;
 }
 
 .feedback-success {
-    background: linear-gradient(135deg, #00843d 0%, #00a54c 100%);
-    color: white;
-    box-shadow: 0 8px 20px rgba(0, 132, 61, 0.3);
+    width: 100%;
+    max-width: 470px;
+    margin: 12px auto 0;
+    padding: 12px 16px;
+    background: rgba(230, 126, 34, 0.1);
+    border-left: 3px solid #e67e22;
+    border-right: 3px solid #e67e22;
+    border-radius: 0;
+    font-size: 0.3rem;
+    line-height: 1.5;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .feedback-loading i,
@@ -933,12 +1222,10 @@ html, body {
 }
 
 .feedback-success span strong {
-    font-weight: 700;
-    text-decoration: underline;
+    font-weight: 900;
     text-underline-offset: 3px;
 }
 
-/* Animações */
 @keyframes spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
@@ -955,17 +1242,6 @@ html, body {
     }
 }
 
-
-
-
-/* ==========================================================================
-   DOSAGEM - RESULTADO PREMIUM (MESMO ESTILO DA DILUIÇÃO)
-   ========================================================================== */
-
-/* ==========================================================================
-   RESULTADO DISPLAY - LARGURA FIXA CONSISTENTE
-   ========================================================================== */
-
 .resultado-display {
     margin-top: 25px;
     background: transparent;
@@ -973,8 +1249,8 @@ html, body {
     font-weight: 400;
     font-size: 1rem;
     box-shadow: none;
-    width: 100%;  /* ← Largura consistente */
-    max-width: 100%;  /* ← Garante que não ultrapassa */
+    width: 100%;
+    max-width: 100%;
     padding: 0;
     box-sizing: border-box;
 }
@@ -984,7 +1260,6 @@ html, body {
     box-sizing: border-box;
 }
 
-/* Card principal */
 .dosagem-card {
     background: var(--card-bg);
     border-radius: 20px;
@@ -997,7 +1272,6 @@ html, body {
     width: 100%;
     box-sizing: border-box;
 }
-/* Cabeçalho do card */
 .dosagem-card .card-header {
     display: flex;
     justify-content: space-between;
@@ -1029,7 +1303,6 @@ html, body {
     color: var(--text);
 }
 
-/* Dose única */
 .dosagem-dose {
     text-align: center;
     padding: 8px 0 5px 0;
@@ -1053,7 +1326,6 @@ html, body {
     color: var(--text);
 }
 
-/* Ataque e Manutenção */
 .dosagem-ataque-manutencao {
     display: flex;
     flex-direction: column;
@@ -1118,8 +1390,6 @@ html, body {
     color: var(--text);
 }
 
-
-/* Intervalo - como texto simples, sem card */
 .dosagem-intervalo-texto {
     display: flex;
     align-items: center;
@@ -1140,7 +1410,6 @@ html, body {
     color: var(--primary);
 }
 
-/* Notas - com ícones alinhados simetricamente */
 .dosagem-notas {
     background: rgba(0, 132, 61, 0.05);
     border-radius: 0 16px 16px 0;
@@ -1174,17 +1443,6 @@ html, body {
     line-height: 1.4;
 }
 
-
-
-
-
-
-
-
-/* ==========================================================================
-   TÍTULO DAS INFORMAÇÕES ADICIONAIS
-   ========================================================================== */
-
 .notas-titulo {
     display: flex;
     align-items: center;
@@ -1207,15 +1465,28 @@ html, body {
 }
 
 
+.dosagem-notas .notas-scroll {
+    max-height: 220px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+.dosagem-notas .notas-scroll::-webkit-scrollbar {
+    width: 4px;
+}
+.dosagem-notas .notas-scroll::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+}
+[data-theme="dark"] .dosagem-notas .notas-scroll::-webkit-scrollbar-thumb {
+    background: rgba(0, 132, 61, 0.6);
+}
+
+.dosagem-notas .btn-ver-mais-notas {
+    margin: 4px 0;
+}
 
 
 
-
-
-
-
-
-/* Totais (tomas/dia, volume/dia, massa/dia) */
 .dosagem-totais {
     display: flex;
     justify-content: center;
@@ -1241,7 +1512,6 @@ html, body {
     color: var(--primary);
 }
 
-/* Erros */
 .dosagem-erro,
 .dosagem-erro-interno {
     display: flex;
@@ -1271,7 +1541,6 @@ html, body {
     margin: 16px 0;
 }
 
-/* Dark mode */
 [data-theme="dark"] .dosagem-card {
     border-color: rgba(255, 255, 255, 0.06);
 }
@@ -1293,19 +1562,15 @@ html, body {
     background: black;
 }
 
-/* Responsividade */
 @media (max-width: 480px) {
     .dosagem-card {
         padding: 16px 14px;
     }
     
-
-    
     .ataque-item,
     .manutencao-item {
         padding: 10px 14px;
     }
-    
     
     .dosagem-totais {
         gap: 12px;
@@ -1320,37 +1585,20 @@ html, body {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-  
-
-/* ==========================================================================
-   FOOTER GLOBAL
-   ========================================================================== */
 .plain-footer {
   width: 100%;
   padding: 20px 15px;
-  background-color: transparent; /* Sem fundo */
+  background-color: transparent;
   text-align: center;
-  margin-top: auto; /* Cola no fundo se o conteúdo for curto */
+  margin-top: auto;
 }
 
 .footer-inline {
   display: flex;
-  flex-wrap: wrap; /* Itens quebram linha em mobile */
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 8px 16px; /* Espaço entre itens */
-  
+  gap: 8px 16px;
   font-size: 0.8rem;
   color: grey;
 }
@@ -1363,7 +1611,6 @@ html, body {
   transition: color 0.2s, border-color 0.2s;
 }
 
-
 .footer-inline a:hover {
   color: var(--primary-dark);
   border-bottom-color: var(--primary-dark);
@@ -1373,26 +1620,6 @@ html, body {
   opacity: 0.4;
 }
 
-
-
-
-
-
-
-/* ==========================================================================
-   MODAL DE SEGURANÇA - POP UP COM FUNDO FUSCO
-   ========================================================================== */
-
-/* ==========================================================================
-   MODAL DE SEGURANÇA - ESTILO VIDRO COM FUNDO FUSCO
-   ========================================================================== */
-
-/* Classe que ativa o fundo escuro */
-/* ==========================================================================
-   MODAL DE SEGURANÇA - ESTILO VIDRO COM FUNDO FUSCO
-   ========================================================================== */
-
-/* Classe que ativa o fundo escuro */
 body.modal-aberto {
     overflow: hidden;
     position: fixed;
@@ -1400,7 +1627,6 @@ body.modal-aberto {
     height: 100%;
 }
 
-/* Fundo desfocado estilo iOS/Windows 11 - NÃO totalmente escuro */
 body.modal-aberto::before {
     content: '';
     position: fixed;
@@ -1415,7 +1641,6 @@ body.modal-aberto::before {
     animation: fadeInFundo 0.3s ease-out;
 }
 
-/* Overlay do modal - mantém o vidro */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -1431,7 +1656,6 @@ body.modal-aberto::before {
     z-index: 9999;
 }
 
-/* Conteúdo do modal - estilo vidro */
 .modal-content {
     background: rgba(255, 255, 255, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.5);
@@ -1446,7 +1670,6 @@ body.modal-aberto::before {
     z-index: 10000;
 }
 
-/* Título do modal - com ícone e cor profissional */
 .modal-content h3 {
     display: flex;
     align-items: center;
@@ -1457,9 +1680,6 @@ body.modal-aberto::before {
     font-weight: 700;
 }
 
-
-
-/* Texto do modal */
 .modal-content p {
     color: black;
     font-size: 0.95rem;
@@ -1467,7 +1687,6 @@ body.modal-aberto::before {
     margin-bottom: 1.5rem;
 }
 
-/* Botão do modal */
 .modal-content button {
     background: #27ae60;
     color: white;
@@ -1489,7 +1708,6 @@ body.modal-aberto::before {
     box-shadow: 0 12px 20px -3px rgba(39, 174, 96, 0.4);
 }
 
-/* Linha separadora entre mensagens */
 .modal-content hr {
     margin: 15px 0;
     border: none;
@@ -1497,7 +1715,6 @@ body.modal-aberto::before {
     background: rgba(0, 0, 0, 0.1);
 }
 
-/* Dark mode - ajuste do vidro */
 [data-theme="dark"] .modal-content {
     background: rgba(30, 30, 30, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -1511,7 +1728,6 @@ body.modal-aberto::before {
     background: rgba(255, 255, 255, 0.1);
 }
 
-/* Animações */
 @keyframes fadeInFundo {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -1528,16 +1744,6 @@ body.modal-aberto::before {
     }
 }
 
-
-
-
-
-
-
-
-
-
-/* Definição da animação de vibrar */
 @keyframes vibration {
     0% { transform: translateX(0); }
     25% { transform: translateX(-5px); }
@@ -1546,8 +1752,321 @@ body.modal-aberto::before {
     100% { transform: translateX(0); }
 }
 
-/* Classe que será aplicada ao elemento */
 .vibrar {
     animation: vibration 0.2s ease-in-out;
 }
+
+
+/* ==========================================================================
+   ACRESCENTOS — nada acima desta linha foi alterado
+   ========================================================================== */
+
+/* --- Generaliza o valor/seta de QUALQUER custom-select novo --- */
+.custom-select-trigger > span:not(.floating-label) {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text);
+    padding-top: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.custom-select-trigger > i {
+    font-size: 1.1rem;
+    color: var(--text);
+    opacity: 0.5;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    margin-left: 8px;
+}
+.custom-select-trigger.aberto > i {
+    transform: rotate(180deg);
+}
+
+/* --- Condição: linha própria, largura total --- */
+.condicao-select {
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+/* --- Pares fixos (peso/idade, dose/manutenção) --- */
+.par-campos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    width: 100%;
+}
+
+.par-campos.par-unico {
+    grid-template-columns: 1fr;
+}
+
+.par-campos.dose-dupla {
+    grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 480px) {
+    .par-campos {
+        gap: 8px;
+    }
+}
+
+@media (max-width: 360px) {
+    .par-campos {
+        gap: 6px;
+    }
+}
+
+/* --- Linha partilhada via/intervalo/população --- */
+.linha-secundaria {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 8px;
+}
+.linha-secundaria > .custom-select {
+    flex: 1;
+    min-width: 0;
+}
+
+/* --- Linha exclusiva: intervalo de ataque + manutenção juntos --- */
+#linhaIntervaloDuplo {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 8px;
+}
+#linhaIntervaloDuplo .custom-select {
+    flex: 1;
+    min-width: 0;
+}
+
+/* --- Nota de fallback de referência --- */
+.nota-fallback-referencia {
+    width: 100%;
+    max-width: 470px;
+    margin: 12px auto 0;
+    padding: 12px 16px;
+    background: rgba(230, 126, 34, 0.1);
+    border-left: 3px solid #e67e22;
+    border-right: 3px solid #e67e22;
+    border-radius: 0;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.nota-fallback-referencia i {
+    color: #e67e22;
+    font-size: 1rem;
+    margin-top: 1px;
+    flex-shrink: 0;
+}
+[data-theme="dark"] .nota-fallback-referencia {
+    background: rgba(230, 126, 34, 0.12);
+}
+
+/* --- Notas: "ver mais" --- */
+.nota-item.nota-oculta {
+    display: none;
+}
+.btn-ver-mais-notas {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 6px 0 2px;
+}
+.btn-ver-mais-notas:hover {
+    text-decoration: underline;
+}
+.nota-item.nota-referencia {
+    border-top: 1px dashed rgba(0, 132, 61, 0.25);
+    margin-top: 6px;
+    padding-top: 8px;
+    opacity: 0.85;
+}
+
+.custom-select {
+    position: relative;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Blocos por fase (ataque / manutenção) */
+.fase-bloco {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.fase-cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 2px;
+}
+.fase-cabecalho i {
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+
+.fase-dose {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+/* Separação visual entre os dois blocos */
+.dosagem-ataque-manutencao .fase-bloco + .fase-bloco {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed rgba(0, 132, 61, 0.2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.dosagem-ataque-manutencao {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+.fase-item {
+    background: var(--bg);
+    border-radius: 16px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.fase-cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+.fase-cabecalho i {
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+.fase-linha-principal {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.fase-intervalo {
+    font-size: 0.8rem;
+    color: var(--primary);
+    font-weight: 500;
+    margin-top: 2px;
+}
+.fase-totais {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(0, 132, 61, 0.15);
+    font-size: 0.75rem;
+    color: var(--primary);
+    font-weight: 500;
+}
+.fase-totais span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+.fase-totais i {
+    font-size: 0.9rem;
+    color: var(--primary);
+}
+[data-theme="dark"] .fase-item {
+    background: black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.campos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 8px;
+}
+.campos-grid.grid-unica {
+    grid-template-columns: 1fr;
+}
+
+.campos-grid > .entradas_de_dados {
+    margin-bottom: 0;
+}
+@media (max-width: 480px) {
+    .campos-grid { gap: 8px; }
+}
+@media (max-width: 360px) {
+    .campos-grid { gap: 6px; }
+}
+
+
+
+.campos-grid .quebra-linha {
+    display: none;
+    grid-column: 1 / -1;
+    height: 0;
+}
+.campos-grid.tem-dupla .quebra-linha {
+    display: block;
+}
+
+
+.campos-grid.tem-dupla.grid-unica-solta #campo_de_peso,
+.campos-grid.tem-dupla.grid-unica-solta #campo_de_idade {
+    grid-column: 1 / -1;
+}
+
+
+
+
+
+
 

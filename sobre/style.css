@@ -1,0 +1,557 @@
+:root {
+    --primary: #00843d;
+    --primary-dark: #00632e;
+    --primary-soft: #eafaf1;
+    --text: black;
+    --gray: #6d7c74;
+    --white: #ffffff;
+    --milk-solid: #f0f2f0;
+    --section-2-bg: #f0f2f0;
+    --footer-bg: #1a2a21;
+    --sombra: #e0dada;
+    --subCard: #ffffff;
+    --borda-bento: 1px solid rgba(0, 132, 61, 0.08);
+    --shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.3s, color 0.3s;
+    -webkit-text-size-adjust: 100%;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../assets/fonts/Poppins-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../assets/fonts/Poppins-Bold.ttf') format('truetype');
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text);
+    background-color: var(--white);
+    overflow-x: hidden;
+    height: 100%;
+}
+
+
+/* Cores do Tema Escuro */
+[data-theme="dark"] {
+    --white: black;
+    /* Fundo da Section 1 */
+    --milk-solid: #1e1e1e;
+    /* Fundo dos Cards e Section 2 */
+    --section-2-bg: #1e1e1e;
+    --text: #f0f2f0;
+    /* Texto principal */
+    --gray: #a0a0a0;
+    /* Texto secundário */
+    --primary-soft: #1a3326;
+    /* Hover dos cards no modo escuro */
+    --border-color: #333333;
+    --sombra: none;
+    --subCard: #1e1e1e;
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.4);
+    --borda-bento: none;
+}
+
+
+
+
+
+/* ==========================================================================
+   NAVEGAÇÃO SUPERIOR
+   ========================================================================== */
+.nav-topo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.6);
+    /* Transparência base branca */
+    backdrop-filter: blur(15px) saturate(180%);
+    /* O segredo do vidro */
+    -webkit-backdrop-filter: blur(15px) saturate(180%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0, 132, 61, 0.08);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .nav-topo {
+    background: #1a1a1ad3;
+    border-bottom: 1px solid #333;
+}
+
+.nav-logo {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: -0.3px;
+}
+
+.nav-logo span {
+    color: var(--text);
+}
+
+.matClinica {
+    color: var(--text);
+}
+
+/* ==========================================================================
+   BOTÃO HAMBURGER (Animado)
+   ========================================================================== */
+.btn-hamburger {
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    z-index: 2000;
+    position: relative;
+}
+
+.btn-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2.5px;
+    background: var(--text);
+    border-radius: 3px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+}
+
+/* Animação do Hamburger → X */
+.btn-hamburger.ativo span:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg);
+}
+
+.btn-hamburger.ativo span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.btn-hamburger.ativo span:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
+}
+
+/* ==========================================================================
+   MENU OVERLAY (70% ESCURO - SEM FUNDO BRANCO ATRÁS)
+   ========================================================================== */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 1500;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.menu-overlay.ativo {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ==========================================================================
+   MENU LATERAL (SEM FUNDO BRANCO - APENAS ITENS FLUTUANDO)
+   ========================================================================== */
+.menu-lateral {
+    position: fixed;
+    top: 0;
+    right: -270px;
+    width: 250px;
+    height: 100%;
+    z-index: 1600;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 20px 12px;
+    gap: 6px;
+    /* SEM background! Transparente! */
+    background: transparent;
+}
+
+.menu-lateral.ativo {
+    right: 0;
+}
+
+/* ==========================================================================
+   CABEÇALHO DO MENU (Ícone + Nome - Flutuando)
+   ========================================================================== */
+.menu-header {
+    padding: 10px 4px 20px;
+    text-align: center;
+    /* SEM background! */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    margin-bottom: 10px;
+}
+
+.menu-header-icon {
+    width: 56px;
+    height: 56px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: white;
+    margin: 0 auto 12px;
+}
+
+.menu-header h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 4px;
+}
+
+.menu-header p {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* ==========================================================================
+   ITENS DO MENU (Fundo cinza, padding, border-radius 12px)
+   ========================================================================== */
+.menu-items {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0.5rem;
+    /* Padding como pediu */
+    text-decoration: none;
+    color: grey;
+    border-radius: 20px;
+    /* Border-radius como pediu */
+    background: var(--subCard);
+    /* Fundo cinza como pediu */
+    transition: all 0.25s ease;
+    position: relative;
+    font-weight: 500;
+    width: fit-content;
+}
+
+
+
+.menu-item-icon {
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: grey;
+    flex-shrink: 0;
+}
+
+.menu-header-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.menu-item span {
+    flex: 1;
+    font-size: 0.95rem;
+}
+
+.menu-item-arrow {
+    font-size: 1.1rem;
+    transition: 0.2s;
+    color: grey;
+}
+
+.menu-item:hover .menu-item-arrow {
+    opacity: 1;
+    transform: translateX(3px);
+}
+
+.contacto {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.5rem;
+}
+
+.contacto a {
+    text-decoration: none;
+}
+
+.contacto i {
+    border: solid 2px white;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    background: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   RODAPÉ DO MENU (Transparente)
+   ========================================================================== */
+.menu-footer {
+    padding: 20px 4px;
+    text-align: right;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    opacity: 0.6;
+    font-size: 0.75rem;
+    margin-top: auto;
+    /* SEM background! */
+    background: transparent;
+}
+
+.menu-footer small {
+    display: block;
+    line-height: 1.8;
+    color: white;
+}
+
+/* ==========================================================================
+   SCROLLBAR DO MENU
+   ========================================================================== */
+.menu-lateral::-webkit-scrollbar {
+    width: 4px;
+}
+
+.menu-lateral::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+/* --- TELA SOBRE: MINIMALISMO EXTREMO --- */
+
+.app-mode {
+    background-color: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.nav-minimal {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.back-link {
+    color: var(--primary);
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+
+.page-simple {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0 25px 60px;
+}
+
+/* Header */
+.brand-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.brand-name {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 5px;
+    letter-spacing: -1px;
+}
+
+.brand-name span {
+    color: var(--primary);
+}
+
+.version-text {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--gray);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.link_site {
+    color: var(--primary);
+    font-weight: 900;
+}
+
+/* Fluxo de Informação */
+.info-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.info-block {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.info-block i {
+    font-size: 1.5rem;
+    color: var(--primary);
+    background: var(--primary-soft);
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.text-content h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.text-content p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--gray);
+}
+
+/* Stats Minimalistas */
+.minimal-stats {
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(0, 132, 61, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.minimal-stats span {
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.minimal-stats i {
+    color: var(--primary);
+    font-size: 1rem;
+}
+
+.dot-sep {
+    width: 4px;
+    height: 4px;
+    background: var(--gray);
+    border-radius: 50%;
+    opacity: 0.3;
+}
+
+
+/* Ajuste para telas muito pequenas */
+@media (max-width: 400px) {
+    .minimal-stats {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .dot-sep {
+        display: none;
+    }
+}
+
+
+
+
+/* ==========================================================================
+   FOOTER GLOBAL
+   ========================================================================== */
+.plain-footer {
+    width: 100%;
+    padding: 20px 15px;
+    background-color: transparent;
+    /* Sem fundo */
+    text-align: center;
+    margin-top: auto;
+    /* Cola no fundo se o conteúdo for curto */
+}
+
+.footer-inline {
+    display: flex;
+    flex-wrap: wrap;
+    /* Itens quebram linha em mobile */
+    justify-content: center;
+    align-items: center;
+    gap: 8px 16px;
+    /* Espaço entre itens */
+
+    font-size: 0.8rem;
+    color: grey;
+}
+
+.footer-inline a {
+    color: grey;
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px dotted grey;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.footer-inline a:hover {
+    color: var(--primary-dark);
+    border-bottom-color: var(--primary-dark);
+}
+
+.footer-sep {
+    opacity: 0.4;
+}

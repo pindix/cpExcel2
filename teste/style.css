@@ -1,0 +1,1553 @@
+:root {
+    --primary: #00843d;
+    --white: #ffffff;
+    --bg: #f0f2f0;
+    /* Cinza Pérola que usamos na S2 */
+    --text: #1a2a21;
+    --card-bg: #ffffff;
+    --sombra: #e0dada;
+    --card-bg2: #ffffff;
+    --mat: black;
+} 
+
+[data-theme="dark"] {
+    --bg: black;
+    --card-bg: #121212;
+    --text: #f0f2f0;
+    --sombra: none;
+    --card-bg2: #121212;
+    --mat: white;
+    --white: black;
+}
+
+ 
+
+@font-face {
+    font-family: 'Poppins'; 
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../assets/fonts/Poppins-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../assets/fonts/Poppins-Bold.ttf') format('truetype');
+}
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: 0.3s;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+
+/* ==========================================================================
+   NAVEGAÇÃO SUPERIOR
+   ========================================================================== */
+.nav-topo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.6); /* Transparência base branca */
+    backdrop-filter: blur(15px) saturate(180%); /* O segredo do vidro */
+    -webkit-backdrop-filter: blur(15px) saturate(180%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0, 132, 61, 0.08);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .nav-topo {
+    background: #1a1a1ad3;
+    border-bottom: 1px solid #333;
+}
+
+.nav-logo {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: -0.3px;
+}
+
+.matClinica {
+    color: var(--mat);
+}
+
+/* ==========================================================================
+   BOTÃO HAMBURGER (Animado)
+   ========================================================================== */
+.btn-hamburger {
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    z-index: 2000;
+    position: relative;
+}
+
+.btn-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2.5px;
+    background: var(--text);
+    border-radius: 3px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+}
+
+/* Animação do Hamburger → X */
+.btn-hamburger.ativo span:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg);
+}
+
+.btn-hamburger.ativo span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.btn-hamburger.ativo span:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
+}
+
+/* ==========================================================================
+   MENU OVERLAY (70% ESCURO - SEM FUNDO BRANCO ATRÁS)
+   ========================================================================== */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 1500;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.menu-overlay.ativo {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ==========================================================================
+   MENU LATERAL (SEM FUNDO BRANCO - APENAS ITENS FLUTUANDO)
+   ========================================================================== */
+.menu-lateral {
+    position: fixed;
+    top: 0;
+    right: -270px;
+    width: 250px;
+    height: 100%;
+    z-index: 1600;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 20px 12px;
+    gap: 6px;
+    /* SEM background! Transparente! */
+    background: transparent;
+}
+
+.menu-lateral.ativo {
+    right: 0;
+}
+
+/* ==========================================================================
+   CABEÇALHO DO MENU (Ícone + Nome - Flutuando)
+   ========================================================================== */
+.menu-header {
+    padding: 10px 4px 20px;
+    text-align: center;
+    /* SEM background! */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    margin-bottom: 10px;
+}
+
+.menu-header-icon {
+    width: 56px;
+    height: 56px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: white;
+    margin: 0 auto 12px;
+}
+
+.menu-header h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 4px;
+}
+
+.menu-header p {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* ==========================================================================
+   ITENS DO MENU (Fundo cinza, padding, border-radius 12px)
+   ========================================================================== */
+.menu-items {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0.5rem;                    /* Padding como pediu */
+    text-decoration: none;
+    color: grey;
+    border-radius: 20px;                /* Border-radius como pediu */
+    background: var(--card-bg);                   /* Fundo cinza como pediu */
+    transition: all 0.25s ease;
+    position: relative;
+    font-weight: 500;
+    width: fit-content;
+}
+
+
+
+.menu-item-icon {
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: grey;
+    flex-shrink: 0;
+}
+
+.menu-item span {
+    flex: 1;
+    font-size: 0.95rem;
+}
+
+.menu-item-arrow {
+    font-size: 1.1rem;
+    transition: 0.2s;
+    color: grey;
+}
+
+.menu-item:hover .menu-item-arrow {
+    opacity: 1;
+    transform: translateX(3px);
+}
+
+.contacto {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.5rem;
+}
+
+.contacto a {
+    text-decoration: none;
+}
+
+.contacto i {
+    border: solid 2px white;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    background: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    flex-shrink: 0;
+} 
+
+/* ==========================================================================
+   RODAPÉ DO MENU (Transparente)
+   ========================================================================== */
+.menu-footer {
+    padding: 20px 4px;
+    text-align: right;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    opacity: 0.6;
+    font-size: 0.75rem;
+    margin-top: auto;
+    /* SEM background! */
+    background: transparent;
+}
+
+.menu-footer small {
+    display: block;
+    line-height: 1.8;
+    color: white;
+}
+
+/* ==========================================================================
+   SCROLLBAR DO MENU
+   ========================================================================== */
+.menu-lateral::-webkit-scrollbar {
+    width: 4px;
+}
+
+.menu-lateral::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+
+
+
+
+/* --- SECTION ÚNICA --- */
+.main-tool {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 70px 10px 0 10px;
+    max-width: 470px;
+    margin: 0 auto;
+    width: 100%;
+    overflow-x: hidden;}
+
+/* Contentor dos Comandos (A sua DIV) */
+.calculator-box {
+    background: var(--card-bg);
+    width: 100%;
+    padding: 20px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+
+
+/* 1. O Contentor Pai (Ocupa a linha toda do Grid) */
+.nomeConcentracao {
+    grid-column: span 2; /* Garante que ocupa as duas colunas do seu grid principal */
+    display: flex;       /* Alinha os filhos horizontalmente */
+    gap: 10px;           /* Espaço entre o input e o select quando visível */
+    width: 100%;
+    align-items: flex-start; /* Mantém o alinhamento pelo topo (importante para as sugestões) */
+    row-gap: 8px;
+    margin-bottom: 1rem;
+}
+
+/* 2. O Campo de Nome (Configurado para crescer) */
+#campo_nome {
+    flex-grow: 1;        /* Faz este campo ocupar todo o espaço disponível */
+    display: flex;       /* Mantém o ícone e o input organizados internamente */
+    margin-bottom: 0;    /* Remove margens para não desalinharem */
+    position: relative;  /* Mantém a sugestões_box no lugar certo */
+}
+
+
+
+
+
+ 
+/* ==========================================================================
+   SELECT DE CONCENTRAÇÃO - VERSÃO PROFISSIONAL
+   ========================================================================== */
+
+.nomeConcentracao {
+    display: flex;
+    gap: 12px;
+    align-items: stretch; /* Força ambos os filhos a terem a mesma altura */
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Wrapper do select */
+.select-concentracao-wrapper {
+    flex: 1;
+    min-width: 140px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+/* Label do select - estilo flutuante no canto superior esquerdo */
+.label-concentracao {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-align: center;
+    letter-spacing: 0.8px;
+    display: block;
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--card-bg);
+    padding: 4px;
+}
+
+/* Select estilizado */
+#selConcentracao {
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: 1.5px solid var(--primary);
+    border-radius: 14px;
+    padding: 0 32px 0 16px;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300843d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 14px;
+    transition: all 0.2s ease;
+}
+
+/* Opções do select */
+#selConcentracao option {
+    background: var(--card-bg);
+    color: var(--text);
+    padding: 10px;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+    .select-concentracao-wrapper {
+        min-width: 110px;
+    }
+    
+    #selConcentracao {
+        height: 40px;
+        font-size: 0.75rem;
+        padding: 0 28px 0 12px;
+    }
+    
+    .label-concentracao {
+        font-size: 0.6rem;
+        letter-spacing: 0.5px;
+    }
+}
+    
+    
+
+
+
+
+
+    
+    
+
+
+
+
+
+
+
+
+/* Campos*/
+.entradas_de_dados {
+    width: 100%;
+    height: 40px;
+    position: relative;
+    display: none;
+    align-items: center;
+    padding: 4px;
+    background: var(--bg);
+    box-shadow: 0 4px 12px var(--sombra);
+    border-radius: 4px;
+    margin-bottom: 8px;
+    
+}
+
+
+.entradas_de_dados input {
+    padding: 0.5rem 0.5rem 0.5rem 1.8rem;
+    width: 100%;
+    background: none;
+    border: none;
+    border-bottom: solid 2px green;
+    color: green;
+}
+
+.entradas_de_dados i {
+    position: absolute;
+    left: 6px;
+    color: green;
+    background: var(--card-bg);
+    padding: 2px;
+    border-radius: 2px;
+    z-index: 1;
+}
+
+.entradas_de_dados select {
+    position: absolute;
+    right: 4px;
+    width: 4rem;
+    border: none;
+    color: green;
+    font-weight: bold;
+    background: var(--bg);
+    font-size: 11px;
+}
+
+.entradas_de_dados p {
+    background: var(--bg);
+    position: absolute;
+    right: 8px;
+    color: green;
+    font-size: 0.9rem;
+    width: 3rem;
+    height: 60%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 11px;
+}
+
+#selDoenca,
+#intervalo,
+#via,
+#dose {
+    align-items: center;
+    flex-direction: column;
+    border-radius: 16px;
+    background-color: var(--bg); 
+    border: none;
+    padding: 0.6rem;
+    padding-right: 1rem;
+    display: none;
+    color: green;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+}
+#pais {
+    display: flex;
+    background-color: var(--card-bg); 
+    border: none;
+    box-shadow: 0 4px 12px var(--sombra);
+    border-radius: 50px;
+    padding: 0.7rem;
+    color: green;
+    font-weight: bold;
+    margin-bottom: 0.7rem;
+    text-align: center;
+    width: 90%;
+}
+
+
+
+
+/* ==========================================================================
+   LAYOUT DUAS COLUNAS
+   ========================================================================== */
+
+.container-duas-colunas {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+/* COLUNA ESQUERDA - Inputs */
+.coluna-inputs {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* COLUNA DIREITA - Selects */
+.coluna-selects {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: var(--bg);
+    border-radius: 16px;
+    padding-right: 4px;
+    padding-left: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    box-shadow: 0 4px 12px var(--sombra);
+    height: fit-content;
+}
+
+/* Inputs individuais */
+.entradas_de_dados {
+    display: none;
+    align-items: center;
+    width: 100%;
+    height: 52px;
+    background: var(--bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px var(--sombra);
+    position: relative;
+    padding: 8px 4px;
+}
+
+.entradas_de_dados i {
+    position: absolute;
+    left: 8px;
+    color: var(--primary);
+    font-size: 1.1rem;
+    z-index: 1;
+}
+
+.entradas_de_dados input {
+    flex: 1;
+    height: 100%;
+    padding: 0 4px 0 30px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid var(--primary);
+    color: var(--primary);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+
+/* ==========================================================================
+   LABELS FLUTUANTES
+   ========================================================================== */
+
+.floating-group {
+    position: relative;
+}
+
+.label-flutuante {
+    position: absolute;
+    left: 34px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.9rem;
+    color: var(--text);
+    opacity: 0.5;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+/* Label sobe quando input tem foco OU tem conteúdo */
+.floating-group input:focus ~ .label-flutuante,
+.floating-group input:not(:placeholder-shown) ~ .label-flutuante {
+    top: 8px;
+    font-size: 0.7rem;
+    opacity: 0.7;
+}
+
+/* Ajuste do padding do input para acomodar a label */
+.floating-group input {
+    padding-top: 12px;
+    padding-bottom: 4px;
+}
+
+/* Remove o placeholder visual */
+.floating-group input::placeholder {
+    opacity: 0;
+}
+
+/* Ajuste do ícone para não interferir com a label */
+.floating-group i {
+    z-index: 2;
+}
+
+
+
+
+
+.unidade-fixa {
+    background: rgba(0, 132, 61, 0.1);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-right: 2px;
+    white-space: nowrap;
+}
+
+.select-unidade {
+    background: rgba(0, 132, 61, 0.1);
+    border: none;
+   /* padding: 6px 10px; */
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+/* Selects na coluna direita */
+.linha-dupla {
+    display: flex;
+    gap: 12px;
+}
+
+.select-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.select-item-full {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.select-item label,
+.select-item-full label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: 4px;
+}
+
+.select-item select,
+.select-item-full select {
+    background: var(--bg);
+    border: none;
+    border-radius: 12px;
+    padding: 12px 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--primary);
+    cursor: pointer;
+}
+
+.coluna-selects select:hover {
+    background: rgba(0, 132, 61, 0.2) !important;
+}
+
+
+/* Responsividade - mobile vira 1 coluna */
+
+
+/* Dark mode */
+[data-theme="dark"] .unidade-fixa,
+[data-theme="dark"] .select-unidade {
+    background: rgba(0, 132, 61, 0.2);
+}
+
+[data-theme="dark"] .select-item select,
+[data-theme="dark"] .select-item-full select {
+    background: var(--bg);
+}
+
+
+
+
+
+
+/* Sugestões e animações) */
+#sugestoes_box {
+    position: absolute;
+    /* Alinha exatamente abaixo do pai (entradas_de_dados) */
+    top: calc(100% + 4px);
+    left: 0;
+    width: 100%;
+    background: var(--bg);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: none;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.sugestao_item {
+    padding: 10px;
+    cursor: pointer;
+    /* border-bottom: 1px solid #eee; */
+    background: var(--card-bg);
+    color: green;
+    margin: 4px;
+    border-radius: 15px;
+}
+
+.sugestao-item:hover {
+    background: #f0f0f0;
+    color: green;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#sugestoes_box,
+.entradas_de_dados,
+#intervalo,
+#dose 
+#via{
+    animation: fadeIn 0.5s ease-out;
+}
+
+.botao   {
+    flex: 6;
+    padding: 13px;
+    background:  linear-gradient(135deg, #00843d 0%, #00a54c 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.botao:hover {letter-spacing: 2px;}
+
+#limpador {
+    flex: 1;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+.caxa_de_botoes{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-top: 8px;
+}
+
+
+/* ==========================================================================
+   AJUSTE DE ESPAÇAMENTO NO RESULTADO
+   ========================================================================== */
+
+
+
+/* ==========================================================================
+   FEEDBACK DE MUDANÇA DE PAÍS - ESTILO PREMIUM
+   ========================================================================== */
+
+.feedback-loading,
+.feedback-success {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border-radius: 28px;
+    font-weight: 500;
+    animation: fadeInUp 0.3s ease-out;
+    backdrop-filter: blur(10px);
+}
+
+.feedback-loading {
+    background: linear-gradient(135deg, #f59e0b 0%, #e67e22 100%);
+    color: white;
+    box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+}
+
+.feedback-success {
+    background: linear-gradient(135deg, #00843d 0%, #00a54c 100%);
+    color: white;
+    box-shadow: 0 8px 20px rgba(0, 132, 61, 0.3);
+}
+
+.feedback-loading i,
+.feedback-success i {
+    font-size: 1.3rem;
+    animation: spin 0.8s linear infinite;
+}
+
+.feedback-success i {
+    animation: none;
+}
+
+.feedback-loading span,
+.feedback-success span {
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
+}
+
+.feedback-success span strong {
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* Animações */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+/* ==========================================================================
+   DOSAGEM - RESULTADO PREMIUM (MESMO ESTILO DA DILUIÇÃO)
+   ========================================================================== */
+
+/* ==========================================================================
+   RESULTADO DISPLAY - LARGURA FIXA CONSISTENTE
+   ========================================================================== */
+
+.resultado-display {
+    margin-top: 25px;
+    background: transparent;
+    border-radius: 30px;
+    font-weight: 400;
+    font-size: 1rem;
+    box-shadow: none;
+    width: 100%;  /* ← Largura consistente */
+    max-width: 100%;  /* ← Garante que não ultrapassa */
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.dosagem-container {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Card principal */
+.dosagem-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 20px 18px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 132, 61, 0.08);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+}
+/* Cabeçalho do card */
+.dosagem-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.dosagem-card .card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    background: rgba(0, 132, 61, 0.1);
+    color: var(--primary);
+}
+
+.dosagem-card .card-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--text);
+}
+
+/* Dose única */
+.dosagem-dose {
+    text-align: center;
+    padding: 8px 0 5px 0;
+}
+
+.dose-valor {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.2;
+}
+.dose-unidade {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--primary);
+}
+.dose-unidade-frasco {
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.7;
+    color: var(--text);
+}
+
+/* Ataque e Manutenção */
+.dosagem-ataque-manutencao {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.ataque-item {
+    padding-top: 60px 16px 12px 16px;
+}
+
+.manutencao-item {
+    padding: 12px 16px;
+}
+
+.ataque-item,
+.manutencao-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--bg);
+    border-radius: 16px;
+}
+
+.ataque-item i,
+.manutencao-item i {
+    font-size: 1.3rem;
+    color: var(--primary);
+}
+
+.ataque-item div,
+.manutencao-item div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+}
+
+.item-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.item-valor {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.item-unidade {
+    font-size: 0.7rem;
+    font-weight: 400;
+}
+
+.item-unidade-frasco {
+    font-size: 0.7rem;
+    font-weight: 500;
+    opacity: 0.7;
+    color: var(--text);
+}
+
+
+/* Intervalo - como texto simples, sem card */
+.dosagem-intervalo-texto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 2px 0 8px 0;
+    margin: 0;
+}
+
+.dosagem-intervalo-texto i {
+    font-size: 1rem;
+    color: var(--primary);
+}
+
+.dosagem-intervalo-texto span {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--primary);
+}
+
+/* Notas - com ícones alinhados simetricamente */
+.dosagem-notas {
+    background: rgba(0, 132, 61, 0.05);
+    border-radius: 0 16px 16px 0;
+    padding: 14px 16px;
+    margin-top: 16px;
+ border-left: 3px solid var(--primary); 
+}
+
+.nota-item {
+    display: flex;
+    align-items: center;
+    gap: px;
+    padding: 4px 0;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: var(--text);
+    opacity: 0.85;
+}
+
+.nota-item i {
+    font-size: 1.1rem;
+    color: var(--primary);
+    flex-shrink: 0;
+    margin-top: 1px;
+    width: 20px;
+    text-align: center;
+}
+
+.nota-item span {
+    flex: 1;
+    line-height: 1.4;
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   TÍTULO DAS INFORMAÇÕES ADICIONAIS
+   ========================================================================== */
+
+.notas-titulo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 132, 61, 0.2);
+}
+
+.notas-titulo i {
+    font-size: 1rem;
+    color: var(--primary);
+}
+
+.notas-titulo span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--primary);
+    letter-spacing: 1px;
+}
+
+
+
+
+
+
+
+
+
+
+/* Totais (tomas/dia, volume/dia, massa/dia) */
+.dosagem-totais {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    background: rgba(0, 132, 61, 0.05);
+    border-radius: 16px;
+    padding: 12px 16px;
+    margin-top: 16px;
+}
+
+.total-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--primary);
+}
+
+.total-item i {
+    font-size: 1rem;
+    color: var(--primary);
+}
+
+/* Erros */
+.dosagem-erro,
+.dosagem-erro-interno {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 20px;
+    background: #ef4444;
+    color: white;
+}
+
+.dosagem-erro i,
+.dosagem-erro-interno i {
+    font-size: 1.5rem;
+}
+
+.dosagem-erro span,
+.dosagem-erro-interno span {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.dosagem-erro-interno {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    margin: 16px 0;
+}
+
+/* Dark mode */
+[data-theme="dark"] .dosagem-card {
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .dosagem-card .card-status {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .ataque-item,
+[data-theme="dark"] .manutencao-item {
+    background: black;
+}
+
+[data-theme="dark"] .dosagem-notas {
+    background: balck;
+}
+
+[data-theme="dark"] .dosagem-totais {
+    background: black;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+    .dosagem-card {
+        padding: 16px 14px;
+    }
+    
+
+    
+    .ataque-item,
+    .manutencao-item {
+        padding: 10px 14px;
+    }
+    
+    
+    .dosagem-totais {
+        gap: 12px;
+    }
+    
+    .total-item {
+        font-size: 0.7rem;
+    }
+    
+    .nota-item {
+        font-size: 0.75rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+/* ==========================================================================
+   FOOTER GLOBAL
+   ========================================================================== */
+.plain-footer {
+  width: 100%;
+  padding: 20px 15px;
+  background-color: transparent; /* Sem fundo */
+  text-align: center;
+  margin-top: auto; /* Cola no fundo se o conteúdo for curto */
+}
+
+.footer-inline {
+  display: flex;
+  flex-wrap: wrap; /* Itens quebram linha em mobile */
+  justify-content: center;
+  align-items: center;
+  gap: 8px 16px; /* Espaço entre itens */
+  
+  font-size: 0.8rem;
+  color: grey;
+}
+
+.footer-inline a {
+  color: grey;
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px dotted grey;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+
+.footer-inline a:hover {
+  color: var(--primary-dark);
+  border-bottom-color: var(--primary-dark);
+}
+
+.footer-sep {
+  opacity: 0.4;
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   MODAL DE SEGURANÇA - POP UP COM FUNDO FUSCO
+   ========================================================================== */
+
+/* ==========================================================================
+   MODAL DE SEGURANÇA - ESTILO VIDRO COM FUNDO FUSCO
+   ========================================================================== */
+
+/* Classe que ativa o fundo escuro */
+/* ==========================================================================
+   MODAL DE SEGURANÇA - ESTILO VIDRO COM FUNDO FUSCO
+   ========================================================================== */
+
+/* Classe que ativa o fundo escuro */
+body.modal-aberto {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+/* Fundo desfocado estilo iOS/Windows 11 - NÃO totalmente escuro */
+body.modal-aberto::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    z-index: 9998;
+    animation: fadeInFundo 0.3s ease-out;
+}
+
+/* Overlay do modal - mantém o vidro */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+/* Conteúdo do modal - estilo vidro */
+.modal-content {
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+    padding: 28px;
+    border-radius: 28px;
+    width: 85%;
+    max-width: 350px;
+    text-align: left;
+    animation: popIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+    z-index: 10000;
+}
+
+/* Título do modal - com ícone e cor profissional */
+.modal-content h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #e67e22;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+
+
+/* Texto do modal */
+.modal-content p {
+    color: black;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+/* Botão do modal */
+.modal-content button {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 12px 0;
+    width: 100%;
+    border-radius: 16px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 10px 15px -3px rgba(39, 174, 96, 0.3);
+}
+
+.modal-content button:hover {
+    background: #219150;
+    transform: translateY(-2px);
+    letter-spacing: 0.5px;
+    box-shadow: 0 12px 20px -3px rgba(39, 174, 96, 0.4);
+}
+
+/* Linha separadora entre mensagens */
+.modal-content hr {
+    margin: 15px 0;
+    border: none;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode - ajuste do vidro */
+[data-theme="dark"] .modal-content {
+    background: rgba(30, 30, 30, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .modal-content p {
+    color: #f0f2f0;
+}
+
+[data-theme="dark"] .modal-content hr {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Animações */
+@keyframes fadeInFundo {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes popIn {
+    from { 
+        opacity: 0; 
+        transform: scale(0.95) translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: scale(1) translateY(0); 
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/* Definição da animação de vibrar */
+@keyframes vibration {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+/* Classe que será aplicada ao elemento */
+.vibrar {
+    animation: vibration 0.2s ease-in-out;
+}
+

@@ -174,6 +174,28 @@ function getTextoUnidadeTempo() {
     return document.getElementById("unidadeTempoSelecionada").textContent;
 }
 
+// ============================================================
+// LIMPEZA AUTOMÁTICA DAS COTAS
+// ============================================================
+// Se o utilizador alterar Volume ou Tempo depois de um cálculo,
+// as cotas (macrogotas/microgotas) e o resultado ficam obsoletos.
+// Limpamos tudo para evitar valores inconsistentes.
+let jaCalculou = false;
+
+function verificarELimparCotas() {
+    if (!jaCalculou) return;
+
+    // Qualquer alteração em Volume ou Tempo invalida as cotas,
+    // porque estas foram calculadas com base nos valores anteriores.
+    valor_macrogotas.value = '';
+    valor_microgotas.value = '';
+    resultado.innerHTML = '';
+    jaCalculou = false;
+}
+
+valor_volume.addEventListener('input', verificarELimparCotas);
+valor_tempo.addEventListener('input', verificarELimparCotas);
+
 function calcular() {
     resultado.classList.remove("vibrar");
     void resultado.offsetWidth;
@@ -325,6 +347,9 @@ function calcular() {
     resultado.innerHTML = html;
     resultado.style.boxShadow = "none";
     resultado.style.border = "none";
+
+    // Marca que houve um cálculo válido (para a limpeza automática)
+    jaCalculou = true;
 }
 
 function limpar(){
@@ -336,6 +361,7 @@ function limpar(){
     resultado.classList.remove("vibrar");
     void resultado.offsetWidth; 
     resultado.classList.add("vibrar");
+    jaCalculou = false;
 }
 
 // ========================================================================

@@ -24,7 +24,7 @@ themeBtn.addEventListener('click', () => {
 });
 
 // ============================================================
-// DADOS DAS UNIDADES (LIMPEZA: Removidas opções de taxa de infusão e unidades especiais)
+// DADOS DAS UNIDADES
 // ============================================================
 const UNIDADES_DOSAGEM = [
     // 💊 Dose por peso
@@ -42,7 +42,6 @@ const UNIDADES_DOSAGEM = [
     { id: 'dosagem_11', value: '1', label: 'mg/dia', grupo: '💊 Dose fixa' },
     { id: 'dosagem_12', value: '1000', label: 'g/dia', grupo: '💊 Dose fixa' },
     { id: 'dosagem_13', value: '0.001', label: 'mcg/dia', grupo: '💊 Dose fixa' },
-    // Removido: Taxa de Infusão (/h, /min) e Unidades Especiais (UI, mEq, mmol)
 ];
 
 const UNIDADES_CONCENTRACAO = [
@@ -56,10 +55,12 @@ const UNIDADES_CONCENTRACAO = [
     { id: 'concentracao_7', value: '0.001', label: 'mg/100ml', grupo: '🧪 Concentração (massa/volume)' },
     { id: 'concentracao_8', value: '0.2', label: 'mg/5ml', grupo: '🧪 Concentração (massa/volume)' },
     { id: 'concentracao_9', value: '100', label: 'g/10ml', grupo: '🧪 Concentração (massa/volume)' },
+    // 👇 NOVAS UNIDADES ADICIONADAS 👇
+    { id: 'concentracao_12', value: '200', label: 'g/5ml', grupo: '🧪 Concentração (massa/volume)' },
+    { id: 'concentracao_13', value: '0.1', label: 'mg/10ml', grupo: '🧪 Concentração (massa/volume)' },
     // 📊 Percentual
     { id: 'concentracao_10', value: '10', label: '% (1% = 10mg/ml)', grupo: '📊 Percentual' },
     { id: 'concentracao_11', value: '1', label: '% (peso/volume)', grupo: '📊 Percentual' },
-    // Removido: Unidades Especiais (UI, mEq, mmol)
 ];
 
 // ============================================================
@@ -71,7 +72,7 @@ function popularSelectDosagem() {
 
     let html = '';
     let grupoAtual = '';
-    
+
     UNIDADES_DOSAGEM.forEach(op => {
         if (op.grupo !== grupoAtual) {
             grupoAtual = op.grupo;
@@ -88,7 +89,6 @@ function popularSelectDosagem() {
     });
     container.innerHTML = html;
 
-    // Seleciona a primeira opção por padrão
     const primeiraOpcao = container.querySelector('.custom-select-option-unidade');
     if (primeiraOpcao) {
         const id = primeiraOpcao.dataset.id;
@@ -106,7 +106,7 @@ function popularSelectConcentracao() {
 
     let html = '';
     let grupoAtual = '';
-    
+
     UNIDADES_CONCENTRACAO.forEach(op => {
         if (op.grupo !== grupoAtual) {
             grupoAtual = op.grupo;
@@ -123,7 +123,6 @@ function popularSelectConcentracao() {
     });
     container.innerHTML = html;
 
-    // Seleciona a primeira opção por padrão
     const primeiraOpcao = container.querySelector('.custom-select-option-unidade');
     if (primeiraOpcao) {
         const id = primeiraOpcao.dataset.id;
@@ -141,18 +140,17 @@ function popularSelectConcentracao() {
 function toggleUnidadeSelect(tipo) {
     const optionsId = tipo === 'dosagem' ? 'unidadeDosagemOptions' : 'unidadeConcentracaoOptions';
     const triggerId = tipo === 'dosagem' ? 'selectDosagem' : 'selectConcentracao';
-    
+
     const options = document.getElementById(optionsId);
     const trigger = document.querySelector(`#${triggerId} .custom-select-trigger-unidade`);
-    
+
     if (!options || !trigger) return;
 
-    // Fecha o outro select se estiver aberto
     const outroOptionsId = tipo === 'dosagem' ? 'unidadeConcentracaoOptions' : 'unidadeDosagemOptions';
     const outroTriggerId = tipo === 'dosagem' ? 'selectConcentracao' : 'selectDosagem';
     const outroOptions = document.getElementById(outroOptionsId);
     const outroTrigger = document.querySelector(`#${outroTriggerId} .custom-select-trigger-unidade`);
-    
+
     if (outroOptions && outroOptions.classList.contains('aberto')) {
         outroOptions.classList.remove('aberto');
         if (outroTrigger) outroTrigger.classList.remove('aberto');
@@ -163,7 +161,7 @@ function toggleUnidadeSelect(tipo) {
 }
 
 // ============================================================
-// SELECIONAR UNIDADE (CORRIGIDO)
+// SELECIONAR UNIDADE
 // ============================================================
 function selecionarUnidade(tipo, id, valor, label) {
     const hiddenId = tipo === 'dosagem' ? 'unidade_de_dosagem' : 'unidade_de_concentracao';
@@ -171,13 +169,9 @@ function selecionarUnidade(tipo, id, valor, label) {
     const optionsId = tipo === 'dosagem' ? 'unidadeDosagemOptions' : 'unidadeConcentracaoOptions';
     const triggerId = tipo === 'dosagem' ? 'selectDosagem' : 'selectConcentracao';
 
-    // Atualiza o hidden input
     document.getElementById(hiddenId).value = valor;
-
-    // Atualiza o texto exibido
     document.getElementById(displayId).textContent = label;
 
-    // Marca APENAS a opção com o ID específico como selecionada
     const container = document.getElementById(optionsId);
     container.querySelectorAll('.custom-select-option-unidade').forEach(opt => {
         opt.classList.remove('selecionado');
@@ -186,19 +180,16 @@ function selecionarUnidade(tipo, id, valor, label) {
         }
     });
 
-    // Fecha o dropdown
     container.classList.remove('aberto');
     const trigger = document.querySelector(`#${triggerId} .custom-select-trigger-unidade`);
     if (trigger) trigger.classList.remove('aberto');
-
-    console.log(`📊 Unidade ${tipo} selecionada: ${label} (${valor}) - ID: ${id}`);
 }
+
 // ============================================================
 // FECHAR SELECTS AO CLICAR FORA
 // ============================================================
 document.addEventListener('click', function (event) {
-    const selects = ['selectDosagem', 'selectConcentracao'];
-    selects.forEach(id => {
+    ['selectDosagem', 'selectConcentracao'].forEach(id => {
         const select = document.getElementById(id);
         if (select && !select.contains(event.target)) {
             const options = select.querySelector('.custom-select-options-unidade');
@@ -210,53 +201,62 @@ document.addEventListener('click', function (event) {
 });
 
 // ============================================================
-// FUNÇÕES ORIGINAIS (mantidas intactas)
+// CAMPOS
 // ============================================================
-
 const campo_peso = document.getElementById("peso");
 const campo_dosagem = document.getElementById("dosagem");
 const campo_concentracao = document.getElementById("concentracao");
 const campo_intervalo = document.getElementById("intervalo");
 
+// ============================================================
+// UTILITÁRIOS
+// ============================================================
+function formatarNumero(valor) {
+    if (Number.isInteger(valor)) return valor.toString();
+    return valor.toFixed(2);
+}
+
+function limparBorda(campo) {
+    if (campo.value.trim() !== "") {
+        campo.style.borderBottom = "";
+    }
+}
+
+// Remove borda ao escrever (listener único por campo, sem acumular)
+[campo_peso, campo_dosagem, campo_concentracao, campo_intervalo].forEach(campo => {
+    campo.addEventListener("input", () => limparBorda(campo));
+});
+
+// ============================================================
+// VALIDAÇÃO
+// ============================================================
 function validarCampos() {
     const campos = [campo_dosagem, campo_concentracao];
     let todosPreenchidos = true;
 
     campos.forEach(campo => {
         if (campo.value.trim() === "") {
-            campo.style.border = "solid 1px red";
-            campo.style.borderRight = "none";
-            campo.style.borderLeft = "none";
+            campo.style.borderBottom = "solid 2px red";
             todosPreenchidos = false;
-            resultado.style.background = "red";
         } else {
-            campo.style.border = "";
+            campo.style.borderBottom = "";
         }
     });
 
     return todosPreenchidos;
 }
 
-function retirar_bordas() {
-    const camposObrigatorios = [campo_dosagem, campo_concentracao, campo_peso, campo_intervalo];
-    camposObrigatorios.forEach(campo => {
-        campo.addEventListener("input", function () {
-            if (this.value.trim() !== "") {
-                this.style.border = "";
-            }
-        });
-    });
-}
-
 // ============================================================
-// FUNÇÃO CALCULAR (CORRIGIDA)
+// FUNÇÃO CALCULAR
 // ============================================================
 function calcular() {
     const resultado = document.getElementById("resultado");
+
     resultado.classList.remove("vibrar");
     void resultado.offsetWidth;
     resultado.classList.add("vibrar");
 
+    // ---------- Validação básica ----------
     if (!validarCampos()) {
         resultado.innerHTML = `<div class="internacional-erro">
             <i class="ri-error-warning-line"></i>
@@ -297,15 +297,12 @@ function calcular() {
         return;
     }
 
-    const unidade_de_dosagem = parseFloat(document.getElementById("unidade_de_dosagem").value);
-    const unidade_de_concentracao = parseFloat(document.getElementById("unidade_de_concentracao").value);
-
-    const vdosagem = vdosagemInput * unidade_de_dosagem;
-    const vconcentracao = vconcentracaoInput * unidade_de_concentracao;
-
+    // ---------- Validação do intervalo ----------
     let intervaloHoras = null;
     if (vintervalo_raw !== "") {
-        if (parseFloat(vintervalo_raw) <= 0) {
+        const vintervalo = parseFloat(vintervalo_raw);
+
+        if (isNaN(vintervalo) || vintervalo <= 0) {
             resultado.innerHTML = `<div class="internacional-erro">
                 <i class="ri-error-warning-line"></i>
                 <span>O intervalo deve ser um número positivo maior que zero!</span>
@@ -314,9 +311,7 @@ function calcular() {
             return;
         }
 
-        intervaloHoras = parseFloat(vintervalo_raw);
-
-        if (intervaloHoras < 1) {
+        if (vintervalo < 1) {
             resultado.innerHTML = `<div class="internacional-erro">
                 <i class="ri-error-warning-line"></i>
                 <span>O intervalo mínimo é de 1 hora!</span>
@@ -325,7 +320,7 @@ function calcular() {
             return;
         }
 
-        if (intervaloHoras > 672) {
+        if (vintervalo > 672) {
             resultado.innerHTML = `<div class="internacional-erro">
                 <i class="ri-error-warning-line"></i>
                 <span>O intervalo máximo é de 28 dias (672 horas)!</span>
@@ -333,79 +328,81 @@ function calcular() {
             campo_intervalo.style.borderBottom = "solid 2px red";
             return;
         }
+
+        intervaloHoras = vintervalo;
     }
 
-    function formatarNumero(valor) {
-        if (Number.isInteger(valor)) {
-            return valor.toString();
-        }
-        return valor.toFixed(2);
-    }
+    // ---------- Converter unidades para base (mg e mg/ml) ----------
+    const unidade_de_dosagem = parseFloat(document.getElementById("unidade_de_dosagem").value);
+    const unidade_de_concentracao = parseFloat(document.getElementById("unidade_de_concentracao").value);
 
-    // CORREÇÃO: Lógica de dose diária vs dose por administração
-    // Verifica se a opção da dose selecionada contém "/dia"
+    const vdosagem = vdosagemInput * unidade_de_dosagem;       // em mg (ou mg/kg)
+    const vconcentracao = vconcentracaoInput * unidade_de_concentracao; // em mg/ml
+
+    // ---------- Interpretar a unidade selecionada ----------
     const unidadeDosagemSelecionada = document.getElementById('unidadeDosagemSelecionada').textContent;
     const isDoseDiaria = unidadeDosagemSelecionada.includes('/dia');
+    const isPorPeso = unidadeDosagemSelecionada.includes('/kg');
 
-    // Cálculo base: dose * peso (sempre em mg)
-    const doseDiariaMg = vpeso * vdosagem;
-    let doseAdminMg = doseDiariaMg; // Inicializa com o valor diário
+    // Nº de tomas em 24h (usa 1 se não houver intervalo)
+    const numeroTomas = intervaloHoras ? 24 / intervaloHoras : 1;
 
-    // Se NÃO for dose diária (ex: mg/kg, mg), a dose já é por administração
-    if (!isDoseDiaria) {
-        doseAdminMg = vdosagem; // A dose inserida já é por administração (não multiplica pelo peso)
-        // Se a dose for por peso (mg/kg) mas não for diária, multiplica pelo peso
-        if (unidadeDosagemSelecionada.includes('/kg') && !unidadeDosagemSelecionada.includes('/dia')) {
-            doseAdminMg = vpeso * vdosagem;
-        }
-        // Se for dose fixa (mg, g, mcg) sem /kg, usa o valor diretamente
+    // ---------- Dose POR TOMA (mg) ----------
+    let dosePorTomaMg;
+    if (isDoseDiaria) {
+        // Dose escrita = total diário → distribuir pelas tomas
+        const doseDiariaTotalMg = isPorPeso ? vpeso * vdosagem : vdosagem;
+        dosePorTomaMg = doseDiariaTotalMg / numeroTomas;
+    } else {
+        // Dose escrita = dose de cada toma
+        dosePorTomaMg = isPorPeso ? vpeso * vdosagem : vdosagem;
     }
 
-    // O volume por administração é sempre: doseAdminMg / concentracao
-    const volumePorAdmin = doseAdminMg / vconcentracao;
+    // ---------- Volume por toma ----------
+    const volumePorToma = dosePorTomaMg / vconcentracao;
 
+    // ---------- Massa total diária (só para exibir) ----------
+    let massaTotalDiariaMg;
+    if (isDoseDiaria) {
+        // Já é o total do dia
+        massaTotalDiariaMg = isPorPeso ? vpeso * vdosagem : vdosagem;
+    } else {
+        // Dose por toma × nº de tomas
+        massaTotalDiariaMg = dosePorTomaMg * numeroTomas;
+    }
+
+    // ============================================================
+    // RENDERIZAÇÃO
+    // ============================================================
     let html = '';
 
-    if (intervaloHoras !== null && intervaloHoras > 0) {
-        const numeroTomas = 24 / intervaloHoras;
-        let volumePorToma = volumePorAdmin; // Inicializa com o volume por administração
-
-        // CORREÇÃO: Só divide pelo número de tomadas se for dose diária
-        if (isDoseDiaria) {
-            // Para dose diária, o volume por toma é o volume diário dividido pelo número de tomadas
-            const doseDiariaVolume = doseAdminMg / vconcentracao;
-            volumePorToma = doseDiariaVolume / numeroTomas;
-        } else {
-            // Para dose por administração, o volume por toma é o volume calculado diretamente
-            volumePorToma = volumePorAdmin;
-        }
-
-        // CORREÇÃO: Ajuste para o caso de intervalo > 24h
-        if (intervaloHoras > 24) {
-            // Para intervalo > 24h, a dose é única (1 toma)
-            volumePorToma = volumePorAdmin;
-        }
+    if (intervaloHoras !== null) {
 
         if (intervaloHoras === 24) {
             html = `
                 <div class="internacional-container">
                     <div class="internacional-card">
                         <div class="card-header">
-                            <div class="card-icon">
-                                <i class="ri-global-line"></i>
-                            </div>
+                            <div class="card-icon"><i class="ri-global-line"></i></div>
                             <div class="card-status">
                                 <i class="ri-information-line"></i>
                                 <span>Resultado</span>
                             </div>
                         </div>
-                        
                         <div class="dose-central">
                             <div class="dose-volume">
                                 ${formatarNumero(volumePorToma)} <span class="dose-unidade">mL</span>
                             </div>
-                            <div class="dose-intervalo">
-                                1 vez por dia
+                            <div class="dose-intervalo">1 vez por dia</div>
+                        </div>
+                        <div class="internacional-totais">
+                            <div class="total-item">
+                                <i class="ri-drop-line"></i>
+                                <span>${formatarNumero(volumePorToma)} mL/dia</span>
+                            </div>
+                            <div class="total-item">
+                                <i class="ri-scales-2-line"></i>
+                                <span>${formatarNumero(massaTotalDiariaMg)} mg/dia</span>
                             </div>
                         </div>
                     </div>
@@ -413,43 +410,36 @@ function calcular() {
             `;
         } else if (intervaloHoras > 24) {
             const dias = intervaloHoras / 24;
-            let textoIntervalo = '';
+            let textoIntervalo;
 
-            if (dias === 1.5) {
-                textoIntervalo = '1 vez a cada 36 horas';
-            } else if (dias === 2) {
-                textoIntervalo = '1 vez a cada 2 dias';
-            } else if (dias === 3) {
-                textoIntervalo = '1 vez a cada 3 dias';
-            } else if (dias === 7) {
-                textoIntervalo = '1 vez por semana';
-            } else if (dias === 14) {
-                textoIntervalo = '1 vez a cada 2 semanas';
-            } else if (dias === 28) {
-                textoIntervalo = '1 vez por mês';
-            } else {
-                textoIntervalo = `1 vez a cada ${formatarNumero(dias)} dias`;
-            }
+            if (dias === 1.5) textoIntervalo = '1 vez a cada 36 horas';
+            else if (dias === 2) textoIntervalo = '1 vez a cada 2 dias';
+            else if (dias === 3) textoIntervalo = '1 vez a cada 3 dias';
+            else if (dias === 7) textoIntervalo = '1 vez por semana';
+            else if (dias === 14) textoIntervalo = '1 vez a cada 2 semanas';
+            else if (dias === 28) textoIntervalo = '1 vez por mês';
+            else textoIntervalo = `1 vez a cada ${formatarNumero(dias)} dias`;
 
             html = `
                 <div class="internacional-container">
                     <div class="internacional-card">
                         <div class="card-header">
-                            <div class="card-icon">
-                                <i class="ri-global-line"></i>
-                            </div>
+                            <div class="card-icon"><i class="ri-global-line"></i></div>
                             <div class="card-status">
                                 <i class="ri-information-line"></i>
                                 <span>Resultado</span>
                             </div>
                         </div>
-                        
                         <div class="dose-central">
                             <div class="dose-volume">
                                 ${formatarNumero(volumePorToma)} <span class="dose-unidade">mL</span>
                             </div>
-                            <div class="dose-intervalo">
-                                ${textoIntervalo}
+                            <div class="dose-intervalo">${textoIntervalo}</div>
+                        </div>
+                        <div class="internacional-totais">
+                            <div class="total-item">
+                                <i class="ri-scales-2-line"></i>
+                                <span>${formatarNumero(massaTotalDiariaMg)} mg/dia (média)</span>
                             </div>
                         </div>
                     </div>
@@ -461,15 +451,12 @@ function calcular() {
                 <div class="internacional-container">
                     <div class="internacional-card">
                         <div class="card-header">
-                            <div class="card-icon">
-                                <i class="ri-global-line"></i>
-                            </div>
+                            <div class="card-icon"><i class="ri-global-line"></i></div>
                             <div class="card-status">
                                 <i class="ri-information-line"></i>
                                 <span>Resultado</span>
                             </div>
                         </div>
-                        
                         <div class="dose-central">
                             <div class="dose-volume">
                                 ${formatarNumero(volumePorToma)} <span class="dose-unidade">mL</span>
@@ -478,7 +465,6 @@ function calcular() {
                                 de ${formatarNumero(intervaloHoras)} em ${formatarNumero(intervaloHoras)} horas
                             </div>
                         </div>
-                        
                         <div class="internacional-totais">
                             <div class="total-item">
                                 <i class="ri-repeat-line"></i>
@@ -490,33 +476,33 @@ function calcular() {
                             </div>
                             <div class="total-item">
                                 <i class="ri-scales-2-line"></i>
-                                <span>${formatarNumero(doseAdminMg)} mg/dia</span>
+                                <span>${formatarNumero(massaTotalDiariaMg)} mg/dia</span>
                             </div>
                         </div>
                     </div>
                 </div>
             `;
         }
+
     } else {
         // Sem intervalo
         html = `
             <div class="internacional-container">
                 <div class="internacional-card">
                     <div class="card-header">
-                        <div class="card-icon">
-                            <i class="ri-global-line"></i>
-                        </div>
+                        <div class="card-icon"><i class="ri-global-line"></i></div>
                         <div class="card-status">
                             <i class="ri-information-line"></i>
                             <span>Resultado</span>
                         </div>
                     </div>
-                    
                     <div class="dose-central">
                         <div class="dose-volume">
-                            ${formatarNumero(volumePorAdmin)} <span class="dose-unidade">mL</span>
+                            ${formatarNumero(volumePorToma)} <span class="dose-unidade">mL</span>
                         </div>
-                        ${isDoseDiaria ? `<div class="dose-intervalo">Dose diária total</div>` : `<div class="dose-intervalo">Dose por administração</div>`}
+                        <div class="dose-intervalo">
+                            ${isDoseDiaria ? 'Dose diária total' : 'Dose por administração'}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -526,32 +512,24 @@ function calcular() {
     resultado.innerHTML = html;
     resultado.style.background = "none";
 
-    campo_peso.style.borderBottom = "solid 2px var(--primary)";
-    campo_dosagem.style.borderBottom = "solid 2px var(--primary)";
-    campo_concentracao.style.borderBottom = "solid 2px var(--primary)";
-    campo_intervalo.style.borderBottom = "solid 2px var(--primary)";
+    // Repõe as bordas normais de todos os campos
+    [campo_peso, campo_dosagem, campo_concentracao, campo_intervalo].forEach(c => {
+        c.style.borderBottom = "solid 2px var(--primary)";
+    });
 }
 
-
-campo_peso.addEventListener("input", retirar_bordas);
-campo_dosagem.addEventListener("input", retirar_bordas);
-campo_concentracao.addEventListener("input", retirar_bordas);
-campo_intervalo.addEventListener("input", retirar_bordas);
-
+// ============================================================
+// LIMPAR
+// ============================================================
 function limpar() {
-    const campos = [campo_dosagem, campo_concentracao, campo_intervalo, campo_peso];
-    campos.forEach(campo => {
-        campo.style.border = "";
+    [campo_dosagem, campo_concentracao, campo_intervalo, campo_peso].forEach(campo => {
+        campo.style.borderBottom = "";
+        campo.value = "";
     });
-
-    campo_peso.value = "";
-    campo_dosagem.value = "";
-    campo_concentracao.value = "";
-    campo_intervalo.value = "";
 
     const resultado = document.getElementById("resultado");
     resultado.textContent = "";
-    resultado.style.background = "var(--primary)";
+    resultado.style.background = "none";
     resultado.classList.remove("vibrar");
     void resultado.offsetWidth;
     resultado.classList.add("vibrar");
@@ -581,29 +559,22 @@ if (btnHamburger && menuOverlay && menuLateral) {
     }
 
     btnHamburger.addEventListener('click', () => {
-        if (menuLateral.classList.contains('ativo')) {
-            fecharMenu();
-        } else {
-            abrirMenu();
-        }
+        if (menuLateral.classList.contains('ativo')) fecharMenu();
+        else abrirMenu();
     });
 
     menuOverlay.addEventListener('click', fecharMenu);
 
     menuItems.forEach(item => {
-        item.addEventListener('click', (e) => {
+        item.addEventListener('click', () => {
             menuItems.forEach(i => i.classList.remove('active'));
             item.classList.add('active');
             setTimeout(fecharMenu, 200);
-            const page = item.getAttribute('data-page');
-            console.log(`Navegar para: ${page}`);
         });
     });
 
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && menuLateral.classList.contains('ativo')) {
-            fecharMenu();
-        }
+        if (e.key === 'Escape' && menuLateral.classList.contains('ativo')) fecharMenu();
     });
 
     let touchStartXMenu = 0;
@@ -614,9 +585,7 @@ if (btnHamburger && menuOverlay && menuLateral) {
     menuLateral.addEventListener('touchend', (e) => {
         const touchEndX = e.changedTouches[0].clientX;
         const diff = touchStartXMenu - touchEndX;
-        if (diff < -50) {
-            fecharMenu();
-        }
+        if (diff < -50) fecharMenu();
     });
 }
 
@@ -630,7 +599,6 @@ window.addEventListener('load', () => {
         themeIcon.className = 'ri-sun-line';
     }
 
-    // Inicializa os selects personalizados
     popularSelectDosagem();
     popularSelectConcentracao();
 });

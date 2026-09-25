@@ -1,0 +1,184 @@
+{
+  "oms": [
+    {
+      "BASE DE DADOS DE DOSAGEM ": "Desenvolvido por: António Sebastião Mpindi  |  Ano: 2026",
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": NaN,
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN,
+      "Unnamed: 7": NaN,
+      "Unnamed: 8": NaN
+    },
+    {
+      "BASE DE DADOS DE DOSAGEM ": "Última data de Modificação:  /  /",
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": NaN,
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN,
+      "Unnamed: 7": NaN,
+      "Unnamed: 8": NaN
+    },
+    {
+      "BASE DE DADOS DE DOSAGEM ": "A menos que seja um desenvolvedor ou outra pessoa autorizada, não pode alterar este arquivo. O mesmo contém informações sobre os padrões de cálculo dos medicamentos que o integram.",
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": NaN,
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN,
+      "Unnamed: 7": NaN,
+      "Unnamed: 8": NaN
+    },
+    {
+      "BASE DE DADOS DE DOSAGEM ": "REGISTRO DE MEDICAMENTOS",
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": NaN,
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN,
+      "Unnamed: 7": NaN,
+      "Unnamed: 8": NaN
+    },
+    {
+      "BASE DE DADOS DE DOSAGEM ": "NOME",
+      "Unnamed: 1": "DOENCA",
+      "Unnamed: 2": "DOSE",
+      "Unnamed: 3": "VIA",
+      "Unnamed: 4": "CAMPOS",
+      "Unnamed: 5": "CONCENTRACAO ",
+      "Unnamed: 6": "INTERVALO",
+      "Unnamed: 7": "FORMULA",
+      "Unnamed: 8": "NOTA"
+    }
+  ],
+  "msf": [
+    {
+      "BASE DE DADOS DE DOSAGEM ": "Desenvolvido por: António Sebastião Mpindi | Ano: 2026",
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": NaN,
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN,
+      "Unnamed: 7": NaN,
+      "Unnamed: 8": NaN
+    },
+    {
+      "BASE DE DADOS DE DOSAGEM ": "Última data de Modificação:  /  /",
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": NaN,
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN,
+      "Unnamed: 7": NaN,
+      "Unnamed: 8": NaN
+    },
+    {
+      "BASE DE DADOS DE DOSAGEM ": "A menos que seja um desenvolvedor ou outra pessoa autorizada, não pode alterar este arquivo. O mesmo contém informações sobre os padrões de cálculo dos medicamentos que o integram.",
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": NaN,
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN,
+      "Unnamed: 7": NaN,
+      "Unnamed: 8": NaN
+    },
+    {
+      "BASE DE DADOS DE DOSAGEM ": "REGISTRO DE MEDICAMENTOS",
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": NaN,
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN,
+      "Unnamed: 7": NaN,
+      "Unnamed: 8": NaN
+    },
+    {
+      "BASE DE DADOS DE DOSAGEM ": "NOME",
+      "Unnamed: 1": "DOENCA",
+      "Unnamed: 2": "DOSE",
+      "Unnamed: 3": "VIA",
+      "Unnamed: 4": "CAMPOS",
+      "Unnamed: 5": "CONCENTRACAO ",
+      "Unnamed: 6": "INTERVALO",
+      "Unnamed: 7": "FORMULA",
+      "Unnamed: 8": "NOTA"
+    },
+    {
+      "BASE DE DADOS DE DOSAGEM ": "med",
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": NaN,
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": 12,
+      "Unnamed: 7": "{20/#i} ml",
+      "Unnamed: 8": NaN
+    }
+  ],
+  "minsa": [
+    {
+      "BASE DE DADOS DE DOSAGEM ": "Desenvolvido por: António Sebastião Mpindi | Ano: 2026",
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": NaN,
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN,
+      "Unnamed: 7": NaN,
+      "Unnamed: 8": NaN
+    },
+    {
+      "BASE DE DADOS DE DOSAGEM ": "Última data de Modificação:  /  /",
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": NaN,
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN,
+      "Unnamed: 7": NaN,
+      "Unnamed: 8": NaN
+    },
+    {
+      "BASE DE DADOS DE DOSAGEM ": "A menos que seja um desenvolvedor ou outra pessoa autorizada, não pode alterar este arquivo. O mesmo contém informações sobre os padrões de cálculo dos medicamentos que o integram.",
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": NaN,
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN,
+      "Unnamed: 7": NaN,
+      "Unnamed: 8": NaN
+    },
+    {
+      "BASE DE DADOS DE DOSAGEM ": "REGISTRO DE MEDICAMENTOS",
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": NaN,
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN,
+      "Unnamed: 7": NaN,
+      "Unnamed: 8": NaN
+    },
+    {
+      "BASE DE DADOS DE DOSAGEM ": "NOME",
+      "Unnamed: 1": "DOENCA",
+      "Unnamed: 2": "DOSE",
+      "Unnamed: 3": "VIA",
+      "Unnamed: 4": "CAMPOS",
+      "Unnamed: 5": "CONCENTRACAO ",
+      "Unnamed: 6": "INTERVALO",
+      "Unnamed: 7": "FORMULA",
+      "Unnamed: 8": "NOTA"
+    }
+  ]
+}

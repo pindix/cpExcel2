@@ -4,33 +4,33 @@
 <head>
 
 
-       <style>
-    /* Tema inline para evitar flash branco */
-    :root {
-        --bg-inline: #f0f2f0;
-        --text-inline: #1a2a21;
-    }
-    
-    [data-theme="dark"] {
-        --bg-inline: black;
-        --text-inline: #f0f2f0;
-    }
-    
-    /* Aplica o fundo imediatamente */
-    html {
-        background-color: var(--bg-inline);
-    }
-    
-    body {
-        background-color: var(--bg-inline);
-        color: var(--text-inline);
-    }
-    
-    /* Força o fundo antes do JS carregar */
-    body::before {
-        display: none;
-    }
-</style>
+    <style>
+        /* Tema inline para evitar flash branco */
+        :root {
+            --bg-inline: #f0f2f0;
+            --text-inline: #1a2a21;
+        }
+
+        [data-theme="dark"] {
+            --bg-inline: black;
+            --text-inline: #f0f2f0;
+        }
+
+        /* Aplica o fundo imediatamente */
+        html {
+            background-color: var(--bg-inline);
+        }
+
+        body {
+            background-color: var(--bg-inline);
+            color: var(--text-inline);
+        }
+
+        /* Força o fundo antes do JS carregar */
+        body::before {
+            display: none;
+        }
+    </style>
 
 
     <script>
@@ -65,7 +65,7 @@
             <span></span>
             <span></span>
             <span></span>
-        </button> 
+        </button>
     </nav>
 
     <!-- ================================================================== -->
@@ -142,16 +142,50 @@
         </div>
     </div>
 
- 
- 
+
 
     <section class="main-tool">
-        <select id="pais">
-            <option value="msf" disabled selected>Que padrão vai usar?</option>
-            <option value="msf">Médicos Sem Fronteira</option>
-            <option>OMS (não disponível)</option>
-            <option disabled>Novos padrões brevemente</option>
-        </select>
+
+        <!-- ===== FONTE DE REFERÊNCIA ===== -->
+        <div class="fonte-referencia-wrapper">
+            <div class="custom-select" id="fonteSelect">
+                <div class="custom-select-trigger" onclick="toggleCustomSelect('fonteSelect')">
+                    <span class="floating-label">Referência</span>
+                    <span id="fonteSelecionada">Médicos Sem Fronteira</span>
+                    <i class="ri-arrow-down-s-line" id="fonteArrow"></i>
+                </div>
+                <div class="custom-select-options" id="fonteOptions">
+                    <div class="custom-select-option disabled"
+                        style="opacity: 0.6; cursor: default; pointer-events: none; border-bottom: 1px solid rgba(0,0,0,0.06);">
+                        <i class="ri-information-line" style="color: #94a3b8;"></i>
+                        <div class="option-content">
+                            <span class="option-titulo"
+                                style="font-size: 0.65rem; font-weight: 400; color: #94a3b8;">Referências cruzadas podem
+                                ser aplicadas</span>
+                            <span class="option-desc" style="font-size: 0.55rem; color: #94a3b8;">Em caso de
+                                insuficiência de dados específicos</span>
+                        </div>
+                    </div>
+                    <div class="custom-select-option selected" data-value="msf" onclick="selecionarFonte('msf')">
+                        <i class="ri-earth-line"></i>
+                        <div class="option-content">
+                            <span class="option-titulo">🌍 Médicos Sem Fronteira</span>
+                            <span class="option-desc">Baseado prioritariamente nas diretrizes da OMS, complementadas
+                                apenas quando a OMS não disponibiliza recomendações específicas.</span>
+                        </div>
+                    </div>
+                    <div class="custom-select-option" data-value="oms" onclick="selecionarFonte('oms')">
+                        <i class="ri-government-line"></i>
+                        <div class="option-content">
+                            <span class="option-titulo">🇦🇴 🌍 OMS (não disponível)</span>
+                            <span class="option-desc">Baseado prioritariamente nas diretrizes da OMS, complementadas
+                                apenas quando a OMS não disponibiliza recomendações específicas.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="calculator-box" data-aos="fade-up">
 
             <div class="nomeConcentracao">
@@ -162,91 +196,125 @@
                     <div id="sugestoes_box"></div>
                 </div>
 
-                <div class="select-concentracao-wrapper" id="concentracaoWrapper" style="display: none;">
-                    <label class="label-concentracao">Concentração</label>
-                    <select id="selConcentracao">
-                        <option></option>
-                    </select>
+                <div class="custom-select" id="concentracaoSelect" style="display:none;">
+                    <div class="custom-select-trigger" onclick="toggleCustomSelect('concentracaoSelect')">
+                        <span class="floating-label">Concentração</span>
+                        <span id="concentracaoSelecionada">—</span>
+                        <i class="ri-arrow-down-s-line" id="concentracaoArrow"></i>
+                    </div>
+                    <div class="custom-select-options" id="concentracaoOptions"></div>
                 </div>
 
             </div>
 
+            <div class="campos-grid" id="camposGrid">
+                <div class="entradas_de_dados floating-group" id="campo_de_peso">
+                    <i class="ri-scales-2-fill"></i>
+                    <input type="number" id="peso" placeholder=" ">
+                    <label class="label-flutuante">Peso</label>
+                    <span class="unidade-fixa">kg</span>
+                </div>
 
-
-            <div class="container-duas-colunas">
-                <!-- COLUNA ESQUERDA: Inputs com labels flutuantes -->
-                <div class="coluna-inputs">
-                    <div class="entradas_de_dados floating-group" id="campo_de_peso">
-                        <i class="ri-scales-2-fill"></i>
-                        <input type="number" id="peso" placeholder=" ">
-                        <label class="label-flutuante">Peso</label>
-                        <span class="unidade-fixa">kg</span>
-                    </div>
-
-                    <div class="entradas_de_dados floating-group" id="campo_de_idade">
-                        <i class="ri-user-heart-line"></i>
-                        <input type="number" id="idade" placeholder=" ">
-                        <label class="label-flutuante">Idade</label>
-                        <select id="unidade_de_idade" class="select-unidade">
-                            <option value="365">anos</option>
-                            <option value="30">meses</option>
-                            <option value="7">semanas</option>
-                            <option value="1">dias</option>
-                        </select>
-                    </div>
-
-                    <!-- Dose (ou dose de ataque, quando houver ataque+manutenção) -->
-                    <div class="entradas_de_dados floating-group" id="campo_de_dosagem">
-                        <i class="ri-capsule-line"></i>
-                        <input type="number" id="dosagem" placeholder=" ">
-                        <label class="label-flutuante" id="label_dosagem">Dose</label>
-                        <span id="unidade_de_dosagem" class="unidade-fixa">--</span>
-                    </div>
-
-                    <!-- Dose de manutenção — só aparece quando a linha tem
-                         dose(...) com ataque()/manutencao() diferentes -->
-                    <div class="entradas_de_dados floating-group" id="campo_de_dosagem_manutencao" style="display: none;">
-                        <i class="ri-capsule-line"></i>
-                        <input type="number" id="dosagem_manutencao" placeholder=" ">
-                        <label class="label-flutuante">Dose (manutenção)</label>
-                        <span id="unidade_de_dosagem_manutencao" class="unidade-fixa">--</span>
+                <div class="entradas_de_dados floating-group" id="campo_de_idade">
+                    <i class="ri-user-heart-line"></i>
+                    <input type="number" id="idade" placeholder=" ">
+                    <label class="label-flutuante">Idade</label>
+                    <div class="custom-select-temp-local" id="tempLocalSelect">
+                        <div class="custom-select-trigger-temp" onclick="toggleTempLocalSelect(event)">
+                            <span id="tempLocalSelecionado">anos</span>
+                            <i class="ri-arrow-down-s-line" id="tempLocalArrow"></i>
+                        </div>
+                        <div class="custom-select-options-temp" id="tempLocalOptions">
+                            <div class="custom-select-option-temp selected" data-value="365"
+                                onclick="selecionarUnidadeIdade('365', event)"><span class="option-label">anos</span>
+                            </div>
+                            <div class="custom-select-option-temp" data-value="30"
+                                onclick="selecionarUnidadeIdade('30', event)"><span class="option-label">meses</span>
+                            </div>
+                            <div class="custom-select-option-temp" data-value="7"
+                                onclick="selecionarUnidadeIdade('7', event)"><span class="option-label">semanas</span>
+                            </div>
+                            <div class="custom-select-option-temp" data-value="1"
+                                onclick="selecionarUnidadeIdade('1', event)"><span class="option-label">dias</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- COLUNA DIREITA: Selects -->
-                <div class="coluna-selects">
-                    <div class="linha-dupla">
-                        <div class="select-item" style="flex: 2;">
-                            <select id="intervalo"></select>
-                        </div>
-                        <div class="select-item">
-                            <select id="via">
-                                <option value="iv">IV</option>
-                                <option value="im">IM</option>
-                            </select>
-                        </div>
-                    </div>
+                <div class="quebra-linha" id="quebraLinhaDose"></div>
 
-                    <!-- Intervalo de manutenção — só aparece quando a linha
-                         tem intervalo(...) com ataque()/manutencao() diferentes -->
-                    <div class="select-item-full" id="campo_intervalo_manutencao" style="display: none;">
-                        <select id="intervalo_manutencao"></select>
-                    </div>
 
-                    <div class="select-item-full">
-                        <select id="dose">
-                            <option value="pediatrica">Dose Pediátrica</option>
-                            <option value="adulta">Dose Adulta</option>
-                            <option value="gravida">Grávida</option>
-                        </select>
-                    </div>
+                <div class="entradas_de_dados floating-group" id="campo_de_dosagem">
+                    <i class="ri-capsule-line"></i>
+                    <input type="number" id="dosagem" placeholder=" ">
+                    <label class="label-flutuante" id="label_dosagem">Dose</label>
+                    <span id="unidade_de_dosagem" class="unidade-fixa">--</span>
+                </div>
 
-                    <div class="select-item-full">
-                        <select id="selDoenca"></select>
-                    </div>
+                <div class="entradas_de_dados floating-group" id="campo_de_dosagem_manutencao" style="display: none;">
+                    <i class="ri-capsule-line"></i>
+                    <input type="number" id="dosagem_manutencao" placeholder=" ">
+                    <label class="label-flutuante">Dose de manutenção</label>
+                    <span id="unidade_de_dosagem_manutencao" class="unidade-fixa">--</span>
                 </div>
             </div>
 
+            <!-- ===== LINHA PARTILHADA: VIA / INTERVALO / POPULAÇÃO =====
+                 Via e População vivem sempre aqui. O intervalo de ataque
+                 também vive aqui -- exceto quando o de manutenção também
+                 está ativo, caso em que o JS o move para linhaIntervaloDuplo. -->
+            <div class="linha-secundaria" id="linhaSecundaria">
+                <div class="custom-select" id="viaSelect" style="display:none;">
+                    <div class="custom-select-trigger" onclick="toggleCustomSelect('viaSelect')">
+                        <span class="floating-label">Via</span>
+                        <span id="viaSelecionada">—</span>
+                        <i class="ri-arrow-down-s-line" id="viaArrow"></i>
+                    </div>
+                    <div class="custom-select-options" id="viaOptions"></div>
+                </div>
+
+                <div class="custom-select" id="intervaloSelect" style="display:none;">
+                    <div class="custom-select-trigger" onclick="toggleCustomSelect('intervaloSelect')">
+                        <span class="floating-label">Intervalo</span>
+                        <span id="intervaloSelecionado">—</span>
+                        <i class="ri-arrow-down-s-line" id="intervaloArrow"></i>
+                    </div>
+                    <div class="custom-select-options" id="intervaloOptions"></div>
+                </div>
+
+                <div class="custom-select" id="populacaoSelect" style="display:none;">
+                    <div class="custom-select-trigger" onclick="toggleCustomSelect('populacaoSelect')">
+                        <span class="floating-label">População</span>
+                        <span id="populacaoSelecionada">—</span>
+                        <i class="ri-arrow-down-s-line" id="populacaoArrow"></i>
+                    </div>
+                    <div class="custom-select-options" id="populacaoOptions"></div>
+                </div>
+            </div>
+
+            <!-- ===== LINHA EXCLUSIVA: INTERVALO ATAQUE + MANUTENÇÃO
+                 Só usada quando os dois intervalos são realmente diferentes;
+                 o JS move o #intervaloSelect para aqui e cria o de manutenção. ==== -->
+            <div class="linha-secundaria" id="linhaIntervaloDuplo" style="display:none;">
+                <div class="custom-select" id="intervaloManutencaoSelect">
+                    <div class="custom-select-trigger" onclick="toggleCustomSelect('intervaloManutencaoSelect')">
+                        <span class="floating-label">Intervalo de manutenção</span>
+                        <span id="intervaloManutencaoSelecionado">—</span>
+                        <i class="ri-arrow-down-s-line" id="intervaloManutencaoArrow"></i>
+                    </div>
+                    <div class="custom-select-options" id="intervaloManutencaoOptions"></div>
+                </div>
+            </div>
+
+            <!-- ===== CONDIÇÃO — linha própria, largura total ===== -->
+            <div class="custom-select condicao-select" id="condicaoSelect" style="display:none;">
+                <div class="custom-select-trigger" onclick="toggleCustomSelect('condicaoSelect')">
+                    <span class="floating-label">Condição / Indicação</span>
+                    <span id="condicaoSelecionada">—</span>
+                    <i class="ri-arrow-down-s-line" id="condicaoArrow"></i>
+                </div>
+                <div class="custom-select-options" id="condicaoOptions"></div>
+            </div>
 
             <div class="caxa_de_botoes">
                 <button class="botao" onclick="calcular()">Calcular</button>
@@ -254,10 +322,13 @@
             </div>
         </div>
 
+        <div id="fonteFeedback" class="fonte-feedback-wrapper" style="display:none;"></div>
+
+        <div id="notaFallbackReferencia" class="nota-fallback-referencia" style="display:none;"></div>
+
         <div class="resultado-display" id="resultado" data-aos="fade-up" data-aos-delay="100"></div>
+
     </section>
-
-
 
     <div id="meuModal" class="modal-overlay" style="display: none;">
         <div class="modal-content">
@@ -274,7 +345,6 @@
             <span class="footer-sep">|</span>
             <a style="background: var(--white); border-radius: 12px; padding: 0.5rem 1rem; border-bottom: none;"
                 href="../ajuda/index.html#dosagem" class="ri-question-line ajuda"></i> Ajuda</a>
-            <!-- Link condicional para "Sugerir Medicamento" -->
             <span class="footer-sep">|</span>
             <a href="https://wa.me/244929129797?text=Olá!%20Gostaria%20de%20sugerir%20um%20medicamento" target="_blank"
                 rel="noopener">Sugerir Medicamento</a>
@@ -282,8 +352,7 @@
     </footer>
 
 
-
-    <script src="../assets/js/xlsx.full.min.js"></script>
+    <script src="medicamentos.js"></script>
 
     <script src="script.js"></script>
     <script src="../assets/js/persistencia.js"></script>
@@ -298,4 +367,5 @@
     </script>
 
 </body>
+
 </html>

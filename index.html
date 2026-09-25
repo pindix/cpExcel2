@@ -3,728 +3,274 @@
 
 <head>
 
+    <style>
+    /* Tema inline para evitar flash branco */
+    :root {
+        --bg-inline: white;
+        --text-inline: #1a2a21;
+    }
+    
+    [data-theme="dark"] {
+        --bg-inline: black;
+        --text-inline: white;
+    }
+    
+    /* Aplica o fundo imediatamente */
+    html {
+        background-color: var(--bg-inline);
+    }
+    
+    body {
+        background-color: var(--bg-inline);
+        color: var(--text-inline);
+    }
+    
+    /* Força o fundo antes do JS carregar */
+    body::before {
+        display: none;
+    }
+</style>
 
-
-    <script>
-        (function () {
-
-            const tema =
-                localStorage.getItem('matclinica-theme');
-
-            if (tema === 'dark') {
-
-                document.documentElement
-                    .setAttribute('data-theme', 'dark');
-
-            } else {
-
-                document.documentElement
-                    .setAttribute('data-theme', 'light');
-
-            }
-
-        })();
-    </script>
-
+<script>
+    // Ler tema do localStorage ANTES do CSS carregar
+    (function() {
+        const tema = localStorage.getItem('tema');
+        if (tema === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.body.setAttribute('data-theme', 'dark');
+        }
+    })();
+</script> 
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MatClinica</title>
-    <!-- Fontes e Ícones Limpos -->
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <title>Mpindi TecMed</title>
+    <link rel="stylesheet" href="assets/css/aos.css">
+   <link rel="stylesheet" href="assets/css/remixicon.css">
     <link rel="stylesheet" href="style.css">
-    <!-- AOS Library CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!-- PWA -->
+<link rel="manifest" href="/cp app/manifest.json">
+<meta name="theme-color" content="#00843d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <!-- ==========================================
-   FAVICON (Usando o logo da MatClínica)
-=========================================== -->
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/imagens/logo.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/imagens/logo.png">
-    <link rel="apple-touch-icon" href="assets/imagens/logo.png">
-
+<!-- Service Worker -->
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/cp app/sw.js');
+    }
+</script>
 </head>
 
 <body>
 
-
-    <!-- =========================================================
-     NAVBAR MATCLÍNICA — MENU ESTILO HEROSECTION
-     ========================================================= -->
-    <nav class="mc-nav" id="mcNav">
-
-        <!-- LOGO — ESQUERDA -->
-        <div class="mc-nav-left">
-            <a href="#hero" class="mc-logo" aria-label="MatClínica">
-                <img src="assets/imagens/logo.png" alt="Mpindi TecMed - MatClínica">
-            </a>
-        </div>
-
-
-        <!-- AÇÕES — CENTRO -->
-        <div class="mc-nav-center">
-
-            <a href="#" class="mc-nav-app">
-                <i class="ri-google-play-line"></i>
-                <span>Baixar APP</span>
-            </a>
-
-            <a href="#" class="mc-nav-login" onclick="semLogin(); return false;">
-                Login
-            </a>
-
-        </div>
-
-
-        <!-- MENU — DIREITA -->
-        <div class="mc-nav-menu">
-
-            <!-- BOTÃO DE TEMA -->
-            <button class="mc-theme-btn" id="themeBtn" type="button" aria-label="Mudar para tema escuro">
-                <i class="ri-moon-line" id="themeIcon"></i>
-            </button>
-
-
-            <!-- ÁREA DAS PÍLULAS -->
-            <div class="mc-pill-area" id="mcPillArea"></div>
-
-
-            <!-- BOTÃO CIRCULAR DO MENU -->
-            <button class="mc-menu-toggle" id="mcMenuToggle" type="button" aria-label="Abrir menu"
-                aria-expanded="false">
-                <i class="ri-menu-line" id="mcMenuIcon"></i>
-            </button>
-
-        </div>
-
+    <!-- ================================================================== -->
+    <!-- NAVEGAÇÃO SUPERIOR -->
+    <!-- ================================================================== -->
+    <nav class="nav-topo">
+        <span class="nav-logo"><span class="matClinica">Mat</span>Clínica</span>
+        <button class="btn-hamburger" id="btnHamburger" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </nav>
 
-    <!-- ==========================================
-       HERO SECTION
-    =========================================== -->
-    <div class="hero-pin-wrapper">
-        <header id="hero" class="hero-section section-scroll">
-            <div class="hero-container">
-                <div class="hero-text-block">
-                    <h1 class="hero-title">Fim dos <span>Calculos</span> na Saúde!</h1>
-                    <p class="hero-desc">Resolvemos por si: doses, idade gestacional, diluições, gotejamentos,
-                        interpretação de sinais vitais e muito mais.
-                        <br>
-                        <strong>Uma plataforma. Dezenas de ferramentas. Menos complicação no seu dia.</strong>
-                    </p>
+    <!-- ================================================================== -->
+    <!-- MENU OVERLAY (70% escuro) -->
+    <!-- ================================================================== -->
+    <div class="menu-overlay" id="menuOverlay"></div>
 
- 
-                    <div class="hero-buttons">
-                        <a href="#" class="btn-hero-tools"><i class="ri-google-play-line"></i> Baixar App</a>
-                        <!-- <a href="#sobre" class="btn-hero-about"><i class="ri-information-line"></i> Sobre</a> -->
-                    </div>
+    <!-- ================================================================== -->
+    <!-- MENU LATERAL (30% transparente à direita) -->
+    <!-- ================================================================== -->
+    <div class="menu-lateral" id="menuLateral">
 
-                </div>
-        </header> 
-    </div>
-
-
-
-    <section id="sobre" class="sobre-section section-scroll">
-        <div class="sobre-header" data-aos="fade-up">
-
-            <span class="section-tag">Quem Somos</span>
-
-            <h2>Conheça a MatClínica</h2>
-
-            <!-- BOTÃO DA HISTÓRIA -->
-            <button class="btn-historia" id="btnHistoria" type="button" aria-expanded="false">
-                <span>Ver história</span>
-                <i class="ri-arrow-down-s-line"></i>
-            </button>
-
-            <!-- HISTÓRIA -->
-            <div class="historia-container" id="historiaContainer" aria-hidden="true">
-
-                <div class="historia-inner">
-
-                    <div class="historia-divider"></div>
-
-                    <span class="historia-label">
-                        A história por trás da MatClínica
-                    </span>
-
-                    <div class="historia-text">
-
-                        <p>
-                            Tudo começou com um pensamento simples:
-                        </p>
-
-                        <p class="historia-pergunta">
-                            <strong>
-                                Dá para usar um computador para facilitar os cálculos
-                                em tarefas clínicas?
-                            </strong>
-                        </p>
-
-                        <p>
-                            Enquanto eu concluía a formação em Enfermagem, comecei a estudar
-                            programação. A combinação das duas áreas trouxe uma nova perspectiva
-                            sobre problemas comuns da prática clínica: muitos cálculos seguem
-                            regras que podem ser automatizadas.
-                        </p>
-
-                        <p>
-                            A partir dessa ideia, surgiram as primeiras ferramentas. Uma depois
-                            da outra, foram-se multiplicando até que surgiu uma nova possibilidade:
-                        </p>
-
-                        <p class="historia-pergunta">
-                            <strong>
-                                E se todas elas pudessem estar reunidas em um só lugar?
-                            </strong>
-                        </p>
-
-                        <p>
-                            Foi assim que nasceu a <strong>MatClínica</strong>, uma plataforma
-                            de ferramentas clínicas desenvolvida pela <strong>Mpindi TecMed</strong>.
-                        </p>
-
-                        <p>
-                            O que começou com uma pergunta tornou-se uma plataforma.
-                            <strong>E a construção continua.</strong>
-                        </p>
-
-                    </div>
-
-                </div>
-
+        <!-- Cabeçalho do Menu -->
+        <div class="menu-header">
+            <div class="menu-header-icon">
+                <img src="assets/imagens/logo.png" alt="Logo matClinica">
             </div>
-
-            <!-- DESCRIÇÃO DA MATCLÍNICA -->
-            <div class="sobre-resumo">
-
-                <div class="sobre-resumo">
-
-    <p class="sobre-main-text">
-        A <strong>MatClínica</strong> é uma plataforma de ferramentas clínicas
-        desenvolvida pela <strong>Mpindi TecMed</strong>, criada para facilitar
-        cálculos, conversões e consultas do dia a dia de profissionais e
-        estudantes de saúde.
-    </p>
-
-    <p class="sobre-main-text">
-        De cálculos de doses e gotejamentos a idade gestacional, diluições,
-        sinais vitais e outras ferramentas clínicas, a plataforma reúne
-        diferentes recursos em um único lugar, tornando tarefas complexas
-        mais rápidas e simples.
-    </p>
-
-    <p class="sobre-main-text">
-        Tudo com um propósito: ajudar profissionais e estudantes de saúde a
-        dedicar menos tempo às contas e mais tempo àquilo que realmente importa.
-    </p>
-
-    <p class="sobre-cuidar">
-        <strong>Cuidar.</strong>
-    </p>
-
-</div>
-
-            </div>
-
+            <h3><span class="matClinica">Mat</span>Clínica</h3>
+            <p>Suporte de Decisão Clínica</p>
         </div>
 
-
-        <!-- ==========================================================
-     CARDS — MANTIDOS FORA DO SOBRE-HEADER, COMO ESTAVAM
-     ========================================================== -->
-
-        <div class="grid-info">
-
-            <div class="info-box" data-aos="fade-right" data-aos-delay="100">
-                <div class="floating-icon">
-                    <i class="ri-shake-hands-fill"></i>
+        <!-- Itens do Menu -->
+        <div class="menu-items">
+            <a href="index.html" class="menu-item active" data-page="inicio">
+                <div class="menu-item-icon">
+                    <i class="ri-home-line"></i>
                 </div>
+                <span>Ferramentas</span>
+                <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+            </a>
 
-                <h3>Adaptabilidade</h3>
-
-                <p>
-                    Nossos sistemas estão a ser desenhados para funcionar com padrões
-                    de regiões específicas do mundo, podendo se adaptar em diversos
-                    contextos clínicos. Damos esse controle a você.
-                </p>
-            </div>
-
-            <div class="info-box" data-aos="fade-right" data-aos-delay="400">
-                <div class="floating-icon" style="background: #e67e22; box-shadow: 0 8px 20px rgba(230, 126, 34, 0.3);">
-                    <i class="ri-alert-fill"></i>
+            <a href="sobre/index.html" class="menu-item" data-page="sobre">
+                <div class="menu-item-icon">
+                    <i class="ri-information-line"></i>
                 </div>
+                <span>Sobre</span>
+                <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+            </a>
 
-                <h3>Aviso Importante</h3>
 
-                <p>
-                    Esta ferramenta é um auxiliar de cálculo. A conferência com os
-                    protocolos institucionais e bula, bem como a opinião médica,
-                    são indispensáveis.
-                </p>
+            <a href="ajuda/index.html" class="menu-item" data-page="ajuda">
+                <div class="menu-item-icon">
+                    <i class="ri-question-line"></i>
+                </div>
+                <span>Como funciona</span>
+                <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+            </a>
+
+            <div class="contacto">
+                
+                <a href="https://wa.me/244929129797" title="WhatsApp">
+                    <i class="ri-whatsapp-line"></i>
+                </a>
+                
+                <a href="mailto:sebastiaompindi@gmail.com" title="Email">
+                    <i class="ri-mail-line"></i>
+                </a>
             </div>
-
         </div>
-    </section>
-
-    <!-- ==========================================
-       SEGURANÇA (ESTILO WINDOWS LOCKSCREEN)
-    =========================================== -->
-    <section id="seguranca" class="seguranca-section section-scroll">
-        <!-- Camada de Imagem (fundo estático, sem JavaScript) -->
-        <div class="seguranca-bg-image" id="segurancaBgImage"></div>
-        <!-- Overlay -->
-        <div class="seguranca-bg-overlay"></div>
-
-        <div class="seguranca-container">
-
-            <!-- PAINEL MESTRE DE VIDRO HD -->
-            <div class="glass-master-panel" data-aos="fade-up">
-                <!-- Efeito de Reflexo de Luz Diagonal no Vidro -->
-                <div class="glass-glare"></div>
-
-                <div class="glass-header">
-                    <span class="section-tag-dark"><i class="ri-shield-keyhole-line"></i> Rigor Científico &
-                        Confiabilidade</span>
-                    <h2 class="seguranca-title">Conheça as nossas Referências</h2>
-
-                    <p class="seguranca-intro">
-                        Todas as ferramentas de apoio à decisão clínica e algoritmos de cálculo são estritamente
-                        fundamentados em operações matemáticas padronizadas, modelos bioestatísticos e diretrizes
-                        internacionais. Para compreender detalhadamente as equações, variáveis e limites normativos
-                        aplicados em cada módulo, acesse nossa documentação técnica.
-                    </p>
-
-                    <a href="ajuda/index.html" class="btn-como-funciona">
-                        <span>Documentação e fórmulas</span>
-                        <i class="ri-arrow-right-line"></i>
-                    </a>
-                </div>
-
-                <div class="glass-divider"></div>
-
-                <!-- GRID DOS CARDS ISOLADOS EM VIDRO -->
-                <div class="seguranca-grid">
-
-                    <!-- CARD 1: SINAIS VITAIS -->
-                    <div class="glass-card-feature">
-                        <div class="card-body-content">
-                            <div class="card-header-glass">
-                                <div class="glass-icon-box"><i class="ri-heart-pulse-fill"></i></div>
-                                <div>
-                                    <h3>Sinais Vitais</h3>
-                                    <span class="badge-card">Fisiologia Clínica</span>
-                                </div>
-                            </div>
-
-                            <p class="card-desc">
-                                A interpretação dos parâmetros fisiológicos é baseada em referências internacionais ou
-                                locais, permitindo a seleção do perfil normativo pelo usuário. Em cenários de escassez
-                                ou inconsistência de dados, aplica-se o cruzamento ponderado de referências globais com
-                                notificação clara ao profissional.
-                            </p>
-                        </div>
-
-                        <div class="sources-wrapper">
-                            <span class="sources-title"><i class="ri-book-read-line"></i> Manuais Utilizados:</span>
-
-                            <div class="source-item">
-                                <div class="source-info">
-                                    <strong>MINSA (Angola)</strong>
-                                    <span>Diretrizes e protocolos nacionais de saúde pública.</span>
-                                </div>
-                                <a href="https://www.minsa.gov.ao" target="_blank" rel="noopener" class="source-link">
-                                    <span>Ver Manual</span> <i class="ri-external-link-line"></i>
-                                </a>
-                            </div>
-
-                            <div class="source-item">
-                                <div class="source-info">
-                                    <strong>OMS / WHO</strong>
-                                    <span>Diretrizes globais de monitoramento fisiológico.</span>
-                                </div>
-                                <a href="https://www.who.int" target="_blank" rel="noopener" class="source-link">
-                                    <span>Ver Manual</span> <i class="ri-external-link-line"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- CARD 2: INTERPRETADOR DE EXAMES -->
-                    <div class="glass-card-feature">
-                        <div class="card-body-content">
-                            <div class="card-header-glass">
-                                <div class="glass-icon-box"><i class="ri-microscope-fill"></i></div>
-                                <div>
-                                    <h3>Interpretador de Exames</h3>
-                                    <span class="badge-card">Análises Clínicas</span>
-                                </div>
-                            </div>
-
-                            <p class="card-desc">
-                                O cruzamento analítico de dados laboratoriais considera intervalos de referência
-                                estratificados por faixa etária, sexo e parâmetros clínicos. Destaca desvios críticos e
-                                alerta para correlações de risco sem substituir o julgamento diagnóstico.
-                            </p>
-                        </div>
-
-                        <div class="sources-wrapper">
-                            <span class="sources-title"><i class="ri-book-read-line"></i> Manuais Utilizados:</span>
-
-                            <div class="source-item">
-                                <div class="source-info">
-                                    <strong>SBPC / ML</strong>
-                                    <span>Recomendações de controle de qualidade e patologia.</span>
-                                </div>
-                                <a href="https://www.sbpc.org.br" target="_blank" rel="noopener" class="source-link">
-                                    <span>Ver Manual</span> <i class="ri-external-link-line"></i>
-                                </a>
-                            </div>
-
-                            <div class="source-item">
-                                <div class="source-info">
-                                    <strong>IFCC International</strong>
-                                    <span>Padronização global de química clínica e exames.</span>
-                                </div>
-                                <a href="https://www.ifcc.org" target="_blank" rel="noopener" class="source-link">
-                                    <span>Ver Manual</span> <i class="ri-external-link-line"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- CARD 3: CÁLCULO DE DOSAGEM -->
-                    <div class="glass-card-feature">
-                        <div class="card-body-content">
-                            <div class="card-header-glass">
-                                <div class="glass-icon-box"><i class="ri-medicine-bottle-fill"></i></div>
-                                <div>
-                                    <h3>Cálculo de Dosagem</h3>
-                                    <span class="badge-card">Farmacologia</span>
-                                </div>
-                            </div>
-
-                            <p class="card-desc">
-                                As equações de posologia, taxas de infusão contínua, gotejamento e ajuste por superfície
-                                corporal (BSC) e peso corrigido utilizam rigor absoluto para erradicar margens de erro
-                                em prescrições e administrações.
-                            </p>
-                        </div>
-
-                        <div class="sources-wrapper">
-                            <span class="sources-title"><i class="ri-book-read-line"></i> Manuais Utilizados:</span>
-
-                            <div class="source-item">
-                                <div class="source-info">
-                                    <strong>Formulário Nacional / ANVISA</strong>
-                                    <span>Cálculos posológicos e diluições padronizadas.</span>
-                                </div>
-                                <a href="https://www.gov.br/anvisa" target="_blank" rel="noopener" class="source-link">
-                                    <span>Ver Manual</span> <i class="ri-external-link-line"></i>
-                                </a>
-                            </div>
-
-                            <div class="source-item">
-                                <div class="source-info">
-                                    <strong>British National Formulary (BNF)</strong>
-                                    <span>Referências globais de segurança farmacológica.</span>
-                                </div>
-                                <a href="https://bnf.nice.org.uk" target="_blank" rel="noopener" class="source-link">
-                                    <span>Ver Manual</span> <i class="ri-external-link-line"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+        <!-- Botão de Tema no Menu -->
+        <div class="menu-item tema-toggle-menu" id="themeBtn"  style="background: none; border: solid 2px white; color: white;">
+            <div class="menu-item-icon">
+                <i class="ri-moon-line" id="themeIcon"></i>
             </div>
-
-        </div>
-    </section>
-
-    <!-- ==========================================
-       FERRAMENTAS (BENTO GRID)
-    =========================================== -->
-    <section class="section-bento section-scroll" id="ferramentas">
-        <div class="label-ferramentas">Ferramentas</div>
-        <div class="linha-decorativa"></div>
-
-        <div class="bento-grid">
-
-            <!-- Card Grande (Gestograma) - ocupa 2 colunas em desktop -->
-            <a data-aos="fade-up" href="gestograma/index.html" class="bento-item card-grande" style="background: var(--primary-soft);">
-                <div class="bento-content">
-                    <i class="ri-calendar-event-line"></i>
-                    <div class="bento-text">
-                        <h3>Gestograma</h3>
-                        <p>Acompanhamento completo da gestação a partir de qualquer dado: DUM, DPP, idade gestacional ou
-                            altura uterina. Inclui ciclo menstrual.</p>
-                    </div>
-                </div>
-                <span class="bento-badge">Em destaque</span>
-            </a>
-
-            <!-- Card Grande (Dosagem) - ocupa 2 colunas em desktop -->
-            <a data-aos="fade-up" href="dosagem/index.html" class="bento-item card-grande"
-                style="background: var(--primary-soft);">
-                <div class="bento-content">
-                    <i class="ri-capsule-line"></i>
-                    <div class="bento-text">
-                        <h3>Cálculo de Dosagem</h3>
-                        <p>Cálculo de doses pediátricas e adultas por peso, idade ou superfície corporal. <strong>Base
-                                com mais de 1.000 fármacos</strong> e ajustes clínicos.</p>
-                    </div>
-                </div>
-                <span class="bento-badge">Em destaque</span>
-            </a>
-
-            <!-- Card Médio (Fórmula Internacional) -->
-            <a data-aos-delay="200" data-aos="fade-up" href="formula_internacional/index.html"
-                class="bento-item card-medio" style="background: var(--primary-soft);">
-                <div class="bento-content">
-                    <i class="ri-global-line"></i>
-                    <div class="bento-text">
-                        <h3>Fórmula Internacional</h3>
-                        <p>Conversão de prescrições líquidas em doses exatas usando a fórmula universal de enfermagem.
-                            Resultados em ml, gotas ou mg.</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Grupo de Quadrados (empilhados verticalmente à direita do card médio) -->
-            <div class="bento-quadrado-group">
-                <a data-aos="zoom-in" href="gotejamento/index.html" class="bento-item card-quadrado">
-                    <i class="ri-water-flash-line"></i>
-                    <span>Gotejamento</span>
-                </a>
-                <a data-aos="zoom-in" href="conversor/index.html" class="bento-item card-quadrado">
-                    <i class="ri-exchange-line"></i>
-                    <span>Conversor</span>
-                </a>
-            </div>
-
-            <!-- Grupo de Quadrados (Bloco de Notas e Achar Peso e Idade) -->
-            <div class="bento-quadrado-group">
-                <a data-aos="zoom-in" href="notas/index.html" class="bento-item card-quadrado">
-                    <i class="ri-sticky-note-line"></i>
-                    <span>Bloco de Notas</span>
-                </a>
-                <a data-aos="zoom-in" href="peso_idade/index.html" class="bento-item card-quadrado">
-                    <i class="ri-scales-3-line"></i>
-                    <span>Achar Peso e Idade</span>
-                </a>
-            </div>
-
-            <!-- Card Largo (Sinais Vitais) -->
-            <a data-aos="fade-up" href="sinais_vitais/index.html" class="bento-item card-largo">
-                <div class="bento-content">
-                    <i class="ri-heart-pulse-line"></i>
-                    <div class="bento-text">
-                        <h3>Sinais Vitais</h3>
-                        <p>Registo e monitorização de FC, PA, SpO₂, FR e temperatura. <strong>Gráficos interativos e
-                                relatórios em PDF</strong> com histórico do paciente.</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Card Médio (Interpretador Clínico) -->
-            <a data-aos="fade-up" href="exames/index.html" class="bento-item card-medio">
-                <div class="bento-content">
-                    <i class="ri-brain-line"></i>
-                    <div class="bento-text">
-                        <h3>Interpretador Clínico</h3>
-                        <p>Interpretação automática de exames laboratoriais, escalas clínicas e scores de risco.
-                            <strong>Centenas de parâmetros</strong> com alertas de valores críticos.</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Grupo de Quadrados (Diluição e Sistema ABO) -->
-            <div class="bento-quadrado-group">
-                <a data-aos="zoom-in" href="diluicao/index.html" class="bento-item card-quadrado">
-                    <i class="ri-flask-line"></i>
-                    <span>Diluição</span>
-                </a>
-                <a data-aos="zoom-in" href="sangue/index.html" class="bento-item card-quadrado">
-                    <i class="ri-temp-hot-line"></i>
-                    <span>Sistema ABO</span>
-                </a>
-            </div>
-
-        </div>
-    </section>
-
-
-
-    <!-- ==========================================
-     REPORTAR ERRO
-=========================================== -->
-<section id="reportar-erro" class="reportar-erro-section section-scroll">
-    <div class="reportar-erro-container" data-aos="fade-up">
-
-        <span class="section-tag">Feedback</span>
-        <h2 class="reportar-erro-title">Encontrou um erro?</h2>
-        <p class="reportar-erro-subtitle">
-            A tua opinião é muito importante para nós. Se encontraste algum problema, por favor reporta-o abaixo.
-        </p>
-
-        <!-- REPORTAR ERRO: Formulário com FormSubmit -->
-<form id="reportarErroForm" class="reportar-erro-form" novalidate>
-
-    <!-- REPORTAR ERRO: Campos escondidos do FormSubmit -->
-    <input type="hidden" name="_subject" value="Reporte de Erro — MatClínica">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_next" value="https://teusite.com/#reportar-erro">
-
-    <!-- Select Personalizado -->
-    <div class="reportar-erro-field">
-        <label class="reportar-erro-label" for="reportarFerramenta">Ferramenta com erro</label>
-
-        <select id="reportarFerramenta" name="Ferramenta" class="reportar-erro-select-native" required>
-            <option value="" disabled selected>Seleciona uma ferramenta</option>
-            <option value="Gestograma">Gestograma</option>
-            <option value="Cálculo de Dosagem">Cálculo de Dosagem</option>
-            <option value="Fórmula Internacional">Fórmula Internacional</option>
-            <option value="Gotejamento">Gotejamento</option>
-            <option value="Conversor">Conversor</option>
-            <option value="Sinais Vitais">Sinais Vitais</option>
-            <option value="Interpretador Clínico">Interpretador Clínico</option>
-            <option value="Diluição">Diluição</option>
-            <option value="Sistema ABO">Sistema ABO</option>
-            <option value="Bloco de Notas">Bloco de Notas</option>
-            <option value="Achar Peso e Idade">Achar Peso e Idade</option>
-            <option value="Outro">Outro</option>
-        </select>
-
-        <div class="reportar-erro-select" id="reportarErroSelect" tabindex="0" role="combobox" aria-expanded="false">
-            <span class="reportar-erro-select-value" id="reportarErroSelectValue">Seleciona uma ferramenta</span>
-            <i class="ri-arrow-down-s-line"></i>
+            <span>Mudar Tema</span>
+            <i class="ri-arrow-right-s-line menu-item-arrow"></i>
         </div>
 
-        <ul class="reportar-erro-select-list" id="reportarErroSelectList" role="listbox">
-            <li role="option" data-value="Gestograma">Gestograma</li>
-            <li role="option" data-value="Cálculo de Dosagem">Cálculo de Dosagem</li>
-            <li role="option" data-value="Fórmula Internacional">Fórmula Internacional</li>
-            <li role="option" data-value="Gotejamento">Gotejamento</li>
-            <li role="option" data-value="Conversor">Conversor</li>
-            <li role="option" data-value="Sinais Vitais">Sinais Vitais</li>
-            <li role="option" data-value="Interpretador Clínico">Interpretador Clínico</li>
-            <li role="option" data-value="Diluição">Diluição</li>
-            <li role="option" data-value="Sistema ABO">Sistema ABO</li>
-            <li role="option" data-value="Bloco de Notas">Bloco de Notas</li>
-            <li role="option" data-value="Achar Peso e Idade">Achar Peso e Idade</li>
-            <li role="option" data-value="Outro">Outro</li>
-        </ul>
+        <!-- Rodapé do Menu -->
+        <div class="menu-footer">
+            <small>© 2026 Mpindi TecMed</small>
+            <small>Versão 1.0.0</small>
+        </div>
     </div>
 
-    <div class="reportar-erro-field">
-        <label class="reportar-erro-label" for="reportarDescricao">Descrição do erro <span class="reportar-erro-required">*</span></label>
-        <textarea id="reportarDescricao" name="Descrição" class="reportar-erro-textarea" placeholder="Descreve o erro que encontraste..." required></textarea>
-    </div>
+<!-- index.html - Substitua a section .section-bento por esta versão -->
+<section class="section-bento" id="topo">
+    <div class="label-ferramentas">Ferramentas</div>
+    <div class="linha-decorativa"></div>
 
-    <div class="reportar-erro-field">
-        <label class="reportar-erro-label" for="reportarEmail">O teu email <span class="reportar-erro-optional">(opcional, se quiseres resposta)</span></label>
-        <input type="email" id="reportarEmail" name="Email" class="reportar-erro-input" placeholder="exemplo@email.com">
-    </div>
+    <div class="bento-grid">
+        
+        
+         <!-- Card Grande (Gestograma) - ocupa 2 colunas em desktop -->
+        <a data-aos="fade-up" href="gestograma/index.html" class="bento-item card-grande" style="background: var(--primary-soft);">
+            <div class="bento-content">
+                <i class="ri-calendar-event-line"></i>
+                <div class="bento-text">
+                    <h3>Gestograma</h3>
+                    <p>Acompanhamento completo da gestação a partir de qualquer dado: DUM, DPP, idade gestacional ou altura uterina. Inclui ciclo menstrual.</p>
+                </div>
+            </div>
+            <span class="bento-badge">Em destaque</span>
+        </a>
+        
+        <!-- Card Grande (Dosagem) - ocupa 2 colunas em desktop -->
+        <a data-aos="fade-up" href="dosagem/index.html" class="bento-item card-grande" style="background: var(--primary-soft);">
+            <div class="bento-content">
+                <i class="ri-capsule-line"></i>
+                <div class="bento-text">
+                    <h3>Cálculo de Dosagem</h3>
+                    <p>Cálculo de doses pediátricas e adultas por peso, idade ou superfície corporal. <strong>Base com mais de 1.000 fármacos</strong> e ajustes clínicos.</p>
+                </div>
+            </div>
+            <span class="bento-badge">Em destaque</span>
+        </a>
 
-    <div class="reportar-erro-field">
-        <label class="reportar-erro-label" for="reportarPassos">Como chegaste a este erro? <span class="reportar-erro-optional">(opcional)</span></label>
-        <textarea id="reportarPassos" name="Passos" class="reportar-erro-textarea" placeholder="Passos para reproduzir o erro..."></textarea>
-    </div>
+        <!-- Card Médio (Fórmula Internacional) -->
+        <a data-aos-delay="200" data-aos="fade-up" href="formula_internacional/index.html" class="bento-item card-medio" style="background: var(--primary-soft);">
+            <div class="bento-content">
+                <i class="ri-global-line"></i>
+                <div class="bento-text">
+                    <h3>Fórmula Internacional</h3>
+                    <p>Conversão de prescrições líquidas em doses exatas usando a fórmula universal de enfermagem. Resultados em ml, gotas ou mg.</p>
+                </div>
+            </div>
+        </a>
 
-    <button type="submit" class="reportar-erro-btn">
-        <i class="ri-send-plane-line"></i> Enviar Reporte
-    </button>
+        <!-- Grupo de Quadrados (empilhados verticalmente à direita do card médio) -->
+        <div class="bento-quadrado-group">
+            <a data-aos="zoom-in" href="gotejamento/index.html" class="bento-item card-quadrado">
+                <i class="ri-water-flash-line"></i>
+                <span>Gotejamento</span>
+            </a>
+            <a data-aos="zoom-in" href="conversor/index.html" class="bento-item card-quadrado">
+                <i class="ri-exchange-line"></i>
+                <span>Conversor</span>
+            </a>
+        </div>
 
-</form>
+        <!-- Grupo de Quadrados (Bloco de Notas e Achar Peso e Idade) -->
+        <div class="bento-quadrado-group">
+            <a data-aos="zoom-in" href="notas/index.html" class="bento-item card-quadrado">
+                <i class="ri-sticky-note-line"></i>
+                <span>Bloco de Notas</span>
+            </a>
+            <a data-aos="zoom-in" href="peso_idade/index.html" class="bento-item card-quadrado">
+                <i class="ri-scales-3-line"></i>
+                <span>Achar Peso e Idade</span>
+            </a>
+        </div> 
 
-        <!-- Mensagem de fallback (escondida inicialmente) -->
-<div id="reportarErroSucesso" class="reportar-erro-sucesso" style="display: none;">
-    <i class="ri-check-double-line"></i>
-    <p id="reportarErroMensagem"></p>
+        <!-- Card Largo (Sinais Vitais) -->
+        <a data-aos="fade-up" href="sinais_vitais/index.html" class="bento-item card-largo">
+            <div class="bento-content">
+                <i class="ri-heart-pulse-line"></i>
+                <div class="bento-text">
+                    <h3>Sinais Vitais</h3>
+                    <p>Registo e monitorização de FC, PA, SpO₂, FR e temperatura. <strong>Gráficos interativos e relatórios em PDF</strong> com histórico do paciente.</p>
+                </div>
+            </div>
+        </a>
 
-    <!-- REPORTAR ERRO: Botão para repor o formulário -->
-    <button type="button" id="reportarErroReset" class="reportar-erro-reset-btn">
-        Está bem
-    </button>
-</div>
+        <!-- Card Médio (Interpretador Clínico) -->
+        <a data-aos="fade-up" href="exames/index.html" class="bento-item card-medio">
+            <div class="bento-content">
+                <i class="ri-brain-line"></i>
+                <div class="bento-text">
+                    <h3>Interpretador Clínico</h3>
+                    <p>Interpretação automática de exames laboratoriais, escalas clínicas e scores de risco. <strong>Centenas de parâmetros</strong> com alertas de valores críticos.</p>
+                </div>
+            </div>
+        </a>
+
+        <!-- Grupo de Quadrados (Diluição e Sistema ABO) -->
+        <div class="bento-quadrado-group">
+            <a data-aos="zoom-in" href="diluicao/index.html" class="bento-item card-quadrado">
+                <i class="ri-flask-line"></i>
+                <span>Reconstituição</span>
+            </a>
+            <a data-aos="zoom-in" href="sangue/index.html" class="bento-item card-quadrado">
+                <i class="ri-temp-hot-line"></i>
+                <span>Sistema ABO</span>
+            </a>
+        </div>
 
     </div>
 </section>
 
-
-    <!-- ==========================================
-       FOOTER (GLASSMORPHISM)
-    =========================================== -->
-    <footer class="footer-static">
-        <div class="footer-container">
-            <div class="footer-column brand">
-                <h3>MatClínica</h3>
-                <p>Soluções digitais para suporte à decisão clínica. Precisão e rapidez no atendimento ao paciente.</p>
-            </div>
-
-            <div class="footer-column links">
-                <h4>Navegação</h4>
-                <ul>
-                    <li><a href="#ferramentas"><i class="ri-apps-2-line"></i> Todas as Ferramentas</a></li>
-                    <li><a href="ajuda/index.html"><i class="ri-question-line"></i> Como cada ferramentas Funciona?</a>
-                    </li>
-
-                </ul>
-            </div>
-
-            <div class="footer-column contact">
-                <h4>Suporte Profissional</h4>
-                <div class="social-row">
-                    <a href="https://wa.me/244929129797" class="footer-icon wa" title="WhatsApp">
-                        <i class="ri-whatsapp-line"></i>
-                    </a>
-                    <a href="mailto:sebastiaompindi@gmail.com" class="footer-icon mail" title="Email">
-                        <i class="ri-mail-line"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-disclaimer">
-            <p><strong>Aviso:</strong> Estas ferramentas são auxiliares. O uso dos resultados é de inteira
-                responsabilidade do profissional de saúde assistente. Não substitui a avaliação clínica direta.</p>
-        </div>
-
-        <div class="footer-copy">
-            <p>&copy; 2026 Mpindi TecMed</p>
+    <footer class="plain-footer">
+        <div class="footer-inline">
+            <span>&copy; 2026 Mpindi TecMed</span>
+            <span class="footer-sep">|</span>
+            <span>v1.0.0</span>
         </div>
     </footer>
 
-
-    <!-- ==========================================
-       BOTÃO FIXO DE INTERFACE INTELIGENTE
-    =========================================== -->
-    <div id="stickyToolsBtn" class="floating-tools-trigger">
-        <a href="#ferramentas"><i class="ri-tools-line"></i> Ferramentas</a>
-    </div>
-
     <script src="script.js"></script>
+    <script src="assets/js/aos.js"></script>
 
-    <!-- AOS Library JS -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            AOS.init({
-                // Configurações globais recomendadas:
-                duration: 800, // Duração da animação em milissegundos (0.8s)
-                // once: true,        // A animação acontece apenas uma vez ao rolar para baixo
-                offset: 100, // Distância em px do elemento até o topo da tela para disparar
-                easing: 'ease-out-cubic' // Curva de aceleração suave
-            });
+        // Inicializa as animações
+        AOS.init({
+            duration: 700, // Duração da animação (800ms)
+            offset: 50     // Começa a animar 50px antes do elemento aparecer
         });
     </script>
-
-
 </body>
 
 </html>

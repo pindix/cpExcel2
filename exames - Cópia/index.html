@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interpretador Clínico | Mpindi TecMed</title>
+
+    <style>
+    /* Tema inline para evitar flash branco */
+    :root {
+        --bg-inline: #f0f2f0;
+        --text-inline: #1a2a21;
+    }
+    [data-theme="dark"] {
+        --bg-inline: black;
+        --text-inline: #f0f2f0;
+    }
+    html { background-color: var(--bg-inline); }
+    body {
+        background-color: var(--bg-inline);
+        color: var(--text-inline);
+    }
+    </style>
+
+    <script>
+        (function () {
+            const tema = localStorage.getItem('tema');
+            if (tema === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.body.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+
+    <link rel="stylesheet" href="../assets/css/aos.css">
+    <link rel="stylesheet" href="../assets/css/remixicon.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ================================================================== -->
+    <!-- NAVEGAÇÃO SUPERIOR                                                -->
+    <!-- ================================================================== -->
+    <nav class="nav-topo">
+        <span class="nav-logo">Interpretador Clínico</span>
+        <button class="btn-hamburger" id="btnHamburger" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- ================================================================== -->
+    <!-- MENU OVERLAY                                                       -->
+    <!-- ================================================================== -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <!-- ================================================================== -->
+    <!-- MENU LATERAL                                                       -->
+    <!-- ================================================================== -->
+    <div class="menu-lateral" id="menuLateral">
+        <div class="menu-header">
+            <div class="menu-header-icon">
+                <img src="../assets/imagens/logo.png" alt="Logo MatClínica">
+            </div>
+            <h3><span class="matClinica">Mat</span>Clínica</h3>
+            <p>Suporte de Decisão Clínica</p>
+        </div>
+
+        <div class="menu-items">
+            <a href="../index.html" class="menu-item active" data-page="inicio">
+                <div class="menu-item-icon"><i class="ri-home-line"></i></div>
+                <span>Ferramentas</span>
+                <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+            </a>
+            <a href="../sobre/index.html" class="menu-item" data-page="sobre">
+                <div class="menu-item-icon"><i class="ri-information-line"></i></div>
+                <span>Sobre</span>
+                <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+            </a>
+            <a href="../ajuda/index.html" class="menu-item" data-page="ajuda">
+                <div class="menu-item-icon"><i class="ri-question-line"></i></div>
+                <span>Como funciona</span>
+                <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+            </a>
+
+            <div class="contacto">
+                <a href="https://wa.me/244929129797" title="WhatsApp"><i class="ri-whatsapp-line"></i></a>
+                <a href="mailto:sebastiaompindi@gmail.com" title="Email"><i class="ri-mail-line"></i></a>
+            </div>
+        </div>
+
+        <div class="menu-item tema-toggle-menu" id="themeBtn">
+            <div class="menu-item-icon">
+                <i class="ri-moon-line" id="themeIcon"></i>
+            </div>
+            <span>Mudar Tema</span>
+            <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+        </div>
+
+        <div class="menu-footer">
+            <small>© 2026 Mpindi TecMed</small>
+            <small>Versão 2.0.0</small>
+        </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- FERRAMENTA PRINCIPAL                                              -->
+    <!-- ================================================================== -->
+    <section class="main-tool">
+        <div class="calculator-box" data-aos="fade-up">
+
+            <!-- Campo de busca -->
+            <div class="entradas_de_dados" style="position: relative;">
+                <i class="ri-search-eye-line"></i>
+                <input type="text" id="exame_nome" placeholder=" " autocomplete="off">
+                <label class="label-flutuante">Exame ou Escala</label>
+                <div id="sugestoes_box" class="sugestoes-box"></div>
+            </div>
+
+            <!-- Campo de valor único (exames simples) -->
+            <div class="entradas_de_dados" id="campo_valor_container" style="display: none;">
+                <i class="ri-ruler-2-line"></i>
+                <input type="number" step="0.01" id="exame_valor" placeholder=" ">
+                <label class="label-flutuante" id="label_valor">Resultado</label>
+                <p class="unidade-tag" id="unidade_display">--</p>
+            </div>
+
+            <!-- Container para campos dinâmicos -->
+            <div id="campos_dinamicos_container" style="display: none;"></div>
+
+            <!-- Botões -->
+            <div class="caxa_de_botoes">
+                <button class="botao" id="btnAnalisar">Analisar</button>
+                <button class="botao botao-limpar" id="btnLimpar">Limpar</button>
+            </div>
+        </div>
+
+        <!-- Resultado -->
+        <div class="resultado-display" id="resultado" data-aos="fade-up"></div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- FOOTER                                                             -->
+    <!-- ================================================================== -->
+    <footer class="plain-footer">
+        <div class="footer-inline">
+            <span>&copy; 2026 Mpindi TecMed</span>
+            <span class="footer-sep">|</span>
+            <a href="../ajuda/index.html#exames"><i class="ri-question-line"></i> Ajuda</a>
+        </div>
+    </footer>
+
+    <!-- ================================================================== -->
+    <!-- SCRIPTS                                                            -->
+    <!-- ================================================================== -->
+    <script src="../assets/js/aos.js"></script>
+    <script>AOS.init({ duration: 800 });</script>
+    <script src="script.js"></script>
+</body>
+</html>

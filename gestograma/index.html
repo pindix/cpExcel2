@@ -1,329 +1,325 @@
 <!DOCTYPE html>
 <html lang="pt-pt">
-<head>
-    
-    
-    
-    <style>
-    /* Tema inline para evitar flash branco */
-    :root {
-        --bg-inline: white;
-        --text-inline: #1a2a21;
-    }
-    
-    [data-theme="dark"] {
-        --bg-inline: black;
-        --text-inline: white;
-    }
-    
-    /* Aplica o fundo imediatamente */
-    html {
-        background-color: var(--bg-inline);
-    }
-    
-    body {
-        background-color: var(--bg-inline);
-        color: var(--text-inline);
-    }
-    
-    /* Força o fundo antes do JS carregar */
-    body::before {
-        display: none;
-    }
-</style>
 
-<script>
-    // Ler tema do localStorage ANTES do CSS carregar
-    (function() {
-        const tema = localStorage.getItem('tema');
-        if (tema === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            document.body.setAttribute('data-theme', 'dark');
+<head>
+    <style>
+        :root {
+            --bg-inline: #f0f2f0;
+            --text-inline: #1a2a21;
         }
-    })();
-</script> 
+        [data-theme="dark"] {
+            --bg-inline: black;
+            --text-inline: #f0f2f0;
+        }
+        html { background-color: var(--bg-inline); }
+        body {
+            background-color: var(--bg-inline);
+            color: var(--text-inline);
+        }
+        body::before { display: none; }
+    </style>
+    
+    <script>
+        (function() {
+            const tema = localStorage.getItem('tema');
+            if (tema === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.body.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Obstetrícia | MatClínica</title>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <title>Obstetrícia | Mpindi TecMed</title>
+    <link rel="stylesheet" href="../assets/css/aos.css">
+    <link rel="stylesheet" href="../assets/css/remixicon.css">
     <link rel="stylesheet" href="style.css">
-    
-    <!-- ==========================================
-   FAVICON (Usando o logo da MatClínica)
-=========================================== -->
-<link rel="icon" type="image/png" sizes="32x32" href="../assets/imagens/logo.png">
-<link rel="icon" type="image/png" sizes="16x16" href="../assets/imagens/logo.png">
-<link rel="apple-touch-icon" href="../assets/imagens/logo.png">
-    
-    
 </head>
+
 <body>
-
- 
- 
- 
- 
-    <!-- ============================================================ -->
-    <!-- BARRA SUPERIOR - WEB STYLE                                 -->
-    <!-- ============================================================ -->
-    <header class="web-header">
-        <!-- Card com os controles -->
-        <div class="header-controls">
-            <a href="../index.html#ferramentas" class="btn-icon" title="Início">
-                <i class="ri-arrow-left-line"></i>
-                <span>Início</span>
-            </a>
-            <span class="divider-header">|</span>
-            <a href="../ajuda/index.html#gotejamento" class="btn-icon" title="Ajuda">
-                <i class="ri-question-line"></i>
-                <span>Ajuda</span>
-            </a>
-            <span class="divider-header">|</span>
-            <button class="btn-icon theme-toggle" id="themeBtn" title="Mudar Tema">
-                <i class="ri-moon-line" id="themeIcon"></i>
-                <span>Tema</span>
-            </button>
+    
+    <nav class="nav-topo">
+        <span class="nav-logo">Gestograma</span>
+        <button class="btn-hamburger" id="btnHamburger" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+    
+    <div class="menu-overlay" id="menuOverlay"></div>
+    
+    <div class="menu-lateral" id="menuLateral">
+        <div class="menu-header">
+            <div class="menu-header-icon">
+                <img src="../assets/imagens/logo.png" alt="Logo matClinica">
+            </div>
+            <h3><span class="matClinica">Mat</span>Clínica</h3>
+            <p>Suporte de Decisão Clínica</p>
         </div>
-
-        <!-- Título da ferramenta -->
-        <div class="header-title">
-            <span class="tool-badge">Gestograma</span>
+        
+        <div class="menu-items">
+            <a href="../index.html" class="menu-item active" data-page="inicio">
+                <div class="menu-item-icon"><i class="ri-home-line"></i></div>
+                <span>Ferramentas</span>
+                <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+            </a>
+            <a href="../sobre/index.html" class="menu-item" data-page="sobre">
+                <div class="menu-item-icon"><i class="ri-information-line"></i></div>
+                <span>Sobre</span>
+                <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+            </a>
+            <a href="../ajuda/index.html" class="menu-item" data-page="ajuda">
+                <div class="menu-item-icon"><i class="ri-question-line"></i></div>
+                <span>Como funciona</span>
+                <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+            </a>
+            <div class="contacto">
+                <a href="https://wa.me/244929129797" title="WhatsApp"><i class="ri-whatsapp-line"></i></a>
+                <a href="mailto:sebastiaompindi@gmail.com" title="Email"><i class="ri-mail-line"></i></a>
+            </div>
         </div>
-    </header>
-
-    <!-- ================================================================== -->
-    <!-- CONTEÚDO PRINCIPAL -->
-    <!-- ================================================================== -->
-    <section class="main-tool">
         
+        <div class="menu-item tema-toggle-menu" id="themeBtn" style="background: none; border: solid 2px white; color: white;">
+            <div class="menu-item-icon"><i class="ri-moon-line" id="themeIcon"></i></div>
+            <span>Mudar Tema</span>
+            <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+        </div>
         
+        <div class="menu-footer">
+            <small>© 2026 Mpindi TecMed</small>
+            <small>Versão 1.0.0</small>
+        </div>
+    </div>
+    
+    <section class="main-tool" id="mainTool">
         
-        <!-- ========================================================== -->
-        <!-- SELECT PERSONALIZADO - MODO DE CÁLCULO                     -->
-        <!-- ========================================================== -->
-        <div class="modo-select-container" id="modoSelectContainer">
-            <div class="custom-select" id="customSelect">
-                <div class="custom-select-trigger" onclick="toggleModoSelect()">
-                    <span class="floating-label">Modo de Cálculo</span>
-                    <span id="modoSelecionado">Trabalhar com DUM</span>
-                    <i class="ri-arrow-down-s-line" id="modoArrow"></i>
-                </div>
-                <div class="custom-select-options" id="modoOptions">
-                    <div class="custom-select-option" data-value="dum" onclick="selecionarModo('dum')">
-                        <i class="ri-calendar-event-line"></i>
-                        <div class="option-content">
-                            <span class="option-titulo">Trabalhar com DUM</span>
-                            <span class="option-desc">Usar a Data da Última Menstruação para calcular o progresso da gestação ou ciclo menstrual</span>
-                        </div>
+        <div class="coluna-esquerda">
+            
+            <div class="modo-select-container" id="modoSelectContainer">
+                <div class="custom-select" id="customSelect">
+                    <div class="custom-select-trigger" onclick="toggleModoSelect()">
+                        <span class="floating-label">Modo de Cálculo</span>
+                        <span id="modoSelecionado">Trabalhar com DUM</span>
+                        <i class="ri-arrow-down-s-line" id="modoArrow"></i>
                     </div>
-                    <div class="custom-select-option" data-value="ig" onclick="selecionarModo('ig')">
-                        <i class="ri-bar-chart-2-line"></i>
-                        <div class="option-content">
-                            <span class="option-titulo">Trabalhar com Idade Gestacional</span>
-                            <span class="option-desc">Use a Idade Gestacional por ecografia para calcular a DPP e DUM</span>
+                    <div class="custom-select-options" id="modoOptions">
+                        <div class="custom-select-option" data-value="dum" onclick="selecionarModo('dum')">
+                            <i class="ri-calendar-event-line"></i>
+                            <div class="option-content">
+                                <span class="option-titulo">Trabalhar com DUM</span>
+                                <span class="option-desc">Usar a Data da Última Menstruação para calcular o progresso da gestação ou ciclo menstrual</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="custom-select-option" data-value="dpp" onclick="selecionarModo('dpp')">
-                        <i class="ri-calendar-event-fill"></i>
-                        <div class="option-content">
-                            <span class="option-titulo">Trabalhar com a DPP</span>
-                            <span class="option-desc">Use a DPP para achar a DUM e o progresso da gestação se possível</span>
+                        <div class="custom-select-option" data-value="ig" onclick="selecionarModo('ig')">
+                            <i class="ri-bar-chart-2-line"></i>
+                            <div class="option-content">
+                                <span class="option-titulo">Trabalhar com Idade Gestacional</span>
+                                <span class="option-desc">Use a Idade Gestacional por ecografia para calcular a DPP e DUM</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="custom-select-option" data-value="au" onclick="selecionarModo('au')">
-                        <i class="ri-ruler-line"></i>
-                        <div class="option-content">
-                            <span class="option-titulo">Trabalhar com Altura Uterina</span>
-                            <span class="option-desc">Use a Altura Uterina para ter um valor aproximado da idade Gestacional</span>
+                        <div class="custom-select-option" data-value="dpp" onclick="selecionarModo('dpp')">
+                            <i class="ri-calendar-event-fill"></i>
+                            <div class="option-content">
+                                <span class="option-titulo">Trabalhar com a DPP</span>
+                                <span class="option-desc">Use a DPP para achar a DUM e o progresso da gestação se possível</span>
+                            </div>
+                        </div>
+                        <div class="custom-select-option" data-value="au" onclick="selecionarModo('au')">
+                            <i class="ri-ruler-line"></i>
+                            <div class="option-content">
+                                <span class="option-titulo">Trabalhar com Altura Uterina</span>
+                                <span class="option-desc">Use a Altura Uterina para ter um valor aproximado da idade Gestacional</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        
-        
-        
-        
-        
-        <div class="calculator-box" data-aos="fade-up">
             
-            <!-- ========================================================== -->
-            <!-- CAMPOS DINÂMICOS                                            -->
-            <!-- ========================================================== -->
-            <div class="campos-dinamicos-container" id="camposContainer">
+            <div class="calculator-box" data-aos="fade-up">
                 
-                <!-- MODO 1: DUM -->
-                <div class="modo-campos active" data-modo="dum">
-                    <div class="entradas_de_dados floating-group" id="dumField">
-                        <i class="ri-calendar-event-line"></i>
-                        <input type="date" id="dum_data" placeholder=" ">
-                        <label class="label-flutuante">Data da Última Menstruação (DUM)</label>
+                <div class="campos-dinamicos-container" id="camposContainer">
+                    
+                    <div class="modo-campos active" data-modo="dum">
+                        <div class="entradas_de_dados floating-group" id="dumField">
+                            <i class="ri-calendar-event-line"></i>
+                            <input type="date" id="dum_data" placeholder=" ">
+                            <label class="label-flutuante">Data da Última Menstruação (DUM)</label>
+                        </div>
+                        
+                        <div class="campos-semana" id="camposSemana">
+                            <label class="intervalo-label" style="grid-column: span 3;">Se não sabe a DUM, diga quando ela aconteceu</label>
+                            
+                            <div class="entradas_de_dados floating-group" style="flex: 2;">
+                                <i class="ri-calendar-event-line"></i>
+                                <select id="mes_dum">
+                                    <option value="0">Janeiro</option>
+                                    <option value="1">Fevereiro</option>
+                                    <option value="2">Março</option>
+                                    <option value="3">Abril</option>
+                                    <option value="4">Maio</option>
+                                    <option value="5">Junho</option>
+                                    <option value="6">Julho</option>
+                                    <option value="7">Agosto</option>
+                                    <option value="8">Setembro</option>
+                                    <option value="9">Outubro</option>
+                                    <option value="10">Novembro</option>
+                                    <option value="11">Dezembro</option>
+                                </select>
+                                <label class="label-flutuante">Mês</label>
+                            </div>
+                            
+                            <div class="entradas_de_dados floating-group" style="flex: 1;">
+                                <i class="ri-calendar-event-line"></i>
+                                <select id="semana_dum">
+                                    <option value="1">1ª semana</option>
+                                    <option value="2" selected>2ª semana</option>
+                                    <option value="3">3ª semana</option>
+                                    <option value="4">4ª semana</option>
+                                </select>
+                                <label class="label-flutuante">Semana</label>
+                            </div>
+                            <div class="entradas_de_dados floating-group" style="flex: 1;">
+                                <i class="ri-calendar-event-line"></i>
+                                <select id="ano_dum">
+                                    <option value="2025">2025</option>
+                                    <option value="2026" selected>2026</option>
+                                </select>
+                                <label class="label-flutuante">Ano</label>
+                            </div>
+                        </div>
+                        
+                        <div class="toggle-naosei-container">
+                            <label class="toggle-naosei-label">
+                                <span class="toggle-naosei-text">Não sei a data exata</span>
+                                <input type="checkbox" id="toggleNaoSeiDum">
+                                <span class="toggle-naosei-slider"></span>
+                            </label>
+                        </div>
                     </div>
                     
-                    
-                    <!-- Campos da semana (Mês + Semana + Ano) -->
-                    <div class="campos-semana" id="camposSemana">
-                        
-                        <label class="intervalo-label" style="grid-column: span 3;">Se não sabe a DUM, diga quando ela aconteceu</label>
-                        
-                        <div class="entradas_de_dados floating-group" style="flex: 2;">
-                            <i class="ri-calendar-event-line"></i>
-                            <select id="mes_dum">
-                                <option value="0">Janeiro</option>
-                                <option value="1">Fevereiro</option>
-                                <option value="2">Março</option>
-                                <option value="3">Abril</option>
-                                <option value="4">Maio</option>
-                                <option value="5">Junho</option>
-                                <option value="6">Julho</option>
-                                <option value="7">Agosto</option>
-                                <option value="8">Setembro</option>
-                                <option value="9">Outubro</option>
-                                <option value="10">Novembro</option>
-                                <option value="11">Dezembro</option>
-                            </select>
-                            <label class="label-flutuante">Mês</label>
-                        </div>
-                        
+                    <div class="modo-campos" data-modo="ig">
                         <div class="entradas_de_dados floating-group" style="flex: 1;">
                             <i class="ri-calendar-event-line"></i>
-                            <select id="semana_dum">
-                                <option value="1">1ª semana</option>
-                                <option value="2" selected>2ª semana</option>
-                                <option value="3">3ª semana</option>
-                                <option value="4">4ª semana</option>
-                            </select>
-                            <label class="label-flutuante">Semana</label>
+                            <input type="number" id="ig_semanas" placeholder=" " min="0" max="44">
+                            <label class="label-flutuante">Semanas</label>
                         </div>
                         <div class="entradas_de_dados floating-group" style="flex: 1;">
                             <i class="ri-calendar-event-line"></i>
-                            <select id="ano_dum">
-                                <option value="2025">2025</option>
-                                <option value="2026" selected>2026</option>
-                            </select>
-                            <label class="label-flutuante">Ano</label>
+                            <input type="number" id="ig_dias" placeholder=" " min="0" max="6">
+                            <label class="label-flutuante">Dias</label>
                         </div>
                     </div>
                     
+                    <div class="modo-campos" data-modo="dpp">
+                        <div class="entradas_de_dados floating-group">
+                            <i class="ri-calendar-event-line"></i>
+                            <input type="date" id="dpp_data" placeholder=" ">
+                            <label class="label-flutuante">Data Provável do Parto (DPP)</label>
+                        </div>
+                    </div>
                     
-                    <div class="toggle-naosei-container">
-                        <label class="toggle-naosei-label">
-                            <span class="toggle-naosei-text">Não sei a data exata</span>
-                            <input type="checkbox" id="toggleNaoSeiDum">
-                            <span class="toggle-naosei-slider"></span>
+                    <div class="modo-campos" data-modo="au">
+                        <div class="entradas_de_dados floating-group">
+                            <i class="ri-ruler-line"></i>
+                            <input type="number" id="altura_uterina" placeholder=" " step="0.5" min="0" max="50">
+                            <label class="label-flutuante">Altura Uterina (cm)</label>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <div class="intervalo-container">
+                    <label class="intervalo-label">Intervalo do Ciclo</label>
+                    <div class="intervalo-selector">
+                        <button class="intervalo-btn" id="intervaloMenos" aria-label="Diminuir">
+                            <i class="ri-arrow-left-s-line"></i>
+                        </button>
+                        <div class="intervalo-valores-wrapper">
+                            <div class="intervalo-valores" id="intervaloValores">
+                                <span class="intervalo-valor" data-valor="21">21</span>
+                                <span class="intervalo-valor" data-valor="22">22</span>
+                                <span class="intervalo-valor" data-valor="23">23</span>
+                                <span class="intervalo-valor" data-valor="24">24</span>
+                                <span class="intervalo-valor" data-valor="25">25</span>
+                                <span class="intervalo-valor" data-valor="26">26</span>
+                                <span class="intervalo-valor" data-valor="27">27</span>
+                                <span class="intervalo-valor ativo" data-valor="28">28</span>
+                                <span class="intervalo-valor" data-valor="29">29</span>
+                                <span class="intervalo-valor" data-valor="30">30</span>
+                                <span class="intervalo-valor" data-valor="31">31</span>
+                            </div>
+                        </div>
+                        <span class="intervalo-unidade">dias</span>
+                        <button class="intervalo-btn" id="intervaloMais" aria-label="Aumentar">
+                            <i class="ri-arrow-right-s-line"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="toggle-horizontal-container" id="toggleContainer">
+                    <div class="toggle-horizontal">
+                        <input type="checkbox" id="toggleModo">
+                        <label for="toggleModo" class="toggle-horizontal-label">
+                            <span class="toggle-option toggle-option-left">Ciclo Menstrual</span>
+                            <span class="toggle-option toggle-option-right">Gestação</span>
+                            <span class="toggle-slider-horizontal"></span>
                         </label>
                     </div>
-                    
                 </div>
                 
-                <!-- MODO 2: IG -->
-                <div class="modo-campos" data-modo="ig">
-                    <div class="entradas_de_dados floating-group" style="flex: 1;">
-                        <i class="ri-calendar-event-line"></i>
-                        <input type="number" id="ig_semanas" placeholder=" " min="0" max="44">
-                        <label class="label-flutuante">Semanas</label>
-                    </div>
-                    <div class="entradas_de_dados floating-group" style="flex: 1;">
-                        <i class="ri-calendar-event-line"></i>
-                        <input type="number" id="ig_dias" placeholder=" " min="0" max="6">
-                        <label class="label-flutuante">Dias</label>
-                    </div>
-                </div>
-                
-                <!-- MODO 3: DPP -->
-                <div class="modo-campos" data-modo="dpp">
-                    <div class="entradas_de_dados floating-group">
-                        <i class="ri-calendar-event-line"></i>
-                        <input type="date" id="dpp_data" placeholder=" ">
-                        <label class="label-flutuante">Data Provável do Parto (DPP)</label>
-                    </div>
-                </div>
-                
-                <!-- MODO 4: AU -->
-                <div class="modo-campos" data-modo="au">
-                    <div class="entradas_de_dados floating-group">
-                        <i class="ri-ruler-line"></i>
-                        <input type="number" id="altura_uterina" placeholder=" " step="0.5" min="0" max="50">
-                        <label class="label-flutuante">Altura Uterina (cm)</label>
+                <div class="caxa_de_botoes">
+                    <button class="botao" id="btnCalcular">Calcular DPP e IG</button>
+                    <div id="limpador" onclick="limparObstetricia()">
+                        <i class="ri-delete-bin-line"></i>
                     </div>
                 </div>
                 
             </div>
             
-            <!-- INTERVALO (21-31 com navegação) -->
-            <div class="intervalo-container">
-                <label class="intervalo-label">Intervalo do Ciclo</label>
-                <div class="intervalo-selector">
-                    <button class="intervalo-btn" id="intervaloMenos" aria-label="Diminuir">
-                        <i class="ri-arrow-left-s-line"></i>
-                    </button>
-                    <div class="intervalo-valores-wrapper">
-                        <div class="intervalo-valores" id="intervaloValores">
-                            <span class="intervalo-valor" data-valor="21">21</span>
-                            <span class="intervalo-valor" data-valor="22">22</span>
-                            <span class="intervalo-valor" data-valor="23">23</span>
-                            <span class="intervalo-valor" data-valor="24">24</span>
-                            <span class="intervalo-valor" data-valor="25">25</span>
-                            <span class="intervalo-valor" data-valor="26">26</span>
-                            <span class="intervalo-valor" data-valor="27">27</span>
-                            <span class="intervalo-valor ativo" data-valor="28">28</span>
-                            <span class="intervalo-valor" data-valor="29">29</span>
-                            <span class="intervalo-valor" data-valor="30">30</span>
-                            <span class="intervalo-valor" data-valor="31">31</span>
-                        </div>
-                    </div>
-                    <span class="intervalo-unidade">dias</span>
-                    <button class="intervalo-btn" id="intervaloMais" aria-label="Aumentar">
-                        <i class="ri-arrow-right-s-line"></i>
-                    </button>
-                </div>
-            </div>
+            <div class="resultado-display" id="resultado"></div>
             
-            <!-- ========================================================== -->
-            <!-- TOGGLE HORIZONTAL (aparece apenas no modo DUM)              -->
-            <!-- ========================================================== -->
-            <div class="toggle-horizontal-container" id="toggleContainer">
-                <div class="toggle-horizontal">
-                    <input type="checkbox" id="toggleModo">
-                    <label for="toggleModo" class="toggle-horizontal-label">
-                        <span class="toggle-option toggle-option-left">Ciclo Menstrual</span>
-                        <span class="toggle-option toggle-option-right">Gestação</span>
-                        <span class="toggle-slider-horizontal"></span>
-                    </label>
-                </div>
-            </div>
-            
-            <!-- ========================================================== -->
-            <!-- BOTÕES                                                      -->
-            <!-- ========================================================== -->
-            <div class="caxa_de_botoes">
-                <button class="botao" id="btnCalcular">Calcular DPP e IG</button>
-                <div id="limpador" onclick="limparObstetricia()">
-                    <i class="ri-delete-bin-line"></i>
-                </div>
+            <div class="aviso-data">
+                <span class="intervalo-label">
+                    <i class="ri-information-line"></i> 
+                    Certifique-se de que a data do seu dispositivo está correta. É a data usada para os cálculos!
+                </span>
             </div>
             
         </div>
+
+    
         
-        <!-- ========================================================== -->
-        <!-- RESULTADO                                                   -->
-        <!-- ========================================================== -->
-        <div class="resultado-display" id="resultado"  style="display: none;"></div>
-        
-        <div style="margin-top: 12px;">
-            <span class="intervalo-label"> <i class="ri-information-line"></i> Certifique-se de que a data do seu dispositivo está correta. É a data usada para os cálculos!</span>
+        <div class="detalhes-medicos-painel" id="detalhesMedicosPainel">
+            <div class="detalhes-medicos-header">
+                <div class="detalhes-medicos-header-titulo">
+                    <i class="ri-stethoscope-line"></i>
+                    <span>Detalhes Médicos</span>
+                </div>
+                <button class="detalhes-medicos-fechar" onclick="fecharDetalhesMedicos()" aria-label="Fechar">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <div class="detalhes-medicos-scroll" id="detalhesMedicosScroll"></div>
         </div>
+        
     </section>
-
-
-    <footer><p><strong>Mpindi TecMed</strong></p></footer>
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>AOS.init({duration: 800});</script>
+    
+    <footer class="plain-footer">
+        <div class="footer-inline">
+            <span>&copy; 2026 Mpindi TecMed</span>
+            <span class="footer-sep">|</span>
+            <a style="background: var(--white); border-radius: 12px; padding: 0.5rem 1rem; border-bottom: none;" href="../ajuda/index.html#gestograma"><i class="ri-question-line"></i> Ajuda</a>
+        </div>
+    </footer>
+    
+    <script src="../assets/js/aos.js"></script>
+    <script src="../assets/js/persistencia.js"></script>
+    <script>
+        AOS.init({ duration: 800 });
+    </script>
     <script src="script.js"></script>
 </body>
+
 </html>

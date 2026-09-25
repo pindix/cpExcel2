@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+
+<head>
+
+
+       <style>
+    /* Tema inline para evitar flash branco */
+    :root {
+        --bg-inline: #f0f2f0;
+        --text-inline: #1a2a21;
+    }
+    
+    [data-theme="dark"] {
+        --bg-inline: black;
+        --text-inline: #f0f2f0;
+    }
+    
+    /* Aplica o fundo imediatamente */
+    html {
+        background-color: var(--bg-inline);
+    }
+    
+    body {
+        background-color: var(--bg-inline);
+        color: var(--text-inline);
+    }
+    
+    /* Força o fundo antes do JS carregar */
+    body::before {
+        display: none;
+    }
+</style>
+
+
+    <script>
+        // Ler tema do localStorage ANTES do CSS carregar
+        (function () {
+            const tema = localStorage.getItem('tema');
+            if (tema === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.body.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculo de Dosagem | Mpindi TecMed</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../assets/css/remixicon.css">
+    <link rel="stylesheet" href="../assets/css/aos.css">
+</head>
+
+<body>
+    <!-- ================================================================== -->
+    <!-- NAVEGAÇÃO SUPERIOR -->
+    <!-- ================================================================== -->
+    <nav class="nav-topo">
+        <span class="nav-logo">Calculo de Dosagem</span>
+        <button class="btn-hamburger" id="btnHamburger" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button> 
+    </nav>
+
+    <!-- ================================================================== -->
+    <!-- MENU OVERLAY (70% escuro) -->
+    <!-- ================================================================== -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <!-- ================================================================== -->
+    <!-- MENU LATERAL (30% transparente à direita) -->
+    <!-- ================================================================== -->
+    <div class="menu-lateral" id="menuLateral">
+
+        <!-- Cabeçalho do Menu -->
+        <div class="menu-header">
+            <div class="menu-header-icon">
+                <i class="ri-heart-pulse-line"></i>
+            </div>
+            <h3><span class="matClinica">Mat</span>Clínica</h3>
+            <p>Suporte de Decisão Clínica</p>
+        </div>
+
+        <!-- Itens do Menu -->
+        <div class="menu-items">
+            <a href="../index.html" class="menu-item active" data-page="inicio">
+                <div class="menu-item-icon">
+                    <i class="ri-home-line"></i>
+                </div>
+                <span>Ferramentas</span>
+                <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+            </a>
+
+            <a href="../sobre/index.html" class="menu-item" data-page="sobre">
+                <div class="menu-item-icon">
+                    <i class="ri-information-line"></i>
+                </div>
+                <span>Sobre</span>
+                <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+            </a>
+
+
+            <a href="../ajuda/index.html" class="menu-item" data-page="ajuda">
+                <div class="menu-item-icon">
+                    <i class="ri-question-line"></i>
+                </div>
+                <span>Como funciona</span>
+                <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+            </a>
+
+            <div class="contacto">
+
+                <a href="https://wa.me/244929129797" title="WhatsApp">
+                    <i class="ri-whatsapp-line"></i>
+                </a>
+
+                <a href="mailto:sebastiaompindi@gmail.com" title="Email">
+                    <i class="ri-mail-line"></i>
+                </a>
+            </div>
+        </div>
+        <!-- Botão de Tema no Menu -->
+        <div class="menu-item tema-toggle-menu" id="themeBtn"
+            style="background: none; border: solid 2px white; color: white;">
+            <div class="menu-item-icon">
+                <i class="ri-moon-line" id="themeIcon"></i>
+            </div>
+            <span>Mudar Tema</span>
+            <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+        </div>
+
+        <!-- Rodapé do Menu -->
+        <div class="menu-footer">
+            <small>© 2026 Mpindi TecMed</small>
+            <small>Versão 1.0.0</small>
+        </div>
+    </div>
+
+ 
+ 
+
+    <section class="main-tool">
+        <select id="pais">
+            <option value="msf" disabled selected>Que padrão vai usar?</option>
+            <option value="msf">Médicos Sem Fronteira</option>
+            <option>OMS (não disponível)</option>
+            <option disabled>Novos padrões brevemente</option>
+        </select>
+        <div class="calculator-box" data-aos="fade-up">
+
+            <div class="nomeConcentracao">
+                <div class="entradas_de_dados floating-group" id="campo_nome">
+                    <i class="ri-medicine-bottle-fill"></i>
+                    <input type="text" placeholder="Medicamento..." id="nome" autocomplete="off">
+                    <label class="label-flutuante" for="nome">Medicamento</label>
+                    <div id="sugestoes_box"></div>
+                </div>
+
+                <div class="select-concentracao-wrapper" id="concentracaoWrapper" style="display: none;">
+                    <label class="label-concentracao">Concentração</label>
+                    <select id="selConcentracao">
+                        <option></option>
+                    </select>
+                </div>
+
+            </div>
+
+
+
+            <div class="container-duas-colunas">
+                <!-- COLUNA ESQUERDA: Inputs com labels flutuantes -->
+                <div class="coluna-inputs">
+                    <div class="entradas_de_dados floating-group" id="campo_de_peso">
+                        <i class="ri-scales-2-fill"></i>
+                        <input type="number" id="peso" placeholder=" ">
+                        <label class="label-flutuante">Peso</label>
+                        <span class="unidade-fixa">kg</span>
+                    </div>
+
+                    <div class="entradas_de_dados floating-group" id="campo_de_idade">
+                        <i class="ri-user-heart-line"></i>
+                        <input type="number" id="idade" placeholder=" ">
+                        <label class="label-flutuante">Idade</label>
+                        <select id="unidade_de_idade" class="select-unidade">
+                            <option value="365">anos</option>
+                            <option value="30">meses</option>
+                            <option value="7">semanas</option>
+                            <option value="1">dias</option>
+                        </select>
+                    </div>
+
+                    <div class="entradas_de_dados floating-group" id="campo_de_dosagem">
+                        <i class="ri-capsule-line"></i>
+                        <input type="number" id="dosagem" placeholder=" ">
+                        <label class="label-flutuante">Dose</label>
+                        <span id="unidade_de_dosagem" class="unidade-fixa">--</span>
+                    </div>
+                </div>
+
+                <!-- COLUNA DIREITA: Selects -->
+                <div class="coluna-selects">
+                    <div class="linha-dupla">
+                        <div class="select-item" style="flex: 2;">
+                            <select id="intervalo"></select>
+                        </div>
+                        <div class="select-item">
+                            <select id="via">
+                                <option value="iv">IV</option>
+                                <option value="im">IM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="select-item-full">
+                        <select id="dose">
+                            <option value="pediatrica">Dose Pediátrica</option>
+                            <option value="adulta">Dose Adulta</option>
+                        </select>
+                    </div>
+
+                    <div class="select-item-full">
+                        <select id="selDoenca"></select>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="caxa_de_botoes">
+                <button class="botao" onclick="calcular()">Calcular</button>
+                <i class="ri-delete-bin-line" id="limpador" onclick="limpar()"></i>
+            </div>
+        </div>
+
+        <div class="resultado-display" id="resultado" data-aos="fade-up" data-aos-delay="100"></div>
+    </section>
+
+
+
+    <div id="meuModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <h3> <i class="ri-alert-fill"></i>Sistema de Segurança</h3>
+            <p id="modalMensagem"></p>
+            <button onclick="fecharModal()">Entendido</button>
+        </div>
+    </div>
+
+
+    <footer class="plain-footer">
+        <div class="footer-inline">
+            <span>&copy; 2026 Mpindi TecMed</span>
+            <span class="footer-sep">|</span>
+            <a style="background: var(--white); border-radius: 12px; padding: 0.5rem 1rem; border-bottom: none;"
+                href="../ajuda/index.html#dosagem" class="ri-question-line ajuda"></i> Ajuda</a>
+            <!-- Link condicional para "Sugerir Medicamento" -->
+            <span class="footer-sep">|</span>
+            <a href="https://wa.me/244929129797?text=Olá!%20Gostaria%20de%20sugerir%20um%20medicamento" target="_blank"
+                rel="noopener">Sugerir Medicamento</a>
+        </div>
+    </footer>
+
+
+
+    <script src="../assets/js/xlsx.full.min.js"></script>
+
+    <script src="script.js"></script>
+    <script src="../assets/js/persistencia.js"></script>
+
+    <script src="../assets/js/aos.js"></script>
+
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
+
+</body>
+</html>

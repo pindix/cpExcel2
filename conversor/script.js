@@ -43,7 +43,7 @@ const UNIDADES_CONCENTRACAO = [
     { id: 'conc_8', value: '10', label: '% (1% = 10mg/ml)', grupo: '📊 Percentual' },
     { id: 'conc_9', value: '1', label: '% (peso/volume)', grupo: '📊 Percentual' },
     
-];
+  ];
 
 // ============================================================
 // INICIALIZAR SELECTS PERSONALIZADOS

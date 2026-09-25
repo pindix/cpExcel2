@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+
+<head>
+
+    
+        <style>
+    /* Tema inline para evitar flash branco */
+    :root {
+        --bg-inline: #f0f2f0;
+        --text-inline: #1a2a21;
+    }
+    
+    [data-theme="dark"] {
+        --bg-inline: black;
+        --text-inline: #ffff;
+    }
+    
+    /* Aplica o fundo imediatamente */
+    html {
+        background-color: var(--bg-inline);
+    }
+    
+    body {
+        background-color: var(--bg-inline);
+        color: var(--text-inline);
+    }
+    
+    /* Força o fundo antes do JS carregar */
+    body::before {
+        display: none;
+    }
+</style>
+
+<script>
+    // Ler tema do localStorage ANTES do CSS carregar
+    (function() {
+        const tema = localStorage.getItem('tema');
+        if (tema === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.body.setAttribute('data-theme', 'dark');
+        }
+    })();
+</script> 
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre | Mpindi TecMed</title>
+    
+    <link rel="stylesheet" href="../assets/css/aos.css">
+    <link rel="stylesheet" href="../assets/css/remixicon.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav class="nav-topo">
+        <span class="nav-logo">Mat<span>Clínica</span></span>
+        <button class="btn-hamburger" id="btnHamburger" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- ================================================================== -->
+    <!-- MENU OVERLAY (70% escuro) -->
+    <!-- ================================================================== -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <!-- ================================================================== -->
+    <!-- MENU LATERAL (30% transparente à direita) -->
+    <!-- ================================================================== -->
+    <div class="menu-lateral" id="menuLateral">
+
+        <!-- Cabeçalho do Menu -->
+        <div class="menu-header">
+            <div class="menu-header-icon">
+                <img src="../assets/imagens/logo.png" alt="Logo matClinica">
+            </div>
+            <h3><span class="matClinica">Mat</span>Clínica</h3>
+            <p>Suporte de Decisão Clínica</p>
+        </div>
+
+        <!-- Itens do Menu -->
+        <div class="menu-items">
+            <a href="../index.html" class="menu-item active" data-page="inicio">
+                <div class="menu-item-icon">
+                    <i class="ri-home-line"></i>
+                </div>
+                <span>Ferramentas</span>
+                <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+            </a>
+
+            <a href="../sobre/index.html" class="menu-item" data-page="sobre">
+                <div class="menu-item-icon">
+                    <i class="ri-information-line"></i>
+                </div>
+                <span>Sobre</span>
+                <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+            </a>
+
+
+            <a href="../ajuda/index.html" class="menu-item" data-page="ajuda">
+                <div class="menu-item-icon">
+                    <i class="ri-question-line"></i>
+                </div>
+                <span>Como funciona</span>
+                <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+            </a>
+
+            <div class="contacto">
+                
+                <a href="https://wa.me/244929129797" title="WhatsApp">
+                    <i class="ri-whatsapp-line"></i>
+                </a>
+                
+                <a href="mailto:sebastiaompindi@gmail.com" title="Email">
+                    <i class="ri-mail-line"></i>
+                </a>
+            </div>
+        </div>
+        <!-- Botão de Tema no Menu -->
+        <div class="menu-item tema-toggle-menu" id="themeBtn"  style="background: none; border: solid 2px white; color: white;">
+            <div class="menu-item-icon">
+                <i class="ri-moon-line" id="themeIcon"></i>
+            </div>
+            <span>Mudar Tema</span>
+            <i class="ri-arrow-right-s-line menu-item-arrow"></i>
+        </div>
+
+        <!-- Rodapé do Menu -->
+        <div class="menu-footer">
+            <small>© 2026 Mpindi TecMed</small>
+            <small>Versão 1.0.0</small>
+        </div>
+    </div>
+
+
+    <!-- Rodapé do Menu -->
+    <div class="menu-footer">
+        <small>© 2026 Mpindi TecMed</small>
+        <small>Versão 1.0.0</small>
+    </div>
+
+    <section class="app-mode">
+
+
+        <main class="page-simple">
+            <header class="brand-header" data-aos="fade-up">
+                <h1 class="brand-name"><span>Mat</span>Clínica</h1> 
+                <span class="version-text">Versão 1.0.8 Beta</span>
+                <br> 
+                <a class="link_site" href="https://pindix.github.io/cpExcel2/index.html">Visitar site e saber mais</a>
+            </header>
+
+            <section class="info-flow">
+
+                <div class="info-block" data-aos="fade-up" data-aos-delay="100">
+                    <i class="ri-information-line"></i>
+                    <div class="text-content">
+                        <h3>O que é</h3>
+                        <p>Um ecossistema digital de suporte à decisão clínica, desenhado para elevar o padrão de
+                            segurança no atendimento hospitalar através de cálculos automatizados e precisos.
+                        <strong>Não substitui a opnião médica!</strong></p>
+                    </div>
+                </div>
+
+                <div class="info-block" data-aos="fade-up" data-aos-delay="200">
+                    <i class="ri-global-line"></i>
+                    <div class="text-content">
+                        <h3>Flexibilidade Global</h3>
+                        <p>Estrutura adaptável que permite a integração de protocolos internacionais e locais, tornando
+                            a ferramenta funcional em qualquer cenário clínico do mundo.</p>
+                    </div>
+                </div>
+
+                <div class="info-block" data-aos="fade-up" data-aos-delay="300">
+                    <i class="ri-shield-check-line"></i>
+                    <div class="text-content">
+                        <h3>Segurança Rigorosa</h3>
+                        <p>Desenvolvido para eliminar a hesitação. Cada algoritmo é baseado em literatura científica
+                            atualizada para garantir a integridade total do paciente.</p>
+                    </div>
+                </div>
+
+                
+
+            </section>
+
+
+        </main>
+
+
+
+        <footer class="plain-footer">
+            <div class="footer-inline">
+                <span>&copy; 2026 Mpindi TecMed</span>
+                <span class="footer-sep">|</span>
+                <span>v1.0.0</span>
+                <!-- Link condicional para "Sugerir Medicamento" -->
+                <span class="footer-sep">|</span>
+           </div>
+        </footer>
+
+
+        <script src="script.js"></script>
+        <script src="../assets/js/aos.js"></script>
+    <script src="../assets/js/persistencia.js"></script>
+        <script>
+            // Inicializa as animações
+            AOS.init({
+                duration: 800, // Duração da animação (800ms)
+                offset: 50     // Começa a animar 50px antes do elemento aparecer
+            });
+        </script>
+</body>
+
+</html>

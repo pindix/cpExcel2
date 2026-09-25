@@ -1,0 +1,36 @@
+base de dados de exames = [
+exame1 (campos (input (min, max, unidade), select (option 1valueX, 2valueX), nota("lugar da nota) )
+]
+base de dados de esacalas [
+escala1 (campos (input (min, max, unidade), select (option 1valueX, 2valueX), nota("lugar da nota) estado(leve, moderado))
+]
+base de dados de doenças = [
+diagnostico1 (campos (input (min, max, unidade), select (option 1valueX, 2valueX), nota("lugar da nota) estado(grave, normal)
+]
+
+
+
+analisar {
+nome não está na base, erro.
+se o nome está numa das bases, deve aparecer os seus campos respectivos.
+se o elemento não contém nota (nota=""), a nota não é exibida
+se não contém estado, o estado não é exibido.
+}
+
+sugestões {
+o label do primeiro campo vai ser: Exame, Doença ou Escala 
+se o nome for dos diagnóstico, mudamos o lable do primeiro campo para diagnóstico, 
+o mesmo deve ser feito em outros nomes, de outras bases 
+}
+
+=======================================
+=======================================
+
+explicação. a ideia é dar flexibilidade ao sistema. podemos usar uma mistura de campos para 
+atender as necessidades de forma mais precisa. se um elemento só precisa de um campo, vamos colocar só um campo. 
+se um elemento preciso de 2 campos e um select, vamos colocar campos e selects
+se precisa só de selects.
+
+os exames devem continuar a ser exibidos exatamente como estão, só adiciona uma nota
+para os exames.
+para o diagnóstico, vamos usar a estrutura que estamos a usar.

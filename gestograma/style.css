@@ -1,8 +1,11 @@
+/* ==========================================================================
+   VARIÁVEIS E RESET
+   ========================================================================== */
 :root {
     --primary: #00843d;
     --white: #ffffff;
     --bg: #f0f2f0;
-    --text: #1a2a21;
+    --text: black;
     --card-bg: #ffffff;
     --sombra: #e0dada;
 }
@@ -12,9 +15,27 @@
     --card-bg: #1e1e1e;
     --text: #f0f2f0;
     --sombra: none;
+    --white: black;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../assets/fonts/Poppins-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../assets/fonts/Poppins-Bold.ttf') format('truetype');
 }
 
 * {
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -23,7 +44,6 @@
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
     background-color: var(--bg);
     color: var(--text);
     display: flex;
@@ -31,153 +51,247 @@ body {
     min-height: 100vh;
 }
 
-
-
-/* ================================================================
-   WEB HEADER - NOVO ESTILO
-   ================================================================ */
-
-.web-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 12px 20px;
-    max-width: 420px;
-    margin: 0 auto;
-    width: 100%;
-    gap: 12px;
-    margin-top: 10px;
-}
-
-/* Card dos controles */
-.header-controls {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--card-bg);
-    padding: 6px 12px;
-    border-radius: 40px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-    border: 1px solid rgba(0, 132, 61, 0.08);
-    flex-shrink: 0;
-}
-
-.btn-icon {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    text-decoration: none;
+.matClinica {
     color: var(--text);
-    font-size: 0.78rem;
-    font-weight: 500;
-    padding: 4px 8px;
-    border-radius: 20px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    transition: 0.2s;
 }
 
-.btn-icon i {
-    font-size: 1rem;
+
+/* ==========================================================================
+   NAVEGAÇÃO SUPERIOR
+   ========================================================================== */
+.nav-topo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(15px) saturate(180%);
+    -webkit-backdrop-filter: blur(15px) saturate(180%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0, 132, 61, 0.08);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
 }
 
-.btn-icon:hover {
-    background: rgba(0, 132, 61, 0.08);
-    color: var(--primary);
+[data-theme="dark"] .nav-topo {
+    background: #1a1a1ad3;
+    border-bottom: 1px solid #333;
 }
 
-.btn-icon span {
-    display: inline-block;
-}
-
-/* Divisor do header */
-.divider-header {
-    opacity: 0.2;
-    color: var(--text);
-    font-size: 0.8rem;
-}
-
-/* Título da ferramenta */
-.header-title {
-    flex-shrink: 0;
-}
-
-.tool-badge {
+.nav-logo {
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--primary);
     letter-spacing: -0.3px;
-    padding: 4px 0;
+}
+
+.btn-hamburger {
+    width: 40px;
+    height: 40px;
     background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    z-index: 2000;
+    position: relative;
 }
 
-
-
-/* Responsividade para mobile */
-@media (max-width: 480px) {
-    .web-header {
-        padding: 10px 16px;
-        gap: 8px;
-    }
-
-    .header-controls {
-        padding: 4px 10px;
-        gap: 4px;
-        flex-wrap: nowrap;
-    }
-
-    .btn-icon {
-        font-size: 0.7rem;
-        padding: 3px 6px;
-    }
-
-    .btn-icon i {
-        font-size: 0.85rem;
-    }
-
-    .btn-icon span {
-        display: none;
-        /* Esconde o texto em telas muito pequenas, mantém só ícone */
-    }
-
-    .tool-badge {
-        font-size: 0.95rem;
-    }
-
-    /* Em telas muito pequenas, mostra o texto dos ícones com abreviação */
-    @media (max-width: 360px) {
-        .btn-icon span {
-            display: none;
-        }
-        .divider-header {
-            display: none;
-        }
-        .header-controls {
-            gap: 2px;
-            padding: 4px 8px;
-        }
-    }
+.btn-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2.5px;
+    background: var(--text);
+    border-radius: 3px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
 }
 
-/* Em telas médias, mostra os textos */
-@media (min-width: 481px) and (max-width: 768px) {
-    .btn-icon span {
-        display: inline-block;
-    }
+.btn-hamburger.ativo span:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg);
+}
+.btn-hamburger.ativo span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+.btn-hamburger.ativo span:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
 }
 
+/* ==========================================================================
+   MENU LATERAL E OVERLAY
+   ========================================================================== */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 1500;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+.menu-overlay.ativo {
+    opacity: 1;
+    visibility: visible;
+}
 
+.menu-lateral {
+    position: fixed;
+    top: 0;
+    right: -270px;
+    width: 250px;
+    height: 100%;
+    z-index: 1600;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 20px 12px;
+    gap: 6px;
+    background: transparent;
+}
+.menu-lateral.ativo {
+    right: 0;
+}
 
+.menu-header {
+    padding: 10px 4px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    margin-bottom: 10px;
+}
+.menu-header-icon {
+    width: 56px;
+    height: 56px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: white;
+    margin: 0 auto 12px;
+}
+.menu-header h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 4px;
+}
+.menu-header p {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.7);
+}
 
+.menu-items {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0.5rem;
+    text-decoration: none;
+    color: grey;
+    border-radius: 20px;
+    background: var(--card-bg);
+    transition: all 0.25s ease;
+    position: relative;
+    font-weight: 500;
+    width: fit-content;
+}
+.menu-item-icon {
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: grey;
+    flex-shrink: 0;
+}
 
+.menu-header-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.menu-item span {
+    flex: 1;
+    font-size: 0.95rem;
+}
+.menu-item-arrow {
+    font-size: 1.1rem;
+    transition: 0.2s;
+    color: grey;
+}
+.menu-item:hover .menu-item-arrow {
+    opacity: 1;
+    transform: translateX(3px);
+}
 
+.contacto {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.5rem;
+}
+.contacto a {
+    text-decoration: none;
+}
+.contacto i {
+    border: solid 2px white;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    flex-shrink: 0;
+}
 
+.menu-footer {
+    padding: 20px 4px;
+    text-align: right;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    opacity: 0.6;
+    font-size: 0.75rem;
+    margin-top: auto;
+    background: transparent;
+}
+.menu-footer small {
+    display: block;
+    line-height: 1.8;
+    color: white;
+}
 
-
-
-
-
+.menu-lateral::-webkit-scrollbar {
+    width: 4px;
+}
+.menu-lateral::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
 
 /* ==========================================================================
    CONTEÚDO PRINCIPAL
@@ -188,8 +302,22 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 0 20px;
+    padding-top: 70px;
     max-width: 420px;
     margin: 0 auto;
+    width: 100%;
+    min-height: calc(100vh - 60px);
+}
+
+.coluna-esquerda {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.aviso-data {
+    margin-top: 12px;
     width: 100%;
 }
 
@@ -200,7 +328,6 @@ body {
     border-radius: 24px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
-
 /* ==========================================================================
    SELECT PERSONALIZADO - MODO DE CÁLCULO (ESTILO SINAIS VITAIS)
    ========================================================================== */
@@ -372,6 +499,7 @@ body {
     background: #1a1a1a;
     border-color: rgba(255, 255, 255, 0.06);
 }
+
 /* ==========================================================================
    TOGGLE HORIZONTAL - MAIS RÁPIDO
    ========================================================================== */
@@ -862,111 +990,6 @@ input[type="date"]:not(:placeholder-shown) ~ .label-flutuante {
 [data-theme="dark"] .intervalo-valor.ativo {
     background: rgba(0, 132, 61, 0.2);
 }
-/* ==========================================================================
-   TOGGLE HORIZONTAL: CICLO MENSTRUAL | GESTAÇÃO
-   ========================================================================== */
-.toggle-horizontal-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 4px 0;
-    margin-top: 12px;
-}
-
-.toggle-horizontal-container.oculto {
-    display: none;
-}
-
-.toggle-horizontal {
-    position: relative;
-    width: 100%;
-    max-width: 320px;
-    height: 48px;
-    background: var(--bg);
-    border-radius: 30px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    overflow: hidden;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-.toggle-horizontal input {
-    display: none;
-}
-
-.toggle-horizontal-label {
-    display: flex;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 4px;
-}
-
-.toggle-option {
-    flex: 1;
-    text-align: center;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--text);
-    opacity: 0.5;
-    z-index: 2;
-    transition: color 0.3s ease;
-    padding: 8px 12px;
-    letter-spacing: 0.3px;
-    user-select: none;
-}
-
-.toggle-option-left {
-    border-radius: 30px 0 0 30px;
-}
-
-.toggle-option-right {
-    border-radius: 0 30px 30px 0;
-}
-
-.toggle-slider-horizontal {
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    width: calc(50% - 4px);
-    height: calc(100% - 8px);
-    background: var(--primary);
-    border-radius: 30px;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1;
-    box-shadow: 0 4px 12px rgba(0, 132, 61, 0.25);
-}
-
-.toggle-horizontal input:checked ~ .toggle-horizontal-label .toggle-slider-horizontal {
-    transform: translateX(0);
-}
-
-.toggle-horizontal input:checked ~ .toggle-horizontal-label .toggle-option-left {
-    color: white;
-    opacity: 1;
-}
-
-.toggle-horizontal input:checked ~ .toggle-horizontal-label .toggle-option-right {
-    color: var(--text);
-    opacity: 0.5;
-}
-
-.toggle-horizontal input:not(:checked) ~ .toggle-horizontal-label .toggle-slider-horizontal {
-    transform: translateX(calc(100% + 0px));
-}
-
-.toggle-horizontal input:not(:checked) ~ .toggle-horizontal-label .toggle-option-right {
-    color: white;
-    opacity: 1;
-}
-
-.toggle-horizontal input:not(:checked) ~ .toggle-horizontal-label .toggle-option-left {
-    color: var(--text);
-    opacity: 0.5;
-}
 
 /* ==========================================================================
    BOTÕES
@@ -1022,12 +1045,6 @@ input[type="date"]:not(:placeholder-shown) ~ .label-flutuante {
     width: 100%;
     box-sizing: border-box;
 }
-
-
-
-
-
-
 
 /* ==========================================================================
    ERROS
@@ -1315,9 +1332,6 @@ input[type="date"]:not(:placeholder-shown) ~ .label-flutuante {
     }
 }
 
-
-
-
 /* ==========================================================================
    CARD DUM - MODO DPP (SEM PROGRESSO)
    ========================================================================== */
@@ -1333,7 +1347,6 @@ input[type="date"]:not(:placeholder-shown) ~ .label-flutuante {
     font-size: 0.9rem;
 }
 
-
 /* Badge com cores específicas para cada situação */
 .card-resultado.card-dum .card-badge[style*="background: #ef444415"] {
     border: 1px solid rgba(239, 68, 68, 0.2);
@@ -1346,9 +1359,6 @@ input[type="date"]:not(:placeholder-shown) ~ .label-flutuante {
 .card-resultado.card-dum .card-badge[style*="background: #f59e0b15"] {
     border: 1px solid rgba(245, 158, 11, 0.2);
 }
-
- 
-
 
 /* ==========================================================================
    CARD DO CICLO MENSTRUAL
@@ -1590,30 +1600,17 @@ input[type="date"]:not(:placeholder-shown) ~ .label-flutuante {
     opacity: 0.7;
 }
 
-
-
-
-
-
-
 /* ==========================================================================
-   ESTILOS PARA DETALHES MÉDICOS (VERSÃO LAPIDADA)
+   BOTÃO "VER DETALHES MÉDICOS" (dentro do card de resultado)
    ========================================================================== */
 
-.detalhes-medicos-wrapper {
-    margin-top: 16px;
-    border-radius: 20px;
-    overflow: hidden;
-    background: var(--card-bg);
-    
-    transition: all 0.3s ease;
-}
-
-.detalhes-medicos-toggle {
+.btn-abrir-detalhes {
     width: 100%;
+    margin-top: 16px;
     padding: 14px 20px;
     background: none;
-    border: 2px solid rgba(0, 132, 61, 0.06);
+    border: 2px solid rgba(0, 132, 61, 0.15);
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1621,50 +1618,134 @@ input[type="date"]:not(:placeholder-shown) ~ .label-flutuante {
     color: var(--text);
     font-weight: 600;
     font-size: 0.85rem;
-    transition: all 0.2s ease;
-    border-radius: 20px;
+    transition: all 0.25s ease;
     font-family: inherit;
-    margin-bottom: 10px;
 }
 
-.detalhes-medicos-toggle:hover {
-    background: rgba(0, 132, 61, 0.04);
+.btn-abrir-detalhes:hover {
+    background: rgba(0, 132, 61, 0.06);
+    border-color: var(--primary);
 }
 
-.detalhes-medicos-toggle .toggle-left {
+.btn-abrir-detalhes .toggle-left {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.detalhes-medicos-toggle .toggle-left i {
+.btn-abrir-detalhes .toggle-left i {
     font-size: 1.2rem;
     color: var(--primary);
 }
 
-.detalhes-medicos-toggle .toggle-icon {
+.btn-abrir-detalhes .toggle-icon {
     font-size: 1.2rem;
-    transition: transform 0.3s ease;
     color: var(--text);
     opacity: 0.5;
+    transition: transform 0.25s ease;
 }
 
-.detalhes-medicos-toggle.aberto .toggle-icon {
-    transform: rotate(180deg);
+.btn-abrir-detalhes:hover .toggle-icon {
+    transform: translateX(4px);
+    opacity: 1;
 }
 
-.detalhes-medicos-conteudo {
-    max-height: 0;
+/* ==========================================================================
+   PAINEL LATERAL DE DETALHES MÉDICOS
+   ========================================================================== */
+
+.detalhes-medicos-painel {
+    width: 100%;
+    background: var(--card-bg);
+    border-radius: 24px;
+    border: 1px solid rgba(0, 132, 61, 0.08);
     overflow: hidden;
-    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                padding 0.3s ease;
-    padding: 0 20px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    margin-top: 16px;
+    display: none;
 }
 
-.detalhes-medicos-conteudo.aberto {
-    max-height: 5000px;
-    padding: 0 20px 20px;
+.detalhes-medicos-painel.aberto {
+    opacity: 1;
+    transform: translateY(0);
 }
+
+.detalhes-medicos-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(0, 132, 61, 0.08);
+    background: rgba(0, 132, 61, 0.02);
+}
+
+.detalhes-medicos-header-titulo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.detalhes-medicos-header-titulo i {
+    font-size: 1.2rem;
+}
+
+.detalhes-medicos-fechar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.04);
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.detalhes-medicos-fechar:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.detalhes-medicos-fechar i {
+    font-size: 1.1rem;
+}
+
+.detalhes-medicos-scroll {
+    padding: 16px 20px 20px;
+    max-height: 70vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) transparent;
+}
+
+.detalhes-medicos-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.detalhes-medicos-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.detalhes-medicos-scroll::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 3px;
+    opacity: 0.4;
+}
+
+.detalhes-medicos-scroll::-webkit-scrollbar-thumb:hover {
+    opacity: 0.8;
+}
+
+/* ==========================================================================
+   ESTILOS PARA DETALHES MÉDICOS (CONTEÚDO INTERNO)
+   ========================================================================== */
 
 /* ===== SEÇÕES INTERNAS ===== */
 .detalhes-secao {
@@ -1701,9 +1782,10 @@ input[type="date"]:not(:placeholder-shown) ~ .label-flutuante {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 6px 0;
+    padding: 8px 0;
     font-size: 0.8rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    gap: 12px;
 }
 
 .detalhes-item:last-child {
@@ -1716,6 +1798,7 @@ input[type="date"]:not(:placeholder-shown) ~ .label-flutuante {
     gap: 8px;
     color: var(--text);
     opacity: 0.7;
+    flex-shrink: 0;
 }
 
 .detalhes-item-label i {
@@ -1730,6 +1813,9 @@ input[type="date"]:not(:placeholder-shown) ~ .label-flutuante {
     color: var(--text);
     text-align: right;
     font-size: 0.8rem;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .detalhes-item-valor.destaque {
@@ -1773,36 +1859,57 @@ input[type="date"]:not(:placeholder-shown) ~ .label-flutuante {
     color: #d97706;
 }
 
-/* ===== LISTA DE EXAMES ===== */
+/* ==========================================================================
+   LISTA DE EXAMES - GRID MELHORADO
+   ========================================================================== */
+
 .exames-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 8px;
 }
 
 .exame-item {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px 10px;
-    border-radius: 10px;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 12px;
     background: var(--bg);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     transition: all 0.2s ease;
+    min-height: 52px;
+    overflow: hidden;
+}
+
+.exame-item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 .exame-item i {
-    font-size: 0.8rem;
+    font-size: 1rem;
     flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+}
+
+.exame-item > span:first-of-type {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .exame-item .exame-status {
-    margin-left: auto;
     font-size: 0.55rem;
     font-weight: 700;
-    padding: 1px 8px;
+    padding: 2px 8px;
     border-radius: 10px;
     white-space: nowrap;
+    flex-shrink: 0;
+    margin-left: auto;
 }
 
 .exame-item .exame-status.pendente {
@@ -1821,21 +1928,26 @@ input[type="date"]:not(:placeholder-shown) ~ .label-flutuante {
 }
 
 .exame-item .exame-periodo {
-    font-size: 0.55rem;
+    font-size: 0.6rem;
     opacity: 0.5;
-    margin-left: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
-/* ===== VACINAS ===== */
+/* ==========================================================================
+   VACINAS - LAYOUT MELHORADO
+   ========================================================================== */
+
 .vacina-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 8px 12px;
-    border-radius: 10px;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 12px;
     background: var(--bg);
-    margin-bottom: 4px;
+    margin-bottom: 6px;
     font-size: 0.75rem;
+    min-height: 52px;
 }
 
 .vacina-item:last-child {
@@ -1844,24 +1956,31 @@ input[type="date"]:not(:placeholder-shown) ~ .label-flutuante {
 
 .vacina-item .vacina-info {
     flex: 1;
+    min-width: 0;
 }
 
 .vacina-item .vacina-nome {
     font-weight: 600;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .vacina-item .vacina-periodo {
     font-size: 0.6rem;
     opacity: 0.5;
     display: block;
+    margin-top: 1px;
 }
 
 .vacina-item .vacina-status {
     font-size: 0.55rem;
     font-weight: 700;
-    padding: 2px 10px;
+    padding: 3px 10px;
     border-radius: 12px;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .vacina-item .vacina-status.recomendada {
@@ -1879,7 +1998,9 @@ input[type="date"]:not(:placeholder-shown) ~ .label-flutuante {
     color: #f59e0b;
 }
 
-/* ===== CALCULADORA DE PESO ===== */
+/* ==========================================================================
+   CALCULADORA DE PESO
+   ========================================================================== */
 .peso-calculadora {
     background: none;
     border-radius: 12px;
@@ -1930,7 +2051,10 @@ input[type="date"]:not(:placeholder-shown) ~ .label-flutuante {
     color: var(--text);
 }
 
-/* ===== SINAIS DE ALERTA ===== */
+/* ==========================================================================
+   SINAIS DE ALERTA - LAYOUT MELHORADO
+   ========================================================================== */
+
 .alertas-lista {
     display: flex;
     flex-direction: column;
@@ -1941,20 +2065,23 @@ input[type="date"]:not(:placeholder-shown) ~ .label-flutuante {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 8px 12px;
-    border-radius: 0 10px 10px 0;
+    padding: 10px 14px;
+    border-radius: 0 12px 12px 0;
     background: rgba(239, 68, 68, 0.04);
     border-left: 3px solid #ef4444;
-    font-size: 0.7rem;
+    font-size: 0.72rem;
+    min-height: 44px;
 }
 
 .alerta-item i {
     color: #ef4444;
     font-size: 0.9rem;
+    flex-shrink: 0;
 }
 
 .alerta-item .alerta-texto {
     flex: 1;
+    min-width: 0;
 }
 
 .alerta-item .alerta-urgencia {
@@ -1964,90 +2091,8 @@ input[type="date"]:not(:placeholder-shown) ~ .label-flutuante {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     white-space: nowrap;
+    flex-shrink: 0;
 }
-
-/* ===== RESPONSIVIDADE ===== */
-@media (max-width: 550px) {
-    .exames-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .detalhes-medicos-toggle {
-        font-size: 0.75rem;
-        padding: 12px 16px;
-    }
-    
-    .detalhes-medicos-conteudo.aberto {
-        padding: 0 ;
-    }
-    
-    .detalhes-item {
-        font-size: 0.7rem;
-        padding: 5px 0;
-    }
-    
-    .vacina-item {
-        font-size: 0.7rem;
-        padding: 6px 10px;
-    }
-    
-    .alerta-item {
-        font-size: 0.65rem;
-        padding: 6px 10px;
-        flex-wrap: wrap;
-    }
-    
-    .alerta-item .alerta-urgencia {
-        font-size: 0.5rem;
-        white-space: normal;
-    }
-}
-
-/* ===== DARK MODE ===== */
-[data-theme="dark"] .detalhes-medicos-wrapper {
-    border-color: rgba(255, 255, 255, 0.06);
-}
-
-[data-theme="dark"] .detalhes-medicos-toggle:hover {
-    background: rgba(255, 255, 255, 0.04);
-}
-
-[data-theme="dark"] .detalhes-secao {
-    border-top-color: rgba(255, 255, 255, 0.06);
-}
-
-[data-theme="dark"] .detalhes-item {
-    border-bottom-color: rgba(255, 255, 255, 0.04);
-}
-
-[data-theme="dark"] .exame-item,
-[data-theme="dark"] .vacina-item {
-    background: rgba(255, 255, 255, 0.04);
-}
-
-[data-theme="dark"] .alerta-item {
-    background: rgba(239, 68, 68, 0.08);
-}
-
-[data-theme="dark"] .detalhes-badge.sucesso {
-    background: rgba(0, 132, 61, 0.2);
-}
-
-[data-theme="dark"] .detalhes-badge.alerta {
-    background: rgba(245, 158, 11, 0.2);
-}
-
-[data-theme="dark"] .detalhes-badge.perigo {
-    background: rgba(239, 68, 68, 0.2);
-}
-
-
-
-[data-theme="dark"] .resultado-peso-card {
-    background: rgba(255, 255, 255, 0.04);
-}
-
-
 
 /* ==========================================================================
    ANIMAÇÕES
@@ -2064,9 +2109,8 @@ input[type="date"]:not(:placeholder-shown) ~ .label-flutuante {
     100% { transform: translateX(0); }
 }
 
-
 /* ==========================================================================
-   DARK MODE
+   DARK MODE - AJUSTES GERAIS
    ========================================================================== */
 [data-theme="dark"] .card-ciclo {
     border-color: rgba(255, 255, 255, 0.06);
@@ -2162,8 +2206,6 @@ input[type="date"]:not(:placeholder-shown) ~ .label-flutuante {
     background: rgba(245, 158, 11, 0.15);
 }
 
-
-
 [data-theme="dark"] .intervalo-btn {
     background: #2a2a2a;
     color: #f0f2f0;
@@ -2182,8 +2224,67 @@ input[type="date"]:not(:placeholder-shown) ~ .label-flutuante {
     background: var(--primary);
 }
 
+[data-theme="dark"] .detalhes-secao {
+    border-top-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .detalhes-item {
+    border-bottom-color: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .exame-item,
+[data-theme="dark"] .vacina-item {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .exame-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .alerta-item {
+    background: rgba(239, 68, 68, 0.08);
+}
+
+[data-theme="dark"] .detalhes-badge.sucesso {
+    background: rgba(0, 132, 61, 0.2);
+}
+
+[data-theme="dark"] .detalhes-badge.alerta {
+    background: rgba(245, 158, 11, 0.2);
+}
+
+[data-theme="dark"] .detalhes-badge.perigo {
+    background: rgba(239, 68, 68, 0.2);
+}
+
+[data-theme="dark"] .resultado-peso-card {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .btn-abrir-detalhes {
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .btn-abrir-detalhes:hover {
+    background: rgba(0, 132, 61, 0.15);
+    border-color: var(--primary);
+}
+
+[data-theme="dark"] .detalhes-medicos-painel {
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .detalhes-medicos-header {
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+    background: rgba(0, 132, 61, 0.06);
+}
+
+[data-theme="dark"] .detalhes-medicos-fechar {
+    background: rgba(255, 255, 255, 0.06);
+}
+
 /* ==========================================================================
-   RESPONSIVIDADE
+   RESPONSIVIDADE - TELAS PEQUENAS
    ========================================================================== */
 @media (max-width: 550px) {
     .modo-campos.active {
@@ -2261,15 +2362,171 @@ input[type="date"]:not(:placeholder-shown) ~ .label-flutuante {
         flex-direction: column;
         align-items: flex-start;
     }
+    
+    /* Exames em mobile - 1 coluna */
+    .exames-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .detalhes-item {
+        font-size: 0.7rem;
+        padding: 5px 0;
+    }
+    
+    .vacina-item {
+        font-size: 0.7rem;
+        padding: 6px 10px;
+    }
+    
+    .alerta-item {
+        font-size: 0.65rem;
+        padding: 6px 10px;
+        flex-wrap: wrap;
+    }
+    
+    .alerta-item .alerta-urgencia {
+        font-size: 0.5rem;
+        white-space: normal;
+    }
+    
+    .detalhes-medicos-header {
+        padding: 12px 16px;
+    }
+    
+    .detalhes-medicos-scroll {
+        padding: 12px 16px 16px;
+    }
 }
 
+/* ==========================================================================
+   DESKTOP (≥1024px) - GRID: CALCULADORA CENTRO | DETALHES DIREITA
+   ========================================================================== */
 
+@media (min-width: 1024px) {
+    .main-tool {
+        max-width: 1100px;
+        display: grid;
+        grid-template-columns: 1fr 420px 1fr;
+        column-gap: 32px;
+        align-items: center;
+        padding-top: 80px;
+        padding-bottom: 40px;
+        min-height: calc(100vh - 60px);
+    }
+    
+    /* Quando NÃO tem painel aberto, a coluna-esquerda fica no centro */
+    .coluna-esquerda {
+        grid-column: 2;
+        grid-row: 1;
+        align-items: stretch;
+        width: 100%;
+        max-width: 420px;
+    }
+    
+    /* Quando tem painel aberto, reorganiza o grid */
+    .main-tool:has(.detalhes-medicos-painel.aberto) {
+        grid-template-columns: 400px 1fr;
+        justify-items: stretch;
+        align-items: start;
+    }
+    
+    .main-tool:has(.detalhes-medicos-painel.aberto) .coluna-esquerda {
+        grid-column: 1;
+        max-width: 400px;
+    }
+    
+    /* Painel de detalhes médicos à direita - sticky com scroll próprio */
+    .detalhes-medicos-painel {
+        grid-column: 3;
+        grid-row: 1;
+        margin-top: 0;
+        position: sticky;
+        top: 80px;
+        max-height: calc(100vh - 120px);
+        display: none;
+        width: 100%;
+    }
+    
+    .main-tool:has(.detalhes-medicos-painel.aberto) .detalhes-medicos-painel {
+        grid-column: 2;
+        justify-self: stretch;
+    }
+    
+    .detalhes-medicos-painel.aberto {
+        display: flex;
+        flex-direction: column;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    /* O scroll interno do painel é limitado pela altura do painel */
+    .detalhes-medicos-scroll {
+        max-height: none;
+        flex: 1;
+        overflow-y: auto;
+    }
+    
+    /* O resultado permanece por baixo da calculadora */
+    .resultado-display {
+        margin-top: 20px;
+        position: static;
+        max-height: none;
+        overflow: visible;
+    }
+    
+    /* Exames em desktop - grid com mais colunas */
+    .exames-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+}
 
+/* ==========================================================================
+   TABLETS (768px - 1023px)
+   ========================================================================== */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .main-tool {
+        max-width: 600px;
+    }
 
+    .exames-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
 
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.plain-footer {
+    width: 100%;
+    padding: 20px 15px;
+    background-color: transparent;
+    text-align: center;
+    margin-top: auto;
+}
 
+.footer-inline {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px 16px;
+    font-size: 0.8rem;
+    color: grey;
+}
 
+.footer-inline a {
+    color: grey;
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px dotted grey;
+    transition: color 0.2s, border-color 0.2s;
+}
 
+.footer-inline a:hover {
+    color: var(--primary-dark);
+    border-bottom-color: var(--primary-dark);
+}
 
-
-footer { padding: 40px; text-align: center; font-size: 0.8rem; opacity: 0.6; }
+.footer-sep {
+    opacity: 0.4;
+}

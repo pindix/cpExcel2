@@ -1,0 +1,235 @@
+# 1. Baseline: 1 condição, 1 população, 1 via, 1 concentração, intervalo com 2 opções
+nome: Testesimples
+concentracao
+    massa: 250 mg
+    volume: 5 ml
+condicaoClinica: Infeção bacteriana
+    populacao: adulta
+    via: iv
+    pesoMinimo: 40 kg
+    doseMinima: 500 mg
+    doseMaxima: 1000 mg
+    dosePadrao: 500 mg
+    unidadeDose: mg
+    intervalo: 8, 12 h
+notaGeral:
+    1. Referencia: Manual de Teste, p. 1
+
+# 2. 2 condições, 2 concentrações (com instrucao [N]), 2 vias na 1ª condição
+nome: Testeconcentracoesvias
+concentracao
+    massa: 250 mg
+    volume: 5 ml
+    instrucao: Reconstituir com 5ml de água destilada
+    .
+    massa: 500 mg
+    volume: 10 ml
+    instrucao: Reconstituir com 10ml de água destilada
+condicaoClinica: Infeção leve
+    populacao: adulta
+    via: iv
+    pesoMinimo: 40 kg
+    doseMinima: 250 mg
+    doseMaxima: 500 mg
+    dosePadrao: 250 mg
+    unidadeDose: mg
+    intervalo: 8 h
+condicaoClinica: Infeção leve
+    populacao: adulta
+    via: im
+    pesoMinimo: 40 kg
+    doseMinima: 250 mg
+    doseMaxima: 500 mg
+    dosePadrao: 250 mg
+    unidadeDose: mg
+    intervalo: 8 h
+condicaoClinica: Infeção grave
+    populacao: adulta
+    via: iv
+    pesoMinimo: 40 kg
+    doseMinima: 500 mg
+    doseMaxima: 1000 mg
+    dosePadrao: 500 mg
+    unidadeDose: mg
+    intervalo: 6 h
+notaGeral:
+    1. Referencia: Manual de Teste, p. 2
+
+# 3. Ataque + manutenção REALMENTE diferentes (dose e intervalo) -> linha dupla de intervalo
+nome: Testeataquemanutencaodiferente
+concentracao
+    massa: 60 mg
+    volume: 1 ml
+condicaoClinica: Malária grave
+    populacao: pediatrica
+    via: iv
+    pesoMinimo: 3 kg
+    pesoMaximo: 40 kg
+    ataque:
+        doseMinima: 2.4 mg
+        doseMaxima: 2.4 mg
+        dosePadrao: 2.4 mg
+        unidadeDose: mg/kg
+        intervalo: 12 h
+    manutencao:
+        doseMinima: 1.2 mg
+        doseMaxima: 1.2 mg
+        dosePadrao: 1.2 mg
+        unidadeDose: mg/kg
+        intervalo: 24 h
+notaExclusiva:
+    1. Dose máxima diária: não exceder 4 administrações
+notaGeral:
+    1. Referencia: Manual de Teste, p. 3
+
+# 4. Só ataque definido -> manutenção reutiliza o mesmo valor, colapsa para dose/intervalo únicos
+nome: Testesoataque
+concentracao
+    massa: 1 g
+    volume: 10 ml
+condicaoClinica: Profilaxia
+    populacao: adulta
+    via: iv
+    pesoMinimo: 40 kg
+    ataque:
+        doseMinima: 1000 mg
+        doseMaxima: 1000 mg
+        dosePadrao: 1000 mg
+        unidadeDose: mg
+        intervalo: 24 h
+notaGeral:
+    1. Referencia: Manual de Teste, p. 4
+
+# 5. 3 populações (pediátrica/adulta/grávida) na mesma condição -> select de população com 3 opções
+nome: Testegravida
+concentracao
+    massa: 2 g
+    volume: 10 ml
+condicaoClinica: Infeção urinária
+    populacao: pediatrica
+    via: iv
+    pesoMinimo: 3 kg
+    pesoMaximo: 40 kg
+    doseMinima: 25 mg
+    doseMaxima: 50 mg
+    dosePadrao: 30 mg
+    unidadeDose: mg/kg
+    intervalo: 12 h
+condicaoClinica: Infeção urinária
+    populacao: adulta
+    via: iv
+    pesoMinimo: 40 kg
+    doseMinima: 1000 mg
+    doseMaxima: 2000 mg
+    dosePadrao: 1000 mg
+    unidadeDose: mg
+    intervalo: 8 h
+condicaoClinica: Infeção urinária
+    populacao: gravida
+    via: iv
+    pesoMinimo: 40 kg
+    doseMinima: 500 mg
+    doseMaxima: 1000 mg
+    dosePadrao: 500 mg
+    unidadeDose: mg
+    intervalo: 12 h
+notaExclusiva:
+    1. Ajustar em caso de insuficiência renal
+notaGeral:
+    1. Referencia: Manual de Teste, p. 5
+
+# 6. Dose em UI, concentração TAMBÉM em UI -> fatorUnidade deve ficar sem uso
+nome: Testeuicompativel
+concentracao
+    massa: 1000000 UI
+    volume: 10 ml
+condicaoClinica: Sífilis
+    populacao: adulta
+    via: im
+    pesoMinimo: 40 kg
+    doseMinima: 1200000 UI
+    doseMaxima: 2400000 UI
+    dosePadrao: 1200000 UI
+    unidadeDose: UI
+    fatorUnidade: 0.6 mcg
+    intervalo: 24*
+notaGeral:
+    1. Referencia: Manual de Teste, p. 6
+
+# 7. Dose em UI, concentração em mg -> fatorUnidade tem de converter mesmo
+nome: Testeuiconversao
+concentracao
+    massa: 600 mg
+    volume: 5 ml
+condicaoClinica: Infeção por anaeróbios
+    populacao: adulta
+    via: iv
+    pesoMinimo: 40 kg
+    doseMinima: 500000 UI
+    doseMaxima: 1000000 UI
+    dosePadrao: 600000 UI
+    unidadeDose: UI
+    fatorUnidade: 0.6 mcg
+    intervalo: 12 h
+notaGeral:
+    1. Referencia: Manual de Teste, p. 7
+
+# 8. Dose invariável (min=max=padrão) -> campo dose escondido, valor embutido na fórmula
+nome: Testedoseinvariavel
+concentracao
+    massa: 1 g
+    volume: 20 ml
+condicaoClinica: Meningite (dose fixa por kg)
+    populacao: pediatrica
+    via: iv
+    pesoMinimo: 3 kg
+    pesoMaximo: 40 kg
+    doseMinima: 60 mg
+    doseMaxima: 60 mg
+    dosePadrao: 60 mg
+    unidadeDose: mg/kg
+    intervalo: 12 h
+notaGeral:
+    1. Referencia: Manual de Teste, p. 8
+
+# 9. Intervalo multi-dia (48h) -> texto "1 vez/2 dias", totais escondidos
+nome: Testeintervalomultidia
+concentracao
+    massa: 1 g
+    volume: 3.4 ml
+condicaoClinica: Profilaxia prolongada
+    populacao: adulta
+    via: im
+    pesoMinimo: 40 kg
+    doseMinima: 2400000 UI
+    doseMaxima: 2400000 UI
+    dosePadrao: 2400000 UI
+    unidadeDose: UI
+    intervalo: 48 h
+notaGeral:
+    1. Referencia: Manual de Teste, p. 9
+
+# 10. Dose única + 7 notas exclusivas (para testar "ver mais", que aparece com mais de 5)
+nome: Testenotasmuitas
+concentracao
+    massa: 200 mg
+    volume: 1 ml
+condicaoClinica: Malária não complicada
+    populacao: adulta
+    via: im
+    pesoMinimo: 40 kg
+    doseMinima: 200 mg
+    doseMaxima: 200 mg
+    dosePadrao: 200 mg
+    unidadeDose: mg
+    intervalo: dose única
+notaExclusiva:
+    1. Não administrar em bólus
+    2. Monitorizar sinais de reação alérgica
+    3. Não misturar com outros fármacos na mesma seringa
+    4. Verificar função hepática antes da administração
+    5. Contraindicado em caso de hipersensibilidade conhecida
+    6. Ajustar em caso de insuficiência renal grave
+    7. Manter o paciente em observação durante 30 minutos após a dose
+notaGeral:
+    1. Referencia: Manual de Teste, p. 10
