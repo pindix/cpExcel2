@@ -251,7 +251,21 @@ window.BANCO_DADOS = {
       "formula": "{#d/#c} ml",
       "adicionais": "#@@Não administrar em bólus@#@@Monitorizar sinais de reação alérgica@#@@Não misturar com outros fármacos na mesma seringa@#@@Verificar função hepática antes da administração@#@@Contraindicado em caso de hipersensibilidade conhecida@#@@Ajustar em caso de insuficiência renal grave@#@@Manter o paciente em observação durante 30 minutos após a dose@#",
       "notas": "Manual de Teste, p. 10"
-    }
+    },
+    {
+      "nome": "Dipirona|Metamizol",
+      "condicao": "",
+      "populacao": "",
+      "via": "",
+      "idade": "",
+      "peso": ";",
+      "dose": "15, 30, 20, mg",
+      "concentracao": "2.5 g mg/5 ml|500; 1.5 g mg/5 ml|300;",
+      "intervalo": "",
+      "formula": "{#p*#d/#c} ml",
+      "adicionais": "",
+      "notas": "Manual de Teste, p. 10"
+    },
   ]
 
   

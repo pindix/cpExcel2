@@ -23,10 +23,10 @@
     box-sizing: border-box;
     transition: 0.3s;
     outline: none;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
     background-color: var(--bg);
     color: var(--text);
     display: flex;
@@ -189,6 +189,7 @@ html, body {
     margin: 0 auto;
     width: 100%;
     overflow-x: hidden;
+    min-height: 340px;
 }
 
 
@@ -2095,3 +2096,21 @@ body.modal-aberto::before {
 [data-theme="dark"] .sf-ver-todas:hover { background: var(--primary, #00843d); }
 [data-theme="dark"] .sf-separador { background: rgba(255, 255, 255, 0.06); }
 [data-theme="dark"] .sf-copyright { color: rgba(255, 255, 255, 0.35); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.texto-nota {
+    color: var(--text);
+}

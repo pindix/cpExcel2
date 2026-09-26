@@ -572,9 +572,9 @@
                         <i class="ri-arrow-right-line sf-ferramenta-seta"></i>
                     </a>
                     <a href="../exames/index.html" class="sf-ferramenta">
-                        <span class="sf-ferramenta-icone"><i class="ri-heart-pulse-line"></i></span>
+                        <span class="sf-ferramenta-icone"><i class="ri-brain-line"></i></span>
                         <span class="sf-ferramenta-nome">Laboratório e Escalas</span>
-                        <i class="ri-brain-line sf-ferramenta-seta"></i>
+                        <i class="ri-arrow-right-line sf-ferramenta-seta"></i>
                     </a>
                     <a href="../gotejamento/index.html" class="sf-ferramenta">
                         <span class="sf-ferramenta-icone"><i class="ri-water-flash-line"></i></span>
@@ -616,6 +616,58 @@
         </div>
 
     </footer>
+
+
+    
+    <!-- ================================================================== -->
+    <!-- MODAL — DETALHES DO REGISTO (editar ponto do gráfico)              -->
+    <!-- ================================================================== -->
+    <div class="modal-ponto-overlay" id="modalPontoOverlay" onclick="fecharModalPonto()">
+        <div class="modal-ponto" onclick="event.stopPropagation()">
+
+            <div class="modal-ponto-header">
+                <i class="ri-line-chart-line"></i>
+                <h3>Detalhes do Registo</h3>
+                <button class="modal-ponto-fechar" onclick="fecharModalPonto()" aria-label="Fechar">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+
+            <div class="modal-ponto-body">
+
+                <div class="modal-ponto-data" id="modalPontoData">—</div>
+
+                <div class="modal-ponto-sinal">
+                    <div class="modal-ponto-sinal-header">
+                        <span class="modal-ponto-sinal-icone" id="modalPontoSinalIcone">
+                            <i class="ri-heart-pulse-fill"></i>
+                        </span>
+                        <span class="modal-ponto-sinal-nome" id="modalPontoSinalNome">—</span>
+                    </div>
+                    <div class="modal-ponto-sinal-valor" id="modalPontoSinalValor">—</div>
+                    <div class="modal-ponto-sinal-status" id="modalPontoSinalStatus">—</div>
+                </div>
+
+                <div class="modal-ponto-input-group">
+                    <input type="number" step="any" id="modalPontoInput" placeholder=" ">
+                    <label class="label-flutuante" for="modalPontoInput">Editar valor</label>
+                </div>
+
+            </div>
+
+            <div class="modal-ponto-rodape">
+                <button class="modal-ponto-btn-remover" id="modalPontoBtnRemover" onclick="removerPontoGrafico()">
+                    <i class="ri-delete-bin-line"></i> Remover
+                </button>
+                <div class="modal-ponto-rodape-dir">
+                    <button class="modal-ponto-btn-cancelar" onclick="fecharModalPonto()">Cancelar</button>
+                    <button class="modal-ponto-btn-guardar" id="modalPontoBtnGuardar"
+                        onclick="guardarPontoGrafico()">Guardar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
