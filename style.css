@@ -1893,6 +1893,17 @@ html[data-theme="light"] .mc-open-item:not(.active):hover .mc-open-label {
     border-radius: 18px;
     padding: 18px;
     backdrop-filter: blur(10px);
+    overflow-y: auto;
+    max-height: 300px;
+}
+
+.sources-wrapper::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sources-wrapper::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
 }
 
 .sources-title {
@@ -2803,6 +2814,7 @@ html[data-theme="light"] .mc-open-item:not(.active):hover .mc-open-label {
     font-size: 0.95rem;
     user-select: none;
 }
+
 
 .reportar-erro-select:hover {
     border-color: var(--primary);
