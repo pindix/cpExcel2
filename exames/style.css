@@ -938,7 +938,6 @@ input:not(:placeholder-shown) ~ .label-flutuante {
 @media (max-width: 480px) {
     .main-tool {
         padding: 0 12px;
-        padding-top: 70px;
         max-width: 100%;
     }
     
