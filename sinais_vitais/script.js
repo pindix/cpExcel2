@@ -2570,7 +2570,11 @@ function atualizarGrafico() {
     if (ins) ins.style.display = 'flex';
     if (lg) lg.style.display = 'flex';
     if (ph) ph.style.display = 'none';
-    if (cv) { cv.style.display = 'block'; criarGrafico(); setTimeout(gerarLegendaToggle, 100); }
+    if (cv) {
+        cv.style.display = 'block';  // ← Garantir que o canvas fica visível
+        criarGrafico();
+        setTimeout(gerarLegendaToggle, 100);
+    }
 }
 
 function gerarLegendaToggle() {
@@ -2957,16 +2961,37 @@ function interpretar() {
             <div class="alerta-item ${totalAlto > 0 ? 'tem-alerta' : ''}"><i class="ri-arrow-up-circle-fill"></i><span>${totalAlto} acima</span></div>
         </div>`;
     }
-
+    // Registar a medição
     const registro = {
         timestamp: Date.now(),
         fc: fc.value || "", fr: fr.value || "", temp: temp.value || "",
         sato2: sato2.value || "", sis: sis.value || "", dia: dia.value || ""
     };
     const temValor = Object.values(registro).some(v => v !== "" && v !== null && v !== undefined);
+    
     if (temValor) {
-        if (pacienteAtivo) carregarGraficoPaciente();
-        else adicionarMedicao(registro);
+        if (pacienteAtivo) {
+            // MODO PACIENTE: guarda no histórico do paciente
+            const agora = new Date();
+            pacientes[pacienteAtivo].historico.push({
+                data: agora.toLocaleDateString(),
+                hora: agora.toLocaleTimeString(),
+                fc: fc.value, fr: fr.value, temp: temp.value,
+                sato2: sato2.value, sis: sis.value, dia: dia.value
+            });
+            localStorage.setItem('pacientes_monitorados', JSON.stringify(pacientes));
+            limparCacheGravidade();
+
+            const toggleTriagem = document.getElementById('toggle-triagem');
+            const triagemAtiva = toggleTriagem && toggleTriagem.checked;
+            renderListaNomes();
+            if (triagemAtiva) ordenarListaPorTriagem();
+            renderizarCardResultados();
+            carregarGraficoPaciente();
+        } else {
+            // MODO SEM PACIENTE: guarda apenas em memória
+            adicionarMedicao(registro);
+        }
     }
 
     res.innerHTML = html;
@@ -2975,25 +3000,6 @@ function interpretar() {
     res.style.display = "block";
     res.style.boxShadow = "0 10px 30px rgba(0,0,0,0.1)";
     res.style.width = "100%";
-
-    if (pacienteAtivo) {
-        const agora = new Date();
-        pacientes[pacienteAtivo].historico.push({
-            data: agora.toLocaleDateString(),
-            hora: agora.toLocaleTimeString(),
-            fc: fc.value, fr: fr.value, temp: temp.value,
-            sato2: sato2.value, sis: sis.value, dia: dia.value
-        });
-        localStorage.setItem('pacientes_monitorados', JSON.stringify(pacientes));
-        limparCacheGravidade();
-
-        const toggleTriagem = document.getElementById('toggle-triagem');
-        const triagemAtiva = toggleTriagem && toggleTriagem.checked;
-        renderListaNomes();
-        if (triagemAtiva) ordenarListaPorTriagem();
-        renderizarCardResultados();
-        carregarGraficoPaciente();
-    }
 }
 
 function limparSinais() {
@@ -3359,13 +3365,11 @@ async function exportarPDF() {
 // ============================================================================
 
 window.addEventListener('load', () => {
-
     // 1. Tema
     if (localStorage.getItem('tema') === 'dark') {
         body.setAttribute('data-theme', 'dark');
         if (themeIcon) themeIcon.className = 'ri-sun-line';
     }
-
 
     // 2. Referências guardadas
     carregarReferenciasGuardadas();
